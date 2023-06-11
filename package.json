@@ -1,0 +1,23 @@
+{
+  "name": "sql-insight",
+  "version": "0.0.0",
+  "description": "Performance metrics for SQL databases",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/SQL-Insight.git"
+  },
+  "keywords": [
+    "SQL",
+    "Insight"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/SQL-Insight/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/SQL-Insight#readme"
+}
