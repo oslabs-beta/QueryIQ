@@ -1,4 +1,4 @@
-# SQL-Insight
+# QueryIQ
 
 > A performance metrics dev tool for sql databases
 
