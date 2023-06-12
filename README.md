@@ -36,7 +36,7 @@
 
 ## Contributing
 
-- Please read [CONTRIBUTING.md](https://github.com/oslabs-beta/SQL-Insight/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+- Please read [CONTRIBUTING.md](https://github.com/oslabs-beta/QueryIQ/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
 
 ## Versioning
 
@@ -45,11 +45,11 @@
 ## Authors
 
 - **Connor Dillon** - [connoro7](https://github.com/connoro7)
-- 
 -
 -
 -
-- See also the list of [contributors](https://github.com/oslabs-beta/SQL-Insight/contributors) who participated in this project.
+-
+- See also the list of [contributors](https://github.com/oslabs-beta/QueryIQ/contributors) who participated in this project.
 
 ## Acknowledgments
 

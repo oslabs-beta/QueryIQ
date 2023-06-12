@@ -1,5 +1,5 @@
 {
-  "name": "sql-insight",
+  "name": "queryiq",
   "version": "0.0.0",
   "description": "Performance metrics for SQL databases",
   "main": "index.js",
@@ -8,16 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oslabs-beta/SQL-Insight.git"
+    "url": "git+https://github.com/oslabs-beta/QueryIQ.git"
   },
   "keywords": [
-    "SQL",
-    "Insight"
+    "queryiq"
   ],
   "author": "",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/oslabs-beta/SQL-Insight/issues"
+    "url": "https://github.com/oslabs-beta/QueryIQ/issues"
   },
-  "homepage": "https://github.com/oslabs-beta/SQL-Insight#readme"
+  "homepage": "https://github.com/oslabs-beta/QueryIQ#readme"
 }
