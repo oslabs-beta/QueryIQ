@@ -7,12 +7,12 @@ import Link from "next/link";
 import { api } from "~/utils/api";
 
 const Homepage: React.FC = () => {
-    return (
-        <div>
-            <Header />
-            <MainContainer />
-        </div>
-    )
-}
+  return (
+    <div>
+      <Header />
+      <MainContainer />
+    </div>
+  );
+};
 
 export default Homepage;

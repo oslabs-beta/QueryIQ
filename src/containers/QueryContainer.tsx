@@ -3,15 +3,13 @@ import DashboardContainer from "./DashboardContainer";
 
 const QueryContainer: React.FC = () => {
   return (
-    <div className="flex-col bg-pink-600 w-10/12 flex justify-between">
-      <div className="flex-none h-2/6">
-        {/* Other content */}
-      </div>
+    <div className="flex w-10/12 flex-col justify-between bg-pink-600">
+      <div className="h-2/6 flex-none">{/* Other content */}</div>
       <div className="flex-grow">
         <DashboardContainer />
       </div>
     </div>
-  )
+  );
 };
 
 export default QueryContainer;

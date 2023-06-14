@@ -4,7 +4,7 @@ import SideBarContainer from "./SideBarContainer";
 
 const MainContainer: React.FC = () => {
   return (
-    <div className="flex-col md:flex h-screen w-screen bg-indigo-800 p-2 md:flex-row">
+    <div className="h-screen w-screen flex-col bg-indigo-800 p-2 md:flex md:flex-row">
       <SideBarContainer></SideBarContainer>
       <QueryContainer></QueryContainer>
       {/* <style>
