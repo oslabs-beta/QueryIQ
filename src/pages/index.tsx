@@ -1,5 +1,4 @@
 import { type NextPage } from "next";
-import Header from "../components/Header";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
@@ -16,18 +15,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        {/* HEADER
-          logo img
-          about Link
-          Docs Link
-          Settings menu button
-            div to render on click
-        */}
-        <Header></Header>
-        {/* <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            Query <span className="text-[hsl(280,100%,70%)]">IQ</span>
-          </h1>
+        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]"></h1>
+          Query <span className="text-[hsl(280,100%,70%)]">IQ</span>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
@@ -39,6 +29,10 @@ const Home: NextPage = () => {
                 Just the basics - Everything you need to know to set up your
                 database and authentication.
               </div>
+            </Link>
+
+            <Link href="http://localhost:3000/homepage">
+              <h3 className="text-2xl font-bold">HOME PAGE →</h3>
             </Link>
             <Link
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
@@ -58,7 +52,7 @@ const Home: NextPage = () => {
             </p>
             <AuthShowcase />
           </div>
-        </div> */}
+        </div>
       </main>
     </>
   );
