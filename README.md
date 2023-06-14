@@ -45,10 +45,10 @@
 ## Authors
 
 - **Connor Dillon** - [connoro7](https://github.com/connoro7)
--
--
--
--
+- **Dean Biscocho** - [deanbiscocho](https://github.com/deanbiscocho)
+- **Khaile Tran** - [khailetran](https://github.com/khailetran)
+- **Johanna Cameron** - [jojecameron](https://github.com/jojecameron)
+- **Alan Beck** - [KAlanBeck](https://github.com/KAlanBeck)
 - See also the list of [contributors](https://github.com/oslabs-beta/QueryIQ/contributors) who participated in this project.
 
 ## Acknowledgments
