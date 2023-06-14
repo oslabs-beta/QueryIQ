@@ -19,6 +19,7 @@
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
+    "prisma:push": "npx prisma db push",
     "lint": "next lint",
     "start": "next start"
   },
