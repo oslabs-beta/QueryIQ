@@ -4,6 +4,10 @@ import Head from "next/head";
 import Link from "next/link";
 import { api } from "~/utils/api";
 
+/**
+ *
+ * @see https://create.t3.gg/en/usage/tailwind
+ */
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
 
@@ -62,7 +66,7 @@ const AuthShowcase: React.FC = () => {
 
   const { data: secretMessage } = api.example.getSecretMessage.useQuery(
     undefined, // no input
-    { enabled: sessionData?.user !== undefined },
+    { enabled: sessionData?.user !== undefined }
   );
 
   return (

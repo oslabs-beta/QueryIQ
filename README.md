@@ -33,6 +33,15 @@
 ## Built With
 
 <!-- - [Resource Name](Resource URL) - Resource description -->
+- Typescript
+- React
+- Prisma
+- tRPC
+- Tanstack Query
+- Zod
+- Tailwind CSS
+- NextAuth.js
+- Axiom
 
 ## Contributing
 
