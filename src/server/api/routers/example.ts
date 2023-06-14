@@ -5,6 +5,11 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 
+
+/**
+ * @see https://create.t3.gg/en/usage/trpc
+ * @see 
+ */
 export const exampleRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))

@@ -19,8 +19,12 @@
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
+    "prisma:push": "npx prisma db push",
     "lint": "next lint",
     "start": "next start"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
