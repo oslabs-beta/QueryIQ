@@ -1,9 +1,13 @@
 import React from "react";
+import DBConnect from "~/components/DBConnect";
+import QueryLog from "~/components/QueryLog";
 
-//Container used to connect to DB and display historical query logs 
 const SideBarContainer: React.FC = () => {
   return (
-    <div className="h-1/6 w-full bg-purple-800 md:h-full md:w-1/4">SIDEBAE</div>
+    <div className="flex h-full w-full flex-col items-center justify-center bg-purple-800 md:h-full md:w-1/4">
+      <DBConnect />
+      <QueryLog />
+    </div>
   );
 };
 
