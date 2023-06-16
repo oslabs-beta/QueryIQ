@@ -1,9 +1,18 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 
-const DBConnect: React.FC = () => {
+interface DBConnectProps {
+    openModal: React.Dispatch<React.SetStateAction<boolean>>;
+    connection: boolean;
+    setConnection: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const DBConnect: React.FC<DBConnectProps> = ({ openModal, connection, setConnection }) => {
   // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
-  const [connection, setConnection] = useState(false);
+
+  const handleConnect = () => {
+    openModal(true);
+  }
 
   const handleClick = () => {
     connection ? setConnection(false) : setConnection(true);
@@ -16,7 +25,7 @@ const DBConnect: React.FC = () => {
         <>
           <button
             className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-            onClick={handleClick}
+            onClick={handleConnect}
           >
             Connect to Database
           </button>
