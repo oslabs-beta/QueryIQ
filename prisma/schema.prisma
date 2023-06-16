@@ -6,7 +6,10 @@ generator client {
   previewFeatures = ["jsonProtocol"]
 }
 
+<<<<<<< HEAD
 // @see https://www.npmjs.com/package/prisma-erd-generator
+=======
+>>>>>>> 9f7e1978feffb4bf1c4a9d3fc4bc2080cc48647e
 generator erd {
   provider                  = "prisma-erd-generator"
   output                    = "../prismaERD.svg"
