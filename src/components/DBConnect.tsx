@@ -2,18 +2,20 @@ import React from "react";
 import { useState } from "react";
 
 const DBConnect: React.FC = () => {
+  // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
   const [connection, setConnection] = useState(false);
 
   const handleClick = () => {
-    connection ? setConnection(false) : setConnection(true)
+    connection ? setConnection(false) : setConnection(true);
   };
 
   return (
     <div className="flex flex-col items-center justify-center">
+      {/**conditionally renders DB disconnected or DB connected**/}
       {!connection ? (
         <>
           <button
-            className="my-4 rounded-lg border border-gray-900 p-1 bg-indigo-500 text-gray-900 hover:bg-gray-900 hover:text-indigo-500 shadow-xl"
+            className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
             onClick={handleClick}
           >
             Connect to Database
@@ -23,7 +25,7 @@ const DBConnect: React.FC = () => {
         </>
       ) : (
         <>
-          <div className="my-4 rounded-lg border border-black p-4 bg-gray-900 text-indigo-300 shadow-xl">
+          <div className="my-4 rounded-lg border border-black bg-gray-900 p-4 text-indigo-300 shadow-xl">
             <span>DB NAME: SWAPI</span>
             <br></br>
             <span>HOST: POSTGRES</span>
@@ -35,7 +37,7 @@ const DBConnect: React.FC = () => {
             <span>ACTIVE</span>
           </div>
           <button
-            className="rounded-lg border border-gray-900 p-1 bg-indigo-500 text-gray-900 hover:bg-gray-900 hover:text-indigo-500 shadow-xl"
+            className="rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
             onClick={handleClick}
           >
             Disconnect
