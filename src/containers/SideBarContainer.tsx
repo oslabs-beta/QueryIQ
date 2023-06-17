@@ -9,15 +9,11 @@ interface SideBarContainerProps {
   formData: {
     dbName: string;
     dbURI: string;
-    dbHost: string;
-    dbPort: string;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
       dbName: string;
       dbURI: string;
-      dbHost: string;
-      dbPort: string;
     }>
   >;
 }

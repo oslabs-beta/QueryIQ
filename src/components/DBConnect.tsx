@@ -7,15 +7,11 @@ interface DBConnectProps {
   formData: {
     dbName: string;
     dbURI: string;
-    dbHost: string;
-    dbPort: string;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
       dbName: string;
       dbURI: string;
-      dbHost: string;
-      dbPort: string;
     }>
   >;
 }
@@ -33,8 +29,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
     setFormData({
       dbName: "",
       dbURI: "",
-      dbHost: "",
-      dbPort: "",
     });
     openModal(true);
   };
@@ -61,10 +55,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
         <>
           <div className="my-4 rounded-lg border border-black bg-gray-900 p-4 text-indigo-300 shadow-xl">
             <span>DB NAME: {formData.dbName}</span>
-            <br></br>
-            <span>HOST: {formData.dbHost}</span>
-            <br></br>
-            <span>PORT: {formData.dbPort}</span>
             <br></br>
             <span>CONNECTION STATUS:</span>
             <br></br>

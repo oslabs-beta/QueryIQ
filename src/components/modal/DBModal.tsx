@@ -9,15 +9,11 @@ interface DBModalProps {
     React.SetStateAction<{
       dbName: string;
       dbURI: string;
-      dbHost: string;
-      dbPort: string;
     }>
   >;
   formData: {
     dbName: string;
     dbURI: string;
-    dbHost: string;
-    dbPort: string;
   };
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;

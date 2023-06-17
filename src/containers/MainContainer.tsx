@@ -11,14 +11,12 @@ const MainContainer: React.FC = ({}) => {
   const [formData, setFormData] = useState({
     dbName: "",
     dbURI: "",
-    dbHost: "",
-    dbPort: "",
   });
 
   useEffect(() => {
-    const { dbName, dbURI, dbHost, dbPort } = formData;
+    const { dbName, dbURI, } = formData;
     let isValid = false;
-    if (dbName && dbURI && dbHost && dbPort) {
+    if (dbName && dbURI) {
       isValid = true;
     }
     setIsFormValid(isValid);
@@ -26,7 +24,7 @@ const MainContainer: React.FC = ({}) => {
 
   // will only fire if isFormValid === true
   const handleConnect = () => {
-    console.log('Valid Form:', formData);
+    console.log("Valid Form:", formData);
     // will send data to back end if validateData is true
     setConnection(true);
     setIsModalOpen(false);

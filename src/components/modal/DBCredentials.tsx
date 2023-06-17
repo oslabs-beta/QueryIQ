@@ -4,15 +4,11 @@ interface DBCredentialsProps {
   formData: {
     dbName: string;
     dbURI: string;
-    dbHost: string;
-    dbPort: string;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
       dbName: string;
       dbURI: string;
-      dbHost: string;
-      dbPort: string;
     }>
   >;
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
@@ -42,20 +38,6 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
         placeholder="Database URI"
         value={formData.dbURI}
         onChange={(e) => setFormData({ ...formData, dbURI: e.target.value })}
-      ></input>
-      <label>Database Host</label>
-      <input
-        className="rounded-lg border border-gray-900 p-2"
-        placeholder="Database Host"
-        value={formData.dbHost}
-        onChange={(e) => setFormData({ ...formData, dbHost: e.target.value })}
-      ></input>
-      <label>Port</label>
-      <input
-        className="rounded-lg border border-gray-900 p-2"
-        placeholder="Port"
-        value={formData.dbPort}
-        onChange={(e) => setFormData({ ...formData, dbPort: e.target.value })}
       ></input>
       <div className="h-45 w-45 flex justify-center">
         <button
