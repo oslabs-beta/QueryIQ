@@ -6,10 +6,7 @@ interface DBModalProps {
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DBModal: React.FC<DBModalProps> = ({
-  openModal,
-  setConnection,
-}) => {
+const DBModal: React.FC<DBModalProps> = ({ openModal, setConnection }) => {
   // used to cycle between modal states, selecting a database and inputting credentials
   const [dbSelection, setdbSelection] = useState(false);
 

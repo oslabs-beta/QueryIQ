@@ -2,17 +2,21 @@ import React from "react";
 // import { useState } from "react";
 
 interface DBConnectProps {
-    openModal: React.Dispatch<React.SetStateAction<boolean>>;
-    connection: boolean;
-    setConnection: React.Dispatch<React.SetStateAction<boolean>>;
+  openModal: React.Dispatch<React.SetStateAction<boolean>>;
+  connection: boolean;
+  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const DBConnect: React.FC<DBConnectProps> = ({ openModal, connection, setConnection }) => {
+const DBConnect: React.FC<DBConnectProps> = ({
+  openModal,
+  connection,
+  setConnection,
+}) => {
   // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
 
   const handleConnect = () => {
     openModal(true);
-  }
+  };
 
   const handleClick = () => {
     connection ? setConnection(false) : setConnection(true);

@@ -5,7 +5,6 @@ import { useState } from "react";
 import DBModal from "~/components/DBModal";
 
 const MainContainer: React.FC = ({}) => {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [connection, setConnection] = useState(false);
 
@@ -15,10 +14,14 @@ const MainContainer: React.FC = ({}) => {
         <></>
       ) : (
         <>
-          <DBModal openModal={setIsModalOpen} setConnection={setConnection}  />
+          <DBModal openModal={setIsModalOpen} setConnection={setConnection} />
         </>
       )}
-      <SideBarContainer openModal={setIsModalOpen} connection={connection} setConnection={setConnection} />
+      <SideBarContainer
+        openModal={setIsModalOpen}
+        connection={connection}
+        setConnection={setConnection}
+      />
       <QueryContainer />
     </div>
   );

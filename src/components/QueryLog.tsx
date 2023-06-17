@@ -4,7 +4,7 @@ const QueryLog: React.FC = () => {
   const queryArray = Array.from({ length: 16 }, (_, index) => index + 1);
 
   return (
-    <div className="my-8 flex h-36 md:h-96 w-11/12 flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl">
+    <div className="my-8 flex h-36 w-11/12 flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-96">
       <span className="w-full border-black bg-gray-900 p-1 text-center text-indigo-300">
         Query Log
       </span>
