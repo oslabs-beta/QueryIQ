@@ -29,19 +29,21 @@ const MainContainer: React.FC = ({}) => {
     if (isFormValid) {
       console.log(formData);
       console.log("connected");
-      setConnection(true);
+      return true;
     } else {
       console.log("Invalid Data");
+      return false;
     }
   };
 
   const handleConnect = () => {
-    validateData();
-    if (isFormValid) {
+    if (validateData()) {
+      setConnection(true);
       console.log('Valid Form:', formData);
+      
+      // will send data to back end if validateData is true
+      setIsModalOpen(false);
     }
-    // will send data to back end if validateData is true
-    setIsModalOpen(false);
   };
 
   return (
