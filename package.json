@@ -38,6 +38,7 @@
     "@trpc/server": "^10.26.0",
     "next": "^13.4.2",
     "next-auth": "^4.22.1",
+    "prisma-field-encryption": "^1.4.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "1.12.2",
