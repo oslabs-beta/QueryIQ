@@ -26,6 +26,11 @@
 
 -
 
+## Future Features
+
+- Comparing queries across two different database vendors:
+  - One database vendor (PostreSQL, MySQL, etc.) may be superior to another given a certain format of data, and given a certain read or write operation.
+
 ## Deployment
 
 -
