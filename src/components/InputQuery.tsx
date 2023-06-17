@@ -7,7 +7,6 @@ import { useState } from "react";
 //request is routed
 
 const InputQuery: React.FC = () => {
-
     //useState for loading bar 
     const [loadingProgress, setLoadingProgress] = useState(0);
 
@@ -39,13 +38,6 @@ return (
 
 
 );
-
-
 };
-
-
-
-
-
 
 export default InputQuery;
