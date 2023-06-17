@@ -2,7 +2,7 @@ import React from "react";
 import QueryContainer from "./QueryContainer";
 import SideBarContainer from "./SideBarContainer";
 import { useState, useEffect } from "react";
-import DBModal from "~/components/DBModal";
+import DBModal from "~/components/modal/DBModal";
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,31 +19,17 @@ const MainContainer: React.FC = ({}) => {
     const { dbName, dbURI, dbHost, dbPort } = formData;
     let isValid = false;
     if (dbName && dbURI && dbHost && dbPort) {
-      isValid = true; // Check if all fields are filled
+      isValid = true;
     }
     setIsFormValid(isValid);
   }, [formData]);
 
-  // placeHolder for eventual validation of form data
-  const validateData = () => {
-    if (isFormValid) {
-      console.log(formData);
-      console.log("connected");
-      return true;
-    } else {
-      console.log("Invalid Data");
-      return false;
-    }
-  };
-
+  // will only fire if isFormValid === true
   const handleConnect = () => {
-    if (validateData()) {
-      setConnection(true);
-      console.log('Valid Form:', formData);
-      
-      // will send data to back end if validateData is true
-      setIsModalOpen(false);
-    }
+    console.log('Valid Form:', formData);
+    // will send data to back end if validateData is true
+    setConnection(true);
+    setIsModalOpen(false);
   };
 
   return (
