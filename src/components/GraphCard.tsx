@@ -10,6 +10,7 @@ const GraphCard: React.FC = () => {
         width={210}
         height={64}
       />
+      {/* <iframe src="http://localhost:3000/d-solo/c380d2f8-36cc-4a99-a230-a3169f3bec69/test-dashboard?orgId=1&from=1687258045279&to=1687279645279&panelId=7" width="450" height="200" frameborder="0"></iframe> */}
     </div>
   );
 };

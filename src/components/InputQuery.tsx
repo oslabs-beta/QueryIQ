@@ -6,32 +6,48 @@ import { useState } from "react";
 //query string will be submitted into input field, send triggered by button
 //request is routed
 
-const InputQuery: React.FC = () => {
+interface InputQueryProps {
+  setQueryLog: React.Dispatch<
+    React.SetStateAction<Array<{ query: string; data?: object }>>
+  >;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  query: string;
+}
+
+const InputQuery: React.FC<InputQueryProps> = ({
+  setQueryLog,
+  setQuery,
+  query,
+}) => {
   //useState for loading bar
   const [loadingProgress, setLoadingProgress] = useState(0);
 
   //handleClick for loading bar
-  const handleGoClick = () => {
+  const handleGoClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoadingProgress(100);
+    setQueryLog((prevQueryLog) => [...prevQueryLog, { query: query }]);
+    setQuery("");
   };
 
   return (
     <>
       <div className=" flex w-7/12 flex-col items-center justify-center">
-        <div className="w-full">
+        <form onSubmit={handleGoClick} className="flex w-full flex-col">
           <input
             className="my-1 w-full rounded-md shadow-xl"
             placeholder="Input Query Here..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
-          {/* <button>GO</button> */}
-        </div>
-        <button
-          className="my-2 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-          onClick={handleGoClick}
-        >
-          {" "}
-          GO{" "}
-        </button>
+          <button
+            type="submit"
+            disabled={!query}
+            className="my-2 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+          >
+            GO
+          </button>
+        </form>
 
         {/* loading bar */}
         <div className="my-1 w-full rounded-full bg-gray-200 dark:bg-gray-700">

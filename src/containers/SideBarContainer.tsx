@@ -16,6 +16,10 @@ interface SideBarContainerProps {
       dbURI: string;
     }>
   >;
+  queryLog: { query: string; data?: object }[];
+  setQueryLog: React.Dispatch<
+    React.SetStateAction<Array<{ query: string; data?: object }>>
+  >;
 }
 
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
@@ -24,6 +28,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   setConnection,
   formData,
   setFormData,
+  queryLog,
 }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-purple-800 md:h-full md:w-1/4">
@@ -34,7 +39,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
         formData={formData}
         setFormData={setFormData}
       />
-      <QueryLog />
+      <QueryLog queryLog={queryLog} />
     </div>
   );
 };
