@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import LoadingBar from "./LoadingBar";
 
 //child of QueryContainer
 //includes input field and submit button
@@ -21,11 +22,25 @@ const InputQuery: React.FC<InputQueryProps> = ({
 }) => {
   //useState for loading bar
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  //handleClick for loading bar
-  const handleGoClick = (e: React.FormEvent<HTMLFormElement>) => {
+  const asyncLoadingSim = (): Promise<void> => {
+    setIsLoading(true);
+    setLoadingProgress(0);
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        setLoadingProgress(100);
+        setTimeout(() => {
+          setIsLoading(false);
+          resolve();
+        }, 900);
+      }, 100);
+    });
+  };
+
+  const handleGoClick = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoadingProgress(100);
+    await asyncLoadingSim();
     setQueryLog((prevQueryLog) => [
       ...prevQueryLog,
       { query: query, data: {}, name: "" },
@@ -55,16 +70,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
           </button>
         </form>
 
-        {/* loading bar */}
-        <div className="my-1 w-full rounded-full bg-gray-200 dark:bg-gray-700">
-          <div
-            className="rounded-full bg-blue-600 p-0.5 text-center text-xs font-medium leading-none text-blue-100 transition-all duration-1000 ease-out"
-            style={{ width: `${loadingProgress}%` }}
-          >
-            {" "}
-            {loadingProgress}%
-          </div>
-        </div>
+        {!isLoading ? <></> : <LoadingBar loadingProgress={loadingProgress} />}
       </div>
     </>
   );
