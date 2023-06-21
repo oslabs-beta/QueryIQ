@@ -8,16 +8,16 @@ import next from 'next';
 import path from 'path'
 import dbRouter from './routes/dbRouter'
 
-// Cannot use env from ../env.mjs due to issues with ESM
-// import { env } from '../env.mjs';
+// Required to pipe env variables into Express
 import dotenv from 'dotenv';
 dotenv.config();
-const port = process.env.PORT || 3001;
+
+const port = process.env.PORT || 3002;
 
 const app: Application = express();
 const bodyParser = require('body-parser');
 
-// Attach Next.js to Express
+// Wrap Express in Next.js
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
