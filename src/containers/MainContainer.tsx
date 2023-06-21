@@ -51,7 +51,7 @@ const MainContainer: React.FC = ({}) => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col bg-white md:flex-row">
+    <div className="flex h-full w-full flex-col bg-purple-800 md:flex-row">
       {!isModalOpen ? (
         <></>
       ) : (
