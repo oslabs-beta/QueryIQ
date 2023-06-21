@@ -48,9 +48,19 @@ const DBConnect: React.FC<DBConnectProps> = ({
     connection ? setConnection(false) : setConnection(true);
   };
 
+  // USEQUERY TESTING BELOW COMMENTED OUT TEMPORARILY
 
+//   const { isLoading, isError, data, error, refetch } = useQuery('posts', () =>
+//   fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json()),
+//   {
+//     enabled: false,
+//   }
+// );
 
-  //Connecting using a fake API endpoint with some fake data
+//   const handleClickTestDB = () => {
+//     //triggers a fresh data fetch for the useQuery above 
+//     refetch();
+//   };
 
   const { isLoading, isError, data, error, refetch,
   } = useQuery<Post[]>('posts',
@@ -97,10 +107,11 @@ const DBConnect: React.FC<DBConnectProps> = ({
             Connect to Database
           </button>
           <span>OR</span>
-          <button 
+          <span>Use Test Data</span>
+          {/* <button 
             className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-             onClick = {handleClickTestDB} 
-          > {buttonLabel()}</button>
+            //  onClick = {handleClickTestDB} 
+          > {buttonLabel()}</button> */}
         </>
       ) : (
         <>

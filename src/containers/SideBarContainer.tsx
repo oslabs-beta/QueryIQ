@@ -1,6 +1,6 @@
 import React from "react";
 import DBConnect from "~/components/DBConnect";
-import QueryLog from "~/components/QueryLog";
+import QueryLog from "~/components/queryLog/QueryLog";
 
 interface SideBarContainerProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +16,11 @@ interface SideBarContainerProps {
       dbURI: string;
     }>
   >;
+  queryLog: { query: string; data: object; name: string }[];
+  setQueryLog: React.Dispatch<
+    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
+  >;
+  editQueryLabel: (index: number, label: string) => void;
 }
 
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
@@ -24,6 +29,8 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   setConnection,
   formData,
   setFormData,
+  queryLog,
+  editQueryLabel,
 }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-purple-800 md:h-full md:w-1/4">
@@ -34,7 +41,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
         formData={formData}
         setFormData={setFormData}
       />
-      <QueryLog />
+      <QueryLog queryLog={queryLog} editQueryLabel={editQueryLabel} />
     </div>
   );
 };
