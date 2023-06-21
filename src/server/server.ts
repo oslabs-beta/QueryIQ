@@ -14,7 +14,7 @@ const port = process.env.PORT || 3001;
 
 const app: Application = express();
 
-// Attach Next.js to Express
+// Wrap Express in Next.js
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
