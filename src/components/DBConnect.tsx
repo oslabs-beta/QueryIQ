@@ -1,7 +1,6 @@
-import React from "react";
-import { useQuery } from 'react-query';
-// import { TestDB } from "pg";
-
+import  React from "react";
+import { useQuery} from 'react-query';
+        
 interface DBConnectProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
@@ -19,6 +18,13 @@ interface DBConnectProps {
 }
 
 
+
+// type Post =  {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
 
 
 const DBConnect: React.FC<DBConnectProps> = ({
@@ -46,12 +52,19 @@ const DBConnect: React.FC<DBConnectProps> = ({
 
   //Connecting using a fake API endpoint with some fake data
 
-  const { isLoading, isError, data, error, refetch } = useQuery('posts', () =>
-  fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json()),
-  {
-    enabled: false,
-  }
-);
+  const { isLoading, isError, data, error, refetch,
+  } = useQuery<Post[]>('posts',
+    async () => {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+      if (!response.ok) {
+        throw new Error('Failed to fetch posts');
+      }
+      return response.json();
+    },
+    {
+      enabled: false,
+    }
+  );
 
   const handleClickTestDB = () => {
     //triggers a fresh data fetch for the useQuery above 
