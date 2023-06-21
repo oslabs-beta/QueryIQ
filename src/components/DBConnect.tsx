@@ -1,8 +1,6 @@
 import  React from "react";
 import { useQuery} from 'react-query';
-
-
-
+        
 interface DBConnectProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
@@ -17,7 +15,6 @@ interface DBConnectProps {
       dbURI: string;
     }>
   >;
-
 }
 
 
