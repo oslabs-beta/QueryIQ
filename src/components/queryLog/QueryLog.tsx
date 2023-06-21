@@ -3,12 +3,11 @@ import { useState } from "react";
 import QueryLogItem from "./QueryLogItem";
 
 interface QueryLogProps {
-  queryLog: { query: string; data?: object; name?: string }[];
+  queryLog: { query: string; data: object; name: string }[];
   editQueryLabel: (index: number, label: string) => void;
 }
 
 const QueryLog: React.FC<QueryLogProps> = ({ queryLog, editQueryLabel }) => {
-
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const handleEditHover = (bool: boolean) => {
@@ -22,16 +21,22 @@ const QueryLog: React.FC<QueryLogProps> = ({ queryLog, editQueryLabel }) => {
       </span>
       <div className="h-full w-full overflow-y-auto bg-gray-800">
         <ul className="w-full">
-          {queryLog.map((query, index) => (
-            <QueryLogItem
-              key={index}
-              index={index}
-              queryLogObject={queryLog[index]}
-              handleEditHover={handleEditHover}
-              isHovered={isHovered}
-              editQueryLabel={editQueryLabel}
-            />
-          ))}
+          {queryLog.map((query, index) => {
+            const queryLogObject = queryLog[index];
+            if (queryLogObject) {
+              return (
+                <QueryLogItem
+                  key={index}
+                  index={index}
+                  queryLogObject={queryLogObject}
+                  handleEditHover={handleEditHover}
+                  isHovered={isHovered}
+                  editQueryLabel={editQueryLabel}
+                />
+              );
+            }
+            return null;
+          })}
         </ul>
       </div>
     </div>

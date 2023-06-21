@@ -4,12 +4,16 @@ import SideBarContainer from "./SideBarContainer";
 import { useState, useEffect } from "react";
 import DBModal from "~/components/modal/DBModal";
 
+interface QueryLogItem {
+  query: string;
+  data: object;
+  name: string;
+}
+
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [queryLog, setQueryLog] = useState<
-    Array<{ query: string; data?: object; name?: string }>
-  >([]);
+  const [queryLog, setQueryLog] = useState<QueryLogItem[]>([]);
   const [connection, setConnection] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,13 +39,16 @@ const MainContainer: React.FC = ({}) => {
     setIsModalOpen(false);
   };
 
-  const editQueryLabel = (index: number, label: string) : void => {
-    if (!queryLog[index].name) {
-      queryLog[index].name = label;
-    } else {
-      queryLog[index].name = label;
-    }
-  }
+  const editQueryLabel = (index: number, label: string): void => {
+    setQueryLog((prevQueryLog) => {
+      if (prevQueryLog.length > index) {
+        const updatedQueryLog = [...prevQueryLog];
+        updatedQueryLog[index].name = label; // functionality works but this linter is not being nice!
+        return updatedQueryLog;
+      }
+      return prevQueryLog;
+    });
+  };
 
   return (
     <div className="flex h-full w-full flex-col bg-white md:flex-row">

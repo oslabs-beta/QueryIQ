@@ -16,9 +16,9 @@ interface SideBarContainerProps {
       dbURI: string;
     }>
   >;
-  queryLog: { query: string; data?: object }[];
+  queryLog: { query: string; data: object; name: string }[];
   setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data?: object; name?: string }>>
+    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
   >;
   editQueryLabel: (index: number, label: string) => void;
 }

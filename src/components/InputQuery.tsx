@@ -8,7 +8,7 @@ import { useState } from "react";
 
 interface InputQueryProps {
   setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data?: object; name?: string }>>
+    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
   >;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
@@ -26,16 +26,22 @@ const InputQuery: React.FC<InputQueryProps> = ({
   const handleGoClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoadingProgress(100);
-    setQueryLog((prevQueryLog) => [...prevQueryLog, { query: query }]);
+    setQueryLog((prevQueryLog) => [
+      ...prevQueryLog,
+      { query: query, data: {}, name: "" },
+    ]);
     setQuery("");
   };
 
   return (
     <>
       <div className=" flex w-7/12 flex-col items-center justify-center">
-        <form onSubmit={handleGoClick} className="flex w-full items-center justify-center flex-col">
+        <form
+          onSubmit={handleGoClick}
+          className="flex w-full flex-col items-center justify-center"
+        >
           <input
-            className="my-1 w-full rounded-md shadow-xl p-1"
+            className="my-1 w-full rounded-md p-1 shadow-xl"
             placeholder="Input Query Here..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}

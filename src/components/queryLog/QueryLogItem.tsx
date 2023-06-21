@@ -14,8 +14,8 @@ interface QueryLogItemProps {
   editQueryLabel: (index: number, label: string) => void;
   queryLogObject: {
     query: string;
-    data?: object | undefined;
-    name?: string | undefined;
+    data: object;
+    name: string;
   };
 }
 
@@ -31,7 +31,7 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(index, label);
+    // console.log(index, label);
     editQueryLabel(index, label);
     setEditMode(false);
   };
