@@ -1,4 +1,7 @@
 import React from "react";
+// import { useQuery } from 'react-query';
+
+//commented out useQuery for linter
 
 interface DBConnectProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,6 +40,33 @@ const DBConnect: React.FC<DBConnectProps> = ({
     connection ? setConnection(false) : setConnection(true);
   };
 
+  // USEQUERY TESTING BELOW COMMENTED OUT TEMPORARILY
+
+//   const { isLoading, isError, data, error, refetch } = useQuery('posts', () =>
+//   fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json()),
+//   {
+//     enabled: false,
+//   }
+// );
+
+//   const handleClickTestDB = () => {
+//     //triggers a fresh data fetch for the useQuery above 
+//     refetch();
+//   };
+
+//   const buttonLabel = () => {
+//     if (isLoading) {
+//       return 'Loading...';
+//     } else if (isError) {
+//       return `Error: ${error.message}`;
+//     } else if (!data && !isLoading) {
+//       return 'Connect to a test db';
+//     } else {
+//       console.log('testdata', data)
+//       return 'Connected to test db';
+//     }
+//   };
+
   return (
     <div className="flex flex-col items-center justify-center">
       {/**conditionally renders DB disconnected or DB connected**/}
@@ -49,7 +79,11 @@ const DBConnect: React.FC<DBConnectProps> = ({
             Connect to Database
           </button>
           <span>OR</span>
-          <span>USE TEST DATA</span>
+          <span>Use Test Data</span>
+          {/* <button 
+            className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+            //  onClick = {handleClickTestDB} 
+          > {buttonLabel()}</button> */}
         </>
       ) : (
         <>

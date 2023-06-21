@@ -19,9 +19,9 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
 }) => {
   return (
     <div className="flex h-5/6 w-full flex-col justify-between bg-pink-600 md:h-full md:w-10/12">
-      <div className="h-1/6 flex-none border-4 ">
+      <div className="h-1/6 flex-none p-4">
         {/* Other content */}
-        <div className="flex items-center justify-center  border-4 border-yellow-200 ">
+        <div className="flex justify-center p-2">
           <InputQuery
             setQueryLog={setQueryLog}
             setQuery={setQuery}

@@ -33,9 +33,9 @@ const InputQuery: React.FC<InputQueryProps> = ({
   return (
     <>
       <div className=" flex w-7/12 flex-col items-center justify-center">
-        <form onSubmit={handleGoClick} className="flex w-full flex-col">
+        <form onSubmit={handleGoClick} className="flex w-full items-center justify-center flex-col">
           <input
-            className="my-1 w-full rounded-md shadow-xl"
+            className="my-1 w-full rounded-md shadow-xl p-1"
             placeholder="Input Query Here..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -43,7 +43,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
           <button
             type="submit"
             disabled={!query}
-            className="my-2 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+            className="my-2 w-24 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
           >
             GO
           </button>
