@@ -8,7 +8,7 @@ const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [queryLog, setQueryLog] = useState<
-    Array<{ query: string; data?: object }>
+    Array<{ query: string; data?: object; name?: string }>
   >([]);
   const [connection, setConnection] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -34,6 +34,10 @@ const MainContainer: React.FC = ({}) => {
     setConnection(true);
     setIsModalOpen(false);
   };
+
+  const editQueryLabel = (index, label) => {
+
+  }
 
   return (
     <div className="flex h-full w-full flex-col bg-white md:flex-row">

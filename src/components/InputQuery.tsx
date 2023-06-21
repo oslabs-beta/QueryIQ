@@ -8,7 +8,7 @@ import { useState } from "react";
 
 interface InputQueryProps {
   setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data?: object }>>
+    React.SetStateAction<Array<{ query: string; data?: object; name?: string }>>
   >;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;

@@ -1,6 +1,6 @@
 import React from "react";
 import DBConnect from "~/components/DBConnect";
-import QueryLog from "~/components/QueryLog";
+import QueryLog from "~/components/queryLog/QueryLog";
 
 interface SideBarContainerProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +18,7 @@ interface SideBarContainerProps {
   >;
   queryLog: { query: string; data?: object }[];
   setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data?: object }>>
+    React.SetStateAction<Array<{ query: string; data?: object; name?: string }>>
   >;
 }
 
