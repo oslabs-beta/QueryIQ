@@ -10,12 +10,12 @@ import PieChart3 from "~/components/PitChart3";
 const DashboardContainer: React.FC = () => {
   return (
     <div className="flex h-full w-full flex-wrap items-center justify-around bg-blue-700 p-4">
-      <LineChart3 />
+      {/* <LineChart3 />
       <PieChart />
       <LineChart />
       <LineChart2 />
       <PieChart2 />
-      <PieChart3 />
+      <PieChart3 /> */}
 
     </div>
   );
