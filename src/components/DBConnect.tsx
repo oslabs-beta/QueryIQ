@@ -1,8 +1,6 @@
-import React from "react";
-// import { useQuery } from 'react-query';
-
-//commented out useQuery for linter
-
+import  React from "react";
+import { useQuery} from 'react-query';
+        
 interface DBConnectProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
@@ -18,6 +16,16 @@ interface DBConnectProps {
     }>
   >;
 }
+
+
+
+// type Post =  {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
+
 
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
@@ -54,18 +62,38 @@ const DBConnect: React.FC<DBConnectProps> = ({
 //     refetch();
 //   };
 
-//   const buttonLabel = () => {
-//     if (isLoading) {
-//       return 'Loading...';
-//     } else if (isError) {
-//       return `Error: ${error.message}`;
-//     } else if (!data && !isLoading) {
-//       return 'Connect to a test db';
-//     } else {
-//       console.log('testdata', data)
-//       return 'Connected to test db';
-//     }
-//   };
+  const { isLoading, isError, data, error, refetch,
+  } = useQuery<Post[]>('posts',
+    async () => {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+      if (!response.ok) {
+        throw new Error('Failed to fetch posts');
+      }
+      return response.json();
+    },
+    {
+      enabled: false,
+    }
+  );
+
+  const handleClickTestDB = () => {
+    //triggers a fresh data fetch for the useQuery above 
+    refetch();
+  };
+
+
+  const buttonLabel = () => {
+    if (isLoading) {
+      return 'Loading...';
+    } else if (isError) {
+      return `Error: ${error.message}`;
+    } else if (!data && !isLoading) {
+      return 'Connect to a test db';
+    } else {
+      console.log('testdata', data)
+      return 'Connected to test db';
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
