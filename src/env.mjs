@@ -7,6 +7,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
+    PORT_EXPRESS: z.string(),
     DATABASE_URL_PRISMA: z.string().url(),
     DATABASE_URL_NODE: z.string().url(),
     NODE_ENV: z.enum(['development', 'test', 'production']),
@@ -40,6 +41,7 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    PORT_EXPRESS: process.env.PORT_EXPRESS,
     DATABASE_URL_PRISMA: process.env.DATABASE_URL_PRISMA,
     DATABASE_URL_NODE: process.env.DATABASE_URL_NODE,
     NODE_ENV: process.env.NODE_ENV,
