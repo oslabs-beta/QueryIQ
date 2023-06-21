@@ -5,9 +5,8 @@ import express, {
   type Response,
 } from 'express';
 import next from 'next';
-// import path from 'path'
-import dbRouter from './routes/dbRouter'
-import bodyParser from 'body-parser'
+import dbRouter from './routes/dbRouter';
+import bodyParser from 'body-parser';
 
 // Required to pipe env variables into Express
 import dotenv from 'dotenv';
@@ -37,8 +36,7 @@ nextApp
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/api', dbRouter)
-
+app.use('/api', dbRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
