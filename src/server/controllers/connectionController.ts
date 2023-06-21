@@ -1,4 +1,4 @@
-import { RequestHandler } from 'express';
+import { RequestHandler, NextFunction } from 'express';
 import { Pool } from 'pg';
 
 type ConnectionController = {
