@@ -5,8 +5,9 @@ import express, {
   type Response,
 } from 'express';
 import next from 'next';
-import path from 'path'
+// import path from 'path'
 import dbRouter from './routes/dbRouter'
+import bodyParser from 'body-parser'
 
 // Required to pipe env variables into Express
 import dotenv from 'dotenv';
@@ -15,7 +16,6 @@ dotenv.config();
 const port = process.env.PORT_EXPRESS || 3002;
 
 const app: Application = express();
-const bodyParser = require('body-parser');
 
 // Wrap Express in Next.js
 const dev = process.env.NODE_ENV !== 'production';
