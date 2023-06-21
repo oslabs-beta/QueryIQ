@@ -12,7 +12,7 @@ import dbRouter from './routes/dbRouter'
 import dotenv from 'dotenv';
 dotenv.config();
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT_EXPRESS || 3002;
 
 const app: Application = express();
 const bodyParser = require('body-parser');
