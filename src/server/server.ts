@@ -6,11 +6,11 @@ import express, {
 } from 'express';
 import next from 'next';
 
-// Cannot use env from ../env.mjs due to issues with ESM
-// import { env } from '../env.mjs';
+// Required to pipe env variables into Express
 import dotenv from 'dotenv';
 dotenv.config();
-const port = process.env.PORT || 3001;
+
+const port = process.env.PORT || 3002;
 
 const app: Application = express();
 
