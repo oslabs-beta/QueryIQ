@@ -5,6 +5,8 @@ import express, {
   type Response,
 } from 'express';
 import next from 'next';
+import path from 'path'
+import dbRouter from './routes/dbRouter'
 
 // Cannot use env from ../env.mjs due to issues with ESM
 // import { env } from '../env.mjs';
@@ -13,6 +15,7 @@ dotenv.config();
 const port = process.env.PORT || 3001;
 
 const app: Application = express();
+const bodyParser = require('body-parser');
 
 // Attach Next.js to Express
 const dev = process.env.NODE_ENV !== 'production';
@@ -32,6 +35,10 @@ nextApp
   });
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api', dbRouter)
+
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello World!');
