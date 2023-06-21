@@ -35,8 +35,12 @@ const MainContainer: React.FC = ({}) => {
     setIsModalOpen(false);
   };
 
-  const editQueryLabel = (index, label) => {
-
+  const editQueryLabel = (index: number, label: string) : void => {
+    if (!queryLog[index].name) {
+      queryLog[index].name = label;
+    } else {
+      queryLog[index].name = label;
+    }
   }
 
   return (
@@ -62,6 +66,7 @@ const MainContainer: React.FC = ({}) => {
         formData={formData}
         queryLog={queryLog}
         setQueryLog={setQueryLog}
+        editQueryLabel={editQueryLabel}
       />
       <QueryContainer
         setQueryLog={setQueryLog}

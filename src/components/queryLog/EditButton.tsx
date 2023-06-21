@@ -1,22 +1,30 @@
-import React from "react";
+// tried modularizing editbutton
 
-interface EditButtonProps {
-  setEditMode: (bool: boolean) => void;
-  setEditMode: (bool: boolean) => void;
-}
+// import React from "react";
 
-const EditButton: React.FC<EditButtonProps> = ({
-    setEditMode,
-  handleEditHover,
-}) => {
-  return (
-    <span
-      onClick={() => setEditMode(false)}
-      onMouseEnter={onMouseEnter(true)}
-      onMouseLeave={() => handleEditHover(false)}
-      className={isHovered ? "edit-icon" : "edit-icon hidden"}
-    ></span>
-  );
-};
+// interface EditButtonProps {
+//   setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+//   isHovered: boolean;
+//   handleEditHover: (bool: boolean) => void;
+//   children: React.ReactNode;
+// }
 
-export default EditButton;
+// const EditButton: React.FC<EditButtonProps> = ({
+//   setEditMode,
+//   handleEditHover,
+//   isHovered,
+//   children,
+// }) => {
+//   return (
+//     <div
+//       onClick={() => setEditMode(false)}
+//       onMouseEnter={() => handleEditHover(true)}
+//       onMouseLeave={() => handleEditHover(false)}
+//       className={isHovered ? "edit-icon" : "edit-icon hidden"}
+//     >
+//       {children} {/* Render the children */}
+//     </div>
+//   );
+// };
+
+// export default EditButton;

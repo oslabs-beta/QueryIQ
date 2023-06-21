@@ -1,14 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import { AiFillEdit, AiOutlineEdit } from "react-icons/ai";
 import QueryLogItem from "./QueryLogItem";
 
 interface QueryLogProps {
   queryLog: { query: string; data?: object; name?: string }[];
+  editQueryLabel: (index: number, label: string) => void;
 }
 
-const QueryLog: React.FC<QueryLogProps> = ({ queryLog }) => {
-  // const queryArray = Array.from({ length: 16 }, (_, index) => index + 1);
+const QueryLog: React.FC<QueryLogProps> = ({ queryLog, editQueryLabel }) => {
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -27,8 +26,10 @@ const QueryLog: React.FC<QueryLogProps> = ({ queryLog }) => {
             <QueryLogItem
               key={index}
               index={index}
+              queryLogObject={queryLog[index]}
               handleEditHover={handleEditHover}
               isHovered={isHovered}
+              editQueryLabel={editQueryLabel}
             />
           ))}
         </ul>
