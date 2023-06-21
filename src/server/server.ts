@@ -1,46 +1,54 @@
-const express = import("express");
-import { Application, NextFunction, Request, Response } from "express";
+import express, {
+  type Application,
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
+import next from 'next';
 
-import next from "next";
-
-const port = 3000;
+// Cannot use env from ../env.mjs due to issues with ESM
+// import { env } from '../env.mjs';
+import dotenv from 'dotenv';
+dotenv.config();
+const port = process.env.PORT || 3001;
 
 const app: Application = express();
 
-const dev = process.env.NODE_ENV !== "production";
+// Attach Next.js to Express
+const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 nextApp
   .prepare()
   .then(() => {
-    app.get("*", (req: Request, res: Response) => {
+    app.get('*', (req: Request, res: Response) => {
       return handle(req, res);
     });
   })
-  .catch((err: Error) => {
-    console.error(err.stack);
+  .catch((err: Error): void => {
+    console.error(err);
     process.exit(1);
   });
 
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-  console.log("/ endpoint hit");
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello World!');
+  console.log('/ endpoint hit');
 });
 
-app.get("/user", (req: Request, res: Response) => {
-  res.send("Hello from the API");
-  console.log("/user endpoint hit");
+app.get('/user', (req: Request, res: Response) => {
+  res.send('Hello from /user');
+  console.log('/user endpoint hit');
 });
 
 // Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr = {
-    log: "Express global error handler caught unknown middleware error",
+    log: 'Express global error handler caught unknown middleware error',
     status: 500,
-    message: { err: "An error occurred" },
+    message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);

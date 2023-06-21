@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "npm:init": "npm install && npm run install --prefix ./src/server && npm run prisma:generate",
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
+    "express": "ts-node --transpile-only ./src/server/server.ts",
     "prisma:generate": "prisma generate",
     "prisma:push": "npx prisma db push",
     "prisma:studio": "npx prisma studio",
-    "express": "ts-node ./src/server/server.ts",
     "serve:dev": "concurrently \"npm run dev\" \"npm run express\""
   },
   "dependencies": {
