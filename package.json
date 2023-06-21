@@ -3,16 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "npm:init": "npm install && npm install --prefix ./src/server && npm run prisma:generate",
-    "build": "next build",
-    "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start",
+    "npm:fullInstall": "npm install --prefix ./src/server && npm run prisma:generate",
+    "next:build": "next build",
+    "next:dev": "next dev",
+    "next:lint": "next lint",
+    "next:start": "next start",
     "express": "ts-node --transpile-only ./src/server/server.ts",
+    "express:watch": "nodemon",
     "prisma:generate": "prisma generate",
     "prisma:push": "npx prisma db push",
     "prisma:studio": "npx prisma studio",
-    "serve:dev": "concurrently \"npm run dev\" \"npm run express\""
+    "serve:dev": "concurrently \"npm run next:dev\" \"npm run express:watch\""
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
