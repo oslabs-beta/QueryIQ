@@ -9,7 +9,9 @@
     "start": "next start",
     "prisma:generate": "prisma generate",
     "prisma:push": "npx prisma db push",
-    "prisma:studio": "npx prisma studio"
+    "prisma:studio": "npx prisma studio",
+    "express": "ts-node ./src/server/server.ts",
+    "serve:dev": "concurrently \"npm run dev\" \"npm run express\""
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
