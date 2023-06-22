@@ -1,13 +1,21 @@
 import React from "react";
 import { useState } from "react";
 import QueryLogItem from "./QueryLogItem";
+import type { QueryLogItemObject } from "~/types/types";
 
 interface QueryLogProps {
   queryLog: { query: string; data: object; name: string }[];
   editQueryLabel: (index: number, label: string) => void;
+  activeQuery: QueryLogItemObject;
+  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
 }
 
-const QueryLog: React.FC<QueryLogProps> = ({ queryLog, editQueryLabel }) => {
+const QueryLog: React.FC<QueryLogProps> = ({
+  queryLog,
+  editQueryLabel,
+  setActiveQuery,
+  activeQuery,
+}) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const handleEditHover = (bool: boolean) => {
@@ -32,6 +40,8 @@ const QueryLog: React.FC<QueryLogProps> = ({ queryLog, editQueryLabel }) => {
                   handleEditHover={handleEditHover}
                   isHovered={isHovered}
                   editQueryLabel={editQueryLabel}
+                  setActiveQuery={setActiveQuery}
+                  activeQuery={activeQuery}
                 />
               );
             }

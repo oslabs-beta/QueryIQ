@@ -1,7 +1,7 @@
 import React from "react";
 import DBConnect from "~/components/DBConnect";
 import QueryLog from "~/components/queryLog/QueryLog";
-import { useState } from "react";
+import type { QueryLogItemObject } from "~/types/types";
 
 interface SideBarContainerProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,6 +24,8 @@ interface SideBarContainerProps {
   editQueryLabel: (index: number, label: string) => void;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
+  activeQuery: QueryLogItemObject;
+  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
 }
 
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
@@ -36,21 +38,26 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   editQueryLabel,
   setTestConnected,
   testConnected,
+  setActiveQuery,
+  activeQuery,
 }) => {
-  
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-purple-800 md:h-full md:w-1/4">
+    <div className="flex h-full w-full flex-col items-center justify-center  md:h-full md:w-1/4">
       <DBConnect
         openModal={openModal}
         connection={connection}
         setConnection={setConnection}
         formData={formData}
         setFormData={setFormData}
-        testConnected = {testConnected}
-        setTestConnected = {setTestConnected}
-
+        testConnected={testConnected}
+        setTestConnected={setTestConnected}
       />
-      <QueryLog queryLog={queryLog} editQueryLabel={editQueryLabel} />
+      <QueryLog
+        queryLog={queryLog}
+        editQueryLabel={editQueryLabel}
+        activeQuery={activeQuery}
+        setActiveQuery={setActiveQuery}
+      />
     </div>
   );
 };

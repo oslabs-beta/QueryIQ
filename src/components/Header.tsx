@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import HamburgerMenu from '../components/HamburgerMenu'
+import HamburgerMenu from "../components/HamburgerMenu";
 
 const Header: React.FC = () => {
   return (

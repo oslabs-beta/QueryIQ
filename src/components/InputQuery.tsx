@@ -1,11 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import LoadingBar from "./LoadingBar";
-
-//child of QueryContainer
-//includes input field and submit button
-//query string will be submitted into input field, send triggered by button
-//request is routed
+import type { QueryLogItemObject } from "~/types/types";
 
 interface InputQueryProps {
   setQueryLog: React.Dispatch<
@@ -13,12 +9,14 @@ interface InputQueryProps {
   >;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
+  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
 }
 
 const InputQuery: React.FC<InputQueryProps> = ({
   setQueryLog,
   setQuery,
   query,
+  setActiveQuery,
 }) => {
   //useState for loading bar
   const [loadingProgress, setLoadingProgress] = useState(0);
