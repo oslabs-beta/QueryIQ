@@ -1,6 +1,9 @@
 import  React from "react";
 import { useQuery} from 'react-query';
-        
+import {useState} from "react";
+import DBCard from "./DBCard";       
+import DashboardContainer from "~/containers/DashboardContainer";
+
 interface DBConnectProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
@@ -15,6 +18,9 @@ interface DBConnectProps {
       dbURI: string;
     }>
   >;
+  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
+  testConnected: boolean;
+  
 }
 
 
@@ -33,6 +39,8 @@ const DBConnect: React.FC<DBConnectProps> = ({
   setConnection,
   formData,
   setFormData,
+  setTestConnected,
+  testConnected,
 }) => {
   // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
 
@@ -49,7 +57,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
   };
 
   // USEQUERY TESTING BELOW COMMENTED OUT TEMPORARILY
-
 //   const { isLoading, isError, data, error, refetch } = useQuery('posts', () =>
 //   fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json()),
 //   {
@@ -62,38 +69,46 @@ const DBConnect: React.FC<DBConnectProps> = ({
 //     refetch();
 //   };
 
-  const { isLoading, isError, data, error, refetch,
-  } = useQuery<Post[]>('posts',
-    async () => {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-      if (!response.ok) {
-        throw new Error('Failed to fetch posts');
-      }
-      return response.json();
-    },
-    {
-      enabled: false,
-    }
-  );
+  // const { isLoading, isError, data, error, refetch,
+  // } = useQuery<Post[]>('posts',
+  //   async () => {
+  //     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+  //     if (!response.ok) {
+  //       throw new Error('Failed to fetch posts');
+  //     }
+  //     return response.json();
+  //   },
+  //   {
+  //     enabled: false,
+  //   }
+  // );
+
+  //
+  // const buttonLabel = () => {
+  //   if (isLoading) {
+  //     return 'Loading...';
+  //   } else if (isError) {
+  //     return `Error: ${error.message}`;
+  //   } else if (!data && !isLoading) {
+  //     return 'Connect to a test db';
+  //   } else {
+  //     console.log('testdata', data)
+  //     return 'Connected to test db';
+  //   }
+  // };
+
+
+
+ //KT's code for connecting to a test DB 
+
+  // const [testConnected, setTestConnected] = useState(false);
 
   const handleClickTestDB = () => {
-    //triggers a fresh data fetch for the useQuery above 
-    refetch();
+    setTestConnected(true); 
   };
 
 
-  const buttonLabel = () => {
-    if (isLoading) {
-      return 'Loading...';
-    } else if (isError) {
-      return `Error: ${error.message}`;
-    } else if (!data && !isLoading) {
-      return 'Connect to a test db';
-    } else {
-      console.log('testdata', data)
-      return 'Connected to test db';
-    }
-  };
+
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -107,11 +122,18 @@ const DBConnect: React.FC<DBConnectProps> = ({
             Connect to Database
           </button>
           <span>OR</span>
-          <span>Use Test Data</span>
-          {/* <button 
+          {/* <span>Use Test Data</span> */}
+          <button 
             className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-            //  onClick = {handleClickTestDB} 
-          > {buttonLabel()}</button> */}
+              onClick = {handleClickTestDB} 
+          > {testConnected ? 'Connected to test DB' : 'Connect to test DB'}</button>
+           {testConnected && (
+        <div >
+          <DBCard />
+          
+        </div>
+      )}
+        
         </>
       ) : (
         <>

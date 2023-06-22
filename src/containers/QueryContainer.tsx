@@ -8,6 +8,8 @@ interface QueryContainerProps {
   >;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
+  // setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
+  testConnected: boolean;
 }
 
 //Container is for input query and render the graphs on Dashboard Container if input query is processed successfully
@@ -16,6 +18,8 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   setQueryLog,
   setQuery,
   query,
+
+  testConnected,
 }) => {
   return (
     <div className="flex h-5/6 w-full flex-col justify-between bg-pink-600 md:h-full md:w-10/12">
@@ -26,11 +30,18 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             setQueryLog={setQueryLog}
             setQuery={setQuery}
             query={query}
+
+
           />
         </div>
       </div>
       <div className="flex-grow ">
-        <DashboardContainer />
+        <DashboardContainer 
+        testConnected = {testConnected}
+      
+        
+        
+        />
       </div>
     </div>
   );

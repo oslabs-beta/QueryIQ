@@ -3,6 +3,10 @@ import QueryContainer from "./QueryContainer";
 import SideBarContainer from "./SideBarContainer";
 import { useState, useEffect } from "react";
 import DBModal from "~/components/modal/DBModal";
+import DBConnect from "~/components/DBConnect";
+import DashboardContainer from "./DashboardContainer";
+
+
 
 interface QueryLogItem {
   query: string;
@@ -21,6 +25,9 @@ const MainContainer: React.FC = ({}) => {
     dbURI: "",
   });
 
+  //for connecting to test DB
+  const [testConnected, setTestConnected] = useState(false);
+
   //checking form validation on input changes for credentials
   useEffect(() => {
     const { dbName, dbURI } = formData;
@@ -38,6 +45,14 @@ const MainContainer: React.FC = ({}) => {
     setConnection(true);
     setIsModalOpen(false);
   };
+
+  //for connecting to test DB
+
+  // function handleTestConnect() {
+  //   // Perform the necessary actions to establish the connection
+  //   setConnected(true);
+  // }
+
 
   const editQueryLabel = (index: number, label: string): void => {
     setQueryLog((prevQueryLog) => {
@@ -74,14 +89,25 @@ const MainContainer: React.FC = ({}) => {
         queryLog={queryLog}
         setQueryLog={setQueryLog}
         editQueryLabel={editQueryLabel}
+        testConnected = {testConnected}
+        setTestConnected = {setTestConnected}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
         setQuery={setQuery}
         query={query}
+        testConnected = {testConnected}
+        setTestConnected = {setTestConnected}
       />
+
+      
+
+
+
     </div>
   );
 };
+
+
 
 export default MainContainer;
