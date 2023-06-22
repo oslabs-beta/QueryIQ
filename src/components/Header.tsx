@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { GiHamburgerMenu } from "react-icons/gi";
+import HamburgerMenu from "../components/HamburgerMenu";
 
 const Header: React.FC = () => {
   return (
@@ -22,7 +22,8 @@ const Header: React.FC = () => {
       </div>
       <div className="flex items-center">
         <button>
-          <GiHamburgerMenu />
+          {/* <GiHamburgerMenu /> */}
+          <HamburgerMenu />
         </button>
       </div>
     </div>
