@@ -24,8 +24,8 @@ const handle = nextApp.getRequestHandler();
 
 nextApp
   .prepare()
-  .then(() => {
-    app.get('*', (req: Request, res: Response) => {
+  .then((): void => {
+    app.get('*', (req: Request, res: Response): void => {
       return handle(req, res);
     });
   })
