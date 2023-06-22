@@ -3,21 +3,14 @@ import QueryContainer from "./QueryContainer";
 import SideBarContainer from "./SideBarContainer";
 import { useState, useEffect } from "react";
 import DBModal from "~/components/modal/DBModal";
-import DBConnect from "~/components/DBConnect";
-import DashboardContainer from "./DashboardContainer";
-
-
-
-interface QueryLogItem {
-  query: string;
-  data: object;
-  name: string;
-}
+// import DBConnect from "~/components/DBConnect";
+// import DashboardContainer from "./DashboardContainer";
+import type { QueryLogItemObject } from "~/types/types";
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [queryLog, setQueryLog] = useState<QueryLogItem[]>([]);
+  const [queryLog, setQueryLog] = useState<QueryLogItemObject[]>([]);
   const [connection, setConnection] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
@@ -27,6 +20,11 @@ const MainContainer: React.FC = ({}) => {
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
+  const [activeQuery, setActiveQuery] = useState<QueryLogItemObject>({
+    query: "",
+    data: {},
+    name: "",
+  });
 
   //checking form validation on input changes for credentials
   useEffect(() => {
@@ -53,7 +51,6 @@ const MainContainer: React.FC = ({}) => {
   //   setConnected(true);
   // }
 
-
   const editQueryLabel = (index: number, label: string): void => {
     setQueryLog((prevQueryLog) => {
       if (prevQueryLog.length > index) {
@@ -66,7 +63,7 @@ const MainContainer: React.FC = ({}) => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col bg-purple-800 md:flex-row">
+    <div className="flex h-full w-full flex-col bg-gradient-to-b from-purple-900 to-white md:flex-row">
       {!isModalOpen ? (
         <></>
       ) : (
@@ -89,25 +86,21 @@ const MainContainer: React.FC = ({}) => {
         queryLog={queryLog}
         setQueryLog={setQueryLog}
         editQueryLabel={editQueryLabel}
-        testConnected = {testConnected}
-        setTestConnected = {setTestConnected}
+        testConnected={testConnected}
+        setTestConnected={setTestConnected}
+        activeQuery={activeQuery}
+        setActiveQuery={setActiveQuery}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
         setQuery={setQuery}
         query={query}
-        testConnected = {testConnected}
-        setTestConnected = {setTestConnected}
+        testConnected={testConnected}
+        activeQuery={activeQuery}
+        setActiveQuery={setActiveQuery}
       />
-
-      
-
-
-
     </div>
   );
 };
-
-
 
 export default MainContainer;

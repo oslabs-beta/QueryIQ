@@ -1,7 +1,7 @@
-import  React from "react";
-import { useQuery} from 'react-query';
-import {useState} from "react";
-import DBCard from "./DBCard";       
+import React from "react";
+import { useQuery } from "react-query";
+import { useState } from "react";
+import DBCard from "./DBCard";
 import DashboardContainer from "~/containers/DashboardContainer";
 
 interface DBConnectProps {
@@ -20,10 +20,7 @@ interface DBConnectProps {
   >;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
-  
 }
-
-
 
 // type Post =  {
 //   userId: number;
@@ -31,7 +28,6 @@ interface DBConnectProps {
 //   title: string;
 //   body: string;
 // }
-
 
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
@@ -57,17 +53,17 @@ const DBConnect: React.FC<DBConnectProps> = ({
   };
 
   // USEQUERY TESTING BELOW COMMENTED OUT TEMPORARILY
-//   const { isLoading, isError, data, error, refetch } = useQuery('posts', () =>
-//   fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json()),
-//   {
-//     enabled: false,
-//   }
-// );
+  //   const { isLoading, isError, data, error, refetch } = useQuery('posts', () =>
+  //   fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json()),
+  //   {
+  //     enabled: false,
+  //   }
+  // );
 
-//   const handleClickTestDB = () => {
-//     //triggers a fresh data fetch for the useQuery above 
-//     refetch();
-//   };
+  //   const handleClickTestDB = () => {
+  //     //triggers a fresh data fetch for the useQuery above
+  //     refetch();
+  //   };
 
   // const { isLoading, isError, data, error, refetch,
   // } = useQuery<Post[]>('posts',
@@ -97,18 +93,13 @@ const DBConnect: React.FC<DBConnectProps> = ({
   //   }
   // };
 
-
-
- //KT's code for connecting to a test DB 
+  //KT's code for connecting to a test DB
 
   // const [testConnected, setTestConnected] = useState(false);
 
   const handleClickTestDB = () => {
-    setTestConnected(true); 
+    setTestConnected(true);
   };
-
-
-
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -123,17 +114,18 @@ const DBConnect: React.FC<DBConnectProps> = ({
           </button>
           <span>OR</span>
           {/* <span>Use Test Data</span> */}
-          <button 
+          <button
             className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-              onClick = {handleClickTestDB} 
-          > {testConnected ? 'Connected to test DB' : 'Connect to test DB'}</button>
-           {testConnected && (
-        <div >
-          <DBCard />
-          
-        </div>
-      )}
-        
+            onClick={handleClickTestDB}
+          >
+            {" "}
+            {testConnected ? "Connected to test DB" : "Connect to test DB"}
+          </button>
+          {testConnected && (
+            <div className="flex flex-col items-center justify-center">
+              <DBCard />
+            </div>
+          )}
         </>
       ) : (
         <>
