@@ -1,69 +1,28 @@
-# QueryIQ
+# Create T3 App
 
-> A performance metrics dev tool for sql databases
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## Getting Started
+## What's next? How do I make an app with this?
 
--
+We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-### Prerequisites
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
--
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-### Installing
+## Learn More
 
--
+To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-## Running the tests
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
--
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
 
-### Break down into end to end tests
+## How do I deploy this?
 
--
-
-### And coding style tests
-
--
-
-## Deployment
-
--
-
-## Built With
-
-<!-- - [Resource Name](Resource URL) - Resource description -->
-- Typescript
-- React
-- Prisma
-- tRPC
-- Tanstack Query
-- Zod
-- Tailwind CSS
-- NextAuth.js
-- Axiom
-
-## Contributing
-
-- Please read [CONTRIBUTING.md](https://github.com/oslabs-beta/QueryIQ/blob/main/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
-
-## Versioning
-
--
-
-## Authors
-
-- **Connor Dillon** - [connoro7](https://github.com/connoro7)
-- **Dean Biscocho** - [deanbiscocho](https://github.com/deanbiscocho)
-- **Khaile Tran** - [khailetran](https://github.com/khailetran)
-- **Johanna Cameron** - [jojecameron](https://github.com/jojecameron)
-- **Alan Beck** - [KAlanBeck](https://github.com/KAlanBeck)
-- See also the list of [contributors](https://github.com/oslabs-beta/QueryIQ/contributors) who participated in this project.
-
-## Acknowledgments
-
--
-
-## License
-
-- This project is currently unlicensed.
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
