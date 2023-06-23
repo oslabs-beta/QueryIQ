@@ -1,25 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 import DBCard from './DBCard';
-import DashboardContainer from '~/containers/DashboardContainer';
-
-interface DBConnectProps {
-  openModal: React.Dispatch<React.SetStateAction<boolean>>;
-  connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
-  formData: {
-    dbName: string;
-    dbURI: string;
-  };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
-    }>
-  >;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
-}
+import type { DBConnectProps } from '~/types/types';
 
 // type Post =  {
 //   userId: number;

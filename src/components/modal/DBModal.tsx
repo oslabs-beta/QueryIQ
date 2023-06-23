@@ -2,22 +2,8 @@ import React from "react";
 import { useState } from "react";
 import DBSelection from "./DBSelection";
 import DBCredentials from "./DBCredentials";
+import type { DBModalProps } from "~/types/types";
 
-interface DBModalProps {
-  openModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
-    }>
-  >;
-  formData: {
-    dbName: string;
-    dbURI: string;
-  };
-  handleConnect: React.MouseEventHandler<HTMLButtonElement>;
-  isFormValid: boolean;
-}
 
 const DBModal: React.FC<DBModalProps> = ({
   openModal,

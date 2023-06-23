@@ -1,20 +1,5 @@
 import React from "react";
-
-interface DBCredentialsProps {
-  formData: {
-    dbName: string;
-    dbURI: string;
-  };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
-    }>
-  >;
-  handleConnect: React.MouseEventHandler<HTMLButtonElement>;
-  isFormValid: boolean;
-  handleCancel: () => void;
-}
+import type { DBCredentialsProps } from "~/types/types";
 
 const DBCredentials: React.FC<DBCredentialsProps> = ({
   formData,
