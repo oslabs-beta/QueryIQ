@@ -1,19 +1,5 @@
-/******************************************************************************* 
-Per T3-Axiom #3, we treat typesafety as a first class citizen. Unfortunately, 
-not all frameworks and plugins support TypeScript which means some of the 
-configuration files have to be .js files.
-
-We try to emphasize that these files are JavaScript for a reason, by explicitly 
-declaring each file's type (cjs or mjs) depending on what's supported by the 
-library it is used by. Also, all the js files in this project are still 
-typechecked using a checkJs option in the compiler (tsconfig).
-
-==> Do not convert this file to TypeScript. It will break the build.
-
-*******************************************************************************/
-
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs';
+import { z } from 'zod';
 
 export const env = createEnv({
   /**
@@ -21,10 +7,12 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.string().url(),
-    NODE_ENV: z.enum(["development", "test", "production"]),
+    PORT_EXPRESS: z.string(),
+    DATABASE_URL_PRISMA: z.string().url(),
+    DATABASE_URL_NODE: z.string().url(),
+    NODE_ENV: z.enum(['development', 'test', 'production']),
     NEXTAUTH_SECRET:
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === 'production'
         ? z.string().min(1)
         : z.string().min(1).optional(),
     NEXTAUTH_URL: z.preprocess(
@@ -53,7 +41,9 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
+    PORT_EXPRESS: process.env.PORT_EXPRESS,
+    DATABASE_URL_PRISMA: process.env.DATABASE_URL_PRISMA,
+    DATABASE_URL_NODE: process.env.DATABASE_URL_NODE,
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,

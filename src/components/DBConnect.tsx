@@ -1,8 +1,7 @@
-import React from "react";
-import { useQuery } from "react-query";
-import { useState } from "react";
-import DBCard from "./DBCard";
-import DashboardContainer from "~/containers/DashboardContainer";
+import React from 'react';
+import { useState } from 'react';
+import DBCard from './DBCard';
+import DashboardContainer from '~/containers/DashboardContainer';
 
 interface DBConnectProps {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,8 +41,8 @@ const DBConnect: React.FC<DBConnectProps> = ({
 
   const handleConnect = () => {
     setFormData({
-      dbName: "",
-      dbURI: "",
+      dbName: '',
+      dbURI: '',
     });
     openModal(true);
   };
@@ -118,8 +117,8 @@ const DBConnect: React.FC<DBConnectProps> = ({
             className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
             onClick={handleClickTestDB}
           >
-            {" "}
-            {testConnected ? "Connected to test DB" : "Connect to test DB"}
+            {' '}
+            {testConnected ? 'Connected to test DB' : 'Connect to test DB'}
           </button>
           {testConnected && (
             <div className="flex flex-col items-center justify-center">
