@@ -1,14 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import QueryLogItem from "./QueryLogItem";
-import type { QueryLogItemObject } from "~/types/types";
-
-interface QueryLogProps {
-  queryLog: { query: string; data: object; name: string }[];
-  editQueryLabel: (index: number, label: string) => void;
-  activeQuery: QueryLogItemObject;
-  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
+import type { QueryLogProps } from "~/types/types";
 
 const QueryLog: React.FC<QueryLogProps> = ({
   queryLog,

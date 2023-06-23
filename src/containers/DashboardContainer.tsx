@@ -5,12 +5,8 @@ import LineChart from "~/components/Graphs/LineChart";
 import LineChart2 from "~/components/Graphs/LineChart2";
 import PieChart2 from "~/components/Graphs/PieChart2";
 import PieChart3 from "~/components/Graphs/PieChart3";
-import type { QueryLogItemObject } from "~/types/types";
+import type { DashboardContainerProps } from "~/types/types";
 
-interface DashboardContainerProps {
-  testConnected: boolean;
-  activeQuery: QueryLogItemObject;
-}
 //child of Query container
 //used for rendering graphs for database performance metrics
 const DashboardContainer: React.FC<DashboardContainerProps> = ({

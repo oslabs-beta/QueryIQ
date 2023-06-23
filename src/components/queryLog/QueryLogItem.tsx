@@ -6,17 +6,8 @@ import {
   AiFillCheckSquare,
   AiOutlineCheckSquare,
 } from "react-icons/ai";
-import type { QueryLogItemObject } from "~/types/types";
+import type { QueryLogItemProps } from "~/types/types";
 
-interface QueryLogItemProps {
-  index: number;
-  handleEditHover: (bool: boolean) => void;
-  isHovered: boolean;
-  editQueryLabel: (index: number, label: string) => void;
-  queryLogObject: QueryLogItemObject;
-  activeQuery: QueryLogItemObject;
-  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
 
 const QueryLogItem: React.FC<QueryLogItemProps> = ({
   index,
@@ -24,7 +15,6 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
   isHovered,
   editQueryLabel,
   queryLogObject,
-  activeQuery,
   setActiveQuery,
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);

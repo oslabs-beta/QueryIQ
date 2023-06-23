@@ -8,7 +8,7 @@ const DBCard: React.FC = () => {
         src="http://localhost:3000/d-solo/a2dc4fc5-613f-4527-b267-a01f274f4612/dvdrental-dashboard?orgId=1&from=1687363777383&to=1687385377384&panelId=7"
         width="100%"
         height="100%"
-        frameborder="0"
+        frameBorder="0"
       ></iframe>
     </div>
   );
