@@ -1,16 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import LoadingBar from "./LoadingBar";
-import type { QueryLogItemObject } from "~/types/types";
+import type { InputQueryProps } from "~/types/types";
 
-interface InputQueryProps {
-  setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
-  >;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-  query: string;
-  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
 
 const InputQuery: React.FC<InputQueryProps> = ({
   setQueryLog,
@@ -36,7 +28,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
     });
   };
 
-  const handleGoClick = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleGoClick = async (e: React.FormEvent<HTMLFormElement>) : Promise<void> => {
     e.preventDefault();
     await asyncLoadingSim();
     setQueryLog((prevQueryLog) => [

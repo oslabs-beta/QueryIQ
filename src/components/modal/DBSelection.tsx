@@ -1,9 +1,6 @@
 import React from "react";
+import type { DBSelectionProps } from "~/types/types";
 
-interface DBSelectionProps {
-  handleCancel: () => void;
-  handleClick: () => void;
-}
 
 const DBSelection: React.FC<DBSelectionProps> = ({
   handleCancel,

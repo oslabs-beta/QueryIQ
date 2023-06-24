@@ -3,8 +3,6 @@ import QueryContainer from "./QueryContainer";
 import SideBarContainer from "./SideBarContainer";
 import { useState, useEffect } from "react";
 import DBModal from "~/components/modal/DBModal";
-// import DBConnect from "~/components/DBConnect";
-// import DashboardContainer from "./DashboardContainer";
 import type { QueryLogItemObject } from "~/types/types";
 
 const MainContainer: React.FC = ({}) => {

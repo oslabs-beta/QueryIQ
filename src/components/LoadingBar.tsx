@@ -1,8 +1,6 @@
 import React from "react";
+import type { LoadingBarProps } from '~/types/types';
 
-interface LoadingBarProps {
-  loadingProgress: number;
-}
 
 const LoadingBar: React.FC<LoadingBarProps> = ({ loadingProgress }) => {
   return (
