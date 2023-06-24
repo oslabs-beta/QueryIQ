@@ -1,27 +1,27 @@
-import React from "react";
-import QueryContainer from "./QueryContainer";
-import SideBarContainer from "./SideBarContainer";
-import { useState, useEffect } from "react";
-import DBModal from "~/components/modal/DBModal";
-import type { QueryLogItemObject } from "~/types/types";
+import React from 'react';
+import QueryContainer from './QueryContainer';
+import SideBarContainer from './SideBarContainer';
+import { useState, useEffect } from 'react';
+import DBModal from '~/components/modal/DBModal';
+import type { QueryLogItemObject } from '~/types/types';
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [queryLog, setQueryLog] = useState<QueryLogItemObject[]>([]);
   const [connection, setConnection] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
-    dbName: "",
-    dbURI: "",
+    dbName: '',
+    dbURI: '',
   });
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
   const [activeQuery, setActiveQuery] = useState<QueryLogItemObject>({
-    query: "",
+    query: '',
     data: {},
-    name: "",
+    name: '',
   });
 
   //checking form validation on input changes for credentials
@@ -38,6 +38,52 @@ const MainContainer: React.FC = ({}) => {
   const handleConnect = () => {
     // console.log("Valid Form:", formData);
     // will send data to back end if validateData is true
+
+    // using basic auth on a local Grafana instance
+    /*
+    const username = 'YOUR_USERNAME'; // Replace with your Grafana username
+    const password = 'YOUR_PASSWORD'; // Replace with your Grafana password
+    const url = 'http://localhost:3000/api/datasources';
+    const body = {
+      name: formData.dbName,
+      type: 'postgres',
+      url: 'formData.dbURI',
+      access: 'proxy',
+      basicAuth: true
+    };
+
+    axios.post(url, body, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      auth: {
+        username,
+        password
+      }
+    })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+      */
+     // if we're using an env api key
+     /* const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+     axios.post(url, body, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        }
+      })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+        */
+       
     setConnection(true);
     setIsModalOpen(false);
   };
