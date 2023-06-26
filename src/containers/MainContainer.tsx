@@ -14,6 +14,7 @@ const MainContainer: React.FC = ({}) => {
   const [formData, setFormData] = useState({
     graf_name: '',
     graf_pass: '',
+    graf_port: '',
     db_name: '',
     db_url: '',
     db_username: '',
@@ -34,6 +35,7 @@ const MainContainer: React.FC = ({}) => {
     const {
       graf_name,
       graf_pass,
+      graf_port,
       db_name,
       db_url,
       db_username,
@@ -44,6 +46,7 @@ const MainContainer: React.FC = ({}) => {
     if (
       graf_name &&
       graf_pass &&
+      graf_port &&
       db_name &&
       db_url &&
       db_username &&
@@ -61,8 +64,8 @@ const MainContainer: React.FC = ({}) => {
     
 
 
-    // const route = '/';
-    // const body : { graf_name: string; graf_pass: string; db_name: string; db_url: string; db_username: string; db_server: string; db_password: string; } = formData;
+    // const route = '/api/connect';
+    // const body : { graf_name: string; graf_pass: string; graf_port: string; db_name: string; db_url: string; db_username: string; db_server: string; db_password: string } = formData;
     // try {
     //   const response = await fetch(route, {
     //     method: 'POST',
