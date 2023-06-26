@@ -24,6 +24,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
     setFormData({
       graf_name: '',
       graf_pass: '',
+      graf_port: '',
       db_name: '',
       db_url: '',
       db_username: '',
@@ -83,7 +84,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
   // const [testConnected, setTestConnected] = useState(false);
 
   const handleClickTestDB = () => {
-    setTestConnected(true);
+    setTestConnected((prevState) => !prevState);
   };
 
   return (
@@ -104,7 +105,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
             onClick={handleClickTestDB}
           >
             {' '}
-            {testConnected ? 'Connected to test DB' : 'Connect to test DB'}
+            {testConnected ? 'Disconnect from test DB' : 'Connect to test DB'}
           </button>
           {testConnected && (
             <div className="flex flex-col items-center justify-center">
@@ -130,7 +131,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
               </span>
               <br></br>
               <button
-                className="mt-2 ml-3 justify-self-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+                className="mt-2 ml-5 justify-self-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
                 onClick={handleClick}
               >
                 Disconnect

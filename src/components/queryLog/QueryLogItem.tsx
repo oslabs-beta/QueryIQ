@@ -11,8 +11,6 @@ import type { QueryLogItemProps } from "~/types/types";
 
 const QueryLogItem: React.FC<QueryLogItemProps> = ({
   index,
-  handleEditHover,
-  isHovered,
   editQueryLabel,
   queryLogObject,
   setActiveQuery,
@@ -21,7 +19,12 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [label, setLabel] = useState<string>("");
-  const [active, setActive] = useState<boolean>(false);
+  // const [active, setActive] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  const handleEditHover = (bool: boolean) => {
+    setIsHovered(bool);
+  };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -35,7 +35,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
           </span>
         </div>
         {dashboardState === 'database' ? (
-          <div className="flex h-auto w-full flex-col  items-center bg-gray-800 p-4 text-indigo-300">
+          <div className="flex w-full h-full md:h-96 flex-col overflow-y-auto items-center bg-gray-800 p-4 text-indigo-300">
             {!testConnected ? (
               <></>
             ) : (

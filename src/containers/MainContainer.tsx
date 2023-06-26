@@ -109,6 +109,7 @@ const MainContainer: React.FC = ({}) => {
           console.error(error);
         });
         */
+    setDashboardState('database');
     setConnection(true);
     setIsModalOpen(false);
   };

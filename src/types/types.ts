@@ -58,8 +58,8 @@ export type QueryLogProps = {
 // child of QueryLog
 export type QueryLogItemProps = {
   index: number;
-  handleEditHover: (bool: boolean) => void;
-  isHovered: boolean;
+  // handleEditHover: (bool: boolean) => void;
+  // isHovered: boolean;
   editQueryLabel: (index: number, label: string) => void;
   queryLogObject: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
