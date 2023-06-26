@@ -5,9 +5,9 @@
   "scripts": {
     "npm:fullInstall": "npm install --prefix ./src/server && npm run prisma:generate",
     "next:build": "next build",
-    "next:dev": "next dev",
+    "next:dev": "next dev -p 3333",
     "next:lint": "next lint",
-    "next:start": "next start",
+    "next:start": "next start -p 3333",
     "express": "ts-node --transpile-only ./src/server/server.ts",
     "express:watch": "nodemon",
     "prisma:generate": "prisma generate",
