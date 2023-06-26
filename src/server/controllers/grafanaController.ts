@@ -54,17 +54,20 @@ const grafanaController = {
       "body": JSON.stringify(body),
     }
   
-    console.log('payload', payload)
-  
     try {
       const response = await fetch(url, payload);
-      console.log('response', response)
       const data = await response.json();
+      res.locals.data = data;
+      res.locals.url = url;
+      res.locals.headers = headers;
+      // console.log(res.locals.body)
       return next();
-    } catch (e) {
-      console.log('Error', e)
-      throw e;
-      return;
+    } catch (error) {
+      return next({
+        log: `${error}: error in the grafanaController.createDataSource`,
+        status: 400,
+        message: `${error}: error with the data source`
+      })
     }
 
     // console.log("graf_name:", graf_name);
@@ -113,7 +116,7 @@ const grafanaController = {
 
       // console.log('Response:', response);
       // const data = await response.json();
-      // res.locals.uid = dashBoardHelper(data.datasource.uid);
+      // res.locals.dashboard = dashBoardHelper(data.datasource.uid);
       // console.log('Data:', data);
       // console.log('Datasource created:', data);
     //   return next();
@@ -128,9 +131,30 @@ const grafanaController = {
   },
 
   createDashBoard: async (req: Request, res: Response, next: NextFunction) => {
-    const { uid } = res.locals.uid;
-
-
+    const url = res.locals.url;
+    const headers = res.locals.headers;
+    const body = dashBoardHelper(res.locals.data.datasource.uid);
+    
+    const payload = {
+      "method": "POST",
+      "headers": headers,
+      "body": JSON.stringify(body),
+    }
+  
+    try {
+      const response = await fetch(url, payload);
+      const data = await response.json();
+      console.log('data:', data);
+      // res.locals.dashboard = [data.slug, data.uid];
+      res.locals.dashboard = { slug: data.slug, uid: data.uid } as {slug: string, uid: string};
+      return next();
+    } catch (error) {
+      return next({
+        log: `${error}: error in the grafanaController.createDashBoard`,
+        status: 400,
+        message: `${error}: error with the data source`
+      })
+    }
   },
 
 }
