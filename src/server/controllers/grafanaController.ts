@@ -81,6 +81,10 @@ const grafanaController: GrafanaController = {
       const response = await fetch(url, payload);
       console.log('response', response);
       const data = await response.json();
+      res.locals.data = data;
+      res.locals.url = url;
+      res.locals.headers = headers;
+      // console.log(res.locals.body)
       return next();
     } catch (e) {
       console.log('Error', e);

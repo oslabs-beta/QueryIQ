@@ -2,8 +2,8 @@ export const dashBoardHelper = (uid : string) => {
   const dashboard = {"dashboard": {
     "__inputs": [
       {
-        "name": "DvdRentals",
-        "label": "DvdRentals",
+        "name": "QueryIQ generated DB",
+        "label": "QueryIQ generated DB",
         "description": "",
         "type": "datasource",
         "pluginId": "postgres",
@@ -12,12 +12,6 @@ export const dashBoardHelper = (uid : string) => {
     ],
     "__elements": {},
     "__requires": [
-      {
-        "type": "panel",
-        "id": "barchart",
-        "name": "Bar chart",
-        "version": ""
-      },
       {
         "type": "panel",
         "id": "bargauge",
@@ -34,7 +28,7 @@ export const dashBoardHelper = (uid : string) => {
         "type": "grafana",
         "id": "grafana",
         "name": "Grafana",
-        "version": "9.5.3"
+        "version": "10.0.1"
       },
       {
         "type": "panel",
@@ -111,10 +105,541 @@ export const dashBoardHelper = (uid : string) => {
     "liveNow": false,
     "panels": [
       {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 11,
+        "panels": [],
+        "title": "Database Stats Related to Queries",
+        "type": "row"
+      },
+      {
         "datasource": {
           "type": "postgres",
           "uid": `${uid}`
         },
+        "description": "This chart identifies the longest running queries by measuring the mean_exec_time.  ",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "m"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 0,
+          "y": 1
+        },
+        "id": 3,
+        "options": {
+          "displayMode": "gradient",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "/^mean_exec_time$/",
+            "values": true
+          },
+          "showUnfilled": true,
+          "text": {},
+          "valueMode": "color"
+        },
+        "pluginVersion": "10.0.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "postgres",
+              "uid": `${uid}`
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "WITH statements AS (\nSELECT * FROM pg_stat_statements pss\n\t\tJOIN pg_roles pr ON (userid=oid)\nWHERE rolname = current_user\n)\nSELECT calls, \n\tmean_exec_time, \n\tquery\nFROM statements\nWHERE shared_blks_hit > 0\nORDER BY mean_exec_time DESC\nLIMIT 10;\n",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "Top 10 Longest Running Queries",
+        "transparent": true,
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "postgres",
+          "uid": `${uid}`
+        },
+        "description": "This chart is returning all row counts per table created in the database ",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 11,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "displayMode": "gradient",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "",
+            "values": true
+          },
+          "showUnfilled": true,
+          "text": {},
+          "valueMode": "color"
+        },
+        "pluginVersion": "10.0.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "postgres",
+              "uid": `${uid}`
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT\n  relname as table_name,\n  reltuples as rows\nFROM\n  pg_class C\n  LEFT JOIN pg_namespace N ON (N.oid = C .relnamespace)\nWHERE\n  nspname NOT IN ('pg_catalog', 'information_schema')\n  AND relkind = 'r'\nORDER BY\n  reltuples DESC;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "Row Counts by Schema Tables",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "postgres",
+          "uid": `${uid}`
+        },
+        "description": "In summary, this metric measures the query column and calculates the average execution time per call for each row in the pg_stat_statements table. It then sorts the remaining rows by the average execution time in descending order, and returns only the top 10 rows.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "m"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 0,
+          "y": 9
+        },
+        "id": 1,
+        "options": {
+          "displayMode": "gradient",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "",
+            "values": true
+          },
+          "showUnfilled": true,
+          "valueMode": "color"
+        },
+        "pluginVersion": "10.0.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "postgres",
+              "uid": `${uid}`
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT query,\n       mean_exec_time / calls AS avg_exec_time\nFROM pg_stat_statements\nORDER BY avg_exec_time DESC\nLIMIT 10;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "Highest Average Execution Time ",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "postgres",
+          "uid": `${uid}`
+        },
+        "description": "This chart displays index scans per table. If index_scans is 0 or close to 0 then you can drop those indexes. But be careful, as maybe those indexes are for unique purposes.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "continuous-BlYlRd"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 11,
+          "y": 9
+        },
+        "id": 9,
+        "options": {
+          "displayMode": "gradient",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [],
+            "fields": "",
+            "values": true
+          },
+          "showUnfilled": true,
+          "valueMode": "color"
+        },
+        "pluginVersion": "10.0.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "postgres",
+              "uid": `${uid}`
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT s.relname AS table_name,\n       indexrelname AS index_name,\n       i.indisunique,\n       idx_scan AS index_scans\nFROM   pg_catalog.pg_stat_user_indexes s\nJOIN   pg_index i ON i.indexrelid = s.indexrelid\nORDER BY idx_scan DESC;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "Index Scans by Table",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "postgres",
+          "uid": `${uid}`
+        },
+        "description": "Measured by (shared_blks_hit + shared_blks_dirtied) calculates the sum of shared_blks_hit and shared_blks_dirtied as shared_block_accesses. This sum represents the total shared block accesses for each query. Including this expression as a separate column allows you to see the calculated value in the query output.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              }
+            },
+            "mappings": []
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 0,
+          "y": 17
+        },
+        "id": 2,
+        "options": {
+          "displayLabels": [
+            "percent"
+          ],
+          "legend": {
+            "displayMode": "list",
+            "placement": "right",
+            "showLegend": false,
+            "values": []
+          },
+          "pieType": "donut",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": true
+          },
+          "tooltip": {
+            "mode": "multi",
+            "sort": "asc"
+          }
+        },
+        "pluginVersion": "10.0.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "postgres",
+              "uid": `${uid}`
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT userid::regrole, dbid, query, (shared_blks_hit + shared_blks_dirtied) AS shared_block_accesses\nFROM pg_stat_statements\nORDER BY shared_block_accesses DESC\nLIMIT 10;",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "Highest Queries by Memory Usage",
+        "type": "piechart"
+      },
+      {
+        "datasource": {
+          "type": "postgres",
+          "uid": `${uid}`
+        },
+        "description": "This chart is displaying the size of every table, index, and the total size of the table",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 11,
+          "x": 11,
+          "y": 17
+        },
+        "id": 8,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.0.1",
+        "targets": [
+          {
+            "datasource": {
+              "type": "postgres",
+              "uid": `${uid}`
+            },
+            "editorMode": "code",
+            "format": "table",
+            "rawQuery": true,
+            "rawSql": "SELECT    CONCAT(n.nspname,'.', c.relname) AS table,\n          i.relname AS index_name, pg_size_pretty(pg_relation_size(x.indrelid)) AS table_size,\n          pg_size_pretty(pg_relation_size(x.indexrelid)) AS index_size,\n          pg_size_pretty(pg_total_relation_size(x.indrelid)) AS total_size FROM pg_class c \nJOIN      pg_index x ON c.oid = x.indrelid\nJOIN      pg_class i ON i.oid = x.indexrelid\nLEFT JOIN pg_namespace n ON n.oid = c.relnamespace\nWHERE     c.relkind = ANY (ARRAY['r', 't'])\nAND       n.oid NOT IN (99, 11, 12375);",
+            "refId": "A",
+            "sql": {
+              "columns": [
+                {
+                  "parameters": [],
+                  "type": "function"
+                }
+              ],
+              "groupBy": [
+                {
+                  "property": {
+                    "type": "string"
+                  },
+                  "type": "groupBy"
+                }
+              ],
+              "limit": 50
+            }
+          }
+        ],
+        "title": "Total of Table Size and Index Size ",
+        "type": "table"
+      },
+      {
+        "collapsed": false,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 25
+        },
+        "id": 10,
+        "panels": [],
+        "title": "General ",
+        "type": "row"
+      },
+      {
+        "datasource": {
+          "type": "postgres",
+          "uid": `${uid}`
+        },
+        "description": "Chart lists general information on database connected",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -147,10 +672,10 @@ export const dashBoardHelper = (uid : string) => {
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 11,
+          "h": 5,
+          "w": 6,
           "x": 0,
-          "y": 0
+          "y": 26
         },
         "id": 7,
         "options": {
@@ -166,7 +691,7 @@ export const dashBoardHelper = (uid : string) => {
           },
           "showHeader": true
         },
-        "pluginVersion": "9.5.3",
+        "pluginVersion": "10.0.1",
         "targets": [
           {
             "datasource": {
@@ -230,10 +755,10 @@ export const dashBoardHelper = (uid : string) => {
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 11,
-          "y": 0
+          "h": 5,
+          "w": 6,
+          "x": 6,
+          "y": 26
         },
         "id": 6,
         "options": {
@@ -248,7 +773,7 @@ export const dashBoardHelper = (uid : string) => {
           "showThresholdLabels": false,
           "showThresholdMarkers": false
         },
-        "pluginVersion": "9.5.3",
+        "pluginVersion": "10.0.1",
         "targets": [
           {
             "datasource": {
@@ -287,30 +812,11 @@ export const dashBoardHelper = (uid : string) => {
           "type": "postgres",
           "uid": `${uid}`
         },
+        "description": "This chart is measuring all databases available in the PostgreSQL server connected. Size is measured by querying into pg_database.",
         "fieldConfig": {
           "defaults": {
             "color": {
-              "mode": "thresholds"
-            },
-            "custom": {
-              "axisCenteredZero": false,
-              "axisColorMode": "text",
-              "axisLabel": "",
-              "axisPlacement": "auto",
-              "fillOpacity": 80,
-              "gradientMode": "none",
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              },
-              "lineWidth": 1,
-              "scaleDistribution": {
-                "type": "linear"
-              },
-              "thresholdsStyle": {
-                "mode": "off"
-              }
+              "mode": "continuous-GrYlRd"
             },
             "mappings": [],
             "thresholds": {
@@ -325,40 +831,31 @@ export const dashBoardHelper = (uid : string) => {
                   "value": 80
                 }
               ]
-            },
-            "unit": "short"
+            }
           },
           "overrides": []
         },
         "gridPos": {
-          "h": 7,
-          "w": 11,
-          "x": 0,
-          "y": 8
+          "h": 5,
+          "w": 6,
+          "x": 12,
+          "y": 26
         },
         "id": 5,
         "options": {
-          "barRadius": 0,
-          "barWidth": 0.97,
-          "fullHighlight": false,
-          "groupWidth": 0.7,
-          "legend": {
+          "displayMode": "lcd",
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "orientation": "horizontal",
+          "reduceOptions": {
             "calcs": [],
-            "displayMode": "list",
-            "placement": "bottom",
-            "showLegend": true
+            "fields": "",
+            "values": true
           },
-          "orientation": "auto",
-          "showValue": "auto",
-          "stacking": "none",
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          },
-          "xTickLabelRotation": 0,
-          "xTickLabelSpacing": 0
+          "showUnfilled": true,
+          "valueMode": "color"
         },
-        "pluginVersion": "9.5.3",
+        "pluginVersion": "10.0.1",
         "targets": [
           {
             "datasource": {
@@ -390,87 +887,6 @@ export const dashBoardHelper = (uid : string) => {
           }
         ],
         "title": "Database by Size",
-        "type": "barchart"
-      },
-      {
-        "datasource": {
-          "type": "postgres",
-          "uid": `${uid}`
-        },
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "continuous-GrYlRd"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 7,
-          "w": 12,
-          "x": 11,
-          "y": 8
-        },
-        "id": 4,
-        "options": {
-          "displayMode": "basic",
-          "minVizHeight": 10,
-          "minVizWidth": 0,
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [],
-            "fields": "",
-            "values": true
-          },
-          "showUnfilled": true,
-          "valueMode": "color"
-        },
-        "pluginVersion": "9.5.3",
-        "targets": [
-          {
-            "datasource": {
-              "type": "postgres",
-              "uid": `${uid}`
-            },
-            "editorMode": "code",
-            "format": "table",
-            "rawQuery": true,
-            "rawSql": "SELECT\n  relname as table_name,\n  reltuples as rows\nFROM\n  pg_class C\n  LEFT JOIN pg_namespace N ON (N.oid = C .relnamespace)\nWHERE\n  nspname NOT IN ('pg_catalog', 'information_schema')\n  AND relkind = 'r'\nORDER BY\n  reltuples DESC;",
-            "refId": "A",
-            "sql": {
-              "columns": [
-                {
-                  "parameters": [],
-                  "type": "function"
-                }
-              ],
-              "groupBy": [
-                {
-                  "property": {
-                    "type": "string"
-                  },
-                  "type": "groupBy"
-                }
-              ],
-              "limit": 50
-            }
-          }
-        ],
-        "title": "Row Counts by Schema Tables",
         "type": "bargauge"
       },
       {
@@ -478,6 +894,7 @@ export const dashBoardHelper = (uid : string) => {
           "type": "postgres",
           "uid": `${uid}`
         },
+        "description": "This chart displays how many open connections are currently present in our database cluster.",
         "fieldConfig": {
           "defaults": {
             "color": {
@@ -501,14 +918,14 @@ export const dashBoardHelper = (uid : string) => {
           "overrides": []
         },
         "gridPos": {
-          "h": 8,
-          "w": 11,
+          "h": 6,
+          "w": 6,
           "x": 0,
-          "y": 15
+          "y": 31
         },
-        "id": 3,
+        "id": 12,
         "options": {
-          "displayMode": "basic",
+          "displayMode": "lcd",
           "minVizHeight": 10,
           "minVizWidth": 0,
           "orientation": "horizontal",
@@ -520,7 +937,7 @@ export const dashBoardHelper = (uid : string) => {
           "showUnfilled": true,
           "valueMode": "color"
         },
-        "pluginVersion": "9.5.3",
+        "pluginVersion": "10.0.1",
         "targets": [
           {
             "datasource": {
@@ -530,7 +947,7 @@ export const dashBoardHelper = (uid : string) => {
             "editorMode": "code",
             "format": "table",
             "rawQuery": true,
-            "rawSql": "SELECT usename, query, total_exec_time\nFROM pg_stat_statements\nJOIN pg_user ON pg_user.usesysid = pg_stat_statements.userid\nORDER BY total_exec_time DESC\nLIMIT 10;",
+            "rawSql": "SELECT\n  COUNT(*) as connections,\n  backend_type\nFROM\n  pg_stat_activity\nGROUP BY\n  backend_type\nORDER BY\n  connections DESC",
             "refId": "A",
             "sql": {
               "columns": [
@@ -551,174 +968,7 @@ export const dashBoardHelper = (uid : string) => {
             }
           }
         ],
-        "title": "Top Slowest Queries by User",
-        "type": "bargauge"
-      },
-      {
-        "datasource": {
-          "type": "postgres",
-          "uid": `${uid}`
-        },
-        "description": "Measured by (shared_blks_hit + shared_blks_dirtied) calculates the sum of shared_blks_hit and shared_blks_dirtied as shared_block_accesses. This sum represents the total shared block accesses for each query. Including this expression as a separate column allows you to see the calculated value in the query output.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "palette-classic"
-            },
-            "custom": {
-              "hideFrom": {
-                "legend": false,
-                "tooltip": false,
-                "viz": false
-              }
-            },
-            "mappings": []
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 11,
-          "y": 15
-        },
-        "id": 2,
-        "options": {
-          "displayLabels": [
-            "percent"
-          ],
-          "legend": {
-            "displayMode": "list",
-            "placement": "right",
-            "showLegend": false,
-            "values": []
-          },
-          "pieType": "donut",
-          "reduceOptions": {
-            "calcs": [
-              "lastNotNull"
-            ],
-            "fields": "",
-            "values": true
-          },
-          "tooltip": {
-            "mode": "single",
-            "sort": "none"
-          }
-        },
-        "targets": [
-          {
-            "datasource": {
-              "type": "postgres",
-              "uid": `${uid}`
-            },
-            "editorMode": "code",
-            "format": "table",
-            "rawQuery": true,
-            "rawSql": "SELECT userid::regrole, dbid, query, (shared_blks_hit + shared_blks_dirtied) AS shared_block_accesses\nFROM pg_stat_statements\nORDER BY shared_block_accesses DESC\nLIMIT 10;",
-            "refId": "A",
-            "sql": {
-              "columns": [
-                {
-                  "parameters": [],
-                  "type": "function"
-                }
-              ],
-              "groupBy": [
-                {
-                  "property": {
-                    "type": "string"
-                  },
-                  "type": "groupBy"
-                }
-              ],
-              "limit": 50
-            }
-          }
-        ],
-        "title": "Highest Queries by Memory Usage",
-        "type": "piechart"
-      },
-      {
-        "datasource": {
-          "type": "postgres",
-          "uid": `${uid}`
-        },
-        "description": "In summary, this metric measures the query column and calculates the average execution time per call for each row in the pg_stat_statements table. It then sorts the remaining rows by the average execution time in descending order, and returns only the top 10 rows.",
-        "fieldConfig": {
-          "defaults": {
-            "color": {
-              "mode": "continuous-GrYlRd"
-            },
-            "mappings": [],
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "color": "green",
-                  "value": null
-                },
-                {
-                  "color": "red",
-                  "value": 80
-                }
-              ]
-            }
-          },
-          "overrides": []
-        },
-        "gridPos": {
-          "h": 8,
-          "w": 11,
-          "x": 0,
-          "y": 23
-        },
-        "id": 1,
-        "options": {
-          "displayMode": "basic",
-          "minVizHeight": 10,
-          "minVizWidth": 0,
-          "orientation": "horizontal",
-          "reduceOptions": {
-            "calcs": [],
-            "fields": "",
-            "values": true
-          },
-          "showUnfilled": true,
-          "valueMode": "color"
-        },
-        "pluginVersion": "9.5.3",
-        "targets": [
-          {
-            "datasource": {
-              "type": "postgres",
-              "uid": `${uid}`
-            },
-            "editorMode": "code",
-            "format": "table",
-            "rawQuery": true,
-            "rawSql": "SELECT query,\n       total_exec_time / calls AS avg_exec_time\nFROM pg_stat_statements\nORDER BY avg_exec_time DESC\nLIMIT 10;",
-            "refId": "A",
-            "sql": {
-              "columns": [
-                {
-                  "parameters": [],
-                  "type": "function"
-                }
-              ],
-              "groupBy": [
-                {
-                  "property": {
-                    "type": "string"
-                  },
-                  "type": "groupBy"
-                }
-              ],
-              "limit": 50
-            }
-          }
-        ],
-        "title": "Highest Average Execution Time ",
+        "title": "Open Connections ",
         "type": "bargauge"
       }
     ],
@@ -735,12 +985,11 @@ export const dashBoardHelper = (uid : string) => {
     },
     "timepicker": {},
     "timezone": "",
-    "title": "User Created DashBoard",
-    "uid": "123467",
-    "version": 1,
+    "title": "QueryIQ Dashboard for Database Performance Metrics",
+    "uid": null,
+    "version": 2,
     "weekStart": ""
   }
-
   }
 
   return dashboard;
