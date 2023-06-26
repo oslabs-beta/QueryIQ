@@ -14,6 +14,7 @@ const MainContainer: React.FC = ({}) => {
   const [formData, setFormData] = useState({
     graf_name: '',
     graf_pass: '',
+    graf_port: '',
     db_name: '',
     db_url: '',
     db_username: '',
@@ -34,6 +35,7 @@ const MainContainer: React.FC = ({}) => {
     const {
       graf_name,
       graf_pass,
+      graf_port,
       db_name,
       db_url,
       db_username,
@@ -44,6 +46,7 @@ const MainContainer: React.FC = ({}) => {
     if (
       graf_name &&
       graf_pass &&
+      graf_port &&
       db_name &&
       db_url &&
       db_username &&
