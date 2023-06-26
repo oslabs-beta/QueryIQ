@@ -1,10 +1,16 @@
 import React from "react";
-import LineChart3 from "~/components/Graphs/LineChart3";
+
 import PieChart from "~/components/Graphs/PieChart";
 import LineChart from "~/components/Graphs/LineChart";
 import LineChart2 from "~/components/Graphs/LineChart2";
-import PieChart2 from "~/components/Graphs/PieChart2";
-import PieChart3 from "~/components/Graphs/PieChart3";
+import LineChart3 from "~/components/Graphs/LineChart3";
+import LineChart4 from "~/components/Graphs/LineChart4";
+import LineChart5 from "~/components/Graphs/LineChart5";
+import GeneralInfo from "~/components/Graphs/GeneralInfo";
+import GeneralInfo2 from "~/components/Graphs/GeneralInfo2";
+import GeneralInfo3 from "~/components/Graphs/GeneralInfo3";
+import GeneralInfo4 from "~/components/Graphs/GeneralInfo4";
+
 import type { QueryLogItemObject } from "~/types/types";
 
 interface DashboardContainerProps {
@@ -32,12 +38,18 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
         <></>
       ) : (
         <>
-          <LineChart3 />
-          <PieChart />
+
           <LineChart />
           <LineChart2 />
-          <PieChart2 />
-          <PieChart3 />
+          <LineChart3 />
+          <LineChart4 />
+          <LineChart5 />
+          <PieChart />
+          <GeneralInfo />
+          <GeneralInfo2 />
+          <GeneralInfo3 />
+          <GeneralInfo4 />
+
         </>
       )}
       <></>

@@ -1,11 +1,11 @@
 import React from "react";
 
 //Pie chart for Highest Queries by Memory Usage
-const PieChart3: React.FC = () => {
+const LineChart5: React.FC = () => {
   return (
     <div className="h-78 w-78 my-2 rounded-lg border border-gray-900  bg-red-100 shadow">
       <iframe
-        src="http://localhost:3000/d-solo/a2dc4fc5-613f-4527-b267-a01f274f4612/dvdrental-dashboard?orgId=1&from=1687301145947&to=1687322745947&panelId=6"
+        src="http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776643111&to=1687798243111&panelId=8"
         width="450"
         height="200"
         frameborder="0"
@@ -14,4 +14,4 @@ const PieChart3: React.FC = () => {
   );
 };
 
-export default PieChart3;
+export default LineChart5;
