@@ -81,6 +81,8 @@ export type QueryContainerProps = {
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
+  dashboardState: string;
+  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // child of QueryContainer
@@ -102,6 +104,8 @@ export type LoadingBarProps = {
 export type DashboardContainerProps = {
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
+  dashboardState: string;
+  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // parent modal

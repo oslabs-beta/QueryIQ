@@ -21,6 +21,7 @@ const MainContainer: React.FC = ({}) => {
     db_server: '',
     db_password: '',
   });
+  const [dashboardState, setDashboardState] = useState('database');
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
@@ -166,6 +167,8 @@ const MainContainer: React.FC = ({}) => {
         testConnected={testConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
+        dashboardState={dashboardState}
+        setDashboardState={setDashboardState}
       />
     </div>
   );

@@ -22,7 +22,7 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
       {/* <input className="rounded-lg border border-gray-900 p-2"></input> */}
       <label>Grafana Password</label>
       <ModalFormInput
-        placeholder="Database URI"
+        placeholder="Password"
         type="password"
         value={formData.graf_pass}
         onChange={(e) =>
