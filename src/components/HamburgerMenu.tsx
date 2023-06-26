@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Link from "next/link";
+import { useState } from 'react';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import Link from 'next/link';
 
 const HamburgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ const HamburgerMenu = () => {
   };
 
   return (
-    <div className={`hamburger-menu relative ${isOpen ? "open" : ""}`}>
+    <div className={`hamburger-menu relative ${isOpen ? 'open' : ''}`}>
       <div className="hamburger-icon" onClick={toggleMenu}>
         <GiHamburgerMenu className="h-6 w-6 text-black" />
       </div>
