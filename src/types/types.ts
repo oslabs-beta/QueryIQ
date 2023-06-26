@@ -4,8 +4,13 @@ export type SideBarContainerProps = {
   connection: boolean;
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: {
-    dbName: string;
-    dbURI: string;
+    graf_name: string;
+    graf_pass: string;
+    db_name: string;
+    db_url: string;
+    db_username: string;
+    db_server: string;
+    db_password: string;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
@@ -30,13 +35,23 @@ export type DBConnectProps = {
   connection: boolean;
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: {
-    dbName: string;
-    dbURI: string;
+    graf_name: string;
+    graf_pass: string;
+    db_name: string;
+    db_url: string;
+    db_username: string;
+    db_server: string;
+    db_password: string;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
+      graf_name: string;
+      graf_pass: string;
+      db_name: string;
+      db_url: string;
+      db_username: string;
+      db_server: string;
+      db_password: string;
     }>
   >;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
@@ -108,13 +123,23 @@ export type DBModalProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   setFormData: React.Dispatch<
     React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
+      graf_name: string;
+      graf_pass: string;
+      db_name: string;
+      db_url: string;
+      db_username: string;
+      db_server: string;
+      db_password: string;
     }>
   >;
   formData: {
-    dbName: string;
-    dbURI: string;
+    graf_name: string;
+    graf_pass: string;
+    db_name: string;
+    db_url: string;
+    db_username: string;
+    db_server: string;
+    db_password: string;
   };
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
@@ -127,15 +152,51 @@ export type DBSelectionProps = {
 }
 
 // child of DBModal
-export type DBCredentialsProps = {
+export type GrafanaCredentialsProps = {
+  handleCancel: () => void;
+  handleClick: () => void;
   formData: {
-    dbName: string;
-    dbURI: string;
+    graf_name: string;
+    graf_pass: string;
+    db_name: string;
+    db_url: string;
+    db_username: string;
+    db_server: string;
+    db_password: string;
   };
   setFormData: React.Dispatch<
     React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
+      graf_name: string;
+      graf_pass: string;
+      db_name: string;
+      db_url: string;
+      db_username: string;
+      db_server: string;
+      db_password: string;
+    }>
+  >;
+};
+
+// child of DBModal
+export type DBCredentialsProps = {
+  formData: {
+    graf_name: string;
+    graf_pass: string;
+    db_name: string;
+    db_url: string;
+    db_username: string;
+    db_server: string;
+    db_password: string;
+  };
+  setFormData: React.Dispatch<
+    React.SetStateAction<{
+      graf_name: string;
+      graf_pass: string;
+      db_name: string;
+      db_url: string;
+      db_username: string;
+      db_server: string;
+      db_password: string;
     }>
   >;
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
