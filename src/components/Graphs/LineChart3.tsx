@@ -8,7 +8,7 @@ const LineChart3: React.FC = () => {
         src="http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776468593&to=1687798068593&panelId=1"
         width="450"
         height="200"
-        frameborder="0"
+        frameBorder="0"
       ></iframe>
     </div>
   );

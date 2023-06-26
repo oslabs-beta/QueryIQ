@@ -13,10 +13,6 @@ import GeneralInfo4 from "~/components/Graphs/GeneralInfo4";
 
 import type { QueryLogItemObject } from "~/types/types";
 
-interface DashboardContainerProps {
-  testConnected: boolean;
-  activeQuery: QueryLogItemObject;
-}
 //child of Query container
 //used for rendering graphs for database performance metrics
 const DashboardContainer: React.FC<DashboardContainerProps> = ({

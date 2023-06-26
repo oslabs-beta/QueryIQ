@@ -1,32 +1,8 @@
 import React from "react";
 import DBConnect from "~/components/DBConnect";
 import QueryLog from "~/components/queryLog/QueryLog";
-import type { QueryLogItemObject } from "~/types/types";
+import type { SideBarContainerProps } from "~/types/types";
 
-interface SideBarContainerProps {
-  openModal: React.Dispatch<React.SetStateAction<boolean>>;
-  connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
-  formData: {
-    dbName: string;
-    dbURI: string;
-  };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
-    }>
-  >;
-  queryLog: { query: string; data: object; name: string }[];
-  setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
-  >;
-  editQueryLabel: (index: number, label: string) => void;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
-  activeQuery: QueryLogItemObject;
-  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
 
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
   openModal,

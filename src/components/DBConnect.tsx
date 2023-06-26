@@ -1,25 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 import DBCard from './DBCard';
-import DashboardContainer from '~/containers/DashboardContainer';
-
-interface DBConnectProps {
-  openModal: React.Dispatch<React.SetStateAction<boolean>>;
-  connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
-  formData: {
-    dbName: string;
-    dbURI: string;
-  };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
-    }>
-  >;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
-}
+import type { DBConnectProps } from '~/types/types';
 
 // type Post =  {
 //   userId: number;
@@ -41,8 +22,13 @@ const DBConnect: React.FC<DBConnectProps> = ({
 
   const handleConnect = () => {
     setFormData({
-      dbName: '',
-      dbURI: '',
+      graf_name: '',
+      graf_pass: '',
+      db_name: '',
+      db_url: '',
+      db_username: '',
+      db_server: '',
+      db_password: '',
     });
     openModal(true);
   };
@@ -128,19 +114,29 @@ const DBConnect: React.FC<DBConnectProps> = ({
         </>
       ) : (
         <>
-          <div className="my-4 rounded-lg border border-black bg-gray-900 p-4 text-indigo-300 shadow-xl">
-            <span>DB NAME: {formData.dbName}</span>
-            <br></br>
-            <span>CONNECTION STATUS:</span>
-            <br></br>
-            <span>ACTIVE</span>
+          <div className="my-8 flex w-full flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl">
+            <span className="w-full border-black bg-gray-900 p-1 text-center text-indigo-300">
+              Active Connection
+            </span>
+            <div className="bg-gray-800 p-4 text-indigo-300 shadow-xl">
+              <span>
+                DB NAME:{' '}
+                <span className="text-cyan-200">{formData.db_name}</span>
+              </span>
+              <br></br>
+              <span>
+                DB SERVER:{' '}
+                <span className="text-cyan-200">{formData.db_server}</span>
+              </span>
+              <br></br>
+              <button
+                className="mt-2 ml-3 justify-self-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+                onClick={handleClick}
+              >
+                Disconnect
+              </button>
+            </div>
           </div>
-          <button
-            className="rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-            onClick={handleClick}
-          >
-            Disconnect
-          </button>
         </>
       )}
     </div>
