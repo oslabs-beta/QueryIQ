@@ -98,6 +98,7 @@ export type InputQueryProps = {
   query: string;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
+  activeQuery: QueryLogItemObject;
 };
 
 // child of InputQuery

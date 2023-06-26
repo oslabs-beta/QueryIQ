@@ -17,9 +17,11 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
   queryLogObject,
   setActiveQuery,
   setDashboardState,
+  activeQuery,
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [label, setLabel] = useState<string>("");
+  const [active, setActive] = useState<boolean>(false);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +41,10 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
     <li>
       {!editMode ? (
         <div
-          className="flex w-full items-center justify-between border-b border-t border-black bg-gray-800 p-4 text-left text-indigo-300 hover:bg-gray-900"
+          className={`flex w-full items-center justify-between border-b border-black p-4 text-left text-indigo-300 
+          ${ 
+            activeQuery === queryLogObject ? 'bg-indigo-900 hover:bg-indigo-800' : 'bg-gray-800 hover:bg-indigo-800'
+          }`}
           onMouseEnter={() => handleEditHover(true)}
           onMouseLeave={() => handleEditHover(false)}
           onClick={handleClick}

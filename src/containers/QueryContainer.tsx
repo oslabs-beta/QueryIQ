@@ -26,6 +26,7 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             setQueryLog={setQueryLog}
             setQuery={setQuery}
             query={query}
+            activeQuery={activeQuery}
             setActiveQuery={setActiveQuery}
             setDashboardState={setDashboardState}
           />
