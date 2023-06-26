@@ -22,17 +22,20 @@ const MainContainer: React.FC = ({}) => {
     db_password: '',
   });
   const [dashboardState, setDashboardState] = useState('database');
+  const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
+  const [queryGraphs, setQueryGraphs] = useState<string[]>([]);
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
   const [activeQuery, setActiveQuery] = useState<QueryLogItemObject>({
     query: '',
-    data: {},
+    data: [],
     name: '',
   });
 
   //checking form validation on input changes for credentials
   useEffect(() => {
+    console.log('Database Graphs', databaseGraphs);
     const {
       graf_name,
       graf_pass,
@@ -161,6 +164,8 @@ const MainContainer: React.FC = ({}) => {
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}
+        databaseGraphs={databaseGraphs}
+        setDatabaseGraphs={setDatabaseGraphs}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
@@ -171,6 +176,8 @@ const MainContainer: React.FC = ({}) => {
         setActiveQuery={setActiveQuery}
         dashboardState={dashboardState}
         setDashboardState={setDashboardState}
+        databaseGraphs={databaseGraphs}
+        queryGraphs={queryGraphs}
       />
     </div>
   );

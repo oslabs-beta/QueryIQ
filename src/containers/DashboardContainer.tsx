@@ -1,15 +1,6 @@
 import React from 'react';
-import PieChart from '~/components/Graphs/PieChart';
-import LineChart from '~/components/Graphs/LineChart';
-import LineChart2 from '~/components/Graphs/LineChart2';
-import LineChart3 from '~/components/Graphs/LineChart3';
-import LineChart4 from '~/components/Graphs/LineChart4';
-import LineChart5 from '~/components/Graphs/LineChart5';
-import GeneralInfo from '~/components/Graphs/GeneralInfo';
-import GeneralInfo2 from '~/components/Graphs/GeneralInfo2';
-import GeneralInfo3 from '~/components/Graphs/GeneralInfo3';
-import GeneralInfo4 from '~/components/Graphs/GeneralInfo4';
 import type { DashboardContainerProps } from '~/types/types';
+import GraphCard from '~/components/Graphs/GraphCard';
 
 // Will render same test graphs for query as the test db metrics at the moment, can be replaced with query graphs when implemented.
 
@@ -18,6 +9,8 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
   activeQuery,
   dashboardState,
   setDashboardState,
+  databaseGraphs,
+  queryGraphs,
 }) => {
   return (
     <div className="flex h-full w-full flex-wrap items-center justify-around p-4">
@@ -46,16 +39,9 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
               <></>
             ) : (
               <>
-                <LineChart />
-                <LineChart2 />
-                <LineChart3 />
-                <LineChart4 />
-                <LineChart5 />
-                <PieChart />
-                <GeneralInfo />
-                <GeneralInfo2 />
-                <GeneralInfo3 />
-                <GeneralInfo4 />
+                {databaseGraphs.map((src, index) => {
+                  return <GraphCard key={index} src={src}></GraphCard>;
+                })}
               </>
             )}
           </div>
@@ -68,16 +54,9 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
               <></>
             ) : (
               <div className="flex h-full w-full flex-col items-center bg-gray-800 p-4 text-indigo-300 md:h-96">
-                <LineChart />
-                <LineChart2 />
-                <LineChart3 />
-                <LineChart4 />
-                <LineChart5 />
-                <PieChart />
-                <GeneralInfo />
-                <GeneralInfo2 />
-                <GeneralInfo3 />
-                <GeneralInfo4 />
+                {queryGraphs.map((src, index) => {
+                  return <GraphCard key={index} src={src}></GraphCard>;
+                })}
               </div>
             )}
           </div>
