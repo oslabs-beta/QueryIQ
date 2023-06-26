@@ -1,22 +1,24 @@
+import type { ChangeEvent } from 'react';
+
+export type FormData = {
+  graf_name: string;
+  graf_pass: string;
+  graf_port: string;
+  db_name: string;
+  db_url: string;
+  db_username: string;
+  db_server: string;
+  db_password: string;
+};
+
 // parent container
 export type SideBarContainerProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
-  formData: {
-    graf_name: string;
-    graf_pass: string;
-    db_name: string;
-    db_url: string;
-    db_username: string;
-    db_server: string;
-    db_password: string;
-  };
+  formData: FormData;
   setFormData: React.Dispatch<
-    React.SetStateAction<{
-      dbName: string;
-      dbURI: string;
-    }>
+    React.SetStateAction<FormData>
   >;
   queryLog: { query: string; data: object; name: string }[];
   setQueryLog: React.Dispatch<
@@ -27,36 +29,20 @@ export type SideBarContainerProps = {
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
+};
 
 // child of SideBarContainer
 export type DBConnectProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
-  formData: {
-    graf_name: string;
-    graf_pass: string;
-    db_name: string;
-    db_url: string;
-    db_username: string;
-    db_server: string;
-    db_password: string;
-  };
+  formData: FormData;
   setFormData: React.Dispatch<
-    React.SetStateAction<{
-      graf_name: string;
-      graf_pass: string;
-      db_name: string;
-      db_url: string;
-      db_username: string;
-      db_server: string;
-      db_password: string;
-    }>
+    React.SetStateAction<FormData>
   >;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
-}
+};
 
 // child of SideBarContainer
 export type QueryLogProps = {
@@ -64,7 +50,7 @@ export type QueryLogProps = {
   editQueryLabel: (index: number, label: string) => void;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
+};
 
 // child of QueryLog
 export type QueryLogItemProps = {
@@ -75,14 +61,14 @@ export type QueryLogItemProps = {
   queryLogObject: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   activeQuery: QueryLogItemObject;
-}
+};
 
 // shape of query log items data
 export type QueryLogItemObject = {
   query: string;
   data: object;
   name: string;
-}
+};
 
 // Parent container
 export type QueryContainerProps = {
@@ -95,7 +81,7 @@ export type QueryContainerProps = {
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
+};
 
 // child of QueryContainer
 export type InputQueryProps = {
@@ -105,112 +91,61 @@ export type InputQueryProps = {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
+};
 
 // child of InputQuery
 export type LoadingBarProps = {
   loadingProgress: number;
-}
+};
 
 // parent container
 export type DashboardContainerProps = {
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
-}
+};
 
 // parent modal
 export type DBModalProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   setFormData: React.Dispatch<
-    React.SetStateAction<{
-      graf_name: string;
-      graf_pass: string;
-      db_name: string;
-      db_url: string;
-      db_username: string;
-      db_server: string;
-      db_password: string;
-    }>
+    React.SetStateAction<FormData>
   >;
-  formData: {
-    graf_name: string;
-    graf_pass: string;
-    db_name: string;
-    db_url: string;
-    db_username: string;
-    db_server: string;
-    db_password: string;
-  };
+  formData: FormData;
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
-}
+};
 
 // child of DBModal
 export type DBSelectionProps = {
   handleCancel: () => void;
   handleClick: () => void;
-}
+};
 
 // child of DBModal
 export type GrafanaCredentialsProps = {
   handleCancel: () => void;
   handleClick: () => void;
-  formData: {
-    graf_name: string;
-    graf_pass: string;
-    db_name: string;
-    db_url: string;
-    db_username: string;
-    db_server: string;
-    db_password: string;
-  };
+  formData: FormData;
   setFormData: React.Dispatch<
-    React.SetStateAction<{
-      graf_name: string;
-      graf_pass: string;
-      db_name: string;
-      db_url: string;
-      db_username: string;
-      db_server: string;
-      db_password: string;
-    }>
+    React.SetStateAction<FormData>
   >;
 };
 
 // child of DBModal
 export type DBCredentialsProps = {
-  formData: {
-    graf_name: string;
-    graf_pass: string;
-    db_name: string;
-    db_url: string;
-    db_username: string;
-    db_server: string;
-    db_password: string;
-  };
+  formData: FormData;
   setFormData: React.Dispatch<
-    React.SetStateAction<{
-      graf_name: string;
-      graf_pass: string;
-      db_name: string;
-      db_url: string;
-      db_username: string;
-      db_server: string;
-      db_password: string;
-    }>
+    React.SetStateAction<FormData>
   >;
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
   handleCancel: () => void;
-}
+};
 
-
-
-
-
-
-
-
-
-
-
+// input for modals
+export type ModalFormInputProps = {
+  placeholder: string;
+  value: string;
+  type: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
