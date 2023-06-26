@@ -21,6 +21,7 @@ const MainContainer: React.FC = ({}) => {
     db_server: '',
     db_password: '',
   });
+  const [dashboardState, setDashboardState] = useState('database');
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
@@ -108,6 +109,7 @@ const MainContainer: React.FC = ({}) => {
           console.error(error);
         });
         */
+    setDashboardState('database');
     setConnection(true);
     setIsModalOpen(false);
   };
@@ -158,6 +160,7 @@ const MainContainer: React.FC = ({}) => {
         setTestConnected={setTestConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
+        setDashboardState={setDashboardState}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
@@ -166,6 +169,8 @@ const MainContainer: React.FC = ({}) => {
         testConnected={testConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
+        dashboardState={dashboardState}
+        setDashboardState={setDashboardState}
       />
     </div>
   );

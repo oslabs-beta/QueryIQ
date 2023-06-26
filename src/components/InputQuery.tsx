@@ -9,6 +9,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
   setQuery,
   query,
   setActiveQuery,
+  setDashboardState,
 }) => {
   //useState for loading bar
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -31,11 +32,14 @@ const InputQuery: React.FC<InputQueryProps> = ({
   const handleGoClick = async (e: React.FormEvent<HTMLFormElement>) : Promise<void> => {
     e.preventDefault();
     await asyncLoadingSim();
+    const newQuery = { query: query, data: {}, name: "" }
     setQueryLog((prevQueryLog) => [
       ...prevQueryLog,
-      { query: query, data: {}, name: "" },
+      newQuery,
     ]);
     setQuery("");
+    setActiveQuery(newQuery);
+    setDashboardState('query');
   };
 
   return (

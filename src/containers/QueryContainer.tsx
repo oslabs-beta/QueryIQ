@@ -14,6 +14,8 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   testConnected,
   setActiveQuery,
   activeQuery,
+  dashboardState,
+  setDashboardState,
 }) => {
   return (
     <div className="flex h-5/6 w-full flex-col justify-between md:h-full md:w-10/12">
@@ -24,7 +26,9 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             setQueryLog={setQueryLog}
             setQuery={setQuery}
             query={query}
+            activeQuery={activeQuery}
             setActiveQuery={setActiveQuery}
+            setDashboardState={setDashboardState}
           />
         </div>
       </div>
@@ -32,6 +36,8 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
         <DashboardContainer
           testConnected={testConnected}
           activeQuery={activeQuery}
+          dashboardState={dashboardState}
+          setDashboardState={setDashboardState}
         />
       </div>
     </div>
