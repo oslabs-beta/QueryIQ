@@ -88,7 +88,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center w-11/12">
       {/**conditionally renders DB disconnected or DB connected**/}
       {!connection ? (
         <>
@@ -119,7 +119,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
             <span className="w-full border-black bg-gray-900 p-1 text-center text-indigo-300">
               Active Connection
             </span>
-            <div className="bg-gray-800 p-4 text-indigo-300 shadow-xl">
+            <div className="flex flex-col w-full bg-gray-800 p-4 text-indigo-300 shadow-xl justify-center items center">
               <span>
                 DB NAME:{' '}
                 <span className="text-cyan-200">{formData.db_name}</span>
@@ -131,7 +131,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
               </span>
               <br></br>
               <button
-                className="mt-2 ml-5 justify-self-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+                className="rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
                 onClick={handleClick}
               >
                 Disconnect
