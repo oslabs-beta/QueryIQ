@@ -3,18 +3,14 @@ import { NextFunction, RequestHandler, Request, Response } from 'express';
 import { RequestBodyConnect } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
 
+interface GrafanaAPIHandler {
+  (req: Request, res: Response, next: NextFunction): Promise<void>;
+}
+
 type GrafanaController = {
-  grafanaFetch: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<void>;
-  createDataSource: (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => Promise<void>;
-  createDashBoard: RequestHandler;
+  grafanaFetch: GrafanaAPIHandler;
+  createDataSource: GrafanaAPIHandler;
+  createDashBoard: GrafanaAPIHandler;
 };
 
 const grafanaController: GrafanaController = {
@@ -79,7 +75,7 @@ const grafanaController: GrafanaController = {
       const response = await fetch(url, payload);
       const data = await response.json();
       res.locals.data = data;
-      res.locals.url = url;
+      res.locals.graf_port = graf_port;
       res.locals.headers = headers;
       // console.log(res.locals.body)
       return next();
@@ -152,10 +148,13 @@ const grafanaController: GrafanaController = {
   },
 
   createDashBoard: async (req: Request, res: Response, next: NextFunction) => {
-    const url = res.locals.url;
-    const headers = res.locals.headers;
+    const { graf_port, headers } = res.locals;
+    const url = `http://localhost:${graf_port}/api/dashboards/db`;
+    // console.log('👽url and headers', { url: url, headers: headers });
+    // console.log( '❗️createDashBoard', ':', 'res.locals.data', ':', res.locals.data);
+    // console.log('❗️❗️UID: ', res.locals.data.datasource.uid);
     const body = dashBoardHelper(res.locals.data.datasource.uid);
-
+    // console.log( '❗️❗️UID from body after dashboardhelper: ', body.dashboard.annotations.list[1]?.datasource.uid);
     const payload = {
       method: 'POST',
       headers: headers,
@@ -163,9 +162,10 @@ const grafanaController: GrafanaController = {
     };
 
     try {
+      // console.log('❗️❗️❗️TRYING TO CREATE DASHBOARD');
       const response = await fetch(url, payload);
       const data = await response.json();
-      console.log('data:', data);
+      // console.log('❗️data:', data);
       // res.locals.dashboard = [data.slug, data.uid];
       res.locals.dashboard = { slug: data.slug, uid: data.uid } as {
         slug: string;
