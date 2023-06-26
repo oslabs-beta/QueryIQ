@@ -18,13 +18,17 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
       <div className="mb-8 mt-9 flex h-1/4 w-full flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-1/4">
         <div className="w-full flex">
           <span
-            className="w-6/12 border-black bg-gray-900 p-1 text-center text-indigo-300 hover:bg-gray-800"
+            className={`w-6/12 border-black p-1 text-center text-indigo-300 hover:bg-indigo-800 ${
+              dashboardState === 'database' ? 'bg-indigo-900' : 'bg-gray-900'
+            }`}
             onClick={() => setDashboardState('database')}
           >
             Database Health Metrics
           </span>
           <span
-            className="w-6/12 border-black bg-gray-900 p-1 text-center text-indigo-300 hover:bg-gray-800"
+            className={`w-6/12 border-black p-1 text-center text-indigo-300 hover:bg-indigo-800 ${
+              dashboardState === 'query' ? 'bg-indigo-900' : 'bg-gray-900'
+            }`}
             onClick={() => setDashboardState('query')}
           >
             Active Query

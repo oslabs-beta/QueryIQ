@@ -159,6 +159,7 @@ const MainContainer: React.FC = ({}) => {
         setTestConnected={setTestConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
+        setDashboardState={setDashboardState}
       />
       <QueryContainer
         setQueryLog={setQueryLog}

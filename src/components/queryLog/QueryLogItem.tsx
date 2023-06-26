@@ -16,6 +16,7 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
   editQueryLabel,
   queryLogObject,
   setActiveQuery,
+  setDashboardState,
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const [label, setLabel] = useState<string>("");
@@ -28,8 +29,9 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
   };
 
   const handleClick = () => {
-    console.log("clicked!");
-    console.log(queryLogObject);
+    // console.log("clicked!");
+    // console.log(queryLogObject);
+    setDashboardState('query');
     setActiveQuery(queryLogObject);
   };
 

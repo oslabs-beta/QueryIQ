@@ -29,6 +29,7 @@ export type SideBarContainerProps = {
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
+  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // child of SideBarContainer
@@ -42,6 +43,7 @@ export type DBConnectProps = {
   >;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
+  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // child of SideBarContainer
@@ -50,6 +52,7 @@ export type QueryLogProps = {
   editQueryLabel: (index: number, label: string) => void;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
+  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // child of QueryLog
@@ -61,6 +64,7 @@ export type QueryLogItemProps = {
   queryLogObject: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   activeQuery: QueryLogItemObject;
+  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // shape of query log items data
@@ -93,6 +97,7 @@ export type InputQueryProps = {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
+  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
 };
 
 // child of InputQuery

@@ -8,6 +8,7 @@ const QueryLog: React.FC<QueryLogProps> = ({
   editQueryLabel,
   setActiveQuery,
   activeQuery,
+  setDashboardState,
 }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -35,6 +36,7 @@ const QueryLog: React.FC<QueryLogProps> = ({
                   editQueryLabel={editQueryLabel}
                   setActiveQuery={setActiveQuery}
                   activeQuery={activeQuery}
+                  setDashboardState={setDashboardState}
                 />
               );
             }
