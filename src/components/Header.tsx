@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import HamburgerMenu from "../components/HamburgerMenu";
+import React from 'react';
+import Image from 'next/image';
+import HamburgerMenu from '../components/HamburgerMenu';
 
 const Header: React.FC = () => {
   return (
@@ -9,20 +8,18 @@ const Header: React.FC = () => {
       <div className="flex flex-col items-center md:flex-row">
         <div className="flex justify-center md:mx-0 md:mr-4 md:items-center md:justify-start">
           <Image
-            src="/assets/logo-full-no-bg.png"
+            src="/../public/assets/logo-full-no-bg.png"
             alt="Logo"
             width={64}
             height={64}
           />
         </div>
         <div className="flex flex-col items-center md:flex-row md:space-x-4">
-          <Link href="">About</Link>
-          <Link href="">Docs</Link>
+          <h1>QueryIQ</h1>
         </div>
       </div>
       <div className="flex items-center">
         <button>
-          {/* <GiHamburgerMenu /> */}
           <HamburgerMenu />
         </button>
       </div>

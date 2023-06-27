@@ -1,19 +1,7 @@
-import React from "react";
-import DashboardContainer from "./DashboardContainer";
-import InputQuery from "../components/InputQuery";
-import type { QueryLogItemObject } from "~/types/types";
-
-interface QueryContainerProps {
-  setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
-  >;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-  query: string;
-  // setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
-  activeQuery: QueryLogItemObject;
-  setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
-}
+import React from 'react';
+import DashboardContainer from './DashboardContainer';
+import InputQuery from '../components/InputQuery';
+import type { QueryContainerProps } from '~/types/types';
 
 //Container is for input query and render the graphs on Dashboard Container if input query is processed successfully
 
@@ -24,6 +12,11 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   testConnected,
   setActiveQuery,
   activeQuery,
+  dashboardState,
+  setDashboardState,
+  databaseGraphs,
+  queryGraphs,
+  setQueryGraphs,
 }) => {
   return (
     <div className="flex h-5/6 w-full flex-col justify-between md:h-full md:w-10/12">
@@ -34,7 +27,10 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             setQueryLog={setQueryLog}
             setQuery={setQuery}
             query={query}
+            activeQuery={activeQuery}
             setActiveQuery={setActiveQuery}
+            setDashboardState={setDashboardState}
+            setQueryGraphs={setQueryGraphs}
           />
         </div>
       </div>
@@ -42,6 +38,10 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
         <DashboardContainer
           testConnected={testConnected}
           activeQuery={activeQuery}
+          dashboardState={dashboardState}
+          setDashboardState={setDashboardState}
+          databaseGraphs={databaseGraphs}
+          queryGraphs={queryGraphs}
         />
       </div>
     </div>
