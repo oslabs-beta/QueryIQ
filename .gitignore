@@ -42,3 +42,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# binaries
+grafana-agent*
+*config.y*ml

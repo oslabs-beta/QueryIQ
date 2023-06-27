@@ -5,9 +5,9 @@ const router = Router();
 
 router.post('/connect',
   grafanaController.createDataSource,
+  grafanaController.createDashBoard,
   (req, res) => {
-    console.log(res.locals)
-    return res.status(200).send('datasource created')
+    return res.status(200).json(res.locals.dashboard)
 })
 
 export default router;
