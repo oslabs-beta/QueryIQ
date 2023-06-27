@@ -1,6 +1,5 @@
-import React from "react";
-import type { DBSelectionProps } from "~/types/types";
-
+import React from 'react';
+import type { DBSelectionProps } from '~/types/types';
 
 const DBSelection: React.FC<DBSelectionProps> = ({
   handleCancel,

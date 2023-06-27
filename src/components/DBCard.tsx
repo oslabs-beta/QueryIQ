@@ -1,6 +1,5 @@
-import React from "react";
+import React from 'react';
 
-//Pie chart for Highest Queries by Memory Usage
 const DBCard: React.FC = () => {
   return (
     <div className="my-4 w-11/12 rounded-lg border border-black bg-gray-900 p-4 text-indigo-300 shadow-xl">

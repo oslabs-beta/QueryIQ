@@ -1,20 +1,15 @@
-import React from "react";
-import { useState } from "react";
-import QueryLogItem from "./QueryLogItem";
-import type { QueryLogProps } from "~/types/types";
+import React from 'react';
+// import { useState } from "react";
+import QueryLogItem from './QueryLogItem';
+import type { QueryLogProps } from '~/types/types';
 
 const QueryLog: React.FC<QueryLogProps> = ({
   queryLog,
   editQueryLabel,
   setActiveQuery,
   activeQuery,
+  setDashboardState,
 }) => {
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-
-  const handleEditHover = (bool: boolean) => {
-    setIsHovered(bool);
-  };
-
   return (
     <div className="my-8 flex h-36 w-11/12 flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-96">
       <span className="w-full border-black bg-gray-900 p-1 text-center text-indigo-300">
@@ -30,11 +25,12 @@ const QueryLog: React.FC<QueryLogProps> = ({
                   key={index}
                   index={index}
                   queryLogObject={queryLogObject}
-                  handleEditHover={handleEditHover}
-                  isHovered={isHovered}
+                  // handleEditHover={handleEditHover}
+                  // isHovered={isHovered}
                   editQueryLabel={editQueryLabel}
                   setActiveQuery={setActiveQuery}
                   activeQuery={activeQuery}
+                  setDashboardState={setDashboardState}
                 />
               );
             }

@@ -1,6 +1,5 @@
-import React from "react";
+import React from 'react';
 import type { LoadingBarProps } from '~/types/types';
-
 
 const LoadingBar: React.FC<LoadingBarProps> = ({ loadingProgress }) => {
   return (
@@ -9,9 +8,9 @@ const LoadingBar: React.FC<LoadingBarProps> = ({ loadingProgress }) => {
         className="rounded-full bg-blue-600 p-0.5 text-center text-xs font-medium leading-none text-blue-100 transition-all duration-1000 ease-out"
         style={{ width: `${loadingProgress}%` }}
       >
-        {" "}
+        {' '}
         {/* {loadingProgress}% */}
-        {"Loading..."}
+        {'Loading...'}
       </div>
     </div>
   );

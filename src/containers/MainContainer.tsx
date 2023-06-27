@@ -12,33 +12,73 @@ const MainContainer: React.FC = ({}) => {
   const [connection, setConnection] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
-    dbName: '',
-    dbURI: '',
+    graf_name: '',
+    graf_pass: '',
+    graf_port: '',
+    db_name: '',
+    db_url: '',
+    db_username: '',
+    db_server: '',
+    db_password: '',
   });
+  const [dashboardState, setDashboardState] = useState('database');
+  const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
+  const [queryGraphs, setQueryGraphs] = useState<string[]>([]);
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
   const [activeQuery, setActiveQuery] = useState<QueryLogItemObject>({
     query: '',
-    data: {},
+    data: [],
     name: '',
   });
 
   //checking form validation on input changes for credentials
   useEffect(() => {
-    const { dbName, dbURI } = formData;
+    const {
+      graf_name,
+      graf_pass,
+      graf_port,
+      db_name,
+      db_url,
+      db_username,
+      db_server,
+      db_password,
+    } = formData;
     let isValid = false;
-    if (dbName && dbURI) {
+    if (
+      graf_name &&
+      graf_pass &&
+      graf_port &&
+      db_name &&
+      db_url &&
+      db_username &&
+      db_server &&
+      db_password
+    ) {
       isValid = true;
     }
     setIsFormValid(isValid);
   }, [formData]);
 
   // will only fire if isFormValid === true
-  const handleConnect = () => {
-    // console.log("Valid Form:", formData);
-    // will send data to back end if validateData is true
+  const handleConnect = async () => {
+    console.log('Valid Form:', formData);
 
+    // const route = '/api/connect';
+    // const body : { graf_name: string; graf_pass: string; graf_port: string; db_name: string; db_url: string; db_username: string; db_server: string; db_password: string } = formData;
+    // try {
+    //   const response = await fetch(route, {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: body,
+    //   })
+    //   const data = await response.json();
+    // } catch (error) {
+    //   console.log(error);
+    // }
     // using basic auth on a local Grafana instance
     /*
     const username = 'YOUR_USERNAME'; // Replace with your Grafana username
@@ -52,24 +92,10 @@ const MainContainer: React.FC = ({}) => {
       basicAuth: true
     };
 
-    axios.post(url, body, {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      auth: {
-        username,
-        password
-      }
-    })
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    
       */
-     // if we're using an env api key
-     /* const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
+    // if we're using an env api key
+    /* const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
      axios.post(url, body, {
         headers: {
           'Content-Type': 'application/json',
@@ -83,7 +109,7 @@ const MainContainer: React.FC = ({}) => {
           console.error(error);
         });
         */
-       
+    setDashboardState('database');
     setConnection(true);
     setIsModalOpen(false);
   };
@@ -134,6 +160,9 @@ const MainContainer: React.FC = ({}) => {
         setTestConnected={setTestConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
+        setDashboardState={setDashboardState}
+        databaseGraphs={databaseGraphs}
+        setDatabaseGraphs={setDatabaseGraphs}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
@@ -142,6 +171,11 @@ const MainContainer: React.FC = ({}) => {
         testConnected={testConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
+        dashboardState={dashboardState}
+        setDashboardState={setDashboardState}
+        databaseGraphs={databaseGraphs}
+        queryGraphs={queryGraphs}
+        setQueryGraphs={setQueryGraphs}
       />
     </div>
   );
