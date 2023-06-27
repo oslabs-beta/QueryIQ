@@ -23,10 +23,10 @@
 ## Versioning
 - 
 ## Authors
-- **Connor Dillon** - [connoro7](https://github.com/connoro7)
-- **Khaile Tran** - [khailetran](https://github.com/khailetran)
+- **Connor Dillon** - [connoro7](https://github.com/connoro7) | [LinkedIn](https://www.linkedin.com/in/connor-dillon/)
+- **Khaile Tran** - [khailetran](https://github.com/khailetran) | [LinkedIn](https://www.linkedin.com/in/khailetran/)
 - **Johanna Cameron** - [jojecameron](https://github.com/jojecameron) | [LinkedIn](https://www.linkedin.com/in/johanna-cameron/)
-- **Dean Biscocho** - [deanbiscocho](https://github.com/deanbiscocho)
+- **Dean Biscocho** - [deanbiscocho](https://github.com/deanbiscocho) | [LinkedIn](https://www.linkedin.com/in/deanbiscocho/)
 - **Alan Beck** - [GitHub](https://github.com/KAlanBeck) | [LinkedIn](https://www.linkedin.com/in/k-alan-beck/)
 - See also the list of [contributors](REPO-BASE-URL/contributors) who participated in this project.
 ## License
