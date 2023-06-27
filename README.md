@@ -23,7 +23,7 @@
 ## Versioning
 - 
 ## Authors
-- **Connor Dillon** - _Developer_ - [connoro7](https://github.com/connoro7)
+- **Connor Dillon** - [connoro7](https://github.com/connoro7)
 - See also the list of [contributors](REPO-BASE-URL/contributors) who participated in this project.
 ## License
 - This project is licensed under the MIT License.
