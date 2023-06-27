@@ -35,7 +35,6 @@ const MainContainer: React.FC = ({}) => {
 
   //checking form validation on input changes for credentials
   useEffect(() => {
-    console.log('Database Graphs', databaseGraphs);
     const {
       graf_name,
       graf_pass,
@@ -64,9 +63,7 @@ const MainContainer: React.FC = ({}) => {
 
   // will only fire if isFormValid === true
   const handleConnect = async () => {
-    console.log("Valid Form:", formData);
-    
-
+    console.log('Valid Form:', formData);
 
     // const route = '/api/connect';
     // const body : { graf_name: string; graf_pass: string; graf_port: string; db_name: string; db_url: string; db_username: string; db_server: string; db_password: string } = formData;
@@ -178,6 +175,7 @@ const MainContainer: React.FC = ({}) => {
         setDashboardState={setDashboardState}
         databaseGraphs={databaseGraphs}
         queryGraphs={queryGraphs}
+        setQueryGraphs={setQueryGraphs}
       />
     </div>
   );

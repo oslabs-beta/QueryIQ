@@ -1,8 +1,7 @@
-import React from "react";
-import DBConnect from "~/components/DBConnect";
-import QueryLog from "~/components/queryLog/QueryLog";
-import type { SideBarContainerProps } from "~/types/types";
-
+import React from 'react';
+import DBConnect from '~/components/DBConnect';
+import QueryLog from '~/components/queryLog/QueryLog';
+import type { SideBarContainerProps } from '~/types/types';
 
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
   openModal,
@@ -32,7 +31,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
         setTestConnected={setTestConnected}
         setDashboardState={setDashboardState}
         databaseGraphs={databaseGraphs}
-        setDatabaseGraphs={setDatabaseGraphs}       
+        setDatabaseGraphs={setDatabaseGraphs}
       />
       <QueryLog
         queryLog={queryLog}

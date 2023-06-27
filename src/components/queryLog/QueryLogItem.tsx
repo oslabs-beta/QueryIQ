@@ -1,13 +1,12 @@
-import React from "react";
-import { useState } from "react";
+import React from 'react';
+import { useState } from 'react';
 import {
   AiFillEdit,
   AiOutlineEdit,
   AiFillCheckSquare,
   AiOutlineCheckSquare,
-} from "react-icons/ai";
-import type { QueryLogItemProps } from "~/types/types";
-
+} from 'react-icons/ai';
+import type { QueryLogItemProps } from '~/types/types';
 
 const QueryLogItem: React.FC<QueryLogItemProps> = ({
   index,
@@ -18,7 +17,7 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
   activeQuery,
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [label, setLabel] = useState<string>("");
+  const [label, setLabel] = useState<string>('');
   // const [active, setActive] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -45,19 +44,21 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
       {!editMode ? (
         <div
           className={`flex w-full items-center justify-between border-b border-black p-4 text-left text-indigo-300 
-          ${ 
-            activeQuery === queryLogObject ? 'bg-indigo-900 hover:bg-indigo-800' : 'bg-gray-800 hover:bg-indigo-800'
+          ${
+            activeQuery === queryLogObject
+              ? 'bg-indigo-900 hover:bg-indigo-800'
+              : 'bg-gray-800 hover:bg-indigo-800'
           }`}
           onMouseEnter={() => handleEditHover(true)}
           onMouseLeave={() => handleEditHover(false)}
           onClick={handleClick}
         >
-          {queryLogObject.name ? queryLogObject.name : `Query ${index + 1}`}{" "}
+          {queryLogObject.name ? queryLogObject.name : `Query ${index + 1}`}{' '}
           <span onClick={() => setEditMode(true)}>
-            <span className={isHovered ? "edit-icon" : "edit-icon hidden"}>
+            <span className={isHovered ? 'edit-icon' : 'edit-icon hidden'}>
               <AiFillEdit size={20} />
             </span>
-            <span className={!isHovered ? "edit-icon" : "edit-icon hidden"}>
+            <span className={!isHovered ? 'edit-icon' : 'edit-icon hidden'}>
               <AiOutlineEdit size={20} />
             </span>
           </span>
@@ -78,7 +79,7 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
               type="submit"
               onMouseEnter={() => handleEditHover(true)}
               onMouseLeave={() => handleEditHover(false)}
-              className={isHovered ? "edit-icon" : "edit-icon hidden"}
+              className={isHovered ? 'edit-icon' : 'edit-icon hidden'}
             >
               <AiFillCheckSquare size={20} />
             </button>
@@ -86,7 +87,7 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
               type="submit"
               onMouseEnter={() => handleEditHover(true)}
               onMouseLeave={() => handleEditHover(false)}
-              className={!isHovered ? "edit-icon" : "edit-icon hidden"}
+              className={!isHovered ? 'edit-icon' : 'edit-icon hidden'}
             >
               <AiOutlineCheckSquare size={20} />
             </button>

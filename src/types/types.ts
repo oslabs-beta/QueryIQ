@@ -85,6 +85,7 @@ export type QueryContainerProps = {
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
   queryGraphs: string[];
+  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of QueryContainer
@@ -95,6 +96,7 @@ export type InputQueryProps = {
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   activeQuery: QueryLogItemObject;
+  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of InputQuery

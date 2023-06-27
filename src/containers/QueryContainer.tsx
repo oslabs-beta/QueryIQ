@@ -1,9 +1,7 @@
-import React from "react";
-import DashboardContainer from "./DashboardContainer";
-import InputQuery from "../components/InputQuery";
-import type { QueryContainerProps } from "~/types/types";
-
-
+import React from 'react';
+import DashboardContainer from './DashboardContainer';
+import InputQuery from '../components/InputQuery';
+import type { QueryContainerProps } from '~/types/types';
 
 //Container is for input query and render the graphs on Dashboard Container if input query is processed successfully
 
@@ -18,6 +16,7 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   setDashboardState,
   databaseGraphs,
   queryGraphs,
+  setQueryGraphs,
 }) => {
   return (
     <div className="flex h-5/6 w-full flex-col justify-between md:h-full md:w-10/12">
@@ -31,6 +30,7 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             activeQuery={activeQuery}
             setActiveQuery={setActiveQuery}
             setDashboardState={setDashboardState}
+            setQueryGraphs={setQueryGraphs}
           />
         </div>
       </div>

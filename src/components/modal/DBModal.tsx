@@ -16,7 +16,7 @@ const DBModal: React.FC<DBModalProps> = ({
   const [dbSelection, setdbSelection] = useState(0);
 
   const handleClick = () => {
-    setdbSelection((prevState) => (prevState + 1));
+    setdbSelection((prevState) => prevState + 1);
   };
 
   const handleCancel = () => {
@@ -52,4 +52,3 @@ const DBModal: React.FC<DBModalProps> = ({
 };
 
 export default DBModal;
-
