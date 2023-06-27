@@ -24,6 +24,7 @@
 - 
 ## Authors
 - **Connor Dillon** - [connoro7](https://github.com/connoro7)
+- **Khaile Tran** - [khailetran](https://github.com/khailetran)
 - See also the list of [contributors](REPO-BASE-URL/contributors) who participated in this project.
 ## License
 - This project is licensed under the MIT License.
