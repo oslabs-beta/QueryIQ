@@ -27,6 +27,7 @@
 - **Khaile Tran** - [khailetran](https://github.com/khailetran)
 - **Johanna Cameron** - [jojecameron](https://github.com/jojecameron)
 - **Dean Biscocho** - [deanbiscocho](https://github.com/deanbiscocho)
+- **Alan Beck** - [GitHub](https://github.com/KAlanBeck) | [LinkedIn](https://www.linkedin.com/in/k-alan-beck/)
 - See also the list of [contributors](REPO-BASE-URL/contributors) who participated in this project.
 ## License
 - This project is licensed under the MIT License.
