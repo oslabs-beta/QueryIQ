@@ -1,8 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import LoadingBar from "./LoadingBar";
-import type { InputQueryProps } from "~/types/types";
-
+import React from 'react';
+import { useState } from 'react';
+import LoadingBar from './LoadingBar';
+import type { InputQueryProps } from '~/types/types';
 
 const InputQuery: React.FC<InputQueryProps> = ({
   setQueryLog,
@@ -10,6 +9,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
   query,
   setActiveQuery,
   setDashboardState,
+  setQueryGraphs,
 }) => {
   //useState for loading bar
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -29,16 +29,21 @@ const InputQuery: React.FC<InputQueryProps> = ({
     });
   };
 
-  const handleGoClick = async (e: React.FormEvent<HTMLFormElement>) : Promise<void> => {
+  const handleGoClick = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     await asyncLoadingSim();
-    const newQuery = { query: query, data: {}, name: "" }
-    setQueryLog((prevQueryLog) => [
-      ...prevQueryLog,
-      newQuery,
-    ]);
-    setQuery("");
+    const newQuery = { query: query, data: [], name: '' };
+    setQueryLog((prevQueryLog) => [...prevQueryLog, newQuery]);
+    setQuery('');
     setActiveQuery(newQuery);
+    // hardcoded query results from: SELECT SUM(Payment.amount) AS sum_amt FROM payment
+    setQueryGraphs([
+      'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802712822&to=1687824312822&panelId=2',
+      'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802730181&to=1687824330181&panelId=3',
+      'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802741315&to=1687824341315&panelId=4',
+    ]);
     setDashboardState('query');
   };
 

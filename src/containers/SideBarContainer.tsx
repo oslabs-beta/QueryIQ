@@ -1,8 +1,7 @@
-import React from "react";
-import DBConnect from "~/components/DBConnect";
-import QueryLog from "~/components/queryLog/QueryLog";
-import type { SideBarContainerProps } from "~/types/types";
-
+import React from 'react';
+import DBConnect from '~/components/DBConnect';
+import QueryLog from '~/components/queryLog/QueryLog';
+import type { SideBarContainerProps } from '~/types/types';
 
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
   openModal,
@@ -17,6 +16,8 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   setActiveQuery,
   activeQuery,
   setDashboardState,
+  databaseGraphs,
+  setDatabaseGraphs,
 }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center  md:h-full md:w-1/4">
@@ -28,7 +29,9 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
         setFormData={setFormData}
         testConnected={testConnected}
         setTestConnected={setTestConnected}
-        setDashboardState={setDashboardState}        
+        setDashboardState={setDashboardState}
+        databaseGraphs={databaseGraphs}
+        setDatabaseGraphs={setDatabaseGraphs}
       />
       <QueryLog
         queryLog={queryLog}

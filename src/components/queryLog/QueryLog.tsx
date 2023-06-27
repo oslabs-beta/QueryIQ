@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 // import { useState } from "react";
-import QueryLogItem from "./QueryLogItem";
-import type { QueryLogProps } from "~/types/types";
+import QueryLogItem from './QueryLogItem';
+import type { QueryLogProps } from '~/types/types';
 
 const QueryLog: React.FC<QueryLogProps> = ({
   queryLog,
@@ -10,8 +10,6 @@ const QueryLog: React.FC<QueryLogProps> = ({
   activeQuery,
   setDashboardState,
 }) => {
-  
-
   return (
     <div className="my-8 flex h-36 w-11/12 flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-96">
       <span className="w-full border-black bg-gray-900 p-1 text-center text-indigo-300">

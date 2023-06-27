@@ -1,7 +1,12 @@
 import React from 'react';
 import type { ModalFormInputProps } from '~/types/types';
 
-const ModalFormInput: React.FC<ModalFormInputProps> = ({ placeholder, type, value, onChange }) => {
+const ModalFormInput: React.FC<ModalFormInputProps> = ({
+  placeholder,
+  type,
+  value,
+  onChange,
+}) => {
   return (
     <input
       className="rounded-lg border border-gray-900 p-2"

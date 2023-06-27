@@ -17,19 +17,17 @@ export type SideBarContainerProps = {
   connection: boolean;
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
-  setFormData: React.Dispatch<
-    React.SetStateAction<FormData>
-  >;
-  queryLog: { query: string; data: object; name: string }[];
-  setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
-  >;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  queryLog: QueryLogItemObject[];
+  setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   editQueryLabel: (index: number, label: string) => void;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
+  databaseGraphs: string[];
+  setDatabaseGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of SideBarContainer
@@ -38,17 +36,17 @@ export type DBConnectProps = {
   connection: boolean;
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
-  setFormData: React.Dispatch<
-    React.SetStateAction<FormData>
-  >;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
+  databaseGraphs: string[];
+  setDatabaseGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of SideBarContainer
 export type QueryLogProps = {
-  queryLog: { query: string; data: object; name: string }[];
+  queryLog: QueryLogItemObject[];
   editQueryLabel: (index: number, label: string) => void;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
@@ -70,15 +68,13 @@ export type QueryLogItemProps = {
 // shape of query log items data
 export type QueryLogItemObject = {
   query: string;
-  data: object;
+  data: string[];
   name: string;
 };
 
 // Parent container
 export type QueryContainerProps = {
-  setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
-  >;
+  setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
   // setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
@@ -87,18 +83,20 @@ export type QueryContainerProps = {
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
+  databaseGraphs: string[];
+  queryGraphs: string[];
+  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of QueryContainer
 export type InputQueryProps = {
-  setQueryLog: React.Dispatch<
-    React.SetStateAction<Array<{ query: string; data: object; name: string }>>
-  >;
+  setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   activeQuery: QueryLogItemObject;
+  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of InputQuery
@@ -112,14 +110,14 @@ export type DashboardContainerProps = {
   activeQuery: QueryLogItemObject;
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
+  databaseGraphs: string[];
+  queryGraphs: string[];
 };
 
 // parent modal
 export type DBModalProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setFormData: React.Dispatch<
-    React.SetStateAction<FormData>
-  >;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   formData: FormData;
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
@@ -136,17 +134,13 @@ export type GrafanaCredentialsProps = {
   handleCancel: () => void;
   handleClick: () => void;
   formData: FormData;
-  setFormData: React.Dispatch<
-    React.SetStateAction<FormData>
-  >;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 };
 
 // child of DBModal
 export type DBCredentialsProps = {
   formData: FormData;
-  setFormData: React.Dispatch<
-    React.SetStateAction<FormData>
-  >;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
   handleCancel: () => void;
@@ -158,4 +152,10 @@ export type ModalFormInputProps = {
   value: string;
   type: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
+// graph cards
+export type GraphCardProps = {
+  src: string;
+  key: number;
 };
