@@ -1,4 +1,4 @@
-export const dashBoardHelper = (uid: string) => {
+export const testCopy = (uid: string) => {
   const dashboard = {
     dashboard: {
       __inputs: [
