@@ -5,13 +5,14 @@ import { dashBoardHelper } from './dashBoardHelper';
 import { queryHelper } from './queryHelper';
 
 interface GrafanaAPIHandler {
-  (req: Request, res: Response, next: NextFunction): Promise<void>;
+  (req: Request, res: Response, next: NextFunction): Promise<JSON | void>;
 }
 
 type GrafanaController = {
   grafanaFetch: GrafanaAPIHandler;
   createDataSource: GrafanaAPIHandler;
   createDashBoard: GrafanaAPIHandler;
+  getPgQueryMetrics: GrafanaAPIHandler;
 };
 
 const grafanaController: GrafanaController = {
