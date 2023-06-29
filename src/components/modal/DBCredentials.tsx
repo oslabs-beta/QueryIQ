@@ -18,9 +18,9 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
         value={formData.db_name}
         onChange={(e) => setFormData({ ...formData, db_name: e.target.value })}
       />
-      <label>Database URI</label>
+      <label>Database URL</label>
       <ModalFormInput
-        placeholder="Database URI"
+        placeholder="Database URL"
         type="text"
         value={formData.db_url}
         onChange={(e) => setFormData({ ...formData, db_url: e.target.value })}
@@ -53,10 +53,10 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
         }
       />
       <div className="h-45 w-45 flex justify-center">
-        <button
+        <button type = "submit"
           className="m-4 rounded-lg border border-gray-900 bg-indigo-500 p-2 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
           disabled={!isFormValid}
-          onClick={handleConnect}
+           onClick={handleConnect}
         >
           Connect
         </button>
