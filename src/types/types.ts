@@ -144,6 +144,7 @@ export type DBCredentialsProps = {
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
   handleCancel: () => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 // input for modals
