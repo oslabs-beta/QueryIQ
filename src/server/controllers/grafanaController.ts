@@ -2,6 +2,7 @@
 import { NextFunction, RequestHandler, Request, Response } from 'express';
 import { RequestBodyConnect } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
+import { queryHelper } from './queryHelper';
 
 interface GrafanaAPIHandler {
   (req: Request, res: Response, next: NextFunction): Promise<void>;
@@ -136,7 +137,7 @@ const grafanaController: GrafanaController = {
     // res.locals.dashboard = dashBoardHelper(data.datasource.uid);
     // console.log('Data:', data);
     // console.log('Datasource created:', data);
- 
+
     //   return next();
     // } catch (error) {
     //   console.log(error)
@@ -168,11 +169,16 @@ const grafanaController: GrafanaController = {
       const data = await response.json();
       // console.log('❗️data:', data);
       // res.locals.dashboard = [data.slug, data.uid];
-      res.locals.dashboard = { slug: data.slug, uid: data.uid, status: data.status, datasourceuid: res.locals.data.datasource.uid } as {
+      res.locals.dashboard = {
+        slug: data.slug,
+        uid: data.uid,
+        status: data.status,
+        datasourceuid: res.locals.data.datasource.uid,
+      } as {
         slug: string;
         uid: string;
         status: string;
-        datasourceuid: string; 
+        datasourceuid: string;
       };
       return next();
     } catch (error) {
