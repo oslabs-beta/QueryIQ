@@ -7,6 +7,7 @@ import express, {
 import next from 'next';
 import dbRouter from './routers/dbRouter';
 import apiRouter from './routers/apiRouter';
+const cors = require('cors');
 
 
 // Required to pipe env variables into Express
@@ -36,6 +37,7 @@ nextApp
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: 'http://localhost:3333' }));
 
 // app.use('/api', dbRouter);
 app.use('/api', apiRouter)

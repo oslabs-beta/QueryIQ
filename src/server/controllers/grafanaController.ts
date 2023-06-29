@@ -153,7 +153,7 @@ const grafanaController: GrafanaController = {
     const url = `http://localhost:${graf_port}/api/dashboards/db`;
     // console.log('👽url and headers', { url: url, headers: headers });
     // console.log( '❗️createDashBoard', ':', 'res.locals.data', ':', res.locals.data);
-    // console.log('❗️❗️UID: ', res.locals.data.datasource.uid);
+    //  console.log('❗️❗️UID: ', res.locals.data.datasource.uid);
     const body = dashBoardHelper(res.locals.data.datasource.uid);
     // console.log( '❗️❗️UID from body after dashboardhelper: ', body.dashboard.annotations.list[1]?.datasource.uid);
     const payload = {
@@ -168,9 +168,11 @@ const grafanaController: GrafanaController = {
       const data = await response.json();
       // console.log('❗️data:', data);
       // res.locals.dashboard = [data.slug, data.uid];
-      res.locals.dashboard = { slug: data.slug, uid: data.uid } as {
+      res.locals.dashboard = { slug: data.slug, uid: data.uid, status: data.status, datasourceuid: res.locals.data.datasource.uid } as {
         slug: string;
         uid: string;
+        status: string;
+        datasourceuid: string; 
       };
       return next();
     } catch (error) {
