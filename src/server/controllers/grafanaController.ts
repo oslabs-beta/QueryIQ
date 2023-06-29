@@ -180,6 +180,7 @@ const grafanaController: GrafanaController = {
       const urlArray = [];
       const dataLink = `http://localhost:3000/connections/datasources/edit/${res.locals.data.datasource.uid}`;
 
+      //12 is because that's how many panels we currently have
       for (let i = 1; i <= 12; i++) {
         urlArray.push(
           `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`
