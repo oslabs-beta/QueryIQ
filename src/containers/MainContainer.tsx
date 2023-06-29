@@ -3,7 +3,8 @@ import QueryContainer from './QueryContainer';
 import SideBarContainer from './SideBarContainer';
 import { useState, useEffect } from 'react';
 import DBModal from '~/components/modal/DBModal';
-import type { QueryLogItemObject } from '~/types/types';
+import type { QueryLogItemObject, FormData } from '~/types/types';
+import { useMutation } from 'react-query'
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,65 +62,72 @@ const MainContainer: React.FC = ({}) => {
     setIsFormValid(isValid);
   }, [formData]);
 
+   //when form is submitted, the function passed to useMutation is executed. It will receive the formData as an argument, which contains the data entered in the form fields. useMutation is used for making POST,PUT,DELETE
+   const mutation = useMutation(async (formData: FormData) => {
+    const apiUrl = 'http://localhost:3001/api/connect';
+    const { graf_name, graf_pass, graf_port, db_name, db_url, db_username, db_server, db_password } = formData;
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString('base64')}`,
+      },
+      body: JSON.stringify({
+        graf_name,
+        graf_pass,
+        graf_port,
+        db_name,
+        db_url,
+        db_username,
+        db_server,
+        db_password,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to connect'); // Handle error
+    }
+
+    return response.json();
+  });
+
   // will only fire if isFormValid === true
   const handleConnect = async () => {
     console.log('Valid Form:', formData);
-
-    // const route = '/api/connect';
-    // const body : { graf_name: string; graf_pass: string; graf_port: string; db_name: string; db_url: string; db_username: string; db_server: string; db_password: string } = formData;
-    // try {
-    //   const response = await fetch(route, {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: body,
-    //   })
-    //   const data = await response.json();
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // using basic auth on a local Grafana instance
-    /*
-    const username = 'YOUR_USERNAME'; // Replace with your Grafana username
-    const password = 'YOUR_PASSWORD'; // Replace with your Grafana password
-    const url = 'http://localhost:3000/api/datasources';
-    const body = {
-      name: formData.dbName,
-      type: 'postgres',
-      url: 'formData.dbURI',
-      access: 'proxy',
-      basicAuth: true
-    };
-
-    
-      */
-    // if we're using an env api key
-    /* const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key
-     axios.post(url, body, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        }
-      })
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-        */
-    setDashboardState('database');
-    setConnection(true);
-    setIsModalOpen(false);
+    try {
+      const { graf_name, graf_pass, graf_port, db_name, db_url, db_username, db_server, db_password } = formData;
+      // mutation is an object returned by the useMutation hook and mutateAsync is a method provided by mutation object
+      // await mutation.mutateAsync waits for the mutation operation to complete before moving to the next line 
+      await mutation.mutateAsync({
+        graf_name,
+        graf_pass,
+        graf_port,
+        db_name,
+        db_url,
+        db_username,
+        db_server,
+        db_password,
+      });
+      // setDatabaseGraphs([]) // pass in array of Iframes
+      setDashboardState('database');
+      setConnection(true);
+      setIsModalOpen(false);
+    } catch (error) {
+      // Handle error
+      console.error(error);
+    }
   };
 
-  //for connecting to test DB
+  //if post request is still loading 
+  if (mutation.isLoading) {
+    return <div>Loading...</div>;
+  }
 
-  // function handleTestConnect() {
-  //   // Perform the necessary actions to establish the connection
-  //   setConnected(true);
-  // }
+  //if post request fails to fetch
+  if (mutation.error) {
+    return <div>Error: {mutation.error.message}</div>;
+  }
 
   const editQueryLabel = (index: number, label: string): void => {
     setQueryLog((prevQueryLog) => {
