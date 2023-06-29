@@ -25,6 +25,7 @@ const grafanaController: GrafanaController = {
       db_server,
       db_password,
     } = req.body;
+
     const url = `http://localhost:${graf_port}/api/datasources`;
 
     const body = {
@@ -154,7 +155,14 @@ const grafanaController: GrafanaController = {
     // console.log('👽url and headers', { url: url, headers: headers });
     // console.log( '❗️createDashBoard', ':', 'res.locals.data', ':', res.locals.data);
     //  console.log('❗️❗️UID: ', res.locals.data.datasource.uid);
-    const body = dashBoardHelper(res.locals.data.datasource.uid);
+
+
+    // const body = dashBoardHelper(res.locals.data.datasource.uid);
+
+    
+    const body = testCopy(res.locals.data.datasource.uid);
+
+
     // console.log( '❗️❗️UID from body after dashboardhelper: ', body.dashboard.annotations.list[1]?.datasource.uid);
     const payload = {
       method: 'POST',
@@ -168,11 +176,23 @@ const grafanaController: GrafanaController = {
       const data = await response.json();
       // console.log('❗️data:', data);
       // res.locals.dashboard = [data.slug, data.uid];
-      res.locals.dashboard = { slug: data.slug, uid: data.uid, status: data.status, datasourceuid: res.locals.data.datasource.uid } as {
+     // “http://localhost:3000/d-solo/” + {uid} +”/” +{slug} + “?” +”orgId=1”+”panelId=3”
+      const urlArray = [];
+
+      for (let i = 1; i <= 12; i++) {
+        urlArray.push(`http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`)
+      }
+
+      console.log(urlArray);
+      console.log(urlArray.length);
+
+
+      res.locals.dashboard = { slug: data.slug, uid: data.uid, status: data.status, datasourceuid: res.locals.data.datasource.uid, iFrames: urlArray } as {
         slug: string;
         uid: string;
         status: string;
         datasourceuid: string; 
+        iFrames: [];
       };
       return next();
     } catch (error) {
