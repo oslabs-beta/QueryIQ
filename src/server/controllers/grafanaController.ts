@@ -3,6 +3,7 @@ import { NextFunction, RequestHandler, Request, Response } from 'express';
 import { type FormData } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
 import { queryHelper } from './queryHelper';
+import { testCopy } from './testCopy';
 
 interface GrafanaAPIHandler {
   (req: Request, res: Response, next: NextFunction): Promise<JSON | void>;
@@ -162,18 +163,16 @@ const grafanaController: GrafanaController = {
     };
 
     const url = `http://localhost:${graf_port}/api/dashboards/db`;
+    // console.log('👽url and headers', { url: url, headers: headers });
+    // console.log( '❗️createDashBoard', ':', 'res.locals.data', ':', res.locals.data);
+    //  console.log('❗️❗️UID: ', res.locals.data.datasource.uid);
+    console.log('in create dashboard');
 
-    const body = dashBoardHelper(res.locals.data.datasource.uid) as {
-      dashboard: {
-        annotations: {
-          list: {
-            datasource: {
-              uid: string;
-            };
-          }[];
-        };
-      };
-    };
+    // const body = dashBoardHelper(res.locals.data.datasource.uid);
+
+    const body = testCopy(res.locals.data.datasource.uid);
+
+    // console.log( '❗️❗️UID from body after dashboardhelper: ', body.dashboard.annotations.list[1]?.datasource.uid);
     const payload = {
       method: 'POST',
       headers: headers,
@@ -190,19 +189,35 @@ const grafanaController: GrafanaController = {
 
     try {
       const response = await fetch(url, payload);
-      const data = (await response.json()) as Promise<JSON>;
+      const data = await response.json();
+      // console.log('❗️data:', data);
+      // res.locals.dashboard = [data.slug, data.uid];
+      // “http://localhost:3000/d-solo/” + {uid} +”/” +{slug} + “?” +”orgId=1”+”panelId=3”
+      const urlArray = [];
+      const dataLink = `http://localhost:3000/connections/datasources/edit/${res.locals.data.datasource.uid}`;
+
+      //12 is because that's how many panels we currently have
+      for (let i = 1; i <= 12; i++) {
+        urlArray.push(
+          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`
+        );
+      }
+
+      console.log(urlArray);
+      console.log(urlArray.length);
+
       res.locals.dashboard = {
         slug: data.slug,
         uid: data.uid,
         status: data.status,
-        datasourceuid: res.locals.data.datasource.uid,
-        iFrames: data.iFrames,
+        datasourceurl: dataLink,
+        iFrames: urlArray,
       } as {
         slug: string;
         uid: string;
         status: string;
-        datasourceuid: string;
-        iFrames: string[];
+        datasourceurl: string;
+        iFrames: [];
       };
       return next();
     } catch (error) {
