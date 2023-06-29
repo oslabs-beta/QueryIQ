@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { NextFunction, RequestHandler, Request, Response } from 'express';
-import { RequestBodyConnect } from '../../types/types';
+import { type FormData } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
 import { queryHelper } from './queryHelper';
 
@@ -25,7 +25,8 @@ const grafanaController: GrafanaController = {
       db_username,
       db_server,
       db_password,
-    } = req.body;
+    } = req.body as FormData;
+
     const url = `http://localhost:${graf_port}/api/datasources`;
 
     const body = {
@@ -74,7 +75,7 @@ const grafanaController: GrafanaController = {
 
     try {
       const response = await fetch(url, payload);
-      const data = await response.json();
+      const data = (await response.json()) as Promise<JSON>;
       res.locals.data = data;
       res.locals.graf_port = graf_port;
       res.locals.headers = headers;
