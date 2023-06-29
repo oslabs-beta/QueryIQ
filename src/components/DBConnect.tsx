@@ -1,7 +1,7 @@
 import React from 'react';
 import DBCard from './DBCard';
 import type { DBConnectProps } from '~/types/types';
-// import { useQuery, QueryClient, useMutation } from 'react-query';
+// import { useMutation } from 'react-query';
 
 
 
@@ -17,39 +17,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
   setDatabaseGraphs,
 }) => {
 
-
-
-//KT's code for connecting to grafana using react query
-  // const mutation = useMutation(async (formData) => {
-  //   const apiUrl = 'http://localhost:3001/api/connect';
-  //   const { graf_name, graf_pass, graf_port, db_name, db_url, db_username, db_server, db_password } = formData;
-
-  //   const response = await fetch(apiUrl, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Accept: 'application/json',
-  //       Authorization: `Basic ${btoa(`${graf_name}:${graf_pass}`)}`,
-        
-  //     },
-  //     body: JSON.stringify({
-  //       graf_name,
-  //       graf_pass,
-  //       graf_port,
-  //       db_name,
-  //       db_url,
-  //       db_username,
-  //       db_server,
-  //       db_password,
-  //     }),
-  //   });
-
-  //   if (!response.ok) {
-  //     throw new Error('Failed to connect'); // Handle error
-  //   }
-
-  //   return response.json();
-  // });
 
 
   // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
@@ -69,14 +36,10 @@ const DBConnect: React.FC<DBConnectProps> = ({
 
   };
 
-  
-    //Johanna's code
+
   const handleClick = () => {
     connection ? setConnection(false) : setConnection(true);
   };
-
-
-
 
   // setting database to hardcoded iframe data for now, will replace with iframes received from grafana
   const handleClickTestDB = () => {
