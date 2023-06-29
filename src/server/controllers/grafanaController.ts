@@ -213,6 +213,64 @@ const grafanaController: GrafanaController = {
     }
   },
 
+  getPgQueryMetrics: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { graf_name, graf_pass } = req.headers as {
+      graf_name: string;
+      graf_pass: string;
+    };
+    const { query, dashboardUID } = req.body as {
+      query: string;
+      dashboardUID: string;
+    };
+
+    const url = `http://localhost:${graf_port}/api/dashboards/db`;
+    const queryPanels = queryHelper(query, dashboardUID);
+
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString(
+        'base64'
+      )}`,
+    };
+
+    const payload = {
+      method: 'POST',
+      // headers: headers,
+      body: JSON.stringify(queryPanels),
+    };
+
+    try {
+      const response = await fetch(url, payload);
+      const data = (await response.json()) as Promise<JSON>;
+      res.locals.queryPanels = {
+        slug: data.slug,
+        uid: data.uid,
+        status: data.status,
+        datasourceuid: res.locals.data.datasource.uid,
+        iFrames: data.iFrames,
+      } as {
+        slug: string;
+        uid: string;
+        status: string;
+        datasourceuid: string;
+        iFrames: string[];
+      };
+      return next();
+    } catch (error) {
+      return next({
+        log: `${error}: error in the grafanaController.query`,
+        status: 400,
+        message: `${error}: error with the data source`,
+      });
+    }
+    res.locals.queryPanels = {};
+  },
+
   grafanaFetch: async (
     req: Request,
     res: Response,
