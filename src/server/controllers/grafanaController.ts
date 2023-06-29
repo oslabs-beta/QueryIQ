@@ -151,35 +151,57 @@ const grafanaController: GrafanaController = {
   },
 
   createDashBoard: async (req: Request, res: Response, next: NextFunction) => {
-    const { graf_port, headers } = res.locals;
+    const { graf_port, headers } = res.locals as {
+      graf_port: string;
+      headers: {
+        Accept: string;
+        'Content-Type': string;
+        Authorization: string;
+      };
+    };
+
     const url = `http://localhost:${graf_port}/api/dashboards/db`;
-    // console.log('👽url and headers', { url: url, headers: headers });
-    // console.log( '❗️createDashBoard', ':', 'res.locals.data', ':', res.locals.data);
-    //  console.log('❗️❗️UID: ', res.locals.data.datasource.uid);
-    const body = dashBoardHelper(res.locals.data.datasource.uid);
-    // console.log( '❗️❗️UID from body after dashboardhelper: ', body.dashboard.annotations.list[1]?.datasource.uid);
+
+    const body = dashBoardHelper(res.locals.data.datasource.uid) as {
+      dashboard: {
+        annotations: {
+          list: {
+            datasource: {
+              uid: string;
+            };
+          }[];
+        };
+      };
+    };
     const payload = {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(body),
+    } as {
+      method: string;
+      headers: {
+        Accept: string;
+        'Content-Type': string;
+        Authorization: string;
+      };
+      body: string;
     };
 
     try {
-      // console.log('❗️❗️❗️TRYING TO CREATE DASHBOARD');
       const response = await fetch(url, payload);
-      const data = await response.json();
-      // console.log('❗️data:', data);
-      // res.locals.dashboard = [data.slug, data.uid];
+      const data = (await response.json()) as Promise<JSON>;
       res.locals.dashboard = {
         slug: data.slug,
         uid: data.uid,
         status: data.status,
         datasourceuid: res.locals.data.datasource.uid,
+        iFrames: data.iFrames,
       } as {
         slug: string;
         uid: string;
         status: string;
         datasourceuid: string;
+        iFrames: string[];
       };
       return next();
     } catch (error) {
