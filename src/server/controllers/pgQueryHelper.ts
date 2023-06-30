@@ -362,7 +362,7 @@ export const pgQueryHelper = (userQuery: string, datasourceUID: string) => {
     timepicker: {},
     timezone: '',
     title: 'Dashboard for Specific Query Input',
-    uid: 'f4ba3118-e74f-45fc-aba4-3d7d95407afd',
+    uid: null,
     version: 3,
     weekStart: '',
   };
