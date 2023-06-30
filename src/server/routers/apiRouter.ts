@@ -7,7 +7,6 @@ const router = Router();
 router.post(
   '/connect',
   grafanaController.createDataSource,
-  grafanaController.saveDataSource,
   grafanaController.createDashBoard,
   (req, res) => {
     return res.status(200).json(res.locals.dashboard);

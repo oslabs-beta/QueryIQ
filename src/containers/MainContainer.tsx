@@ -105,7 +105,6 @@ const MainContainer: React.FC = ({}) => {
 
   // will only fire if isFormValid === true
   const handleConnect = async () => {
-    console.log('Valid Form:', formData);
     try {
       const {
         graf_name,
@@ -129,16 +128,13 @@ const MainContainer: React.FC = ({}) => {
         db_server,
         db_password,
       });
-      console.log('RESPONSE: ', response);
       //used to say if(!response.ok)
       if (response.status !== 'success') {
         throw new Error('Failed to connect'); // Handle error
       }
       //used to say response.data
       const { iFrames } = response;
-      console.log('IFRAMES LOGGED FROM RESPONSE', iFrames);
       setDatabaseGraphs(iFrames); // pass in array of Iframes
-      console.log('THIS SHOULD BE ARRAY OF IFRAMES', databaseGraphs);
       setDashboardState('database');
       setConnection(true);
       setIsModalOpen(false);
@@ -149,6 +145,7 @@ const MainContainer: React.FC = ({}) => {
   };
 
   useEffect(() => {
+    // TODO: Does useEffect need to be here?
     console.log('Updated databaseGraphs:', databaseGraphs);
   }, [databaseGraphs]);
 
