@@ -16,7 +16,6 @@ type GrafanaController = {
   getPgQueryMetrics: GrafanaAPIHandler;
 };
 
-
 interface QueryPanelResponse {
   slug: string;
   status: string;
@@ -239,9 +238,7 @@ const grafanaController: GrafanaController = {
   /**
    * @name getPgQueryMetrics
    * @description This function will get metrics from running an arbitrary query on a postgres database and return the
-   * @param req
-   * @param res
-   * @param next
+   * @route /api/query
    */
   getPgQueryMetrics: async (
     req: Request,
