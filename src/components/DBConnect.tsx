@@ -1,13 +1,9 @@
 import React from 'react';
 import DBCard from './DBCard';
 import type { DBConnectProps } from '~/types/types';
+// import { useMutation } from 'react-query';
 
-// type Post =  {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   body: string;
-// }
+
 
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
@@ -20,9 +16,12 @@ const DBConnect: React.FC<DBConnectProps> = ({
   databaseGraphs,
   setDatabaseGraphs,
 }) => {
+
+
+
   // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
 
-  const handleConnect = () => {
+  const handleConnect =  () => {
     setFormData({
       graf_name: '',
       graf_pass: '',
@@ -33,57 +32,14 @@ const DBConnect: React.FC<DBConnectProps> = ({
       db_server: '',
       db_password: '',
     });
-    openModal(true);
+     openModal(true);
+
   };
+
 
   const handleClick = () => {
     connection ? setConnection(false) : setConnection(true);
   };
-
-  // USEQUERY TESTING BELOW COMMENTED OUT TEMPORARILY
-  //   const { isLoading, isError, data, error, refetch } = useQuery('posts', () =>
-  //   fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json()),
-  //   {
-  //     enabled: false,
-  //   }
-  // );
-
-  //   const handleClickTestDB = () => {
-  //     //triggers a fresh data fetch for the useQuery above
-  //     refetch();
-  //   };
-
-  // const { isLoading, isError, data, error, refetch,
-  // } = useQuery<Post[]>('posts',
-  //   async () => {
-  //     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-  //     if (!response.ok) {
-  //       throw new Error('Failed to fetch posts');
-  //     }
-  //     return response.json();
-  //   },
-  //   {
-  //     enabled: false,
-  //   }
-  // );
-
-  //
-  // const buttonLabel = () => {
-  //   if (isLoading) {
-  //     return 'Loading...';
-  //   } else if (isError) {
-  //     return `Error: ${error.message}`;
-  //   } else if (!data && !isLoading) {
-  //     return 'Connect to a test db';
-  //   } else {
-  //     console.log('testdata', data)
-  //     return 'Connected to test db';
-  //   }
-  // };
-
-  //KT's code for connecting to a test DB
-
-  // const [testConnected, setTestConnected] = useState(false);
 
   // setting database to hardcoded iframe data for now, will replace with iframes received from grafana
   const handleClickTestDB = () => {

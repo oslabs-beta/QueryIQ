@@ -86,6 +86,7 @@ export type QueryContainerProps = {
   databaseGraphs: string[];
   queryGraphs: string[];
   setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
+  connection: boolean;
 };
 
 // child of QueryContainer
@@ -112,6 +113,7 @@ export type DashboardContainerProps = {
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
   queryGraphs: string[];
+  connection: boolean;
 };
 
 // parent modal
@@ -144,6 +146,7 @@ export type DBCredentialsProps = {
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
   handleCancel: () => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 // input for modals
