@@ -1,5 +1,8 @@
+import {v4 as uuidv4} from 'uuid';
+
 export const pgQueryHelper = (userQuery: string, datasourceUID: string) => {
   const queryPanels = {
+    dashboard: { 
     __inputs: [
       {
         name: 'Query',
@@ -361,10 +364,11 @@ export const pgQueryHelper = (userQuery: string, datasourceUID: string) => {
     },
     timepicker: {},
     timezone: '',
-    title: 'Dashboard for Specific Query Input',
+    title: `Query Dashboard ${uuidv4()}`,
     uid: null,
     version: 3,
     weekStart: '',
-  };
+  },
+};
   return queryPanels;
 };
