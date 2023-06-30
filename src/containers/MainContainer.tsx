@@ -3,7 +3,7 @@ import QueryContainer from './QueryContainer';
 import SideBarContainer from './SideBarContainer';
 import { useState, useEffect } from 'react';
 import DBModal from '~/components/modal/DBModal';
-import type { QueryLogItemObject, FormData } from '~/types/types';
+import type { QueryLogItemObject, FormData, GrafanaUserObject } from '~/types/types';
 import { useMutation } from 'react-query';
 
 const MainContainer: React.FC = ({}) => {
@@ -12,6 +12,11 @@ const MainContainer: React.FC = ({}) => {
   const [queryLog, setQueryLog] = useState<QueryLogItemObject[]>([]);
   const [connection, setConnection] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [grafanaUser, setGrafanaUser] = useState<GrafanaUserObject>({
+    graf_name: '',
+    graf_pass: '',
+    graf_port: '',
+  });
   const [formData, setFormData] = useState({
     graf_name: '',
     graf_pass: '',
@@ -24,10 +29,12 @@ const MainContainer: React.FC = ({}) => {
   });
   const [dashboardState, setDashboardState] = useState('database');
   const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
+  const [dbUid, setdbUid] = useState('');
   const [queryGraphs, setQueryGraphs] = useState<string[]>([]);
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
+
   const [activeQuery, setActiveQuery] = useState<QueryLogItemObject>({
     query: '',
     data: [],
@@ -127,13 +134,16 @@ const MainContainer: React.FC = ({}) => {
         db_username,
         db_server,
         db_password,
-      });
-      //used to say if(!response.ok)
-      if (response.status !== 'success') {
+      }) as void | {slug: string, uid: string, status: number, iFrames: string[]};
+
+    // If response is less than 200 or greater than 300
+    // Basically, if response is NOT 200-299
+      if (response.status <= 199 && response.status >= 300) {
         throw new Error('Failed to connect'); // Handle error
       }
       //used to say response.data
-      const { iFrames } = response;
+      const { iFrames, datasourceuid } = response;
+      setdbUid(datasourceuid);
       setDatabaseGraphs(iFrames); // pass in array of Iframes
       setDashboardState('database');
       setConnection(true);
@@ -148,6 +158,11 @@ const MainContainer: React.FC = ({}) => {
     // TODO: Does useEffect need to be here?
     console.log('Updated databaseGraphs:', databaseGraphs);
   }, [databaseGraphs]);
+  
+  useEffect(() => {
+    // TODO: Does useEffect need to be here?
+    console.log('Updated dbUid:', dbUid);
+  }, [dbUid]);
 
   //if post request is still loading
   if (mutation.isLoading) {
@@ -182,6 +197,8 @@ const MainContainer: React.FC = ({}) => {
             formData={formData}
             isFormValid={isFormValid}
             handleConnect={handleConnect}
+            setGrafanaUser={setGrafanaUser}
+            grafanaUser={grafanaUser}
           />
         </>
       )}
@@ -215,6 +232,8 @@ const MainContainer: React.FC = ({}) => {
         queryGraphs={queryGraphs}
         setQueryGraphs={setQueryGraphs}
         connection={connection}
+        grafanaUser={grafanaUser}
+        dbUid={dbUid}
       />
     </div>
   );

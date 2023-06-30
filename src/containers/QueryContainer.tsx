@@ -18,6 +18,8 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   queryGraphs,
   setQueryGraphs,
   connection,
+  grafanaUser,
+  dbUid,
 }) => {
   return (
     <div className="flex h-5/6 w-full flex-col justify-between md:h-full md:w-10/12">
@@ -32,6 +34,8 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             setActiveQuery={setActiveQuery}
             setDashboardState={setDashboardState}
             setQueryGraphs={setQueryGraphs}
+            grafanaUser={grafanaUser}
+            dbUid={dbUid}
           />
         </div>
       </div>
