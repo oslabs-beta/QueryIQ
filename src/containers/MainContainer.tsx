@@ -4,7 +4,7 @@ import SideBarContainer from './SideBarContainer';
 import { useState, useEffect } from 'react';
 import DBModal from '~/components/modal/DBModal';
 import type { QueryLogItemObject, FormData } from '~/types/types';
-import { useMutation } from 'react-query'
+import { useMutation } from 'react-query';
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,17 +62,28 @@ const MainContainer: React.FC = ({}) => {
     setIsFormValid(isValid);
   }, [formData]);
 
-   //when form is submitted, the function passed to useMutation is executed. It will receive the formData as an argument, which contains the data entered in the form fields. useMutation is used for making POST,PUT,DELETE
-   const mutation = useMutation(async (formData: FormData) => {
+  //when form is submitted, the function passed to useMutation is executed. It will receive the formData as an argument, which contains the data entered in the form fields. useMutation is used for making POST,PUT,DELETE
+  const mutation = useMutation(async (formData: FormData) => {
     const apiUrl = 'http://localhost:3001/api/connect';
-    const { graf_name, graf_pass, graf_port, db_name, db_url, db_username, db_server, db_password } = formData;
+    const {
+      graf_name,
+      graf_pass,
+      graf_port,
+      db_name,
+      db_url,
+      db_username,
+      db_server,
+      db_password,
+    } = formData;
 
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString('base64')}`,
+        Authorization: `Basic ${Buffer.from(
+          `${graf_name}:${graf_pass}`
+        ).toString('base64')}`,
       },
       body: JSON.stringify({
         graf_name,
@@ -96,10 +107,19 @@ const MainContainer: React.FC = ({}) => {
   const handleConnect = async () => {
     console.log('Valid Form:', formData);
     try {
-      const { graf_name, graf_pass, graf_port, db_name, db_url, db_username, db_server, db_password } = formData;
+      const {
+        graf_name,
+        graf_pass,
+        graf_port,
+        db_name,
+        db_url,
+        db_username,
+        db_server,
+        db_password,
+      } = formData;
       // mutation is an object returned by the useMutation hook and mutateAsync is a method provided by mutation object
-      // await mutation.mutateAsync waits for the mutation operation to complete before moving to the next line 
-      await mutation.mutateAsync({
+      // await mutation.mutateAsync waits for the mutation operation to complete before moving to the next line
+      const response = await mutation.mutateAsync({
         graf_name,
         graf_pass,
         graf_port,
@@ -109,7 +129,16 @@ const MainContainer: React.FC = ({}) => {
         db_server,
         db_password,
       });
-      // setDatabaseGraphs([]) // pass in array of Iframes
+      console.log('RESPONSE: ', response);
+      //used to say if(!response.ok)
+      if (response.status !== 'success') {
+        throw new Error('Failed to connect'); // Handle error
+      }
+      //used to say response.data
+      const { iFrames } = response;
+      console.log('IFRAMES LOGGED FROM RESPONSE', iFrames);
+      setDatabaseGraphs(iFrames); // pass in array of Iframes
+      console.log('THIS SHOULD BE ARRAY OF IFRAMES', databaseGraphs);
       setDashboardState('database');
       setConnection(true);
       setIsModalOpen(false);
@@ -119,7 +148,11 @@ const MainContainer: React.FC = ({}) => {
     }
   };
 
-  //if post request is still loading 
+  useEffect(() => {
+    console.log('Updated databaseGraphs:', databaseGraphs);
+  }, [databaseGraphs]);
+
+  //if post request is still loading
   if (mutation.isLoading) {
     return <div>Loading...</div>;
   }
@@ -184,6 +217,7 @@ const MainContainer: React.FC = ({}) => {
         databaseGraphs={databaseGraphs}
         queryGraphs={queryGraphs}
         setQueryGraphs={setQueryGraphs}
+        connection={connection}
       />
     </div>
   );

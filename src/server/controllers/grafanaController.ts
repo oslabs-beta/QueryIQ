@@ -11,6 +11,7 @@ interface GrafanaAPIHandler {
 type GrafanaController = {
   grafanaFetch: GrafanaAPIHandler;
   createDataSource: GrafanaAPIHandler;
+  saveDataSource: GrafanaAPIHandler;
   createDashBoard: GrafanaAPIHandler;
 };
 
@@ -38,16 +39,17 @@ const grafanaController: GrafanaController = {
       url: `${db_url}`,
       user: `${db_username}`,
       database: `${db_server}`,
-      basicAuth: false,
+      //change basicAuth
+      basicAuth: true,
       basicAuthUser: `${graf_name}`,
       withCredentials: false,
-      isDefault: false,
+      isDefault: true,
       jsonData: {
         maxOpenConns: 100,
         maxIdleConns: 100,
         maxIdleConnsAuto: true,
         connMaxLifetime: 14400,
-        database: 'grafana',
+        // database: 'grafana',
         sslmode: 'disable',
         postgresVersion: 1500,
       },
@@ -80,8 +82,20 @@ const grafanaController: GrafanaController = {
       res.locals.data = data;
       res.locals.graf_port = graf_port;
       res.locals.headers = headers;
+      res.locals.graf_name = graf_name;
+      res.locals.graf_pass = graf_pass;
+      res.locals.db_name = db_name;
+      res.locals.db_url = db_url;
+      res.locals.db_username = db_username;
+      res.locals.db_server = db_server;
+      res.locals.db_password = db_password;
       // console.log(res.locals.body)
-      return next();
+
+      setTimeout(() => {
+        return next();
+      }, 5000);
+
+      // return next();
     } catch (error) {
       return next({
         log: `${error}: error in the grafanaController.createDataSource`,
@@ -173,6 +187,7 @@ const grafanaController: GrafanaController = {
     try {
       // console.log('❗️❗️❗️TRYING TO CREATE DASHBOARD');
       const response = await fetch(url, payload);
+
       const data = await response.json();
       // console.log('❗️data:', data);
       // res.locals.dashboard = [data.slug, data.uid];
@@ -183,12 +198,9 @@ const grafanaController: GrafanaController = {
       //12 is because that's how many panels we currently have
       for (let i = 1; i <= 12; i++) {
         urlArray.push(
-          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`
+          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&refresh=15s&panelId=${i}`
         );
       }
-
-      console.log(urlArray);
-      console.log(urlArray.length);
 
       res.locals.dashboard = {
         slug: data.slug,
@@ -212,6 +224,79 @@ const grafanaController: GrafanaController = {
       });
     }
   },
+
+  saveDataSource: async (req, res, next) => {
+    const uid = res.locals.data.datasource.uid;
+    console.log('in saveDataSource');
+
+    const {
+      graf_name,
+      graf_pass,
+      db_name,
+      db_url,
+      db_username,
+      db_server,
+      db_password,
+    } = res.locals;
+
+    const { graf_port, headers } = res.locals;
+    const url = `http://localhost:${graf_port}/api/datasources/uid/${uid}`;
+
+    const body = {
+      id: 1,
+      uid: 'updated UID',
+      orgId: 1,
+      name: 'it worked?????',
+      type: 'postgres',
+      access: 'proxy',
+      url: `${db_url}`,
+      password: `${db_password}`,
+      user: `${db_username}`,
+      database: `${db_server}`,
+      basicAuth: true,
+      basicAuthUser: `${graf_name}`,
+      secureJsonData: {
+        basicAuthPassword: `${graf_pass}`,
+      },
+      isDefault: false,
+      jsonData: null,
+    };
+
+    const payload = {
+      method: 'PATCH',
+      headers: headers,
+      body: JSON.stringify(body),
+    };
+
+    try {
+      const response = await fetch(url, payload);
+      const data = await response.json();
+      console.log('data:', data);
+
+      // console.log('data source created');
+      // res.locals.data = data;
+      // res.locals.graf_port = graf_port;
+      // res.locals.headers = headers;
+      // res.locals.graf_name = graf_name;
+      // res.locals.graf_pass = graf_pass;
+      // res.locals.db_name = db_name;
+      // res.locals.db_url = db_url
+      // res.locals.db_username = db_username;
+      // res.locals.db_server = db_server;
+      // res.locals.db_password = db_password;
+      // console.log(res.locals.body)
+
+      return next();
+    } catch (error) {
+      return next({
+        log: `${error}: error in the grafanaController.saveDataSource`,
+        status: 400,
+        message: `${error}: error with the data source`,
+      });
+    }
+  },
+
+  // console.log(JSON.stringify(obj, null, 4))
 
   grafanaFetch: async (
     req: Request,
