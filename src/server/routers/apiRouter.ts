@@ -13,8 +13,8 @@ router.post(
   }
 );
 
-router.post('/query', grafanaController.getPgQueryMetrics, (req, res) => {
-  return res.status(200).json(res.locals.query);
+router.post('/query',  grafanaController.getPgQueryMetrics, (req, res) => {
+  return res.status(200).json(res.locals.queryPanels);
 });
 
 export default router;

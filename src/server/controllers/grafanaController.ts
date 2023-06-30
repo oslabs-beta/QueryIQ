@@ -21,6 +21,9 @@ interface QueryPanelResponse {
 }
 
 const grafanaController: GrafanaController = {
+
+  //createDataSource method receives grafana and PGDB information from frontend and 
+  //creates datasource on the users local grafana instance
   createDataSource: async (req: Request, res: Response, next: NextFunction) => {
     const {
       graf_name,
@@ -33,8 +36,10 @@ const grafanaController: GrafanaController = {
       db_password,
     } = req.body as FormData;
 
+    //the user's local grafana instance
     const url = `http://localhost:${graf_port}/api/datasources`;
 
+    //request body sent to grafana local API, includes all the user PGDB information
     const body = {
       orgId: 1,
       name: `${db_name}`,
@@ -44,8 +49,7 @@ const grafanaController: GrafanaController = {
       url: `${db_url}`,
       user: `${db_username}`,
       database: `${db_server}`,
-      //change basicAuth
-      basicAuth: true,
+      basicAuth: false,
       basicAuthUser: `${graf_name}`,
       withCredentials: false,
       isDefault: true,
@@ -54,7 +58,6 @@ const grafanaController: GrafanaController = {
         maxIdleConns: 100,
         maxIdleConnsAuto: true,
         connMaxLifetime: 14400,
-        // database: 'grafana',
         sslmode: 'disable',
         postgresVersion: 1500,
       },
@@ -66,6 +69,8 @@ const grafanaController: GrafanaController = {
       },
     };
 
+
+    //headers for request to Graf API, grants basic auth to graf account
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -83,23 +88,17 @@ const grafanaController: GrafanaController = {
     try {
       const response = await fetch(url, payload);
       const data = (await response.json()) as Promise<JSON>;
+
+      //persist the response and port for next fetch in createDashBoard
       res.locals.data = data;
       res.locals.graf_port = graf_port;
       res.locals.headers = headers;
-      res.locals.graf_name = graf_name;
-      res.locals.graf_pass = graf_pass;
-      res.locals.db_name = db_name;
-      res.locals.db_url = db_url;
-      res.locals.db_username = db_username;
-      res.locals.db_server = db_server;
-      res.locals.db_password = db_password;
-      // console.log(res.locals.body)
 
-      setTimeout(() => {
-        return next();
-      }, 5000);
+      // setTimeout(() => {
+      //   return next();
+      // }, 5000);
 
-      // return next();
+      return next();
     } catch (error) {
       return next({
         log: `${error}: error in the grafanaController.createDataSource`,
@@ -109,6 +108,8 @@ const grafanaController: GrafanaController = {
     }
   },
 
+  //createDashBoard method sends POST request to Graf Local API to create a preconfigured dashboard
+  //(see dashBoardHelper) that contains all the graphs and metrics we need for the iFrames on the frontend
   createDashBoard: async (req: Request, res: Response, next: NextFunction) => {
     const { graf_port, headers } = res.locals as {
       graf_port: string;
@@ -121,9 +122,9 @@ const grafanaController: GrafanaController = {
 
     const url = `http://localhost:${graf_port}/api/dashboards/db`;
 
+    //request body is created using helper function dashBoardHelper that inserts the uid from the data source creation
+    //in all the areas necessary
     const body = dashBoardHelper(res.locals.data.datasource.uid);
-
-    res.locals.data.datasource.uid;
 
     const payload = {
       method: 'POST',
@@ -140,28 +141,33 @@ const grafanaController: GrafanaController = {
     };
 
     try {
+
       const response = await fetch(url, payload);
-
       const data = await response.json();
-      const urlArray = [];
 
-      //12 is because that's how many panels we currently have
-      for (let i = 1; i <= 12; i++) {
+      //creating an array of all the iFrame urls to pass to the frontend
+      //10 panels total on the dashboard, for loop creates the panelId
+      const urlArray = [];
+      for (let i = 1; i <= 10; i++) {
+
         urlArray.push(
-          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&refresh=15s&panelId=${i}`
+          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&refresh=30s&panelId=${i}`
         );
       }
 
+      //response is stored in res.locals.dashboard to send the to the frontend
       res.locals.dashboard = {
         slug: data.slug,
-        uid: data.uid,
+        dashboarduid: data.uid,
         status: data.status,
         iFrames: urlArray,
+        datasourceuid: res.locals.data.datasource.uid
       } as {
         slug: string;
-        uid: string;
+        dashboarduid: string;
         status: string;
-        iFrames: [];
+        iFrames: string[];
+        datasourceuid: string;
       };
       return next();
     } catch (error) {
@@ -177,15 +183,16 @@ const grafanaController: GrafanaController = {
    * @name getPgQueryMetrics
    * @description This function will get metrics from running an arbitrary query on a postgres database and return the
    * @route /api/query
+   * @param req {Object} req.body = {"query":"QUERY", "datasourceUID":"DATASOURCE_UID", "GrafanaCredentials":{"graf_name":"USERNAME","graf_port":"PORT","graf_pass":"PASSWORD"}}
    */
   getPgQueryMetrics: async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const { query, dashboardUID, GrafanaCredentials } = req.body as {
+    const { query, datasourceUID, GrafanaCredentials } = req.body as {
       query: string;
-      dashboardUID: string;
+      datasourceUID: string;
       GrafanaCredentials: {
         graf_port: string;
         graf_name: string;
@@ -201,7 +208,7 @@ const grafanaController: GrafanaController = {
         `${GrafanaCredentials.graf_name}:${GrafanaCredentials.graf_pass}`
       ).toString('base64')}`,
     };
-    const queryPanels = pgQueryHelper(query, dashboardUID);
+    const queryPanels = pgQueryHelper(query, datasourceUID);
     const payload = {
       method: 'POST',
       headers: headers,
@@ -211,15 +218,21 @@ const grafanaController: GrafanaController = {
     try {
       const response = await fetch(url, payload);
       const data = (await response.json()) as QueryPanelResponse;
+      
+      if (process.env.NODE_ENV === 'development') {
+        console.log(data)
+      }
 
       const urlArray: string[] = [];
 
-      for (let i = 1; i <= 3; i++) {
+      // Create 
+      for (let i = 1; i <= queryPanels.dashboard.panels.length; i++) {
         urlArray.push(
           `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`
         );
       }
-
+      
+      // Attach metadata needed to generate iframe URLs to response, this object will be sent to client upon POST to /api/query
       res.locals.queryPanels = {
         slug: data.slug,
         uid: data.uid,
@@ -229,11 +242,13 @@ const grafanaController: GrafanaController = {
         slug: string;
         uid: string;
         status: string;
-        iFrames: [];
+        iFrames: string[];
       };
+
       return next();
     } catch (error) {
       const errorMessage =
+        // Ensure that what's being used in the template literal can indeed be converted to a string
         error instanceof Error ? error.message : String(error);
 
       return next({
