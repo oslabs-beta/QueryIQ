@@ -2,7 +2,7 @@
 import { NextFunction, RequestHandler, Request, Response } from 'express';
 import { type FormData } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
-import { queryHelper } from './queryHelper';
+import { pgQueryHelper } from './pgQueryHelper';
 import { testCopy } from './testCopy';
 
 interface GrafanaAPIHandler {
@@ -15,6 +15,13 @@ type GrafanaController = {
   createDashBoard: GrafanaAPIHandler;
   getPgQueryMetrics: GrafanaAPIHandler;
 };
+
+
+interface QueryPanelResponse {
+  slug: string;
+  status: string;
+  uid: string;
+}
 
 const grafanaController: GrafanaController = {
   createDataSource: async (req: Request, res: Response, next: NextFunction) => {
@@ -229,62 +236,80 @@ const grafanaController: GrafanaController = {
     }
   },
 
+  /**
+   * @name getPgQueryMetrics
+   * @description This function will get metrics from running an arbitrary query on a postgres database and return the
+   * @param req
+   * @param res
+   * @param next
+   */
   getPgQueryMetrics: async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const { graf_name, graf_pass } = req.headers as {
-      graf_name: string;
-      graf_pass: string;
-    };
-    const { query, dashboardUID } = req.body as {
+    const { query, dashboardUID, GrafanaCredentials } = req.body as {
       query: string;
       dashboardUID: string;
+      GrafanaCredentials: {
+        graf_port: string;
+        graf_name: string;
+        graf_pass: string;
+      };
     };
 
-    const url = `http://localhost:${graf_port}/api/dashboards/db`;
-    const queryPanels = queryHelper(query, dashboardUID);
-
+    const url = `http://localhost:${GrafanaCredentials.graf_port}/api/dashboards/db`;
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString(
-        'base64'
-      )}`,
+      Authorization: `Basic ${Buffer.from(
+        `${GrafanaCredentials.graf_name}:${GrafanaCredentials.graf_pass}`
+      ).toString('base64')}`,
     };
-
+    const queryPanels = pgQueryHelper(query, dashboardUID);
     const payload = {
       method: 'POST',
-      // headers: headers,
+      headers: headers,
       body: JSON.stringify(queryPanels),
     };
 
     try {
       const response = await fetch(url, payload);
-      const data = (await response.json()) as Promise<JSON>;
+      const data = (await response.json()) as QueryPanelResponse;
+
+      const urlArray: string[] = [];
+      const dataLink = `http://localhost:3000/connections/datasources/edit/${dashboardUID}`;
+
+      for (let i = 1; i <= 3; i++) {
+        urlArray.push(
+          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`
+        );
+      }
+
       res.locals.queryPanels = {
         slug: data.slug,
         uid: data.uid,
         status: data.status,
-        datasourceuid: res.locals.data.datasource.uid,
-        iFrames: data.iFrames,
+        datasourceurl: dataLink,
+        iFrames: urlArray,
       } as {
         slug: string;
         uid: string;
         status: string;
-        datasourceuid: string;
-        iFrames: string[];
+        datasourceurl: string;
+        iFrames: [];
       };
       return next();
     } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+
       return next({
-        log: `${error}: error in the grafanaController.query`,
+        log: `${errorMessage}: error in the grafanaController.query`,
         status: 400,
-        message: `${error}: error with the data source`,
+        message: `${errorMessage}: error with the data source`,
       });
     }
-    res.locals.queryPanels = {};
   },
 
   grafanaFetch: async (
