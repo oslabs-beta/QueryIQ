@@ -5,10 +5,8 @@ import express, {
   type Response,
 } from 'express';
 import next from 'next';
-import dbRouter from './routers/dbRouter';
 import apiRouter from './routers/apiRouter';
 import cors from 'cors';
-import helmet from 'helmet';
 
 // Required to pipe env variables into Express
 import dotenv from 'dotenv';
@@ -43,15 +41,17 @@ app.use(cors({ origin: 'http://localhost:3333' }));
 // app.use('/api', dbRouter);
 app.use('/api', apiRouter);
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-  console.log('/ endpoint hit');
-});
+if (process.env.NODE_ENV === 'development') {
+  app.get('/', (req: Request, res: Response) => {
+    res.send('Hello World!');
+    console.log('/ endpoint hit');
+  });
 
-app.get('/user', (req: Request, res: Response) => {
-  res.send('Hello from /user');
-  console.log('/user endpoint hit');
-});
+  app.get('/user', (req: Request, res: Response) => {
+    res.send('Hello from /user');
+    console.log('/user endpoint hit');
+  });
+}
 
 // Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {

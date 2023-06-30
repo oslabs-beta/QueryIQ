@@ -113,7 +113,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 0,
           },
-          id: 11,
+          id: 1,
           panels: [],
           title: 'Database Stats Related to Queries',
           type: 'row',
@@ -154,7 +154,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 1,
           },
-          id: 3,
+          id: 2,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -240,7 +240,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 11,
             y: 1,
           },
-          id: 4,
+          id: 3,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -326,7 +326,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 9,
           },
-          id: 1,
+          id: 4,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -410,7 +410,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 11,
             y: 9,
           },
-          id: 9,
+          id: 5,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -488,7 +488,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 17,
           },
-          id: 2,
+          id: 6,
           options: {
             displayLabels: ['percent'],
             legend: {
@@ -582,7 +582,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 11,
             y: 17,
           },
-          id: 8,
+          id: 7,
           options: {
             cellHeight: 'sm',
             footer: {
@@ -636,7 +636,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 25,
           },
-          id: 10,
+          id: 8,
           panels: [],
           title: 'General ',
           type: 'row',
@@ -684,7 +684,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 26,
           },
-          id: 7,
+          id: 9,
           options: {
             cellHeight: 'sm',
             footer: {
@@ -767,7 +767,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 6,
             y: 26,
           },
-          id: 6,
+          id: 10,
           options: {
             orientation: 'auto',
             reduceOptions: {
@@ -848,7 +848,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 12,
             y: 26,
           },
-          id: 5,
+          id: 11,
           options: {
             displayMode: 'lcd',
             minVizHeight: 10,

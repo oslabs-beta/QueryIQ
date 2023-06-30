@@ -53,10 +53,10 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
         }
       />
       <div className="h-45 w-45 flex justify-center">
-        <button type = "submit"
+        <button
           className="m-4 rounded-lg border border-gray-900 bg-indigo-500 p-2 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
           disabled={!isFormValid}
-           onClick={handleConnect}
+          onClick={handleConnect}
         >
           Connect
         </button>

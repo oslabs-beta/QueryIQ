@@ -13,7 +13,6 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
   queryGraphs,
   connection,
 }) => {
-  // console.log(databaseGraphs);
   return (
     <div className="flex h-full w-full flex-wrap items-center justify-around p-4">
       <div className="mb-8 mt-9 flex h-1/4 w-full flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-1/4">
