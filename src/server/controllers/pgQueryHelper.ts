@@ -1,4 +1,4 @@
-export const queryHelper = (userQuery: string, datasourceUID: string) => {
+export const pgQueryHelper = (userQuery: string, datasourceUID: string) => {
   const queryPanels = {
     __inputs: [
       {
