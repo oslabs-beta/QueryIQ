@@ -43,13 +43,13 @@ const grafanaController: GrafanaController = {
       basicAuth: true,
       basicAuthUser: `${graf_name}`,
       withCredentials: false,
-      isDefault: false,
+      isDefault: true,
       jsonData: {
         maxOpenConns: 100,
         maxIdleConns: 100,
         maxIdleConnsAuto: true,
         connMaxLifetime: 14400,
-        database: 'grafana',
+        // database: 'grafana',
         sslmode: 'disable',
         postgresVersion: 1500,
       },
@@ -85,7 +85,7 @@ const grafanaController: GrafanaController = {
       res.locals.graf_name = graf_name;
       res.locals.graf_pass = graf_pass;
       res.locals.db_name = db_name;
-      res.locals.db_url = db_url
+      res.locals.db_url = db_url;
       res.locals.db_username = db_username;
       res.locals.db_server = db_server;
       res.locals.db_password = db_password;
@@ -227,7 +227,7 @@ const grafanaController: GrafanaController = {
 
   saveDataSource: async (req, res, next) => {
     const uid = res.locals.data.datasource.uid;
-    console.log('in saveDataSource')
+    console.log('in saveDataSource');
 
     const {
       graf_name,
@@ -241,27 +241,26 @@ const grafanaController: GrafanaController = {
 
     const { graf_port, headers } = res.locals;
     const url = `http://localhost:${graf_port}/api/datasources/uid/${uid}`;
-    
 
     const body = {
-      "id":1,
-      "uid": "updated UID",
-      "orgId":1,
-      "name":"it worked?????",
-      "type":"postgres",
-      "access":"proxy",
-      "url":`${db_url}`,
-      "password":`${db_password}`,
-      "user":`${db_username}`,
-      "database":`${db_server}`,
-      "basicAuth":true,
-      "basicAuthUser":`${graf_name}`,
-      "secureJsonData": {
-        "basicAuthPassword": `${graf_pass}`
+      id: 1,
+      uid: 'updated UID',
+      orgId: 1,
+      name: 'it worked?????',
+      type: 'postgres',
+      access: 'proxy',
+      url: `${db_url}`,
+      password: `${db_password}`,
+      user: `${db_username}`,
+      database: `${db_server}`,
+      basicAuth: true,
+      basicAuthUser: `${graf_name}`,
+      secureJsonData: {
+        basicAuthPassword: `${graf_pass}`,
       },
-      "isDefault":false,
-      "jsonData":null
-    }
+      isDefault: false,
+      jsonData: null,
+    };
 
     const payload = {
       method: 'PATCH',
@@ -287,9 +286,7 @@ const grafanaController: GrafanaController = {
       // res.locals.db_password = db_password;
       // console.log(res.locals.body)
 
- 
       return next();
-
     } catch (error) {
       return next({
         log: `${error}: error in the grafanaController.saveDataSource`,
@@ -297,7 +294,6 @@ const grafanaController: GrafanaController = {
         message: `${error}: error with the data source`,
       });
     }
-
   },
 
   // console.log(JSON.stringify(obj, null, 4))
