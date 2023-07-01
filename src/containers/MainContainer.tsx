@@ -145,21 +145,18 @@ const MainContainer: React.FC = ({}) => {
         status: number;
         iFrames: string[];
       };
-
       // If response is less than 200 or greater than 300
       // Basically, if response is NOT 200-299
       if (response.status <= 199 && response.status >= 300) {
-        throw new Error('Failed to connect'); // Handle error
+        throw new Error('Failed to connect');
       }
-      //used to say response.data
       const { iFrames, datasourceuid } = response;
       setdbUid(datasourceuid);
-      setDatabaseGraphs(iFrames); // pass in array of Iframes
+      setDatabaseGraphs(iFrames);
       setDashboardState('database');
       setConnection(true);
       setIsModalOpen(false);
     } catch (error) {
-      // Handle error
       console.error(error);
     }
   };

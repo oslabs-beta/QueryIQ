@@ -1,7 +1,6 @@
 import React from 'react';
 import DBCard from './DBCard';
 import type { DBConnectProps } from '~/types/types';
-// import { useMutation } from 'react-query';
 
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
@@ -13,7 +12,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
   testConnected,
   setDatabaseGraphs,
 }) => {
-  // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
 
   const handleConnect = () => {
     setFormData({
@@ -34,7 +32,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
   };
 
   // TODO: get rid of test database iframes
-  // setting database to hardcoded iframe data for now, will replace with iframes received from grafana
   const handleClickTestDB = () => {
     if (!testConnected) {
       setDatabaseGraphs([
@@ -67,7 +64,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
             Connect to Database
           </button>
           <span>OR</span>
-          {/* <span>Use Test Data</span> */}
           <button
             className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
             onClick={handleClickTestDB}
