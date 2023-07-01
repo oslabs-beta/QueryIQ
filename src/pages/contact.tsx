@@ -44,117 +44,71 @@ const Contact = () => {
         <meta name="description" content="Contact page for the team members" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="max-h-full w-screen min-w-full max-w-full bg-black justify-center items-center">
+      <main className="max-h-full w-screen min-w-full max-w-full flex flex-col items-center justify-center bg-black space-x-20 space-y-10">
         <Header />
-        <div className="container mx-auto px-4 py-8 ">
-          <h1 className="text-4xl font-bold text-white">Meet Our Team</h1>
-          {/* <div className="mt-8 grid grid-cols-2 gap-4">
+        <div className=" container mx-auto px-4 py-8 space-y-10 ">
+          <h1 className="text-5xl font-bold text-white">Meet Our Team</h1>
+          <div className="mt-8 flex flex-wrap gap-8 justify-center bg-gray-500  ">
             {teamMembers.map((member, index) => (
+              <div
+                key={index}
+                className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-600 to-orange-400 p-1 pb-4 text-white shadow transition hover:shadow-md w-[250px] h-[380px]"
+              >
+                <figure className="aspect-square max-h-64 overflow-hidden">
+                  <Image
+                    className="h-full w-full object-cover transition group-hover:scale-125"
+                    src={member.image}
+                    alt="Profile"
+                    width={48}
+                    height={48}
+                  />
+                </figure>
 
-              <div key={index} className="rounded-lg bg-gray-900 p-4">
-                <Image
-                  src={member.image}
-                  alt="Profile"
-                  width={64}
-                  height={64}
-                />
-                <h2 className="text-2xl font-semibold text-white">
+                <h2 className="mt-2 text-center text-lg font-semibold text-white">
                   {member.name}
                 </h2>
-                <div className="mt-4">
-                  <p className="text-white">
-                    LinkedIn:{' '}
+                <div className="mt-4 text-center">
+                  <div className="flex items-center justify-center">
+                    {' '}
+
+                    <Image
+                      src="/../public/assets/linkedin-icon-update.png"
+                      alt="LinkedIn"
+                      width={10}
+                      height={10}
+                      className="mr-2 h-4 w-4"
+                    />
                     <a
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="text-white-400 hover:text-red-400"
                     >
-                      {member.linkedin}
+                      LinkedIn
                     </a>
-                  </p>
-                  <p className="text-white">
-                    GitHub:{' '}
+                  </div>
+                  <div className="flex items-center justify-center">
+                    {' '}
+                    <Image
+                      src="/../public/assets/github-mark-white-.png"
+                      alt="GitHub"
+                      width={10}
+                      height={10}
+                      className="mr-2 h-4 w-4"
+                    />
                     <a
                       href={member.github}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="text-white-400 hover:text-red-400"
                     >
-                      {member.github}
+                      GitHub
                     </a>
-                  </p>
+                  </div>
                 </div>
               </div>
-
-
             ))}
-          </div> */}
-
-<div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-6 justify-center  ">
-  {teamMembers.map((member, index) => (
-    <div key={index} className="rounded-lg bg-gray-900 p-1">
-      <div className="space-y-4">
-        <Image
-          src={member.image}
-          alt="Profile"
-          width={48}
-          height={48}
-          className="w-full h-full object-cover"
-        />
-        <h2 className="text-lg font-semibold text-white mt-2">
-          {member.name}
-        </h2>
-        <div className="mt-2">
-  <p className="text-white text-sm">
-    <span className="flex items-center">
-      <Image
-        src="/../public/assets/linkedin-icon-update.png"
-        alt="LinkedIn"
-        width={10}
-        height={10}
-        className="w-4 h-4 mr-2"
-      />
-      <a
-        href={member.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-400 hover:text-red-400"
-      >
-        LinkedIn
-      </a>
-    </span>
-  </p>
-  <p className="text-white text-sm">
-    <span className="flex items-center">
-      <Image
-        src="/../public/assets/github-mark-white-.png"
-        alt="GitHub"
-        width={10}
-        height={10}
-        className="w-4 h-4 mr-2"
-      />
-      <a
-        href={member.github}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-400 hover:text-red-400"
-      >
-        GitHub
-      </a>
-    </span>
-  </p>
-
-
-
-        </div>
-      </div>
-    </div>
-  ))}
-</div>
-
-
-
-
-
+          </div>
         </div>
       </main>
     </>
