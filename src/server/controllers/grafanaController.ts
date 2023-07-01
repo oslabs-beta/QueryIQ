@@ -21,8 +21,7 @@ interface QueryPanelResponse {
 }
 
 const grafanaController: GrafanaController = {
-
-  //createDataSource method receives grafana and PGDB information from frontend and 
+  //createDataSource method receives grafana and PGDB information from frontend and
   //creates datasource on the users local grafana instance
   createDataSource: async (req: Request, res: Response, next: NextFunction) => {
     const {
@@ -69,7 +68,6 @@ const grafanaController: GrafanaController = {
       },
     };
 
-
     //headers for request to Graf API, grants basic auth to graf account
     const headers = {
       Accept: 'application/json',
@@ -100,10 +98,14 @@ const grafanaController: GrafanaController = {
 
       return next();
     } catch (error) {
+      const errorMessage =
+        // Ensure that what's being used in the template literal can indeed be converted to a string
+        error instanceof Error ? error.message : String(error);
+
       return next({
-        log: `${error}: error in the grafanaController.createDataSource`,
+        log: `${errorMessage}: error in the grafanaController.createDataSource`,
         status: 400,
-        message: `${error}: error with the data source`,
+        message: `${errorMessage}: error with the data source`,
       });
     }
   },
@@ -141,15 +143,12 @@ const grafanaController: GrafanaController = {
     };
 
     try {
-
       const response = await fetch(url, payload);
       const data = await response.json();
 
       //creating an array of all the iFrame urls to pass to the frontend
-      //10 panels total on the dashboard, for loop creates the panelId
       const urlArray = [];
-      for (let i = 1; i <= 10; i++) {
-
+      for (let i = 1; i <= body.dashboard.panels.length; i++) {
         urlArray.push(
           `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&refresh=30s&panelId=${i}`
         );
@@ -161,7 +160,7 @@ const grafanaController: GrafanaController = {
         dashboarduid: data.uid,
         status: data.status,
         iFrames: urlArray,
-        datasourceuid: res.locals.data.datasource.uid
+        datasourceuid: res.locals.data.datasource.uid,
       } as {
         slug: string;
         dashboarduid: string;
@@ -171,19 +170,24 @@ const grafanaController: GrafanaController = {
       };
       return next();
     } catch (error) {
+      const errorMessage =
+        // Ensure that what's being used in the template literal can indeed be converted to a string
+        error instanceof Error ? error.message : String(error);
+
       return next({
-        log: `${error}: error in the grafanaController.createDashBoard`,
+        log: `${errorMessage}: error in the grafanaController.createDashBoard`,
         status: 400,
-        message: `${error}: error with the data source`,
+        message: `${errorMessage}: error with the data source`,
       });
     }
   },
 
   /**
    * @name getPgQueryMetrics
-   * @description This function will get metrics from running an arbitrary query on a postgres database and return the
+   * @description This function will get pg_stat_statement metrics from running an arbitrary query on a postgres database and return the URLs and URL metadata for the Grafana panel iFrames
    * @route /api/query
    * @param req {Object} req.body = {"query":"QUERY", "datasourceUID":"DATASOURCE_UID", "GrafanaCredentials":{"graf_name":"USERNAME","graf_port":"PORT","graf_pass":"PASSWORD"}}
+   * @
    */
   getPgQueryMetrics: async (
     req: Request,
@@ -218,20 +222,20 @@ const grafanaController: GrafanaController = {
     try {
       const response = await fetch(url, payload);
       const data = (await response.json()) as QueryPanelResponse;
-      
+
       if (process.env.NODE_ENV === 'development') {
-        console.log(data)
+        console.log(data);
       }
 
       const urlArray: string[] = [];
 
-      // Create 
+      // Create array of iframe URLs for each Grafana panel
       for (let i = 1; i <= queryPanels.dashboard.panels.length; i++) {
         urlArray.push(
           `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`
         );
       }
-      
+
       // Attach metadata needed to generate iframe URLs to response, this object will be sent to client upon POST to /api/query
       res.locals.queryPanels = {
         slug: data.slug,
