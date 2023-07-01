@@ -41,6 +41,7 @@ const MainContainer: React.FC = ({}) => {
     query: '',
     data: [],
     name: '',
+    dashboardUID: '',
   });
 
   //for connecting to the test DB
@@ -118,35 +119,15 @@ const MainContainer: React.FC = ({}) => {
   // will only fire if isFormValid === true
   const handleConnect = async () => {
     try {
-      const {
-        graf_name,
-        graf_pass,
-        graf_port,
-        db_name,
-        db_url,
-        db_username,
-        db_server,
-        db_password,
-      } = formData;
       // mutation is an object returned by the useMutation hook and mutateAsync is a method provided by mutation object
       // await mutation.mutateAsync waits for the mutation operation to complete before moving to the next line
-      const response = (await mutation.mutateAsync({
-        graf_name,
-        graf_pass,
-        graf_port,
-        db_name,
-        db_url,
-        db_username,
-        db_server,
-        db_password,
-      })) as void | {
+      const response = (await mutation.mutateAsync(formData)) as void | {
         slug: string;
         uid: string;
         status: number;
         iFrames: string[];
       };
-      // If response is less than 200 or greater than 300
-      // Basically, if response is NOT 200-299
+      // if response is NOT 200-299
       if (response.status <= 199 && response.status >= 300) {
         throw new Error('Failed to connect');
       }
@@ -184,6 +165,58 @@ const MainContainer: React.FC = ({}) => {
     });
   };
 
+  const deleteQuery = async (index: number): Promise<void> => {
+    const queryToDelete = queryLog[index];
+    const isDeletingActiveQuery = queryToDelete === activeQuery;
+    try {
+      // WIP DELETE REQUEST TO BACKEND //
+      // make async call to backend to delete query specific dashboard
+      // const url = '' // api route for deleting query
+      // const response = await fetch(url, {
+      //   method: 'DELETE',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     Accept: 'application/json',
+      //     Authorization: `Basic ${Buffer.from(
+      //       `${grafanaUser.graf_name}:${grafanaUser.graf_pass}`
+      //     ).toString('base64')}`,
+      //   },
+      //   body: JSON.stringify({
+      //     dashboardUID: queryToDelete.dashboardUID,
+      //     datasourceUID: dbUid,
+      //     GrafanaCredentials: {
+      //       graf_port: grafanaUser.graf_port,
+      //       graf_name: grafanaUser.graf_name,
+      //       graf_pass: grafanaUser.graf_pass,
+      //     }
+      //   }),
+      // })
+      // const data = await response.json();
+      // if (data.status <= 199 && response.status >= 300) {
+      //   throw new Error('Failed to connect');
+      // }
+      setQueryLog((prevQueryLog) => {
+        if (prevQueryLog.length > index) {
+          const updatedQueryLog = [...prevQueryLog];
+          console.log(updatedQueryLog);
+          updatedQueryLog.splice(index, 1);
+          console.log(updatedQueryLog);
+          return updatedQueryLog;
+        }
+      });
+      if (isDeletingActiveQuery) {
+        setActiveQuery({
+          query: '',
+          data: [],
+          name: '',
+          dashboardUID: '',
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex h-full w-full flex-col bg-gradient-to-b from-purple-900 to-white md:flex-row">
       {!isModalOpen ? (
@@ -210,6 +243,7 @@ const MainContainer: React.FC = ({}) => {
         queryLog={queryLog}
         setQueryLog={setQueryLog}
         editQueryLabel={editQueryLabel}
+        deleteQuery={deleteQuery}
         testConnected={testConnected}
         setTestConnected={setTestConnected}
         activeQuery={activeQuery}
