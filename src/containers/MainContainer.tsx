@@ -179,6 +179,7 @@ const MainContainer: React.FC = ({}) => {
   const deleteQuery = async (index: number): Promise<void> => {
     
     const queryToDelete = queryLog[index];
+    const isDeletingActiveQuery = queryToDelete === activeQuery;
     try {
       // make async call to backend to delete query specific dashboard
       // const response = await fetch()
@@ -191,7 +192,15 @@ const MainContainer: React.FC = ({}) => {
           console.log(updatedQueryLog);
           return updatedQueryLog;
         }
-      })
+      });
+      if (isDeletingActiveQuery) {
+        setActiveQuery({
+          query: '',
+          data: [],
+          name: '',
+          dashboardUID: '',
+        });
+      }
     } catch (err) {
       console.log(err);
     }
