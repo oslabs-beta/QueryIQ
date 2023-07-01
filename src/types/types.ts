@@ -28,13 +28,9 @@ export type SideBarContainerProps = {
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   editQueryLabel: (index: number, label: string) => void;
   deleteQuery: (index: number) => void;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
-  databaseGraphs: string[];
-  setDatabaseGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of SideBarContainer
@@ -44,11 +40,6 @@ export type DBConnectProps = {
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  testConnected: boolean;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
-  databaseGraphs: string[];
-  setDatabaseGraphs: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 // child of SideBarContainer
@@ -85,7 +76,7 @@ export type QueryContainerProps = {
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
-  testConnected: boolean;
+  // testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   dashboardState: string;
@@ -116,7 +107,7 @@ export type LoadingBarProps = {
 
 // parent container
 export type DashboardContainerProps = {
-  testConnected: boolean;
+  // testConnected: boolean;
   activeQuery: QueryLogItemObject;
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;

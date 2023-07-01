@@ -18,7 +18,7 @@ const QueryLog: React.FC<QueryLogProps> = ({
       </span>
       <div className="h-full w-full overflow-y-auto bg-gray-800">
         <ul className="w-full">
-          {queryLog.map((query, index) => {
+          {queryLog.map((_query, index) => {
             const queryLogObject = queryLog[index];
             if (queryLogObject) {
               return (

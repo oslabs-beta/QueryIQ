@@ -44,9 +44,6 @@ const MainContainer: React.FC = ({}) => {
     dashboardUID: '',
   });
 
-  //for connecting to the test DB
-  const [testConnected, setTestConnected] = useState(false);
-
   //checking form validation on input changes for credentials
   useEffect(() => {
     const {
@@ -244,19 +241,14 @@ const MainContainer: React.FC = ({}) => {
         setQueryLog={setQueryLog}
         editQueryLabel={editQueryLabel}
         deleteQuery={deleteQuery}
-        testConnected={testConnected}
-        setTestConnected={setTestConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}
-        databaseGraphs={databaseGraphs}
-        setDatabaseGraphs={setDatabaseGraphs}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
         setQuery={setQuery}
         query={query}
-        testConnected={testConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         dashboardState={dashboardState}
