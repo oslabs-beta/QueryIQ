@@ -30,7 +30,6 @@ const MainContainer: React.FC = ({}) => {
   const [dashboardState, setDashboardState] = useState('database');
   const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
   const [dbUid, setdbUid] = useState('');
-  const [queryGraphs, setQueryGraphs] = useState<string[]>([]);
 
   //for connecting to test DB
   const [testConnected, setTestConnected] = useState(false);
@@ -229,8 +228,6 @@ const MainContainer: React.FC = ({}) => {
         dashboardState={dashboardState}
         setDashboardState={setDashboardState}
         databaseGraphs={databaseGraphs}
-        queryGraphs={queryGraphs}
-        setQueryGraphs={setQueryGraphs}
         connection={connection}
         grafanaUser={grafanaUser}
         dbUid={dbUid}
