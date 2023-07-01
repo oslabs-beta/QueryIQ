@@ -4,7 +4,6 @@ import type { DBConnectProps } from '~/types/types';
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
   connection,
-  setConnection,
   formData,
   setFormData,
   disconnectDB,

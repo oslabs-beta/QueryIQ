@@ -6,7 +6,6 @@ import type { SideBarContainerProps } from '~/types/types';
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
   openModal,
   connection,
-  setConnection,
   formData,
   setFormData,
   queryLog,
@@ -22,7 +21,6 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
       <DBConnect
         openModal={openModal}
         connection={connection}
-        setConnection={setConnection}
         formData={formData}
         setFormData={setFormData}
         disconnectDB={disconnectDB}

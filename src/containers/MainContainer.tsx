@@ -188,9 +188,7 @@ const MainContainer: React.FC = ({}) => {
       setQueryLog((prevQueryLog) => {
         if (prevQueryLog.length > index) {
           const updatedQueryLog = [...prevQueryLog];
-          console.log(updatedQueryLog);
           updatedQueryLog.splice(index, 1);
-          console.log(updatedQueryLog);
           return updatedQueryLog;
         }
       });
@@ -208,7 +206,6 @@ const MainContainer: React.FC = ({}) => {
   };
 
   const disconnectDB = async (): Promise<void> => {
-    console.log('clicked!');
     try {
       // make async call to backend to delete query specific dashboard
       const url = 'http://localhost:3001/api/disconnect';
@@ -265,7 +262,6 @@ const MainContainer: React.FC = ({}) => {
       <SideBarContainer
         openModal={setIsModalOpen}
         connection={connection}
-        setConnection={setConnection}
         setFormData={setFormData}
         formData={formData}
         queryLog={queryLog}

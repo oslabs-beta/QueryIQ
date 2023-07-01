@@ -17,11 +17,15 @@ export type FormData = {
   db_password: string;
 };
 
+export type dbUid = {
+  datasourceUid: string;
+  dashboardUid: string;
+}
+
 // parent container
 export type SideBarContainerProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   queryLog: QueryLogItemObject[];
@@ -38,7 +42,6 @@ export type SideBarContainerProps = {
 export type DBConnectProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   disconnectDB: () => Promise<void>;
@@ -85,7 +88,7 @@ export type QueryContainerProps = {
   databaseGraphs: string[];
   connection: boolean;
   grafanaUser: GrafanaUserObject;
-  dbUid: string;
+  dbUid: dbUid;
 };
 
 // child of QueryContainer
@@ -97,7 +100,7 @@ export type InputQueryProps = {
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   activeQuery: QueryLogItemObject;
   grafanaUser: GrafanaUserObject;
-  dbUid: string;
+  dbUid: dbUid;
   connection: boolean;
 };
 
