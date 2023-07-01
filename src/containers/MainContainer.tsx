@@ -168,7 +168,7 @@ const MainContainer: React.FC = ({}) => {
     try {
       // WIP DELETE REQUEST TO BACKEND //
       // make async call to backend to delete query specific dashboard
-      // const url = '' // api route for deleting query
+      // const url = 'http://localhost:3001/api/delete' 
       // const response = await fetch(url, {
       //   method: 'DELETE',
       //   headers: {

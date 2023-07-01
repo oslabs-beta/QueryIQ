@@ -76,7 +76,6 @@ export type QueryContainerProps = {
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
-  // testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   dashboardState: string;
@@ -107,7 +106,6 @@ export type LoadingBarProps = {
 
 // parent container
 export type DashboardContainerProps = {
-  // testConnected: boolean;
   activeQuery: QueryLogItemObject;
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
