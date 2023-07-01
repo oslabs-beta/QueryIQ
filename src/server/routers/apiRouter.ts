@@ -23,6 +23,13 @@ router.delete(
   grafanaController.deleteDashBoard, 
   (req, res) => {
   return res.status(200).send(res.locals.data);
-})
+});
+
+router.delete(
+  '/delete', 
+  grafanaController.deleteQueryDashBoard, 
+  (req, res) => {
+  return res.status(200).send(res.locals.data);
+});
 
 export default router;

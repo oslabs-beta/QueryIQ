@@ -14,6 +14,7 @@ type GrafanaController = {
   getPgQueryMetrics: GrafanaAPIHandler;
   deleteDataSource: GrafanaAPIHandler;
   deleteDashBoard: GrafanaAPIHandler;
+  deleteQueryDashBoard: GrafanaAPIHandler;
 };
 
 interface QueryPanelResponse {
@@ -358,7 +359,55 @@ const grafanaController: GrafanaController = {
         message: `${errorMessage}: error with the dashboard UID`,
       });
     }
-  }
+  },
+
+  deleteQueryDashBoard: async (req, res, next) => {
+    const { dashboardUID, datasourceUID, GrafanaCredentials } = req.body as {
+      dashboardUID: string;
+      datasourceUID: string;
+      GrafanaCredentials: {
+        graf_port: string;
+        graf_name: string;
+        graf_pass: string;
+      };
+    };
+
+    const { graf_name, graf_pass, graf_port } = GrafanaCredentials;
+
+    const url = `http://localhost:${graf_port}/api/dashboards/uid/${dashboardUID}`;
+
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString(
+        'base64'
+      )}`,
+    };
+
+    const payload = {
+      method: 'DELETE',
+      headers: headers,
+    };
+
+    try {
+      const response = await fetch(url, payload);
+      const data = (await response.json()) as Promise<JSON>;
+
+      res.locals.data = data;
+
+      return next();
+    } catch (error) {
+      const errorMessage =
+        // Ensure that what's being used in the template literal can indeed be converted to a string
+        error instanceof Error ? error.message : String(error);
+
+      return next({
+        log: `${errorMessage}: error in the grafanaController.deleteQueryDashBoard`,
+        status: 400,
+        message: `${errorMessage}: error with the query dashboard UID`,
+      });
+    }
+   },
 };
 
 export default grafanaController;
