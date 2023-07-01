@@ -33,6 +33,7 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             setDashboardState={setDashboardState}
             grafanaUser={grafanaUser}
             dbUid={dbUid}
+            connection={connection}
           />
         </div>
       </div>

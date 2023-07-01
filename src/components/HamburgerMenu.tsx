@@ -30,7 +30,9 @@ const HamburgerMenu = () => {
               <Link href="/contact">Contact</Link>
             </li>
             <li className="py-2">
-              <Link href="https://github.com/oslabs-beta/QueryIQ/blob/main/README.md">Docs</Link>
+              <Link href="https://github.com/oslabs-beta/QueryIQ/blob/main/README.md">
+                Docs
+              </Link>
             </li>
             <li className="py-2">Logout</li>
           </ul>

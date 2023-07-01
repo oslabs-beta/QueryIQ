@@ -1,22 +1,27 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { useMutation } from 'react-query';
 import QueryContainer from './QueryContainer';
 import SideBarContainer from './SideBarContainer';
-import { useState, useEffect } from 'react';
 import DBModal from '~/components/modal/DBModal';
-import type { QueryLogItemObject, FormData, GrafanaUserObject } from '~/types/types';
-import { useMutation } from 'react-query';
+import type {
+  QueryLogItemObject,
+  FormData,
+  GrafanaUserObject,
+} from '~/types/types';
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(''); // inputQuery state
   const [queryLog, setQueryLog] = useState<QueryLogItemObject[]>([]);
   const [connection, setConnection] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+
   const [grafanaUser, setGrafanaUser] = useState<GrafanaUserObject>({
     graf_name: '',
     graf_pass: '',
     graf_port: '',
   });
+  const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
     graf_name: '',
     graf_pass: '',
@@ -27,18 +32,19 @@ const MainContainer: React.FC = ({}) => {
     db_server: '',
     db_password: '',
   });
-  const [dashboardState, setDashboardState] = useState('database');
-  const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
   const [dbUid, setdbUid] = useState('');
 
-  //for connecting to test DB
-  const [testConnected, setTestConnected] = useState(false);
+  const [dashboardState, setDashboardState] = useState('database'); // alt state is 'query'
+  const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
 
   const [activeQuery, setActiveQuery] = useState<QueryLogItemObject>({
     query: '',
     data: [],
     name: '',
   });
+
+  //for connecting to the test DB
+  const [testConnected, setTestConnected] = useState(false);
 
   //checking form validation on input changes for credentials
   useEffect(() => {
@@ -124,7 +130,7 @@ const MainContainer: React.FC = ({}) => {
       } = formData;
       // mutation is an object returned by the useMutation hook and mutateAsync is a method provided by mutation object
       // await mutation.mutateAsync waits for the mutation operation to complete before moving to the next line
-      const response = await mutation.mutateAsync({
+      const response = (await mutation.mutateAsync({
         graf_name,
         graf_pass,
         graf_port,
@@ -133,10 +139,15 @@ const MainContainer: React.FC = ({}) => {
         db_username,
         db_server,
         db_password,
-      }) as void | {slug: string, uid: string, status: number, iFrames: string[]};
+      })) as void | {
+        slug: string;
+        uid: string;
+        status: number;
+        iFrames: string[];
+      };
 
-    // If response is less than 200 or greater than 300
-    // Basically, if response is NOT 200-299
+      // If response is less than 200 or greater than 300
+      // Basically, if response is NOT 200-299
       if (response.status <= 199 && response.status >= 300) {
         throw new Error('Failed to connect'); // Handle error
       }
@@ -153,16 +164,7 @@ const MainContainer: React.FC = ({}) => {
     }
   };
 
-  useEffect(() => {
-    // TODO: Does useEffect need to be here?
-    console.log('Updated databaseGraphs:', databaseGraphs);
-  }, [databaseGraphs]);
-  
-  useEffect(() => {
-    // TODO: Does useEffect need to be here?
-    console.log('Updated dbUid:', dbUid);
-  }, [dbUid]);
-
+  // TO DO: want to move this conditional to the return statement and plug in our loading bar component
   //if post request is still loading
   if (mutation.isLoading) {
     return <div>Loading...</div>;
@@ -173,6 +175,7 @@ const MainContainer: React.FC = ({}) => {
     return <div>Error: {mutation.error.message}</div>;
   }
 
+  // finds querylog object in array and updates the name property
   const editQueryLabel = (index: number, label: string): void => {
     setQueryLog((prevQueryLog) => {
       if (prevQueryLog.length > index) {
