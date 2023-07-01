@@ -15,8 +15,6 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   dashboardState,
   setDashboardState,
   databaseGraphs,
-  queryGraphs,
-  setQueryGraphs,
   connection,
   grafanaUser,
   dbUid,
@@ -33,7 +31,6 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
             activeQuery={activeQuery}
             setActiveQuery={setActiveQuery}
             setDashboardState={setDashboardState}
-            setQueryGraphs={setQueryGraphs}
             grafanaUser={grafanaUser}
             dbUid={dbUid}
           />
@@ -46,7 +43,6 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
           dashboardState={dashboardState}
           setDashboardState={setDashboardState}
           databaseGraphs={databaseGraphs}
-          queryGraphs={queryGraphs}
           connection={connection}
         />
       </div>

@@ -10,7 +10,6 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
   dashboardState,
   setDashboardState,
   databaseGraphs,
-  queryGraphs,
   connection,
 }) => {
   return (
@@ -61,8 +60,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
               {activeQuery.query}
             </div>
             <div className="flex h-full w-full flex-col items-center bg-gray-800 p-4 text-indigo-300 md:h-96">
-              {queryGraphs.map((src, index) => {
-                console.log(queryGraphs);
+              {activeQuery.data.map((src, index) => {
                 return <GraphCard key={index} src={src}></GraphCard>;
               })}
             </div>
