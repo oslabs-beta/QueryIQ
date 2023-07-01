@@ -6,7 +6,6 @@ export type GrafanaUserObject = {
   graf_port: string;
 }
 
-
 export type FormData = {
   graf_name: string;
   graf_pass: string;
@@ -28,6 +27,7 @@ export type SideBarContainerProps = {
   queryLog: QueryLogItemObject[];
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   editQueryLabel: (index: number, label: string) => void;
+  deleteQuery: (index: number) => void;
   setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
@@ -44,8 +44,8 @@ export type DBConnectProps = {
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
+  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
   setDatabaseGraphs: React.Dispatch<React.SetStateAction<string[]>>;
@@ -55,6 +55,7 @@ export type DBConnectProps = {
 export type QueryLogProps = {
   queryLog: QueryLogItemObject[];
   editQueryLabel: (index: number, label: string) => void;
+  deleteQuery: (index: number) => void;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
@@ -64,6 +65,7 @@ export type QueryLogProps = {
 export type QueryLogItemProps = {
   index: number;
   editQueryLabel: (index: number, label: string) => void;
+  deleteQuery: (index: number) => void;
   queryLogObject: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   activeQuery: QueryLogItemObject;
@@ -75,6 +77,7 @@ export type QueryLogItemObject = {
   query: string;
   data: string[];
   name: string;
+  dashboardUID: string;
 };
 
 // Parent container
