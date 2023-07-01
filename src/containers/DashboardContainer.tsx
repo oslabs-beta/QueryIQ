@@ -3,7 +3,6 @@ import GraphCard from '~/components/GraphCard';
 import type { DashboardContainerProps } from '~/types/types';
 
 const DashboardContainer: React.FC<DashboardContainerProps> = ({
-  testConnected,
   activeQuery,
   dashboardState,
   setDashboardState,
@@ -34,15 +33,6 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
         {dashboardState === 'database' ? (
           <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-gray-800 p-4 text-indigo-300 md:h-96">
             {!connection ? (
-              <></>
-            ) : (
-              <>
-                {databaseGraphs.map((src, index) => {
-                  return <GraphCard key={index} src={src}></GraphCard>;
-                })}
-              </>
-            )}
-            {!testConnected ? (
               <></>
             ) : (
               <>

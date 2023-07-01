@@ -12,13 +12,9 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   queryLog,
   editQueryLabel,
   deleteQuery,
-  setTestConnected,
-  testConnected,
   setActiveQuery,
   activeQuery,
   setDashboardState,
-  databaseGraphs,
-  setDatabaseGraphs,
 }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center  md:h-full md:w-1/4">
@@ -28,11 +24,6 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
         setConnection={setConnection}
         formData={formData}
         setFormData={setFormData}
-        testConnected={testConnected}
-        setTestConnected={setTestConnected}
-        setDashboardState={setDashboardState}
-        databaseGraphs={databaseGraphs}
-        setDatabaseGraphs={setDatabaseGraphs}
       />
       <QueryLog
         queryLog={queryLog}
