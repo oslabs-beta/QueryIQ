@@ -103,6 +103,7 @@ export type InputQueryProps = {
   activeQuery: QueryLogItemObject;
   grafanaUser: GrafanaUserObject;
   dbUid: string;
+  connection: boolean;
 };
 
 // child of InputQuery

@@ -1,8 +1,6 @@
 import React from 'react';
+import GraphCard from '~/components/GraphCard';
 import type { DashboardContainerProps } from '~/types/types';
-import GraphCard from '~/components/Graphs/GraphCard';
-
-// Will render same test graphs for query as the test db metrics at the moment, can be replaced with query graphs when implemented.
 
 const DashboardContainer: React.FC<DashboardContainerProps> = ({
   testConnected,
