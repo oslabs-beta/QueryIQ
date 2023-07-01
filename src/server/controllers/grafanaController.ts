@@ -12,6 +12,8 @@ type GrafanaController = {
   createDataSource: GrafanaAPIHandler;
   createDashBoard: GrafanaAPIHandler;
   getPgQueryMetrics: GrafanaAPIHandler;
+  deleteDataSource: GrafanaAPIHandler;
+  deleteDashBoard: GrafanaAPIHandler;
 };
 
 interface QueryPanelResponse {
@@ -266,6 +268,22 @@ const grafanaController: GrafanaController = {
       });
     }
   },
+
+  deleteDataSource: async (req, res, next) => {
+    const { dashboardUID, datasourceUID, GrafanaCredentials } = req.body as {
+      dashboardUID: string;
+      datasourceUID: string;
+      GrafanaCredentials: {
+        graf_port: string;
+        graf_name: string;
+        graf_pass: string;
+      };
+    };
+  },
+
+  deleteDashBoard: async (req, res, next) => {
+    
+  }
 };
 
 export default grafanaController;
