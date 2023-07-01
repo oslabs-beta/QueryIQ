@@ -7,6 +7,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
   setConnection,
   formData,
   setFormData,
+  disconnectDB,
 }) => {
 
   const handleConnect = () => {
@@ -23,7 +24,8 @@ const DBConnect: React.FC<DBConnectProps> = ({
     openModal(true);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    await disconnectDB();
     connection ? setConnection(false) : setConnection(true);
   };
 

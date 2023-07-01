@@ -15,6 +15,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   setActiveQuery,
   activeQuery,
   setDashboardState,
+  disconnectDB,
 }) => {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center  md:h-full md:w-1/4">
@@ -24,6 +25,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
         setConnection={setConnection}
         formData={formData}
         setFormData={setFormData}
+        disconnectDB={disconnectDB}
       />
       <QueryLog
         queryLog={queryLog}
