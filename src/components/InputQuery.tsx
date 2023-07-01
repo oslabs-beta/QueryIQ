@@ -10,7 +10,6 @@ const InputQuery: React.FC<InputQueryProps> = ({
   query,
   setActiveQuery,
   setDashboardState,
-  setQueryGraphs,
   grafanaUser,
   dbUid,
 }) => {
@@ -35,26 +34,8 @@ const InputQuery: React.FC<InputQueryProps> = ({
   // grafanaUser passed down from mainContainer should contain a user's Grafana credentials after connection to a database is established.
   // and dbUid passed down from mainContainer should be a string of the datasource uid
 
-  /**
-   * shape of object:
-   *  grafanaUser = {
-   *   graf_name: string;
-   *   graf_pass: string;
-   *   graf_port: string;
-   *  }
-  */ 
-
-
     //KT's code for fetching POST for the input query dashboard to Grafana
   //use mutation from react query to fetch a post request to send api to create dashboard for input query
-
-  //request body:
-// {"query":"SELECT SUM(Payment.amount) AS sum_amt FROM payment;",
-// "GrafanaCredentials":
-// {"graf_name":"admin",
-// "graf_port":"3000",
-// "graf_pass":"Codesmith23*"},
-// "datasourceUID":"c4c87f1f-afa8-41a2-9744-7c3d9d9fe2e0"}
 
   const mutationQuery = useMutation(async ({query, dbUid, grafanaUser}: {query: string, dbUid: string, grafanaUser: GrafanaUserObject}) => {
     
@@ -103,19 +84,11 @@ const InputQuery: React.FC<InputQueryProps> = ({
       setQueryLog((prevQueryLog) => [...prevQueryLog, newQuery]);
       setQuery('');
       setActiveQuery(newQuery);
-      setQueryGraphs(newQuery.data);
       setDashboardState('query');
     } catch (error) {
       console.error(error);
     }
   };
-
-   // hardcoded query results from: SELECT SUM(Payment.amount) AS sum_amt FROM payment
-    // setQueryGraphs([
-    //   'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802712822&to=1687824312822&panelId=2',
-    //   'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802730181&to=1687824330181&panelId=3',
-    //   'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802741315&to=1687824341315&panelId=4',
-    // ]);
 
   if (mutationQuery.isLoading) {
     return <div>Loading...</div>;

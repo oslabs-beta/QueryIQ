@@ -63,8 +63,6 @@ export type QueryLogProps = {
 // child of QueryLog
 export type QueryLogItemProps = {
   index: number;
-  // handleEditHover: (bool: boolean) => void;
-  // isHovered: boolean;
   editQueryLabel: (index: number, label: string) => void;
   queryLogObject: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
@@ -84,15 +82,12 @@ export type QueryContainerProps = {
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
-  // setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
   testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
-  queryGraphs: string[];
-  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
   connection: boolean;
   grafanaUser: GrafanaUserObject;
   dbUid: string;
@@ -106,7 +101,6 @@ export type InputQueryProps = {
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   activeQuery: QueryLogItemObject;
-  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
   grafanaUser: GrafanaUserObject;
   dbUid: string;
 };
@@ -123,7 +117,6 @@ export type DashboardContainerProps = {
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
-  queryGraphs: string[];
   connection: boolean;
 };
 
@@ -161,7 +154,6 @@ export type DBCredentialsProps = {
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
   handleCancel: () => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 // input for modals
