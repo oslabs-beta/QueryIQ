@@ -11,6 +11,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   setFormData,
   queryLog,
   editQueryLabel,
+  deleteQuery,
   setTestConnected,
   testConnected,
   setActiveQuery,
@@ -36,6 +37,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
       <QueryLog
         queryLog={queryLog}
         editQueryLabel={editQueryLabel}
+        deleteQuery={deleteQuery}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}

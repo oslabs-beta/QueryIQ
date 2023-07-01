@@ -13,7 +13,18 @@ import type {
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [query, setQuery] = useState(''); // inputQuery state
-  const [queryLog, setQueryLog] = useState<QueryLogItemObject[]>([]);
+  const [queryLog, setQueryLog] = useState<QueryLogItemObject[]>([{
+    query: 'byebye',
+    data: [],
+    name: '',
+    dashboardUID: '',
+  },{
+    query: 'hello',
+    data: [],
+    name: '',
+    dashboardUID: '',
+
+  }]);
   const [connection, setConnection] = useState(false);
 
   const [grafanaUser, setGrafanaUser] = useState<GrafanaUserObject>({
@@ -41,6 +52,7 @@ const MainContainer: React.FC = ({}) => {
     query: '',
     data: [],
     name: '',
+    dashboardUID: '',
   });
 
   //for connecting to the test DB
@@ -118,35 +130,16 @@ const MainContainer: React.FC = ({}) => {
   // will only fire if isFormValid === true
   const handleConnect = async () => {
     try {
-      const {
-        graf_name,
-        graf_pass,
-        graf_port,
-        db_name,
-        db_url,
-        db_username,
-        db_server,
-        db_password,
-      } = formData;
       // mutation is an object returned by the useMutation hook and mutateAsync is a method provided by mutation object
       // await mutation.mutateAsync waits for the mutation operation to complete before moving to the next line
-      const response = (await mutation.mutateAsync({
-        graf_name,
-        graf_pass,
-        graf_port,
-        db_name,
-        db_url,
-        db_username,
-        db_server,
-        db_password,
-      })) as void | {
+      const response = (await mutation.mutateAsync(formData)
+      ) as void | {
         slug: string;
         uid: string;
         status: number;
         iFrames: string[];
       };
-      // If response is less than 200 or greater than 300
-      // Basically, if response is NOT 200-299
+      // if response is NOT 200-299
       if (response.status <= 199 && response.status >= 300) {
         throw new Error('Failed to connect');
       }
@@ -184,6 +177,28 @@ const MainContainer: React.FC = ({}) => {
     });
   };
 
+  const deleteQuery = async (index: number): Promise<void> => {
+    
+    const queryToDelete = queryLog[index];
+    try {
+      // make async call to backend to delete query specific dashboard
+      // const response = await fetch()
+      // if (response.)
+      setQueryLog((prevQueryLog) => {
+        if (prevQueryLog.length > index) {
+          const updatedQueryLog = [...prevQueryLog];
+          console.log(updatedQueryLog);
+          updatedQueryLog.splice(index, 1);
+          console.log(updatedQueryLog);
+          return updatedQueryLog;
+        }
+      })
+    } catch (err) {
+      console.log(err);
+    }
+    
+  }
+
   return (
     <div className="flex h-full w-full flex-col bg-gradient-to-b from-purple-900 to-white md:flex-row">
       {!isModalOpen ? (
@@ -210,6 +225,7 @@ const MainContainer: React.FC = ({}) => {
         queryLog={queryLog}
         setQueryLog={setQueryLog}
         editQueryLabel={editQueryLabel}
+        deleteQuery={deleteQuery}
         testConnected={testConnected}
         setTestConnected={setTestConnected}
         activeQuery={activeQuery}
