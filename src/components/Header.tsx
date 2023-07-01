@@ -1,6 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 import HamburgerMenu from '../components/HamburgerMenu';
+import { Reem_Kufi } from 'next/font/google';
+
+const reemKufi = Reem_Kufi({ subsets: ['latin'], weight: ['700'] });
 
 const Header: React.FC = () => {
   return (
@@ -15,7 +18,7 @@ const Header: React.FC = () => {
           />
         </div>
         <div className="flex flex-col items-center md:flex-row md:space-x-4">
-          <h1>QueryIQ</h1>
+          <h1 style={{ fontfamily: reemKufi }}>QueryIQ</h1>
         </div>
       </div>
       <div className="flex items-center">
