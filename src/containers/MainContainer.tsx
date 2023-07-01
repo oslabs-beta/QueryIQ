@@ -23,7 +23,6 @@ const MainContainer: React.FC = ({}) => {
     data: [],
     name: '',
     dashboardUID: '',
-
   }]);
   const [connection, setConnection] = useState(false);
 

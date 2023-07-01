@@ -82,25 +82,28 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
                 size={20}
               />
             </span>
-
-            <span
-              onMouseEnter={() => handleDeleteHover(true)}
-              onMouseLeave={() => handleDeleteHover(false)}
-              onClick={handleDeleteClick}
-            >
-              <AiFillDelete
-                className={isDeleteHovered ? 'edit-icon' : 'edit-icon hidden'}
-                size={20}
-              />
-              <AiOutlineDelete
-                className={!isDeleteHovered ? 'edit-icon' : 'edit-icon hidden'}
-                size={20}
-              />
-            </span>
+            <div className="ml-2">
+              <span
+                onMouseEnter={() => handleDeleteHover(true)}
+                onMouseLeave={() => handleDeleteHover(false)}
+                onClick={handleDeleteClick}
+              >
+                <AiFillDelete
+                  className={isDeleteHovered ? 'edit-icon' : 'edit-icon hidden'}
+                  size={20}
+                />
+                <AiOutlineDelete
+                  className={
+                    !isDeleteHovered ? 'edit-icon' : 'edit-icon hidden'
+                  }
+                  size={20}
+                />
+              </span>
+            </div>
           </div>
         </div>
       ) : (
-        <div className="flex items-center w-full justify-between border-b border-t border-black bg-gray-800 p-4 text-indigo-300">
+        <div className="flex w-full items-center justify-between border-b border-t border-black bg-gray-800 p-4 text-indigo-300">
           <form
             onSubmit={handleFormSubmit}
             className="flex w-full items-center justify-between"
