@@ -7,6 +7,8 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
   handleClick,
   formData,
   setFormData,
+  setGrafanaUser,
+  grafanaUser,
 }) => {
   return (
     <form className="flex h-auto w-auto flex-col items-center justify-center space-y-2">
@@ -14,9 +16,12 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
       <ModalFormInput
         placeholder="Username"
         type="text"
-        value={formData.graf_name}
-        onChange={(e) =>
-          setFormData({ ...formData, graf_name: e.target.value })
+        value={formData.graf_name && grafanaUser.graf_name}
+        onChange={(e) => {
+            const { value } = e.target;
+            setFormData({ ...formData, graf_name: value });
+            setGrafanaUser({...grafanaUser, graf_name: value});
+          }
         }
       />
       {/* <input className="rounded-lg border border-gray-900 p-2"></input> */}
@@ -24,18 +29,24 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
       <ModalFormInput
         placeholder="Password"
         type="password"
-        value={formData.graf_pass}
-        onChange={(e) =>
-          setFormData({ ...formData, graf_pass: e.target.value })
+        value={formData.graf_pass && grafanaUser.graf_pass}
+        onChange={(e) => {
+            const { value } = e.target;
+            setFormData({ ...formData, graf_pass: value });
+            setGrafanaUser({ ...grafanaUser, graf_pass: value });
+          }
         }
       />
       <label>Grafana Port</label>
       <ModalFormInput
         placeholder="Port"
         type="text"
-        value={formData.graf_port}
-        onChange={(e) =>
-          setFormData({ ...formData, graf_port: e.target.value })
+        value={formData.graf_port && grafanaUser.graf_port}
+        onChange={(e) => {
+            const { value } = e.target;
+            setFormData({ ...formData, graf_port: value });
+            setGrafanaUser({ ...grafanaUser, graf_port: value});
+          }
         }
       />
       <div className="h-45 w-45 flex justify-center">

@@ -1,5 +1,12 @@
 import type { ChangeEvent } from 'react';
 
+export type GrafanaUserObject = {
+  graf_name: string;
+  graf_pass: string;
+  graf_port: string;
+}
+
+
 export type FormData = {
   graf_name: string;
   graf_pass: string;
@@ -86,6 +93,9 @@ export type QueryContainerProps = {
   databaseGraphs: string[];
   queryGraphs: string[];
   setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
+  connection: boolean;
+  grafanaUser: GrafanaUserObject;
+  dbUid: string;
 };
 
 // child of QueryContainer
@@ -97,6 +107,8 @@ export type InputQueryProps = {
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   activeQuery: QueryLogItemObject;
   setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
+  grafanaUser: GrafanaUserObject;
+  dbUid: string;
 };
 
 // child of InputQuery
@@ -112,6 +124,7 @@ export type DashboardContainerProps = {
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
   queryGraphs: string[];
+  connection: boolean;
 };
 
 // parent modal
@@ -119,8 +132,10 @@ export type DBModalProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   formData: FormData;
-  handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
+  handleConnect: React.MouseEventHandler<HTMLButtonElement>;
+  setGrafanaUser: React.Dispatch<React.SetStateAction<GrafanaUserObject>>;
+  grafanaUser: GrafanaUserObject;
 };
 
 // child of DBModal
@@ -135,6 +150,8 @@ export type GrafanaCredentialsProps = {
   handleClick: () => void;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  setGrafanaUser: React.Dispatch<React.SetStateAction<GrafanaUserObject>>;
+  grafanaUser: GrafanaUserObject;
 };
 
 // child of DBModal
@@ -144,6 +161,7 @@ export type DBCredentialsProps = {
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
   handleCancel: () => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 // input for modals

@@ -106,19 +106,6 @@ export const dashBoardHelper = (uid: string) => {
       liveNow: false,
       panels: [
         {
-          collapsed: false,
-          gridPos: {
-            h: 1,
-            w: 24,
-            x: 0,
-            y: 0,
-          },
-          id: 11,
-          panels: [],
-          title: 'Database Stats Related to Queries',
-          type: 'row',
-        },
-        {
           datasource: {
             type: 'postgres',
             uid: uid,
@@ -154,7 +141,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 1,
           },
-          id: 3,
+          id: 1,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -240,7 +227,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 11,
             y: 1,
           },
-          id: 4,
+          id: 2,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -326,7 +313,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 9,
           },
-          id: 1,
+          id: 3,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -410,7 +397,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 11,
             y: 9,
           },
-          id: 9,
+          id: 4,
           options: {
             displayMode: 'gradient',
             minVizHeight: 10,
@@ -488,7 +475,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 17,
           },
-          id: 2,
+          id: 5,
           options: {
             displayLabels: ['percent'],
             legend: {
@@ -582,7 +569,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 11,
             y: 17,
           },
-          id: 8,
+          id: 6,
           options: {
             cellHeight: 'sm',
             footer: {
@@ -627,19 +614,6 @@ export const dashBoardHelper = (uid: string) => {
           ],
           title: 'Total of Table Size and Index Size ',
           type: 'table',
-        },
-        {
-          collapsed: false,
-          gridPos: {
-            h: 1,
-            w: 24,
-            x: 0,
-            y: 25,
-          },
-          id: 10,
-          panels: [],
-          title: 'General ',
-          type: 'row',
         },
         {
           datasource: {
@@ -767,7 +741,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 6,
             y: 26,
           },
-          id: 6,
+          id: 8,
           options: {
             orientation: 'auto',
             reduceOptions: {
@@ -848,7 +822,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 12,
             y: 26,
           },
-          id: 5,
+          id: 9,
           options: {
             displayMode: 'lcd',
             minVizHeight: 10,
@@ -932,7 +906,7 @@ export const dashBoardHelper = (uid: string) => {
             x: 0,
             y: 31,
           },
-          id: 12,
+          id: 10,
           options: {
             displayMode: 'lcd',
             minVizHeight: 10,

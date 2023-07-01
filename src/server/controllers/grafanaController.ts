@@ -1,19 +1,29 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { NextFunction, RequestHandler, Request, Response } from 'express';
-import { RequestBodyConnect } from '../../types/types';
+import { type FormData } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
+import { pgQueryHelper } from './pgQueryHelper';
 
 interface GrafanaAPIHandler {
-  (req: Request, res: Response, next: NextFunction): Promise<void>;
+  (req: Request, res: Response, next: NextFunction): Promise<JSON | void>;
 }
 
 type GrafanaController = {
-  grafanaFetch: GrafanaAPIHandler;
   createDataSource: GrafanaAPIHandler;
   createDashBoard: GrafanaAPIHandler;
+  getPgQueryMetrics: GrafanaAPIHandler;
 };
 
+interface QueryPanelResponse {
+  slug: string;
+  status: string;
+  uid: string;
+}
+
 const grafanaController: GrafanaController = {
+
+  //createDataSource method receives grafana and PGDB information from frontend and 
+  //creates datasource on the users local grafana instance
   createDataSource: async (req: Request, res: Response, next: NextFunction) => {
     const {
       graf_name,
@@ -24,9 +34,12 @@ const grafanaController: GrafanaController = {
       db_username,
       db_server,
       db_password,
-    } = req.body;
+    } = req.body as FormData;
+
+    //the user's local grafana instance
     const url = `http://localhost:${graf_port}/api/datasources`;
 
+    //request body sent to grafana local API, includes all the user PGDB information
     const body = {
       orgId: 1,
       name: `${db_name}`,
@@ -39,13 +52,12 @@ const grafanaController: GrafanaController = {
       basicAuth: false,
       basicAuthUser: `${graf_name}`,
       withCredentials: false,
-      isDefault: false,
+      isDefault: true,
       jsonData: {
         maxOpenConns: 100,
         maxIdleConns: 100,
         maxIdleConnsAuto: true,
         connMaxLifetime: 14400,
-        database: 'grafana',
         sslmode: 'disable',
         postgresVersion: 1500,
       },
@@ -57,6 +69,8 @@ const grafanaController: GrafanaController = {
       },
     };
 
+
+    //headers for request to Graf API, grants basic auth to graf account
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -73,11 +87,17 @@ const grafanaController: GrafanaController = {
 
     try {
       const response = await fetch(url, payload);
-      const data = await response.json();
+      const data = (await response.json()) as Promise<JSON>;
+
+      //persist the response and port for next fetch in createDashBoard
       res.locals.data = data;
       res.locals.graf_port = graf_port;
       res.locals.headers = headers;
-      // console.log(res.locals.body)
+
+      // setTimeout(() => {
+      //   return next();
+      // }, 5000);
+
       return next();
     } catch (error) {
       return next({
@@ -86,91 +106,68 @@ const grafanaController: GrafanaController = {
         message: `${error}: error with the data source`,
       });
     }
-
-    // console.log("graf_name:", graf_name);
-    // console.log("graf_pass:", graf_pass);
-    // console.log("graf_port:", graf_port);
-    // console.log("db_name:", db_name);
-    // console.log("db_url:", db_url);
-    // console.log("db_username:", db_username);
-    // console.log("db_server:", db_server);
-    // console.log("db_password:", db_password);
-    // console.log('url:', url)
-
-    // const config = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString('base64')}`,
-    // "Connection" : "keep-alive",
-    // "Access-Control-Allow-Origin": "*",
-    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    // "Access-Control-Allow-Credentials": "true"
-    //   },
-    //   body: {
-    //     name: `${db_name}`,
-    //     type: 'postgres',
-    //     url: `${db_url}`,
-    //     user: `${db_username}`,
-    //     access: 'proxy',
-    //     database: `${db_server}`,
-    //     secureJsonData: {
-    //       password: `${db_password}`
-    //       },
-    //     basicAuth: false
-    //   }
-    // };
-
-    // console.log('config:', config)
-
-    // try {
-    //   const response = await fetch(url, config);
-
-    // if (!response.ok) {
-    //   const message = `An error has occured: ${response.status}`;
-    //   throw new Error(message);
-    // }
-
-    // console.log('Response:', response);
-    // const data = await response.json();
-    // res.locals.dashboard = dashBoardHelper(data.datasource.uid);
-    // console.log('Data:', data);
-    // console.log('Datasource created:', data);
- 
-    //   return next();
-    // } catch (error) {
-    //   console.log(error)
-    //   return next({
-    //     log: `${error}: error in the grafanaController.createDataSource`,
-    //     status: 400,
-    //     message: `${error}: error with the data source`
-    //   })
-    // }
   },
 
+  //createDashBoard method sends POST request to Graf Local API to create a preconfigured dashboard
+  //(see dashBoardHelper) that contains all the graphs and metrics we need for the iFrames on the frontend
   createDashBoard: async (req: Request, res: Response, next: NextFunction) => {
-    const { graf_port, headers } = res.locals;
+    const { graf_port, headers } = res.locals as {
+      graf_port: string;
+      headers: {
+        Accept: string;
+        'Content-Type': string;
+        Authorization: string;
+      };
+    };
+
     const url = `http://localhost:${graf_port}/api/dashboards/db`;
-    // console.log('👽url and headers', { url: url, headers: headers });
-    // console.log( '❗️createDashBoard', ':', 'res.locals.data', ':', res.locals.data);
-    // console.log('❗️❗️UID: ', res.locals.data.datasource.uid);
+
+    //request body is created using helper function dashBoardHelper that inserts the uid from the data source creation
+    //in all the areas necessary
     const body = dashBoardHelper(res.locals.data.datasource.uid);
-    // console.log( '❗️❗️UID from body after dashboardhelper: ', body.dashboard.annotations.list[1]?.datasource.uid);
+
     const payload = {
       method: 'POST',
       headers: headers,
       body: JSON.stringify(body),
+    } as {
+      method: string;
+      headers: {
+        Accept: string;
+        'Content-Type': string;
+        Authorization: string;
+      };
+      body: string;
     };
 
     try {
-      // console.log('❗️❗️❗️TRYING TO CREATE DASHBOARD');
+
       const response = await fetch(url, payload);
       const data = await response.json();
-      // console.log('❗️data:', data);
-      // res.locals.dashboard = [data.slug, data.uid];
-      res.locals.dashboard = { slug: data.slug, uid: data.uid } as {
+
+      //creating an array of all the iFrame urls to pass to the frontend
+      //10 panels total on the dashboard, for loop creates the panelId
+      const urlArray = [];
+      for (let i = 1; i <= 10; i++) {
+
+        urlArray.push(
+          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&refresh=30s&panelId=${i}`
+        );
+      }
+
+      //response is stored in res.locals.dashboard to send the to the frontend
+      res.locals.dashboard = {
+        slug: data.slug,
+        dashboarduid: data.uid,
+        status: data.status,
+        iFrames: urlArray,
+        datasourceuid: res.locals.data.datasource.uid
+      } as {
         slug: string;
-        uid: string;
+        dashboarduid: string;
+        status: string;
+        iFrames: string[];
+        datasourceuid: string;
       };
       return next();
     } catch (error) {
@@ -182,37 +179,84 @@ const grafanaController: GrafanaController = {
     }
   },
 
-  grafanaFetch: async (
+  /**
+   * @name getPgQueryMetrics
+   * @description This function will get metrics from running an arbitrary query on a postgres database and return the
+   * @route /api/query
+   * @param req {Object} req.body = {"query":"QUERY", "datasourceUID":"DATASOURCE_UID", "GrafanaCredentials":{"graf_name":"USERNAME","graf_port":"PORT","graf_pass":"PASSWORD"}}
+   */
+  getPgQueryMetrics: async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> => {
-    const response = await fetch(
-      // TODO: change to .env variable
-      'https://influx-prod-13-prod-us-east-0.grafana.net/api/v1/push/influx/write',
-      {
-        method: 'post',
-        headers: {
-          // prettier-ignore
-          Authorization: `Bearer ${process.env.GRAFANA_GCLOUD_HOSTED_METRICS_ID!}:${process.env.GRAFANA_HTTP_METRICS_PROMETHEUS_API_KEY!}`,
-          'Content-Type': 'text/plain',
-        },
-        /***************************************************
-         * body must be in Prometheus style format:
-         * --> const body = 'test,bar_label=abc,source=grafana_cloud_docs metric=35.2';
-         *
-         * Name: Prometheus style name(required)
-         * Label: Identifies a specific visualization of a metric
-         * Source: The source of the metric, the instance job that is generating the metric
-         * Metric: Metric to be pushed up, the specific value
-         **************************************************/
-        body: JSON.stringify(req.body),
+  ) => {
+    const { query, datasourceUID, GrafanaCredentials } = req.body as {
+      query: string;
+      datasourceUID: string;
+      GrafanaCredentials: {
+        graf_port: string;
+        graf_name: string;
+        graf_pass: string;
+      };
+    };
+
+    const url = `http://localhost:${GrafanaCredentials.graf_port}/api/dashboards/db`;
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${Buffer.from(
+        `${GrafanaCredentials.graf_name}:${GrafanaCredentials.graf_pass}`
+      ).toString('base64')}`,
+    };
+    const queryPanels = pgQueryHelper(query, datasourceUID);
+    const payload = {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(queryPanels),
+    };
+
+    try {
+      const response = await fetch(url, payload);
+      const data = (await response.json()) as QueryPanelResponse;
+      
+      if (process.env.NODE_ENV === 'development') {
+        console.log(data)
       }
-    );
-    const data = response.status;
-    res.locals.grafanaFetch = data;
-    console.log(data);
-    next();
+
+      const urlArray: string[] = [];
+
+      // Create 
+      for (let i = 1; i <= queryPanels.dashboard.panels.length; i++) {
+        urlArray.push(
+          `http://localhost:3000/d-solo/${data.uid}/${data.slug}?orgId=1&panelId=${i}`
+        );
+      }
+      
+      // Attach metadata needed to generate iframe URLs to response, this object will be sent to client upon POST to /api/query
+      res.locals.queryPanels = {
+        slug: data.slug,
+        uid: data.uid,
+        status: data.status,
+        iFrames: urlArray,
+      } as {
+        slug: string;
+        uid: string;
+        status: string;
+        iFrames: string[];
+      };
+
+      return next();
+    } catch (error) {
+      const errorMessage =
+        // Ensure that what's being used in the template literal can indeed be converted to a string
+        error instanceof Error ? error.message : String(error);
+
+      return next({
+        log: `${errorMessage}: error in the grafanaController.query`,
+        status: 400,
+        message: `${errorMessage}: error with the data source`,
+      });
+    }
   },
 };
 

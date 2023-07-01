@@ -42,6 +42,7 @@ const Contact = () => {
       <Head>
         <title>Contact</title>
         <meta name="description" content="Contact page for the team members" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="max-h-full w-screen min-w-full max-w-full bg-black">
         <Header />

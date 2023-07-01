@@ -11,6 +11,8 @@ const DBModal: React.FC<DBModalProps> = ({
   formData,
   handleConnect,
   isFormValid,
+  setGrafanaUser,
+  grafanaUser,
 }) => {
   // used to cycle between modal states, selecting a database and inputting credentials
   const [dbSelection, setdbSelection] = useState(0);
@@ -36,6 +38,8 @@ const DBModal: React.FC<DBModalProps> = ({
             handleClick={handleClick}
             formData={formData}
             setFormData={setFormData}
+            setGrafanaUser={setGrafanaUser}
+            grafanaUser={grafanaUser}
           />
         ) : dbSelection === 2 ? (
           <DBCredentials

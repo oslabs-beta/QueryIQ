@@ -11,6 +11,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
   setDashboardState,
   databaseGraphs,
   queryGraphs,
+  connection,
 }) => {
   return (
     <div className="flex h-full w-full flex-wrap items-center justify-around p-4">
@@ -35,6 +36,15 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
         </div>
         {dashboardState === 'database' ? (
           <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-gray-800 p-4 text-indigo-300 md:h-96">
+            {!connection ? (
+              <></>
+            ) : (
+              <>
+                {databaseGraphs.map((src, index) => {
+                  return <GraphCard key={index} src={src}></GraphCard>;
+                })}
+              </>
+            )}
             {!testConnected ? (
               <></>
             ) : (
@@ -50,12 +60,12 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
             <div className="h-24 w-full overflow-y-auto rounded-lg border-black bg-gray-600 p-4 text-left text-indigo-300">
               {activeQuery.query}
             </div>
-              <div className="flex h-full w-full flex-col items-center bg-gray-800 p-4 text-indigo-300 md:h-96">
-                {queryGraphs.map((src, index) => {
-                  console.log(queryGraphs);
-                  return <GraphCard key={index} src={src}></GraphCard>;
-                })}
-              </div>
+            <div className="flex h-full w-full flex-col items-center bg-gray-800 p-4 text-indigo-300 md:h-96">
+              {queryGraphs.map((src, index) => {
+                console.log(queryGraphs);
+                return <GraphCard key={index} src={src}></GraphCard>;
+              })}
+            </div>
           </div>
         ) : null}
       </div>

@@ -18,9 +18,9 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
         value={formData.db_name}
         onChange={(e) => setFormData({ ...formData, db_name: e.target.value })}
       />
-      <label>Database URI</label>
+      <label>Database URL</label>
       <ModalFormInput
-        placeholder="Database URI"
+        placeholder="Database URL"
         type="text"
         value={formData.db_url}
         onChange={(e) => setFormData({ ...formData, db_url: e.target.value })}
