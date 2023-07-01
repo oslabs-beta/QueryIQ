@@ -4,9 +4,9 @@ import type { DBConnectProps } from '~/types/types';
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
   connection,
-  setConnection,
   formData,
   setFormData,
+  disconnectDB,
 }) => {
 
   const handleConnect = () => {
@@ -23,8 +23,8 @@ const DBConnect: React.FC<DBConnectProps> = ({
     openModal(true);
   };
 
-  const handleClick = () => {
-    connection ? setConnection(false) : setConnection(true);
+  const handleClick = async () => {
+    await disconnectDB();
   };
 
   return (
