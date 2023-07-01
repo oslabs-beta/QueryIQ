@@ -144,7 +144,11 @@ const grafanaController: GrafanaController = {
 
     try {
       const response = await fetch(url, payload);
-      const data = await response.json();
+      const data = (await response.json()) as {
+        slug: string;
+        status: string;
+        uid: string;
+      };
 
       //creating an array of all the iFrame urls to pass to the frontend
       const urlArray = [];
