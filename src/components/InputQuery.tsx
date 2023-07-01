@@ -97,11 +97,12 @@ const InputQuery: React.FC<InputQueryProps> = ({
       };
       await asyncLoadingSim();
       console.log('THIS IS RESPONSE', response);
-      const { iFrames } = response;
+      const { iFrames, uid } = response;
       const newQuery: QueryLogItemObject = {
         query: query,
         data: iFrames,
         name: '',
+        dashboardUID: uid,
       };
       setQueryLog((prevQueryLog) => [...prevQueryLog, newQuery]);
       setQuery('');
