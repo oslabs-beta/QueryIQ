@@ -30,7 +30,10 @@ nextApp
   .prepare()
   .then(() => {
     app.get('*', (req: Request, res: Response) => {
-      return handle(req, res);
+      handle(req, res).catch((error) => {
+        console.error(error);
+        res.status(500).send('Error occured during Next.js message handling');
+      });
     });
   })
   .catch((err: Error): void => {
