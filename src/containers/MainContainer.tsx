@@ -32,7 +32,7 @@ const MainContainer: React.FC = ({}) => {
     db_server: '',
     db_password: '',
   });
-  const [dbUid, setdbUid] = useState('');
+  const [dbUid, setdbUid] = useState({ datasourceUid: '', dashboardUid: '' });
 
   const [dashboardState, setDashboardState] = useState('database'); // alt state is 'query'
   const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
@@ -91,9 +91,6 @@ const MainContainer: React.FC = ({}) => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Basic ${Buffer.from(
-          `${graf_name}:${graf_pass}`
-        ).toString('base64')}`,
       },
       body: JSON.stringify({
         graf_name,
@@ -128,8 +125,8 @@ const MainContainer: React.FC = ({}) => {
       if (response.status <= 199 && response.status >= 300) {
         throw new Error('Failed to connect');
       }
-      const { iFrames, datasourceuid } = response;
-      setdbUid(datasourceuid);
+      const { iFrames, datasourceuid, dashboarduid } = response;
+      setdbUid({ datasourceUid: datasourceuid, dashboardUid: dashboarduid });
       setDatabaseGraphs(iFrames);
       setDashboardState('database');
       setConnection(true);
@@ -166,38 +163,32 @@ const MainContainer: React.FC = ({}) => {
     const queryToDelete = queryLog[index];
     const isDeletingActiveQuery = queryToDelete === activeQuery;
     try {
-      // WIP DELETE REQUEST TO BACKEND //
       // make async call to backend to delete query specific dashboard
-      // const url = 'http://localhost:3001/api/delete' 
-      // const response = await fetch(url, {
-      //   method: 'DELETE',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Accept: 'application/json',
-      //     Authorization: `Basic ${Buffer.from(
-      //       `${grafanaUser.graf_name}:${grafanaUser.graf_pass}`
-      //     ).toString('base64')}`,
-      //   },
-      //   body: JSON.stringify({
-      //     dashboardUID: queryToDelete.dashboardUID,
-      //     datasourceUID: dbUid,
-      //     GrafanaCredentials: {
-      //       graf_port: grafanaUser.graf_port,
-      //       graf_name: grafanaUser.graf_name,
-      //       graf_pass: grafanaUser.graf_pass,
-      //     }
-      //   }),
-      // })
-      // const data = await response.json();
-      // if (data.status <= 199 && response.status >= 300) {
-      //   throw new Error('Failed to connect');
-      // }
+      const url = 'http://localhost:3001/api/delete';
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          dashboardUID: queryToDelete.dashboardUID,
+          datasourceUID: dbUid,
+          GrafanaCredentials: {
+            graf_port: grafanaUser.graf_port,
+            graf_name: grafanaUser.graf_name,
+            graf_pass: grafanaUser.graf_pass,
+          },
+        }),
+      });
+      const data = await response.json();
+      if (data.status <= 199 && response.status >= 300) {
+        throw new Error('Failed to connect');
+      }
       setQueryLog((prevQueryLog) => {
         if (prevQueryLog.length > index) {
           const updatedQueryLog = [...prevQueryLog];
-          console.log(updatedQueryLog);
           updatedQueryLog.splice(index, 1);
-          console.log(updatedQueryLog);
           return updatedQueryLog;
         }
       });
@@ -209,6 +200,43 @@ const MainContainer: React.FC = ({}) => {
           dashboardUID: '',
         });
       }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const disconnectDB = async (): Promise<void> => {
+    try {
+      // make async call to backend to delete query specific dashboard
+      const url = 'http://localhost:3001/api/disconnect';
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          dashboardUID: dbUid.dashboardUid,
+          datasourceUID: dbUid.datasourceUid,
+          GrafanaCredentials: {
+            graf_port: grafanaUser.graf_port,
+            graf_name: grafanaUser.graf_name,
+            graf_pass: grafanaUser.graf_pass,
+          },
+        }),
+      });
+      const data = await response.json();
+      if (data.status <= 199 && response.status >= 300) {
+        throw new Error('Failed to connect');
+      }
+      setConnection(false);
+      setDatabaseGraphs([]);
+      setdbUid({ datasourceUid: '', dashboardUid: '' });
+      setGrafanaUser({
+        graf_name: '',
+        graf_pass: '',
+        graf_port: '',
+      });
     } catch (err) {
       console.log(err);
     }
@@ -234,7 +262,6 @@ const MainContainer: React.FC = ({}) => {
       <SideBarContainer
         openModal={setIsModalOpen}
         connection={connection}
-        setConnection={setConnection}
         setFormData={setFormData}
         formData={formData}
         queryLog={queryLog}
@@ -244,6 +271,7 @@ const MainContainer: React.FC = ({}) => {
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}
+        disconnectDB={disconnectDB}
       />
       <QueryContainer
         setQueryLog={setQueryLog}

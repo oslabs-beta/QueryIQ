@@ -17,36 +17,41 @@ export type FormData = {
   db_password: string;
 };
 
+export type dbUid = {
+  datasourceUid: string;
+  dashboardUid: string;
+}
+
 // parent container
 export type SideBarContainerProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   queryLog: QueryLogItemObject[];
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   editQueryLabel: (index: number, label: string) => void;
-  deleteQuery: (index: number) => void;
+  deleteQuery: (index: number) => Promise<void>;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
+  disconnectDB: () => Promise<void>;
 };
 
 // child of SideBarContainer
 export type DBConnectProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  disconnectDB: () => Promise<void>;
 };
 
 // child of SideBarContainer
 export type QueryLogProps = {
   queryLog: QueryLogItemObject[];
   editQueryLabel: (index: number, label: string) => void;
-  deleteQuery: (index: number) => void;
+  deleteQuery: (index: number) => Promise<void>;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
@@ -56,7 +61,7 @@ export type QueryLogProps = {
 export type QueryLogItemProps = {
   index: number;
   editQueryLabel: (index: number, label: string) => void;
-  deleteQuery: (index: number) => void;
+  deleteQuery: (index: number) => Promise<void>;
   queryLogObject: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   activeQuery: QueryLogItemObject;
@@ -83,7 +88,7 @@ export type QueryContainerProps = {
   databaseGraphs: string[];
   connection: boolean;
   grafanaUser: GrafanaUserObject;
-  dbUid: string;
+  dbUid: dbUid;
 };
 
 // child of QueryContainer
@@ -95,7 +100,7 @@ export type InputQueryProps = {
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   activeQuery: QueryLogItemObject;
   grafanaUser: GrafanaUserObject;
-  dbUid: string;
+  dbUid: dbUid;
   connection: boolean;
 };
 

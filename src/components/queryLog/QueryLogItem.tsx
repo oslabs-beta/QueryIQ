@@ -44,9 +44,9 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
     setEditMode(true);
   };
 
-  const handleDeleteClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+  const handleDeleteClick = async (e: React.MouseEvent<HTMLSpanElement>) => {
     e.stopPropagation(); // Prevent event propagation to parent div
-    deleteQuery(index);
+    await deleteQuery(index);
   };
 
   const handleClick = () => {
