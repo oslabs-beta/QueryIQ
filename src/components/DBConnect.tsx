@@ -26,7 +26,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
 
   const handleClick = async () => {
     await disconnectDB();
-    connection ? setConnection(false) : setConnection(true);
   };
 
   return (
