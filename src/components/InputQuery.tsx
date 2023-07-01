@@ -55,11 +55,6 @@ const InputQuery: React.FC<InputQueryProps> = ({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-          //might not need this if this is already in the controller?
-          Authorization: `Basic ${Buffer.from(
-            `${grafanaUser.graf_name}:${grafanaUser.graf_pass}`
-          ).toString('base64')}`,
         },
         body: JSON.stringify({
           query: query,

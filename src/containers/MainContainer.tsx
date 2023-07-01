@@ -91,9 +91,6 @@ const MainContainer: React.FC = ({}) => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Basic ${Buffer.from(
-          `${graf_name}:${graf_pass}`
-        ).toString('base64')}`,
       },
       body: JSON.stringify({
         graf_name,
@@ -168,30 +165,27 @@ const MainContainer: React.FC = ({}) => {
     try {
       // WIP DELETE REQUEST TO BACKEND //
       // make async call to backend to delete query specific dashboard
-      // const url = 'http://localhost:3001/api/delete' 
-      // const response = await fetch(url, {
-      //   method: 'DELETE',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Accept: 'application/json',
-      //     Authorization: `Basic ${Buffer.from(
-      //       `${grafanaUser.graf_name}:${grafanaUser.graf_pass}`
-      //     ).toString('base64')}`,
-      //   },
-      //   body: JSON.stringify({
-      //     dashboardUID: queryToDelete.dashboardUID,
-      //     datasourceUID: dbUid,
-      //     GrafanaCredentials: {
-      //       graf_port: grafanaUser.graf_port,
-      //       graf_name: grafanaUser.graf_name,
-      //       graf_pass: grafanaUser.graf_pass,
-      //     }
-      //   }),
-      // })
-      // const data = await response.json();
-      // if (data.status <= 199 && response.status >= 300) {
-      //   throw new Error('Failed to connect');
-      // }
+      const url = 'http://localhost:3001/api/delete' 
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          dashboardUID: queryToDelete.dashboardUID,
+          datasourceUID: dbUid,
+          GrafanaCredentials: {
+            graf_port: grafanaUser.graf_port,
+            graf_name: grafanaUser.graf_name,
+            graf_pass: grafanaUser.graf_pass,
+          }
+        }),
+      })
+      const data = await response.json();
+      if (data.status <= 199 && response.status >= 300) {
+        throw new Error('Failed to connect');
+      }
       setQueryLog((prevQueryLog) => {
         if (prevQueryLog.length > index) {
           const updatedQueryLog = [...prevQueryLog];
@@ -213,6 +207,10 @@ const MainContainer: React.FC = ({}) => {
       console.log(err);
     }
   };
+
+  const disconnectDB = async (): Promise<void> => {
+    console.log('clicked!');
+  }
 
   return (
     <div className="flex h-full w-full flex-col bg-gradient-to-b from-purple-900 to-white md:flex-row">
@@ -244,6 +242,7 @@ const MainContainer: React.FC = ({}) => {
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}
+        disconnectDB={disconnectDB}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
