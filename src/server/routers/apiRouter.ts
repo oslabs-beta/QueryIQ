@@ -22,7 +22,7 @@ router.delete(
   grafanaController.deleteDataSource, 
   grafanaController.deleteDashBoard, 
   (req, res) => {
-  return res.status(200).send('datasource and dashboard deleted');
+  return res.status(200).send(res.locals.data);
 })
 
 export default router;

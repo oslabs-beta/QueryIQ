@@ -279,10 +279,85 @@ const grafanaController: GrafanaController = {
         graf_pass: string;
       };
     };
-  },
+
+    const { graf_name, graf_pass, graf_port } = GrafanaCredentials;
+
+    const url = `http://localhost:${graf_port}/api/datasources/uid/${datasourceUID}`;
+
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString(
+        'base64'
+      )}`,
+    };
+
+    const payload = {
+      method: 'DELETE',
+      headers: headers,
+    };
+
+    try {
+      const response = await fetch(url, payload);
+      const data = (await response.json()) as Promise<JSON>;
+
+      res.locals.dashboardUID = dashboardUID;
+      res.locals.GrafanaCredentials = GrafanaCredentials;
+      res.locals.dataSourceResponse = data;
+
+      return next();
+    } catch (error) {
+      const errorMessage =
+        // Ensure that what's being used in the template literal can indeed be converted to a string
+        error instanceof Error ? error.message : String(error);
+
+      return next({
+        log: `${errorMessage}: error in the grafanaController.deleteDataSource`,
+        status: 400,
+        message: `${errorMessage}: error with the data source UID`,
+      });
+    }
+
+   },
 
   deleteDashBoard: async (req, res, next) => {
     
+    const { graf_name, graf_pass, graf_port } = res.locals.GrafanaCredentials;
+    const { dashboardUID } = res.locals;
+
+    const url = `http://localhost:${graf_port}/api/dashboards/uid/${dashboardUID}`;
+
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString(
+        'base64'
+      )}`,
+    };
+
+    const payload = {
+      method: 'DELETE',
+      headers: headers,
+    };
+
+    try {
+      const response = await fetch(url, payload);
+      const data = (await response.json()) as Promise<JSON>;
+
+      res.locals.data = {datasource: res.locals.dataSourceResponse, dashboard: data}
+
+      return next();
+    } catch (error) {
+      const errorMessage =
+        // Ensure that what's being used in the template literal can indeed be converted to a string
+        error instanceof Error ? error.message : String(error);
+
+      return next({
+        log: `${errorMessage}: error in the grafanaController.deleteDashboard`,
+        status: 400,
+        message: `${errorMessage}: error with the dashboard UID`,
+      });
+    }
   }
 };
 
