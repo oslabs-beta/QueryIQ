@@ -6,34 +6,34 @@ import Image from 'next/image';
 const Contact = () => {
   const teamMembers = [
     {
-      image: '/../public/assets/logo-full-no-bg.png',
+      image: 'https://github.com/KAlanBeck.png',
       name: 'Alan Beck',
       linkedin: 'https://www.linkedin.com/in/k-alan-beck/',
       github: 'https://github.com/KAlanBeck/',
     },
     {
-      image: '/../public/assets/logo-full-no-bg.png',
+      image: 'https://github.com/connoro7.png',
       name: 'Connor Dillon',
       linkedin: 'https://www.linkedin.com/in/connor-dillon/',
       github: 'https://github.com/connoro7/',
     },
     {
-      image: '/../public/assets/logo-full-no-bg.png',
+      image: 'https://github.com/deanbiscocho.png',
       name: 'Dean Biscocho',
       linkedin: 'https://www.linkedin.com/in/deanbiscocho/',
       github: 'https://github.com/deanbiscocho/',
     },
     {
-      image: '/../public/assets/logo-full-no-bg.png',
+      image: 'https://github.com/jojecameron.png',
       name: 'Johanna Cameron',
       linkedin: 'https://www.linkedin.com/in/johanna-cameron/',
       github: 'https://github.com/jojecameron/',
     },
     {
-      image: '/../public/assets/logo-full-no-bg.png',
+      image: 'https://github.com/khailetran.png',
       name: 'Khaile Tran',
       linkedin: 'https://www.linkedin.com/in/khailetran/',
-      github: 'https://github.com/khailetra/',
+      github: 'https://github.com/khailetran/',
     },
     // Add more team members as needed
   ];
@@ -48,20 +48,23 @@ const Contact = () => {
         <Header />
         <div className=" container mx-auto px-4 py-8 space-y-10 ">
           <h1 className="text-5xl font-bold text-white">Meet Our Team</h1>
-          <div className="mt-8 flex flex-wrap gap-8 justify-center bg-gray-500  ">
+          <div className="mt-8 flex flex-wrap gap-8 justify-center bg-black  ">
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-600 to-orange-400 p-1 pb-4 text-white shadow transition hover:shadow-md w-[250px] h-[380px]"
+                className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white shadow transition hover:shadow-md w-[250px] h-[380px]"
               >
-                <figure className="aspect-square max-h-64 overflow-hidden">
+                <figure className="aspect-square max-h-64 overflow-hidden ">
+                <a href={member.image} target="_blank" rel="noopener noreferrer">
                   <Image
-                    className="h-full w-full object-cover transition group-hover:scale-125"
+                    className="h-full w-full object-cover transition group-hover:scale-110"
                     src={member.image}
+                    loader={({ src }) => src}
                     alt="Profile"
-                    width={48}
-                    height={48}
+                    width={55}
+                    height={55}
                   />
+                  </a>
                 </figure>
 
                 <h2 className="mt-2 text-center text-lg font-semibold text-white">
