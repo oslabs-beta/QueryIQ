@@ -1,7 +1,17 @@
+<!-- PROJECT LOGO -->
 
+
+<div align="center">
+  <a href="https://github.com/oslabs-beta/QueryIQ">
+    <img src="public/assets/QueryIQ_logo_color.png" alt="Logo" width="600" height="auto">
+  </a>
+  <br />
+  <!-- PROJECT LANDING PAGE WEBSITE INSERT HERE ONCE AVAILABLE -->
+<br/>
+  
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## QueryIQ
+
 
 > QueryIQ is a developer-friendly application designed to transform the process of analyzing and optimizing PostgreSQL databases. With its features, QueryIQ enables developers to gain valuable insights by creating data visualization dashboards based on database performance and query metrics. 
 
