@@ -1,19 +1,26 @@
-<!-- PROJECT LOGO -->
 
+
+
+<!-- PROJECT LOGO -->
 
 <div align="center">
   <a href="https://github.com/oslabs-beta/QueryIQ">
-    <img src="public/assets/QueryIQ_logo_color.png" alt="Logo" width="600" height="auto">
+    <img src="public/assets/logo-full-background-color.png" alt="Logo" width="700" height="auto">
   </a>
   <br />
   <!-- PROJECT LANDING PAGE WEBSITE INSERT HERE ONCE AVAILABLE -->
 <br/>
-  
+</div>
+
+
+<div align="center" width="100%">   
+
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+</div>
 
 
-> QueryIQ is a developer-friendly application designed to transform the process of analyzing and optimizing PostgreSQL databases. With its features, QueryIQ enables developers to gain valuable insights by creating data visualization dashboards based on database performance and query metrics. 
+<!-- TABLE OF CONTENTS -->
 
 <div align="center" width="100%">
 
@@ -30,30 +37,109 @@
 ![Primsa](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
-
 </div>
 
+<br />
 
-### Getting Started
-- 
+# Table of Contents
+
+
+  <ol>
+    <li>
+    <a href="#about">About</a></li>
+    <li><a href="#key-features">Key Features</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#how-to-contribute">Contributing</a></li>
+    <li><a href="#authors">Authors</a></li>
+  </ol>
+
+<!-- ABOUT THE PROJECT -->
+
+<br />
+
+# About
+QueryIQ is a developer-friendly application designed to transform the process of analyzing and optimizing PostgreSQL databases. With its features, QueryIQ enables developers to gain valuable insights by creating data visualization dashboards based on database performance and query metrics. 
+
+
+## Demo
+<!-- TODO: INSERT DEMO HERE -->
+<br />
+  <div align="center">
+    <!-- <img src="assets/FullDemo.gif" alt="Logo" width="fit" height="auto"> -->
+  </div>
+<br />
+
+<br />
+
+# Key Features:
+
+### ➮ PostgresQL Database Connection 
+
+Easily access to database connection through Grafana local server within one place 
+
+### ➮ Overall metrics on database health including:
+- Queries with the Longest Running Queries
+- Queries with the Highest Average Execution Time
+- Queries with the Highest Memory Usage
+- Row Counts per Table
+- Index Scans by Table
+- Total of Table Size and Index Size
+- Cache-hit Ratio
+- All databases connected to that server by size
+- Open Connections
+
+### ➮ Overall metrics on multiple arbitrary query inputs including:
+
+- Query plan by aggregated with actual time, rows, and width
+- Sequence scan with actual time, rows, and width
+- Planning time
+- Execution time 
+
+### ➮ Ability to disconnect to a database and delete dashboards 
+
+### ➮ Ability to delete past query inputs 
+
+### ➮ Secured authorization through Google Oauth with required login 
+
+Privacy and security within QueryIQ is maintained through running in individual local server along with Grafana's local instance with authorization required. 
+
+### ➮ Privacy and Security
+
+QueryIQ does not store any user data, most importantly including database connection information, usernames, and passwords. Data is maintained within Grafana's local instance with authorization required and access restricted by the client as needed.
+
+
+<br />
+
+<!-- INSTALLATION -->
+# Installation
+<br></br>
+
 ### Prerequisites
-- 
-### Installing
-- 
-### Running the tests
+<br></br>
 
-### Deployment
-- 
-### Built With
-- [Resource Name](Resource URL) - Resource description
-### Contributing
+### Step 1 - .....
+
+
+
+
+
+
+
+<br />
+
+<!-- CONTRIBUTING -->
+# How to Contribute
 - Please read [CONTRIBUTING.md](#) for details on our code of conduct, and the process for submitting pull requests.
-### Versioning
-- 
 
 
 
-## QueryIQ Team:
+
+
+
+<br />
+
+<!-- Authors -->
+# Authors:
 
 |     Developed By      |                                                                                                                                                         |                                                                                                                                                             |
 | :-------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -62,6 +148,11 @@
 |  Johanna Cameron  |     [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jojecameron)      |         [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/johanna-cameron/)          |
 |     Dean Biscocho     |     [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deanbiscocho)     |         [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deanbiscocho/)         |
 |      Alan Beck       |      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KAlanBeck)      |          [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/k-alan-beck/)          |
+
+
+## Show Your Support
+
+Please ⭐️ this project if you enjoy our tool, thank you so much!
 
 
 <hr>
