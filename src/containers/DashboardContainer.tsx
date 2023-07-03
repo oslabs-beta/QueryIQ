@@ -1,11 +1,8 @@
 import React from 'react';
+import GraphCard from '~/components/GraphCard';
 import type { DashboardContainerProps } from '~/types/types';
-import GraphCard from '~/components/Graphs/GraphCard';
-
-// Will render same test graphs for query as the test db metrics at the moment, can be replaced with query graphs when implemented.
 
 const DashboardContainer: React.FC<DashboardContainerProps> = ({
-  testConnected,
   activeQuery,
   dashboardState,
   setDashboardState,
@@ -36,15 +33,6 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
         {dashboardState === 'database' ? (
           <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-gray-800 p-4 text-indigo-300 md:h-96">
             {!connection ? (
-              <></>
-            ) : (
-              <>
-                {databaseGraphs.map((src, index) => {
-                  return <GraphCard key={index} src={src}></GraphCard>;
-                })}
-              </>
-            )}
-            {!testConnected ? (
               <></>
             ) : (
               <>

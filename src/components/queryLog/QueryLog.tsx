@@ -6,6 +6,7 @@ import type { QueryLogProps } from '~/types/types';
 const QueryLog: React.FC<QueryLogProps> = ({
   queryLog,
   editQueryLabel,
+  deleteQuery,
   setActiveQuery,
   activeQuery,
   setDashboardState,
@@ -17,7 +18,7 @@ const QueryLog: React.FC<QueryLogProps> = ({
       </span>
       <div className="h-full w-full overflow-y-auto bg-gray-800">
         <ul className="w-full">
-          {queryLog.map((query, index) => {
+          {queryLog.map((_query, index) => {
             const queryLogObject = queryLog[index];
             if (queryLogObject) {
               return (
@@ -25,9 +26,8 @@ const QueryLog: React.FC<QueryLogProps> = ({
                   key={index}
                   index={index}
                   queryLogObject={queryLogObject}
-                  // handleEditHover={handleEditHover}
-                  // isHovered={isHovered}
                   editQueryLabel={editQueryLabel}
+                  deleteQuery={deleteQuery}
                   setActiveQuery={setActiveQuery}
                   activeQuery={activeQuery}
                   setDashboardState={setDashboardState}
