@@ -15,3 +15,11 @@ describe("Datasource and Dashboard creation", () => {
     });
   });
 });
+
+describe("Error catch route", () => {
+  it("should respond with a 404 error and 'page not found'", async () => {
+    const response = await request(server).get("/wrongaddress");
+    expect(response.status).toBe(404);
+    expect(response.text).toBe("Page not found");
+  });
+});
