@@ -5,6 +5,7 @@ import type {
   InputQueryProps,
   GrafanaUserObject,
   QueryLogItemObject,
+  dbUid,
 } from '~/types/types';
 import { useMutation } from 'react-query';
 
@@ -44,10 +45,10 @@ const InputQuery: React.FC<InputQueryProps> = ({
       query,
       dbUid,
       grafanaUser,
-    }: {
-      query: string;
-      dbUid: string;
-      grafanaUser: GrafanaUserObject;
+    } : {
+      query: string,
+      dbUid: dbUid,
+      grafanaUser: GrafanaUserObject,
     }) => {
       const apiUrl = 'http://localhost:3001/api/query';
       //deconstruct query for the request response
@@ -55,11 +56,6 @@ const InputQuery: React.FC<InputQueryProps> = ({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-          //might not need this if this is already in the controller?
-          Authorization: `Basic ${Buffer.from(
-            `${grafanaUser.graf_name}:${grafanaUser.graf_pass}`
-          ).toString('base64')}`,
         },
         body: JSON.stringify({
           query: query,
@@ -68,7 +64,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
             graf_port: grafanaUser.graf_port,
             graf_pass: grafanaUser.graf_pass,
           },
-          datasourceUID: dbUid,
+          datasourceUID: dbUid.datasourceUid,
         }),
       });
       // If response is less than 200 or greater than 300
@@ -96,7 +92,6 @@ const InputQuery: React.FC<InputQueryProps> = ({
         iFrames: string[];
       };
       await asyncLoadingSim();
-      console.log('THIS IS RESPONSE', response);
       const { iFrames, uid } = response;
       const newQuery: QueryLogItemObject = {
         query: query,
