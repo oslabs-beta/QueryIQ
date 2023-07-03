@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut, signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 const HamburgerMenu = () => {
@@ -40,9 +40,11 @@ const HamburgerMenu = () => {
               className="py-2"
               onClick={
                 sessionData
-                  ? () => void signOut({ callbackUrl: window.location.origin })
+                  ? () => {
+                      void signOut({ callbackUrl: window.location.origin });
+                    }
                   : () => {
-                      return undefined;
+                      void signIn();
                     }
               }
             >
