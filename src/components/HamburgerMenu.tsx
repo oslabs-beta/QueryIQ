@@ -14,7 +14,7 @@ const HamburgerMenu = () => {
   return (
     <div className={`hamburger-menu relative ${isOpen ? 'open' : ''}`}>
       <div className="hamburger-icon" onClick={toggleMenu}>
-        <GiHamburgerMenu className="h-6 w-6 text-black" />
+        <GiHamburgerMenu className="mr-6 h-6 w-6 text-black" />
       </div>
       {isOpen && (
         <div className="menu-modal absolute right-0 top-full bg-white p-4 shadow ">
