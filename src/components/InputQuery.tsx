@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import LoadingBar from './LoadingBar';
+import Popup from './Popup';
 import type {
   InputQueryProps,
   GrafanaUserObject,
@@ -108,13 +109,14 @@ const InputQuery: React.FC<InputQueryProps> = ({
     }
   };
   // TO DO: want to move this conditional to the return statement and plug in our loading bar component
+  //if post request is still loading
   if (mutationQuery.isLoading) {
-    return <div>Loading...</div>;
+    return <Popup text='Loading...'/>;
   }
 
-  //if post request fails to fetch
+  // //if post request fails to fetch
   if (mutationQuery.error) {
-    return <div>Error: {mutationQuery.error.message}</div>;
+    return  <Popup text={mutationQuery.error.message}/>;
   }
 
   return (
