@@ -4,11 +4,13 @@ import { useMutation } from 'react-query';
 import QueryContainer from './QueryContainer';
 import SideBarContainer from './SideBarContainer';
 import DBModal from '~/components/modal/DBModal';
+import Popup from '~/components/Popup';
 import type {
   QueryLogItemObject,
   FormData,
   GrafanaUserObject,
 } from '~/types/types';
+
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -136,17 +138,6 @@ const MainContainer: React.FC = ({}) => {
     }
   };
 
-  // TO DO: want to move this conditional to the return statement and plug in our loading bar component
-  //if post request is still loading
-  if (mutation.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  //if post request fails to fetch
-  if (mutation.error) {
-    return <div>Error: {mutation.error.message}</div>;
-  }
-
   // finds querylog object in array and updates the name property
   const editQueryLabel = (index: number, label: string): void => {
     setQueryLog((prevQueryLog) => {
@@ -242,8 +233,21 @@ const MainContainer: React.FC = ({}) => {
     }
   };
 
+  // TO DO: want to move this conditional to the return statement and plug in our loading bar component
+  //if post request is still loading
+  if (mutation.isLoading) {
+    return <Popup text='Loading...'/>;
+  }
+
+  // //if post request fails to fetch
+  if (mutation.error) {
+    return  <Popup text={mutation.error.message}/>;
+  }
+
   return (
     <div className="flex h-full w-full flex-col bg-gradient-to-b from-purple-900 to-white md:flex-row">
+      {/* {!mutation.isLoading ? <></> : <Popup text='Loading...'/>}
+      {!mutation.error ? <></> : <Popup text={mutation.error.message}/>} */}
       {!isModalOpen ? (
         <></>
       ) : (
