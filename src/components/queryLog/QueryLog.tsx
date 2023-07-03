@@ -13,7 +13,7 @@ const QueryLog: React.FC<QueryLogProps> = ({
   setDashboardState,
 }) => {
   return (
-    <div className="my-8 flex h-36 w-11/12 flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-96">
+    <div className="my-8 flex h-36 w-11/12 flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-96 outline-r">
       <span className="flex w-full items-center justify-center border-black bg-gray-900 p-1 text-center text-indigo-300">
         <span className="mr-2">
           <BsJournalText />

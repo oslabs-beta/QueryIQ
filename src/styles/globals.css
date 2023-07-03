@@ -7,3 +7,19 @@ body {
   background-image: linear-gradient(to bottom, #0f0f0f, #1f1f1f);
   height: 100dvh;
 }
+
+.outline-red {
+  outline: 1px solid red;
+}
+
+.outline-blue {
+  outline: 1px solid cyan;
+}
+
+.outline-green {
+  outline: 1px solid chartreuse;
+}
+
+.outline-purple {
+  outline: 1px solid magenta;
+}

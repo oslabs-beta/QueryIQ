@@ -39,7 +39,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
           </span>
         </div>
         {dashboardState === 'database' ? (
-          <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-gray-800 p-4 text-indigo-300 md:h-96">
+          <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-slate-800 p-4 text-indigo-300 md:h-96">
             {!connection ? (
               <></>
             ) : (
@@ -51,11 +51,11 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
             )}
           </div>
         ) : dashboardState === 'query' ? (
-          <div className="h-96 w-full overflow-y-auto bg-gray-800 p-4 text-left text-indigo-300">
-            <div className="h-24 w-full overflow-y-auto rounded-lg border-black bg-gray-600 p-4 text-left text-indigo-300">
+          <div className="h-96 w-full overflow-y-auto bg-slate-800 p-4 text-left text-indigo-300">
+            <div className="h-24 w-full overflow-y-auto rounded-lg border-black bg-slate-600 p-4 text-left text-indigo-300">
               {activeQuery.query}
             </div>
-            <div className="flex h-full w-full flex-col items-center bg-gray-800 p-4 text-indigo-300 md:h-96">
+            <div className="flex h-full w-full flex-col items-center bg-slate-800 p-4 text-indigo-300 md:h-96">
               {activeQuery.data.map((src, index) => {
                 return <GraphCard key={index} src={src}></GraphCard>;
               })}

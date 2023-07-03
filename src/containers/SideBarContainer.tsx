@@ -17,7 +17,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
   disconnectDB,
 }) => {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center  md:h-full md:w-1/4">
+    <div className="flex h-full w-full flex-col items-center justify-center mt-20  md:h-full md:w-1/4">
       <DBConnect
         openModal={openModal}
         connection={connection}

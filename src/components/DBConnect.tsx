@@ -32,13 +32,15 @@ const DBConnect: React.FC<DBConnectProps> = ({
       {!connection ? (
         <>
           <button
-            className="my-4 flex items-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+            className="my-4 flex items-center rounded-sm border border-slate-900 bg-slate-500 p-1 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white"
             onClick={handleConnect}
           >
-            <span className="mr-2 ml-2">
+            <span className="ml-2 mr-2 text-5xl">
               <BsDatabaseAdd />
             </span>
-            <span className="mr-2">Connect to Database</span>
+            <span className="mr-2 p-4 text-lg font-bold tracking-widest text-slate-100">
+              Connect to Database
+            </span>
           </button>
         </>
       ) : (
@@ -59,7 +61,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
               </span>
               <br></br>
               <button
-                className="rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+                className="my-4 flex items-center rounded-sm border border-slate-900 bg-slate-500 p-1 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white "
                 onClick={handleClick}
               >
                 Disconnect
