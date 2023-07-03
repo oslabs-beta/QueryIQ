@@ -8,6 +8,7 @@ import type {
   dbUid,
 } from '~/types/types';
 import { useMutation } from 'react-query';
+import { BsKeyboard, BsArrowRightCircleFill } from 'react-icons/bs';
 
 const InputQuery: React.FC<InputQueryProps> = ({
   setQueryLog,
@@ -45,10 +46,10 @@ const InputQuery: React.FC<InputQueryProps> = ({
       query,
       dbUid,
       grafanaUser,
-    } : {
-      query: string,
-      dbUid: dbUid,
-      grafanaUser: GrafanaUserObject,
+    }: {
+      query: string;
+      dbUid: dbUid;
+      grafanaUser: GrafanaUserObject;
     }) => {
       const apiUrl = 'http://localhost:3001/api/query';
       //deconstruct query for the request response
@@ -124,18 +125,26 @@ const InputQuery: React.FC<InputQueryProps> = ({
           onSubmit={handleGoClick}
           className="flex w-full flex-col items-center justify-center"
         >
-          <input
-            className="my-1 w-full rounded-md p-1 shadow-xl"
-            placeholder="Input Query Here..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
+          <div className="relative">
+            <input
+              className="my-1 w-full rounded-md p-1 pl-8 shadow-xl"
+              placeholder="Input Query Here..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <span className="absolute left-2 top-1/2 -translate-y-1/2 transform">
+              <BsKeyboard />{' '}
+            </span>
+          </div>
           <button
             type="submit"
             disabled={!query || !connection}
-            className="my-2 w-24 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+            className="my-2 flex w-24 items-center justify-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
           >
-            GO
+            <span>GO</span>
+            <span className=" ml-2">
+              <BsArrowRightCircleFill />
+            </span>
           </button>
         </form>
 
