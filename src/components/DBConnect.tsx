@@ -1,5 +1,6 @@
 import React from 'react';
 import type { DBConnectProps } from '~/types/types';
+import { BsDatabaseAdd } from 'react-icons/bs';
 
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
@@ -8,7 +9,6 @@ const DBConnect: React.FC<DBConnectProps> = ({
   setFormData,
   disconnectDB,
 }) => {
-
   const handleConnect = () => {
     setFormData({
       graf_name: '',
@@ -32,10 +32,13 @@ const DBConnect: React.FC<DBConnectProps> = ({
       {!connection ? (
         <>
           <button
-            className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+            className="my-4 flex items-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
             onClick={handleConnect}
           >
-            Connect to Database
+            <span className="mr-2 ml-2">
+              <BsDatabaseAdd />
+            </span>
+            <span className="mr-2">Connect to Database</span>
           </button>
         </>
       ) : (
