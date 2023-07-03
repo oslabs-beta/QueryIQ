@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Header: React.FC = () => {
   return (
-    <div className="flex w-screen flex-col items-center justify-center bg-white px-4 py-1 md:flex-row md:justify-between">
+    <div className="flex w-screen flex-col items-center justify-center px-4 py-1 md:flex-row md:justify-between">
       <div className="flex flex-col items-center md:flex-row">
         <div className="flex justify-center md:mx-0 md:mr-4 md:items-center md:justify-start">
           <Link href="/homepage">

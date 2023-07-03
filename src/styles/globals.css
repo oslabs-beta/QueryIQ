@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  /* className="bg-gradient-to-b from-[#0f0f0f] to-[#1f1f1f] */
+  background-image: linear-gradient(to bottom, #0f0f0f, #1f1f1f);
+  height: 100dvh;
+}

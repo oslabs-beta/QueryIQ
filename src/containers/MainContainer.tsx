@@ -11,7 +11,6 @@ import type {
   GrafanaUserObject,
 } from '~/types/types';
 
-
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [query, setQuery] = useState(''); // inputQuery state
@@ -236,16 +235,16 @@ const MainContainer: React.FC = ({}) => {
   // TO DO: want to move this conditional to the return statement and plug in our loading bar component
   //if post request is still loading
   if (mutation.isLoading) {
-    return <Popup text='Loading...'/>;
+    return <Popup text="Loading..." />;
   }
 
   // //if post request fails to fetch
   if (mutation.error) {
-    return  <Popup text={mutation.error.message}/>;
+    return <Popup text={mutation.error.message} />;
   }
 
   return (
-    <div className="flex h-full w-full flex-col bg-gradient-to-b from-purple-900 to-white md:flex-row">
+    <div className="flex h-full w-full flex-col  md:flex-row">
       {/* {!mutation.isLoading ? <></> : <Popup text='Loading...'/>}
       {!mutation.error ? <></> : <Popup text={mutation.error.message}/>} */}
       {!isModalOpen ? (
