@@ -77,4 +77,6 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(port, () => console.log(`> Ready on http://localhost:${port}`));
+app.listen(port, () =>
+  console.log(`> Express OK, served at http://localhost:${port}`)
+);
