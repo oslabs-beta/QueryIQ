@@ -9,7 +9,7 @@ const ModalFormInput: React.FC<ModalFormInputProps> = ({
 }) => {
   return (
     <input
-      className="rounded-lg border border-gray-900 p-2"
+      className="rounded-sm border border-gray-900 p-2"
       type={type}
       placeholder={placeholder}
       value={value}

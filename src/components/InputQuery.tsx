@@ -112,40 +112,40 @@ const InputQuery: React.FC<InputQueryProps> = ({
   // TO DO: want to move this conditional to the return statement and plug in our loading bar component
   //if post request is still loading
   if (mutationQuery.isLoading) {
-    return <Popup text='Loading...'/>;
+    return <Popup text="Loading..." />;
   }
 
   // //if post request fails to fetch
   if (mutationQuery.error) {
-    return  <Popup text={mutationQuery.error.message}/>;
+    return <Popup text={mutationQuery.error.message} />;
   }
 
   return (
     <>
-      <div className=" flex w-7/12 flex-col items-center justify-center">
+      <div className="outline-blue flex w-full flex-col items-center justify-center">
         <form
           onSubmit={handleGoClick}
-          className="flex w-full flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center"
         >
           <div className="relative">
             <input
-              className="my-1 w-full rounded-md p-1 pl-8 shadow-xl"
-              placeholder="Input Query Here..."
+              className="outline-red my-1 rounded-md px-2 py-4 text-lg shadow-xl"
+              placeholder="Paste your query"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
             <span className="absolute left-2 top-1/2 -translate-y-1/2 transform">
-              <BsKeyboard />{' '}
+              {/* <BsKeyboard />{' '} */}
             </span>
           </div>
           <button
             type="submit"
             disabled={!query || !connection}
-            className="my-2 flex w-24 items-center justify-center rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+            className="w-30 my-2 flex items-center justify-center border border-slate-900 bg-slate-500 px-8 py-2 text-3xl font-bold tracking-widest text-slate-100 shadow-xl hover:bg-slate-600 hover:text-slate-200"
           >
-            <span>GO</span>
+            <span>Submit</span>
             <span className=" ml-2">
-              <BsArrowRightCircleFill />
+              <BsArrowRightCircleFill className="text-xl" />
             </span>
           </button>
         </form>
