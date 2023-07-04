@@ -23,3 +23,8 @@ body {
 .outline-purple {
   outline: 1px solid magenta;
 }
+
+.h-100dvh {
+    height: 100dvh;
+}
+

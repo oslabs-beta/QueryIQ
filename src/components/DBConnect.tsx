@@ -32,7 +32,7 @@ const DBConnect: React.FC<DBConnectProps> = ({
       {!connection ? (
         <>
           <button
-            className="my-4 flex items-center rounded-sm border border-slate-600 bg-slate-500 p-1 text-gray-200 shadow-xl  hover:bg-slate-700  hover:text-white"
+            className="mt-12 my-4 flex items-center rounded-sm  ring ring-2 ring-slate-50 bg-slate-500 p-1 text-gray-200 shadow-xl  hover:bg-slate-700  hover:text-white"
             onClick={handleConnect}
           >
             <span className="ml-2 mr-2 text-5xl">

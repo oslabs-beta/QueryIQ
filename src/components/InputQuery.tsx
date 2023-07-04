@@ -122,14 +122,15 @@ const InputQuery: React.FC<InputQueryProps> = ({
 
   return (
     <>
-      <div className="outline-blue flex w-full flex-col items-center justify-center">
+      <div className=" flex w-full flex-col items-center justify-center">
         <form
           onSubmit={handleGoClick}
-          className=" flex flex-col outline-yellow items-center justify-center"
+          className=" flex flex-col w-full items-center justify-center"
         >
-          <div className="relative">
-            <input
-              className="outline-red my-1 rounded-md px-48 py-1 text-lg shadow-xl w-full"
+          <div className="relative w-full">
+            <textarea
+
+              className=" px-2 py-1 my-1 rounded-md py-1 text-lg shadow-xl w-full"
               placeholder="Enter your query here.."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -141,7 +142,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
           <button
             type="submit"
             disabled={!query || !connection}
-            className="w-30 my-2 flex items-center justify-center border  bg-slate-600 px-8 py-2 text-1xl font-bold tracking-widest text-slate-100 shadow-xl hover:text-slate-100 hover:bg-slate-700 "
+            className="w-30 my-2 flex items-center rounded-sm justify-center ring ring-2 ring-slate-50 bg-slate-600 px-8 py-2 text-1xl font-bold tracking-widest text-slate-100 shadow-xl hover:text-slate-100 hover:bg-slate-700 hover:transform hover:scale-105"
           >
             <span>Submit</span>
             <span className=" ml-2">
