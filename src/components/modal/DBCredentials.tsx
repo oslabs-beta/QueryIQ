@@ -54,14 +54,14 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
       />
       <div className="h-45 w-45 flex justify-center">
         <button
-          className="m-4 rounded-lg border border-gray-900 bg-indigo-500 p-2 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+          className="m-4 rounded-sm border bg-slate-500 p-3 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white text-lg"
           disabled={!isFormValid}
           onClick={handleConnect}
         >
           Connect
         </button>
         <button
-          className="m-4 rounded-lg border border-gray-900 bg-red-400 p-2 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+          className="m-4 rounded-sm border bg-slate-500 p-3 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white text-lg"
           onClick={handleCancel}
         >
           Cancel

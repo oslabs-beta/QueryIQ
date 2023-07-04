@@ -32,36 +32,36 @@ const DBConnect: React.FC<DBConnectProps> = ({
       {!connection ? (
         <>
           <button
-            className="my-4 flex items-center rounded-sm border border-slate-900 bg-slate-500 p-1 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white"
+            className="my-4 flex items-center rounded-sm border border-slate-600 bg-slate-500 p-1 text-gray-200 shadow-xl  hover:bg-slate-700  hover:text-white"
             onClick={handleConnect}
           >
             <span className="ml-2 mr-2 text-5xl">
               <BsDatabaseAdd />
             </span>
-            <span className="mr-2 p-4 text-lg font-bold tracking-widest text-slate-100">
+            <span className="mr-2 p-3 text-lg font-bold tracking-widest text-slate-100">
               Connect to Database
             </span>
           </button>
         </>
       ) : (
         <>
-          <div className="my-8 flex w-full flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl">
-            <span className="w-full border-black bg-gray-900 p-1 text-center text-indigo-300">
+          <div className="my-8 flex w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-gray-900 shadow-xl hover:bg-slate-700 ">
+            <span className="w-full border-black bg-gray-900 p-1 text-center text-gray-100">
               Active Connection
             </span>
-            <div className="items center flex w-full flex-col justify-center bg-gray-800 p-4 text-indigo-300 shadow-xl">
+            <div className="items center flex w-full flex-col justify-center bg-gray-800 p-4 text-indigo-200 shadow-xl">
               <span>
-                DB NAME:{' '}
-                <span className="text-cyan-200">{formData.db_name}</span>
+                DB Name:{' '}
+                <span className="text-slate-100">{formData.db_name}</span>
               </span>
               <br></br>
               <span>
-                DB SERVER:{' '}
-                <span className="text-cyan-200">{formData.db_server}</span>
+                DB Server:{' '}
+                <span className="text-slate-100">{formData.db_server}</span>
               </span>
               <br></br>
               <button
-                className="my-4 flex items-center rounded-sm border border-slate-900 bg-slate-500 p-1 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white "
+                className="my-4 flex items-center justify-center rounded-sm border border-slate-600 bg-slate-500 p-1 text-gray-200 shadow-xl hover:bg-slate-700 hover:text-white  "
                 onClick={handleClick}
               >
                 Disconnect
