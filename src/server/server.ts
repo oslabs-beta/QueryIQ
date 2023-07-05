@@ -65,6 +65,11 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+//catch all to non-existent routes
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).send('Page not found')
+})
+
 // Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr = {
