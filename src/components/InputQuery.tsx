@@ -122,7 +122,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
 
   return (
     <>
-      <div className=" outline-blue flex w-full flex-col items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center">
         <form
           onSubmit={handleGoClick}
           className="flex w-full flex-col items-center justify-center"
