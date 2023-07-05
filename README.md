@@ -5,7 +5,7 @@
 
 <div align="center">
   <a href="https://github.com/oslabs-beta/QueryIQ">
-    <img src="public/assets/logo-full-background-color.png" alt="Logo" width="700" height="auto">
+    <img src="public/assets/logo-full-background-color.png" alt="Logo" width="970" height="auto">
   </a>
   <br />
   <!-- PROJECT LANDING PAGE WEBSITE INSERT HERE ONCE AVAILABLE -->
