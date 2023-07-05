@@ -11,7 +11,7 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
   grafanaUser,
 }) => {
   return (
-    <form className="flex h-auto w-auto flex-col items-center justify-center space-y-2">
+    <form className="flex h-auto w-auto flex-col items-center justify-center space-y-2 text-slate-100 text-lg tracking-wide font-bold">
       <label>Grafana Username</label>
       <ModalFormInput
         placeholder="Username"
@@ -48,7 +48,7 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
       />
       <div className="h-45 w-45 flex justify-center">
         <button
-          className="m-4 border bg-slate-500 p-2 shadow-xl hover:bg-slate-600 hover:text-white text-gray-200 rounded-sm"
+          className="m-4 p-4 border bg-slate-500 shadow-xl text-xl hover:bg-slate-600 hover:text-slate-300 text-slate-100 rounded-sm hover:transform hover:scale-105"
           disabled={
             !formData.graf_name || !formData.graf_pass || !formData.graf_port
           }
@@ -57,7 +57,7 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
           Next
         </button>
         <button
-          className="m-4 border bg-slate-500 p-2 shadow-xl hover:bg-slate-600 hover:text-white text-gray-200 rounded-sm"
+          className="m-4 p-4 border bg-slate-500 shadow-xl text-xl hover:bg-slate-600 hover:text-slate-300 text-slate-100 rounded-sm hover:transform hover:scale-105"
           onClick={handleCancel}
         >
           Cancel

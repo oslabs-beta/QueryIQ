@@ -10,13 +10,17 @@ const Popup: React.FC<PopupProps> = ({ text }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-      <div className="flex flex-col h-auto w-auto rounded-lg bg-white p-4">
+    // Background overlay
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 ">
+      {/* Popup Container */}
+      <div className="flex flex-col h-auto w-auto rounded-lg ring ring-2 ring-slate-50 bg-slate-800 px-12 py-8 text-slate-100 text-2xl">
+      {/* Popup Title Text */}
         <p>{text}</p>
         <button
-          className="m-2 rounded-lg border border-gray-900 bg-red-400 p-2 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+          className="mx-4 mt-8 mb-4 p-4 rounded-sm ring ring-2 ring-slate-50 bg-slate-500 shadow-xl hover:bg-slate-600 hover:text-slate-300 text-xl hover:transform hover:scale-105 text-slate-100"
           onClick={handleClick}
         >
+      {/* Button Text */}
           Cancel
         </button>
       </div>
