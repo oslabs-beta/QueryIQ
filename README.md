@@ -115,7 +115,33 @@ QueryIQ does not store any user data, most importantly including database connec
 <br></br>
 
 ### Prerequisites
-<br></br>
+
+  - Ensure you have the following installed before the starting the steps below:
+
+      ➮ Go to the following link to download the latest version (10.0.1) of Grafana: https://grafana.com/docs/grafana/latest/setup-grafana/installation/
+
+      ➮ Go to your grafana.ini configurations file and ensure you have the following configurations. Refer to the the link if you're having trouble locating the grafana.ini: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/
+
+
+        allow_embedding = true
+        auth.anonymous 
+        enabled = true
+        org_name = <<org name>>
+        org_role = Viewer
+
+    ➮ Once you have Grafana installed, run the following command to start your Grafana local instance and ensure you've logged in successfully in the Grafana server
+
+    ```sh
+    brew services restart grafana 
+    ```
+
+    ➮ For the PostgreSQL database you connect to, ensure pg_stat_statements is enabled. Refer to the link for further details: https://virtual-dba.com/blog/postgresql-performance-enabling-pg-stat-statements/
+
+
+
+
+
+
 
 ### Step 1 - .....
 
