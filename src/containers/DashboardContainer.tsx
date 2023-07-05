@@ -12,9 +12,9 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
   connection,
 }) => {
   return (
-    <div className="outline-green flex h-full w-full flex-wrap items-center justify-around outline-red p-6">
+    <div className="outline-green flex h-full w-full flex-wrap items-center justify-around px-6">
       <div className="flex h-full w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-slate-600  shadow-xl md:h-full">
-        <div className="outline-red flex w-full">
+        <div className="flex w-full">
           <span
             className={`flex w-6/12  items-center justify-center border border-slate-600 p-1 text-center text-gray-100 hover:bg-slate-700 ${
               dashboardState === 'database' ? 'bg-gray-800' : 'bg-slate-500'

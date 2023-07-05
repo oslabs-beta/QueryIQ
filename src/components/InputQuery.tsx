@@ -125,12 +125,12 @@ const InputQuery: React.FC<InputQueryProps> = ({
       <div className=" flex w-full flex-col items-center justify-center">
         <form
           onSubmit={handleGoClick}
-          className=" flex flex-col w-full items-center justify-center"
+          className="flex flex-col w-full items-center justify-center"
         >
-          <div className="relative w-full">
+          <div className="relative w-full ">
             <textarea
 
-              className=" px-2 py-1 my-1 rounded-md py-1 text-lg shadow-xl w-full"
+              className="outline-purple resize-y md:h-[155px] min-h-[38px] max-h-[155px] px-2 py-1 my-1 rounded-md py-1 text-lg shadow-xl w-full bg-slate-700 text-slate-200 focus:outline-none ring ring-1 ring-slate-50"
               placeholder="Enter your query here.."
               value={query}
               onChange={(e) => setQuery(e.target.value)}

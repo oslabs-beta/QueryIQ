@@ -10,7 +10,7 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
   handleCancel,
 }) => {
   return (
-    <form className="flex h-auto w-auto flex-col items-center justify-center space-y-2">
+    <form className="flex h-auto w-auto flex-col items-center justify-center space-y-2 text-slate-100 text-lg tracking-wide">
       <label>Database Name</label>
       <ModalFormInput
         placeholder="Database Name"
@@ -54,14 +54,14 @@ const DBCredentials: React.FC<DBCredentialsProps> = ({
       />
       <div className="h-45 w-45 flex justify-center">
         <button
-          className="m-4 rounded-sm border bg-slate-500 p-3 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white text-lg"
+          className="m-4 p-4 rounded-sm border bg-slate-500 shadow-xl hover:bg-slate-600 hover:text-slate-300 text-xl hover:transform hover:scale-105 text-slate-100"
           disabled={!isFormValid}
           onClick={handleConnect}
         >
           Connect
         </button>
         <button
-          className="m-4 rounded-sm border bg-slate-500 p-3 text-gray-200 shadow-xl hover:bg-slate-600 hover:text-white text-lg"
+          className="m-4 p-4 rounded-sm border bg-slate-500 shadow-xl hover:bg-slate-600 hover:text-slate-300 text-xl hover:transform hover:scale-105 text-slate-100"
           onClick={handleCancel}
         >
           Cancel

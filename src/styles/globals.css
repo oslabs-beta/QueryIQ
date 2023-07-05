@@ -8,23 +8,23 @@ body {
   height: 100dvh;
 }
 
-.outline-red {
-  outline: 1px solid red;
+@layer utilities {
+    .h-100dvh {
+        height: 100dvh;
+    }
+    .mb-128 {
+        margin-bottom: 36rem;
+    }
+    .outline-red {
+         outline: 1px solid red;
+    }
+    .outline-blue {
+        outline: 1px solid cyan;
+    }
+    .outline-green {
+        outline: 1px solid chartreuse;
+    }
+    .outline-purple {
+        outline: 1px solid magenta;
+    }
 }
-
-.outline-blue {
-  outline: 1px solid cyan;
-}
-
-.outline-green {
-  outline: 1px solid chartreuse;
-}
-
-.outline-purple {
-  outline: 1px solid magenta;
-}
-
-.h-100dvh {
-    height: 100dvh;
-}
-
