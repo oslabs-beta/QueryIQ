@@ -13,14 +13,14 @@ const FAQ = () => {
         />
         <link rel="icon" href="../../public/favicon.ico" />
       </Head>
-      <main className="max-h-full w-screen min-w-full max-w-full bg-white">
+      <main className="max-h-full w-screen min-w-full max-w-full bg-gray-900">
         <Header />
         <div className="px-16">
-          <div className="mt-12 rounded-lg bg-white p-4 py-8 shadow-xl shadow-med">
-            <h4 className="text-center text-4xl font-bold uppercase tracking-widest text-gray-800">
+          <div className="mt-12 rounded-lg bg-gray-800 p-4 py-8 shadow-xl shadow-med">
+            <h4 className="text-center text-4xl font-bold uppercase tracking-widest text-white">
               FAQ
             </h4>
-            <p className="mt-2 text-center text-sm text-gray-600">
+            <p className="mt-2 text-center text-sm text-white">
               Here are some of the frequently asked questions
             </p>
             <div className="mt-12 space-y-12 px-2 xl:px-16">
@@ -30,7 +30,7 @@ const FAQ = () => {
                     <span className="px-4 text-4xl text-blue-600">Q.</span>
                   </div>
                   <div className="flex h-16 items-center border-l-4 border-gray-400">
-                    <span className="px-4 text-4xl text-gray-400">A.</span>
+                    <span className="px-4 text-4xl text-white">A.</span>
                   </div>
                 </div>
                 <div>
@@ -40,7 +40,7 @@ const FAQ = () => {
                     </span>
                   </div>
                   <div className="flex items-center py-2">
-                    <span className="text-gray-500">
+                    <span className="text-white">
                       Performance metrics for SQL database queries are
                       measurements used to assess the efficiency and
                       effectiveness of query execution. They include metrics
@@ -57,7 +57,7 @@ const FAQ = () => {
                     <span className="px-4 text-4xl text-blue-600">Q.</span>
                   </div>
                   <div className="flex h-16 items-center border-l-4 border-gray-400">
-                    <span className="px-4 text-4xl text-gray-400">A.</span>
+                    <span className="px-4 text-4xl text-white">A.</span>
                   </div>
                 </div>
                 <div>
@@ -67,7 +67,7 @@ const FAQ = () => {
                     </span>
                   </div>
                   <div className="flex items-center py-2">
-                    <span className="text-gray-500">
+                    <span className="text-white">
                       Performance metrics for database queries matter because
                       they provide insights into system efficiency, user
                       experience, scalability, cost optimization,
@@ -87,7 +87,7 @@ const FAQ = () => {
                     <span className="px-4 text-4xl text-blue-600">Q.</span>
                   </div>
                   <div className="flex h-16 items-center border-l-4 border-gray-400">
-                    <span className="px-4 text-4xl text-gray-400">A.</span>
+                    <span className="px-4 text-4xl text-white">A.</span>
                   </div>
                 </div>
                 <div>
@@ -97,7 +97,7 @@ const FAQ = () => {
                     </span>
                   </div>
                   <div className="flex items-center py-2">
-                    <span className="text-gray-500">
+                    <span className="text-white">
                       Query execution time refers to the duration it takes for a
                       query to complete. To optimize query execution time, you
                       can consider strategies such as indexing the appropriate
@@ -115,7 +115,7 @@ const FAQ = () => {
                     <span className="px-4 text-4xl text-blue-600">Q.</span>
                   </div>
                   <div className="flex h-16 items-center border-l-4 border-gray-400">
-                    <span className="px-4 text-4xl text-gray-400">A.</span>
+                    <span className="px-4 text-4xl text-white">A.</span>
                   </div>
                 </div>
                 <div>
@@ -125,7 +125,7 @@ const FAQ = () => {
                     </span>
                   </div>
                   <div className="flex items-center py-2">
-                    <span className="text-gray-500">
+                    <span className="text-white">
                       Query throughput refers to the number of queries that can
                       be processed within a given timeframe. To improve query
                       throughput, you can optimize the database schema, utilize
@@ -143,7 +143,7 @@ const FAQ = () => {
                     <span className="px-4 text-4xl text-blue-600">Q.</span>
                   </div>
                   <div className="flex h-16 items-center border-l-4 border-gray-400">
-                    <span className="px-4 text-4xl text-gray-400">A.</span>
+                    <span className="px-4 text-4xl text-white">A.</span>
                   </div>
                 </div>
                 <div>
@@ -154,7 +154,7 @@ const FAQ = () => {
                     </span>
                   </div>
                   <div className="flex items-center py-2">
-                    <span className="text-gray-500">
+                    <span className="text-white">
                       Query optimization involves improving the efficiency of
                       SQL queries by selecting optimal execution plans. You can
                       optimize SQL queries by using appropriate indexing,
@@ -172,7 +172,7 @@ const FAQ = () => {
                     <span className="px-4 text-4xl text-blue-600">Q.</span>
                   </div>
                   <div className="flex h-16 items-center border-l-4 border-gray-400">
-                    <span className="px-4 text-4xl text-gray-400">A.</span>
+                    <span className="px-4 text-4xl text-white">A.</span>
                   </div>
                 </div>
                 <div>
@@ -183,7 +183,7 @@ const FAQ = () => {
                     </span>
                   </div>
                   <div className="flex items-center py-2">
-                    <span className="text-gray-500">
+                    <span className="text-white">
                       Common performance issues with SQL queries include slow
                       query execution, high resource utilization, lack of
                       indexing, inefficient join operations, and suboptimal
