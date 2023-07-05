@@ -12,7 +12,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
   connection,
 }) => {
   return (
-    <div className="outline-green flex h-full w-full flex-wrap items-center justify-around px-6">
+    <div className="flex h-full w-full flex-wrap items-center justify-around px-6">
       <div className="flex h-full w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-slate-600  shadow-xl md:h-full">
         <div className="flex w-full">
           <span

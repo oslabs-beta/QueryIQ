@@ -130,7 +130,7 @@ const InputQuery: React.FC<InputQueryProps> = ({
           <div className="relative w-full ">
             <textarea
 
-              className="outline-purple resize-y md:h-[155px] min-h-[38px] max-h-[155px] px-2 py-1 my-1 rounded-md py-1 text-lg shadow-xl w-full bg-slate-700 text-slate-200 focus:outline-none ring ring-1 ring-slate-50"
+              className="resize-y md:h-[155px] min-h-[38px] max-h-[155px] px-2 py-1 my-1 rounded-md py-1 text-lg shadow-xl w-full bg-slate-700 text-slate-200 focus:outline-none ring ring-1 ring-slate-50"
               placeholder="Enter your query here.."
               value={query}
               onChange={(e) => setQuery(e.target.value)}

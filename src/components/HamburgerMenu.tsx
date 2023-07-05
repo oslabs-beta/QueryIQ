@@ -14,10 +14,10 @@ const HamburgerMenu = () => {
   return (
     <div className={`hamburger-menu relative ${isOpen ? 'open' : ''}`}>
       <div className="hamburger-icon" onClick={toggleMenu}>
-        <GiHamburgerMenu className="outline-red mr-6 h-6 w-6 text-slate-100" />
+        <GiHamburgerMenu className="mr-6 h-6 w-6 text-slate-100" />
       </div>
       {isOpen && (
-        <div className="menu-modal outline-blue absolute right-12 top-full ml-8 bg-slate-600 p-4 text-lg font-bold tracking-widest text-slate-100 shadow">
+        <div className="menu-modal absolute right-12 top-full ml-8 bg-slate-600 p-4 text-lg font-bold tracking-widest text-slate-100 shadow">
           <ul className="menu-items">
             <li className="py-2">
               <Link href="/homepage">Home</Link>

@@ -244,7 +244,7 @@ const MainContainer: React.FC = ({}) => {
   }
 
   return (
-    <div className="outline-blue flex h-full w-full flex-col md:flex-row h-100dvh overflow-y-hidden">
+    <div className="flex h-full w-full flex-col md:flex-row h-100dvh overflow-y-hidden">
       {/* {!mutation.isLoading ? <></> : <Popup text='Loading...'/>}
       {!mutation.error ? <></> : <Popup text={mutation.error.message}/>} */}
       {!isModalOpen ? (

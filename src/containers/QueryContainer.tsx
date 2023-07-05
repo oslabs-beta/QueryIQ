@@ -19,8 +19,8 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   dbUid,
 }) => {
   return (
-    <div className="outline-purple flex h-auto w-full flex-col justify-between md:h-auto md:w-10/12">
-      <div className="outline-red h-1/6 flex-none p-4">
+    <div className="purple flex h-auto w-full flex-col justify-between md:h-auto md:w-10/12">
+      <div className=" h-1/6 flex-none p-4">
         <div className="flex justify-center">
           <InputQuery
             setQueryLog={setQueryLog}
