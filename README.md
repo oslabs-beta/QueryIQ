@@ -116,8 +116,6 @@ QueryIQ does not store any user data, most importantly including database connec
 
 ### Prerequisites
 
-  - Ensure you have the following installed before the starting the steps below:
-
       ➮ Go to the following link to download the latest version (10.0.1) of Grafana: https://grafana.com/docs/grafana/latest/setup-grafana/installation/
 
       ➮ Go to your grafana.ini configurations file and ensure you have the following configurations. Refer to the the link if you're having trouble locating the grafana.ini: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/
