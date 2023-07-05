@@ -11,6 +11,7 @@
 body {
   background-image: linear-gradient(to bottom, #0f0f0f, #1f1f1f);
   height: 100dvh;
+  
 }
 
 @layer utilities {

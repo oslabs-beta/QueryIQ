@@ -5,7 +5,7 @@ const GraphCard: React.FC<GraphCardProps> = ({ src, key }) => {
   return (
     <div
       key={key}
-      className="h-78 w-78 my-5 mx-3 rounded-lg border border-gray-900  bg-red-100 shadow"
+      className="h-78 w-78 mx-3 my-5 rounded-md bg-slate-900 shadow ring ring-1 ring-slate-600"
     >
       <iframe src={src} width="480" height="220" frameborder="0"></iframe>
     </div>

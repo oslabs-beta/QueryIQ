@@ -58,11 +58,11 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
     <li>
       {!editMode ? (
         <div
-          className={`flex w-full items-center justify-between border-b border-black p-4 text-left text-indigo-300 
+          className={`flex w-full items-center justify-between border-b border-black p-4 text-left text-slate-300 
           ${
             activeQuery === queryLogObject
-              ? 'bg-indigo-900 hover:bg-indigo-800'
-              : 'bg-gray-800 hover:bg-indigo-800'
+              ? 'bg-slate-500 hover:bg-slate-700'
+              : 'bg-slate-800 hover:bg-slate-700'
           }`}
           onClick={handleClick}
         >
@@ -103,7 +103,7 @@ const QueryLogItem: React.FC<QueryLogItemProps> = ({
           </div>
         </div>
       ) : (
-        <div className="flex w-full items-center justify-between border-b border-t border-black bg-gray-800 p-4 text-indigo-300">
+        <div className="flex w-full items-center justify-between border-b border-t border-black bg-gray-800 p-4 text-slate-300">
           <form
             onSubmit={handleFormSubmit}
             className="flex w-full items-center justify-between"

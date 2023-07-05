@@ -122,12 +122,12 @@ const InputQuery: React.FC<InputQueryProps> = ({
 
   return (
     <>
-      <div className=" flex w-full flex-col items-center justify-center">
+      <div className=" outline-blue flex w-full flex-col items-center justify-center">
         <form
           onSubmit={handleGoClick}
           className="flex w-full flex-col items-center justify-center"
         >
-          <div className="relative w-full ">
+          <div className="relative w-full">
             <textarea
               className="my-1 max-h-[155px] min-h-[38px] w-full resize-y rounded-md bg-slate-700 px-2 py-1 py-1 text-lg text-slate-200 shadow-xl ring ring-1 ring-slate-50 focus:outline-none md:h-[155px]"
               placeholder="Enter your query here.."
@@ -138,19 +138,21 @@ const InputQuery: React.FC<InputQueryProps> = ({
               {/* <BsKeyboard />{' '} */}
             </span>
           </div>
-          <button
-            type="submit"
-            disabled={!query || !connection}
-            className="w-30 text-1xl my-2 flex items-center justify-center rounded-sm bg-slate-600 px-8 py-2 font-bold tracking-widest text-slate-100 shadow-xl ring ring-2 ring-slate-50 hover:scale-105 hover:transform hover:bg-slate-700 hover:text-slate-100"
-          >
-            <span>Submit</span>
-            <span className=" ml-2">
-              <BsArrowRightCircleFill className="text-xl" />
-            </span>
-          </button>
+          {!isLoading ? (
+            <button
+              type="submit"
+              disabled={!query || !connection}
+              className="w-30 text-1xl my-2 flex items-center justify-center rounded-sm bg-slate-600 px-8 py-2 font-bold tracking-widest text-slate-100 shadow-xl ring ring-2 ring-slate-50 hover:scale-105 hover:transform hover:bg-slate-700 hover:text-slate-100"
+            >
+              <span>Submit</span>
+              <span className=" ml-2">
+                <BsArrowRightCircleFill className="text-xl" />
+              </span>
+            </button>
+          ) : (
+            <LoadingBar loadingProgress={loadingProgress} />
+          )}
         </form>
-
-        {!isLoading ? <></> : <LoadingBar loadingProgress={loadingProgress} />}
       </div>
     </>
   );

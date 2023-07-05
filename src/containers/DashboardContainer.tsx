@@ -12,7 +12,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
   connection,
 }) => {
   return (
-    <div className="flex h-[77%] w-full flex-wrap items-center justify-around px-6">
+    <div className="outline-green flex h-[77%] w-full flex-wrap items-center justify-around px-6">
       <div className="flex h-full w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-slate-600  shadow-xl md:h-full">
         <div className="flex w-full">
           <span
@@ -51,7 +51,7 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
             )}
           </div>
         ) : dashboardState === 'query' ? (
-          <div className="flex h-auto w-full flex-wrap justify-center gap-x-4 overflow-y-auto bg-slate-950 p-4 text-gray-200  md:h-full">
+          <div className="flex h-auto w-full flex-wrap justify-center gap-x-4 overflow-y-none bg-slate-950 p-4 text-gray-200  md:h-full">
             <div className="h-24 w-full overflow-y-auto rounded-lg border border-slate-600 bg-slate-600 p-4 text-left text-gray-200">
               {activeQuery.query}
             </div>
