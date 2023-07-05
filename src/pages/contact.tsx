@@ -44,11 +44,11 @@ const Contact = () => {
         <meta name="description" content="Contact page for the team members" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="max-h-full w-screen min-w-full max-w-full flex flex-col items-center justify-center bg-black space-x-20 space-y-10">
+      <main className="max-h-full w-screen min-w-full max-w-full flex flex-col items-center justify-center bg-transparent space-x-20 space-y-10">
         <Header />
         <div className=" container mx-auto px-4 py-8 space-y-10 ">
           <h1 className="text-5xl font-bold text-white">Meet Our Team</h1>
-          <div className="mt-8 flex flex-wrap gap-8 justify-center bg-black  ">
+          <div className="mt-8 flex flex-wrap gap-8 justify-center bg-transparent ">
             {teamMembers.map((member, index) => (
               <div
                 key={index}
@@ -57,7 +57,7 @@ const Contact = () => {
                 <figure className="aspect-square max-h-64 overflow-hidden ">
                 <a href={member.image} target="_blank" rel="noopener noreferrer">
                   <Image
-                    className="h-full w-full object-cover transition group-hover:scale-110"
+                    className="h-full w-full object-cover transition group-hover:scale-110 rounded-2xl"
                     src={member.image}
                     loader={({ src }) => src}
                     alt="Profile"
