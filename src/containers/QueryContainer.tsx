@@ -19,7 +19,7 @@ const QueryContainer: React.FC<QueryContainerProps> = ({
   dbUid,
 }) => {
   return (
-    <div className="purple flex h-auto w-full flex-col justify-between md:h-auto md:w-10/12">
+    <div className="purple flex h-auto w-full flex-col justify-between space-y-28 sm:space-y-16 md:h-auto md:w-10/12 md:space-y-8">
       <div className=" h-1/6 flex-none p-4">
         <div className="flex justify-center">
           <InputQuery

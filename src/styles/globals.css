@@ -2,29 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  /* className="bg-gradient-to-b from-[#0f0f0f] to-[#1f1f1f] */
   background-image: linear-gradient(to bottom, #0f0f0f, #1f1f1f);
   height: 100dvh;
 }
 
 @layer utilities {
-    .h-100dvh {
-        height: 100dvh;
-    }
-    .mb-128 {
-        margin-bottom: 36rem;
-    }
-    .outline-red {
-         outline: 1px solid red;
-    }
-    .outline-blue {
-        outline: 1px solid cyan;
-    }
-    .outline-green {
-        outline: 1px solid chartreuse;
-    }
-    .outline-purple {
-        outline: 1px solid magenta;
-    }
+  .h-100dvh {
+    height: 100dvh;
+  }
+  .mb-128 {
+    margin-bottom: 36rem;
+  }
+  .outline-red {
+    outline: 1px solid red;
+  }
+  .outline-blue {
+    outline: 1px solid cyan;
+  }
+  .outline-green {
+    outline: 1px solid chartreuse;
+  }
+  .outline-purple {
+    outline: 1px solid magenta;
+  }
 }

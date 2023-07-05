@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         </div>
         <div className="flex flex-col items-center md:flex-row md:space-x-4">
           <Link href="/homepage" className="font-reem-kufi text-6xl text-white">
-            QueryIQ
+            Query IQ
           </Link>
         </div>
       </div>
