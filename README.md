@@ -90,7 +90,7 @@ Easily manage your postgresQL connection, health, and performance metrics
 
 ### ➮ Grafana Integration
 
-Query IQ simplifies managing your Grafana instance by creating data sources, customizing dashboards, and imbedding graphs within the application
+Query IQ simplifies managing your Grafana instance by creating data sources, customizing dashboards, and imbedding graphs within the application. Users also have the option to remove their data sources and dashboards as needed.
 
 ### ➮ Overall metrics on database health including:
 
