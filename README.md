@@ -112,12 +112,11 @@ Query IQ simplifies managing your Grafana instance by creating data sources, cus
 - Execution time
 
 ### ➮ Secured authorization through Google Oauth with required login
-
-Privacy and security within QueryIQ is maintained through running in individual local server along with Grafana's local instance with authorization required.
+Users are required to login with Google Oauth for authorization prior to using the application. 
 
 ### ➮ Privacy and Security
 
-QueryIQ does not store any user data, most importantly including database connection information, usernames, and passwords. Data is maintained within Grafana's local instance with authorization required and access restricted by the client as needed.
+Privacy and security within QueryIQ is maintained through running in individual local server along with Grafana's local instance with authorization required. QueryIQ does not store any user data, most importantly including database connection information, usernames, and passwords. Data is maintained within Grafana's local instance with authorization required and access restricted by the client as needed.
 
 # Installation
 
