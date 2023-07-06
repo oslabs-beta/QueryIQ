@@ -78,11 +78,16 @@ User inputting an arbitrary query to receive query execution stats:
 
 # Key Features:
 
-### ➮ PostgresQL Database Connection
+### ➮ PostgresQL Support
 
-Easily access to database connection through Grafana local server within one place
+Easily manage your postgresQL connection, health, and performance metrics
+
+### ➮ Grafana Integration
+
+Query IQ simplifies managing your Grafana instance by creating data sources, customizing dashboards, and imbedding graphs within the application
 
 ### ➮ Overall metrics on database health including:
+
 - Queries with the Longest Running Queries
 - Queries with the Highest Average Execution Time
 - Queries with the Highest Memory Usage
@@ -99,10 +104,6 @@ Easily access to database connection through Grafana local server within one pla
 - Sequence scan with actual time, rows, and width
 - Planning time
 - Execution time
-
-### ➮ Ability to disconnect to a database and delete dashboards
-
-### ➮ Ability to delete past query inputs
 
 ### ➮ Secured authorization through Google Oauth with required login
 
