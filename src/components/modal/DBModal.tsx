@@ -27,9 +27,9 @@ const DBModal: React.FC<DBModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
-      <div className="h-auto w-auto rounded-lg bg-white p-4">
-        <h1 className="p-5 text-xl font-bold">Connect to a Database</h1>
+    <div className="fixed inset-0 z-50 flex items-center justify-center h-100dvh bg-black bg-opacity-75">
+      <div className=" h-auto w-auto rounded-lg bg-slate-800 p-8 py-12  ring ring-2 ring-slate-50">
+        <h1 className="p-5 text-3xl tracking-wide font-bold text-slate-100">Connect to a Database</h1>
         {dbSelection === 0 ? (
           <DBSelection handleCancel={handleCancel} handleClick={handleClick} />
         ) : dbSelection === 1 ? (

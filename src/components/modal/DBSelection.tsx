@@ -8,13 +8,13 @@ const DBSelection: React.FC<DBSelectionProps> = ({
   return (
     <div className="h-45 w-45 flex justify-center">
       <button
-        className="m-4 rounded-lg border border-gray-900 bg-indigo-500 p-5 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+        className="w-auto p-4 m-4 ring ring-2 ring-slate-50 bg-slate-500 text-slate-200 shadow-xl hover:bg-slate-600 hover:text-slate-300 text-gray-200 p-3 rounded-sm hover:transform hover:scale-105"
         onClick={handleClick}
       >
         PostgreSQL
       </button>
       <button
-        className="m-4 rounded-lg border border-gray-900 bg-red-400 p-5 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+        className="m-4 p-4  ring ring-2 ring-slate-50 bg-slate-500 p-3 shadow-xl text-slate-200 hover:bg-slate-600 hover:text-slate-300 text-gray-200 rounded-sm hover:transform hover:scale-105"
         onClick={handleCancel}
       >
         Cancel

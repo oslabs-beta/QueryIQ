@@ -6,36 +6,29 @@ import type { SideBarContainerProps } from '~/types/types';
 const SideBarContainer: React.FC<SideBarContainerProps> = ({
   openModal,
   connection,
-  setConnection,
   formData,
   setFormData,
   queryLog,
   editQueryLabel,
-  setTestConnected,
-  testConnected,
+  deleteQuery,
   setActiveQuery,
   activeQuery,
   setDashboardState,
-  databaseGraphs,
-  setDatabaseGraphs,
+  disconnectDB,
 }) => {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center  md:h-full md:w-1/4">
+    <div className="flex w-full h-full flex-col items-center justify-start mt-5 md:h-4/5 md:w-1/4  overflow-y-auto bg-slate-950 rounded-md border border-slate-600 ">
       <DBConnect
         openModal={openModal}
         connection={connection}
-        setConnection={setConnection}
         formData={formData}
         setFormData={setFormData}
-        testConnected={testConnected}
-        setTestConnected={setTestConnected}
-        setDashboardState={setDashboardState}
-        databaseGraphs={databaseGraphs}
-        setDatabaseGraphs={setDatabaseGraphs}
+        disconnectDB={disconnectDB}
       />
       <QueryLog
         queryLog={queryLog}
         editQueryLabel={editQueryLabel}
+        deleteQuery={deleteQuery}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}
@@ -43,5 +36,7 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
     </div>
   );
 };
+
+
 
 export default SideBarContainer;

@@ -1,51 +1,46 @@
 import React from 'react';
+import GraphCard from '~/components/GraphCard';
 import type { DashboardContainerProps } from '~/types/types';
-import GraphCard from '~/components/Graphs/GraphCard';
-
-// Will render same test graphs for query as the test db metrics at the moment, can be replaced with query graphs when implemented.
+import { GiHealthNormal } from 'react-icons/gi';
+import { AiOutlineLineChart } from 'react-icons/ai';
 
 const DashboardContainer: React.FC<DashboardContainerProps> = ({
-  testConnected,
   activeQuery,
   dashboardState,
   setDashboardState,
   databaseGraphs,
-  queryGraphs,
   connection,
 }) => {
   return (
-    <div className="flex h-full w-full flex-wrap items-center justify-around p-4">
-      <div className="mb-8 mt-9 flex h-1/4 w-full flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl md:h-1/4">
+    <div className=" flex h-[77%] w-full flex-wrap items-center justify-around px-6">
+      <div className="flex h-full w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-slate-600  shadow-xl md:h-full">
         <div className="flex w-full">
           <span
-            className={`w-6/12 border-black p-1 text-center text-indigo-300 hover:bg-indigo-800 ${
-              dashboardState === 'database' ? 'bg-indigo-900' : 'bg-gray-900'
+            className={`flex w-6/12  items-center justify-center border border-slate-600 p-1 text-center text-gray-100 hover:bg-slate-700 ${
+              dashboardState === 'database' ? 'bg-slate-500' : 'bg-gray-800'
             }`}
             onClick={() => setDashboardState('database')}
           >
+            <span className="mr-2">
+              <GiHealthNormal />
+            </span>
             Database Health Metrics
           </span>
           <span
-            className={`w-6/12 border-black p-1 text-center text-indigo-300 hover:bg-indigo-800 ${
-              dashboardState === 'query' ? 'bg-indigo-900' : 'bg-gray-900'
+            className={`flex w-6/12  items-center justify-center border border-slate-600 p-1 text-center text-gray-100 hover:bg-slate-700 ${
+              dashboardState === 'query' ? 'bg-slate-500' : 'bg-gray-800'
             }`}
             onClick={() => setDashboardState('query')}
           >
+            <span className="mr-2">
+              <AiOutlineLineChart />
+            </span>
             Active Query
           </span>
         </div>
         {dashboardState === 'database' ? (
-          <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-gray-800 p-4 text-indigo-300 md:h-96">
+          <div className="flex h-auto w-full flex-wrap justify-center gap-x-4 overflow-y-auto bg-slate-950 p-4 text-gray-200  md:h-full">
             {!connection ? (
-              <></>
-            ) : (
-              <>
-                {databaseGraphs.map((src, index) => {
-                  return <GraphCard key={index} src={src}></GraphCard>;
-                })}
-              </>
-            )}
-            {!testConnected ? (
               <></>
             ) : (
               <>
@@ -56,13 +51,12 @@ const DashboardContainer: React.FC<DashboardContainerProps> = ({
             )}
           </div>
         ) : dashboardState === 'query' ? (
-          <div className="h-96 w-full overflow-y-auto bg-gray-800 p-4 text-left text-indigo-300">
-            <div className="h-24 w-full overflow-y-auto rounded-lg border-black bg-gray-600 p-4 text-left text-indigo-300">
+          <div className="flex h-auto w-full flex-wrap justify-center gap-x-4 overflow-y-none bg-slate-950 p-4 text-gray-200  md:h-full">
+            <div className="h-24 w-full overflow-y-auto rounded-lg border border-slate-600 bg-slate-600 p-4 text-left text-gray-200">
               {activeQuery.query}
             </div>
-            <div className="flex h-full w-full flex-col items-center bg-gray-800 p-4 text-indigo-300 md:h-96">
-              {queryGraphs.map((src, index) => {
-                console.log(queryGraphs);
+            <div className="flex h-auto w-full flex-col items-center bg-slate-950 p-4 text-gray-200 md:h-full">
+              {activeQuery.data.map((src, index) => {
                 return <GraphCard key={index} src={src}></GraphCard>;
               })}
             </div>

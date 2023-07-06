@@ -1,8 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import LoadingBar from './LoadingBar';
-import type { InputQueryProps, GrafanaUserObject, QueryLogItemObject } from '~/types/types';
-import {useMutation} from 'react-query';
+import Popup from './Popup';
+import type {
+  InputQueryProps,
+  GrafanaUserObject,
+  QueryLogItemObject,
+  dbUid,
+} from '~/types/types';
+import { useMutation } from 'react-query';
+import { BsKeyboard, BsArrowRightCircleFill } from 'react-icons/bs';
 
 const InputQuery: React.FC<InputQueryProps> = ({
   setQueryLog,
@@ -10,9 +17,9 @@ const InputQuery: React.FC<InputQueryProps> = ({
   query,
   setActiveQuery,
   setDashboardState,
-  setQueryGraphs,
   grafanaUser,
   dbUid,
+  connection,
 }) => {
   //useState for loading bar
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -32,123 +39,120 @@ const InputQuery: React.FC<InputQueryProps> = ({
     });
   };
 
-  // grafanaUser passed down from mainContainer should contain a user's Grafana credentials after connection to a database is established.
-  // and dbUid passed down from mainContainer should be a string of the datasource uid
-
-  /**
-   * shape of object:
-   *  grafanaUser = {
-   *   graf_name: string;
-   *   graf_pass: string;
-   *   graf_port: string;
-   *  }
-  */ 
-
-
-    //KT's code for fetching POST for the input query dashboard to Grafana
+  //KT's code for fetching POST for the input query dashboard to Grafana
   //use mutation from react query to fetch a post request to send api to create dashboard for input query
 
-  //request body:
-// {"query":"SELECT SUM(Payment.amount) AS sum_amt FROM payment;",
-// "GrafanaCredentials":
-// {"graf_name":"admin",
-// "graf_port":"3000",
-// "graf_pass":"Codesmith23*"},
-// "datasourceUID":"c4c87f1f-afa8-41a2-9744-7c3d9d9fe2e0"}
-
-  const mutationQuery = useMutation(async ({query, dbUid, grafanaUser}: {query: string, dbUid: string, grafanaUser: GrafanaUserObject}) => {
-    
-    const apiUrl = 'http://localhost:3001/api/query';
-    //deconstruct query for the request response
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        //might not need this if this is already in the controller?
-        Authorization: `Basic ${Buffer.from(`${grafanaUser.graf_name}:${grafanaUser.graf_pass}`).toString('base64')}`,
-      },
-      body: JSON.stringify({
-        query: query,
-        GrafanaCredentials: {
-          graf_name: grafanaUser.graf_name,
-          graf_port: grafanaUser.graf_port,
-          graf_pass: grafanaUser.graf_pass,
+  const mutationQuery = useMutation(
+    async ({
+      query,
+      dbUid,
+      grafanaUser,
+    }: {
+      query: string;
+      dbUid: dbUid;
+      grafanaUser: GrafanaUserObject;
+    }) => {
+      const apiUrl = 'http://localhost:3001/api/query';
+      //deconstruct query for the request response
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        datasourceUID: dbUid,
-      }),
-    });
-    // If response is less than 200 or greater than 300
-    // Basically, if response is NOT 200-299
-    if (response.status <= 199 && response.status >= 300) {
-      throw new Error('Failed to connect'); // Handle error
+        body: JSON.stringify({
+          query: query,
+          GrafanaCredentials: {
+            graf_name: grafanaUser.graf_name,
+            graf_port: grafanaUser.graf_port,
+            graf_pass: grafanaUser.graf_pass,
+          },
+          datasourceUID: dbUid.datasourceUid,
+        }),
+      });
+      // If response is less than 200 or greater than 300
+      // Basically, if response is NOT 200-299
+      if (response.status <= 199 && response.status >= 300) {
+        throw new Error('Failed to connect'); // Handle error
+      }
+      return response.json();
     }
-    return response.json();
-  });
+  );
 
   const handleGoClick = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     try {
-      const response = await mutationQuery.mutateAsync({
+      const response = (await mutationQuery.mutateAsync({
         query,
         dbUid,
         grafanaUser,
-      }) as void | {slug: string, uid: string, status: number, iFrames: string[]};
+      })) as void | {
+        slug: string;
+        uid: string;
+        status: number;
+        iFrames: string[];
+      };
       await asyncLoadingSim();
-      console.log('THIS IS RESPONSE', response);
-      const { iFrames } = response;
-      const newQuery : QueryLogItemObject = { query: query, data: iFrames, name: '' };
+      const { iFrames, uid } = response;
+      const newQuery: QueryLogItemObject = {
+        query: query,
+        data: iFrames,
+        name: '',
+        dashboardUID: uid,
+      };
       setQueryLog((prevQueryLog) => [...prevQueryLog, newQuery]);
       setQuery('');
       setActiveQuery(newQuery);
-      setQueryGraphs(newQuery.data);
       setDashboardState('query');
     } catch (error) {
       console.error(error);
     }
   };
-
-   // hardcoded query results from: SELECT SUM(Payment.amount) AS sum_amt FROM payment
-    // setQueryGraphs([
-    //   'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802712822&to=1687824312822&panelId=2',
-    //   'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802730181&to=1687824330181&panelId=3',
-    //   'http://localhost:3000/d-solo/InputQueryExample/testinputqueryexample?orgId=1&from=1687802741315&to=1687824341315&panelId=4',
-    // ]);
-
+  // TO DO: want to move this conditional to the return statement and plug in our loading bar component
+  //if post request is still loading
   if (mutationQuery.isLoading) {
-    return <div>Loading...</div>;
+    return <Popup text="Loading..." />;
   }
 
-  //if post request fails to fetch
+  // //if post request fails to fetch
   if (mutationQuery.error) {
-    return <div>Error: {mutationQuery.error.message}</div>;
+    return <Popup text={mutationQuery.error.message} />;
   }
 
   return (
     <>
-      <div className=" flex w-7/12 flex-col items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center">
         <form
           onSubmit={handleGoClick}
           className="flex w-full flex-col items-center justify-center"
         >
-          <input
-            className="my-1 w-full rounded-md p-1 shadow-xl"
-            placeholder="Input Query Here..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <button
-            type="submit"
-            disabled={!query}
-            className="my-2 w-24 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-          >
-            GO
-          </button>
+          <div className="relative w-full">
+            <textarea
+              className="my-1 max-h-[155px] min-h-[38px] w-full resize-y rounded-md bg-slate-700 px-2 py-1 py-1 text-lg text-slate-200 shadow-xl ring ring-1 ring-slate-50 focus:outline-none md:h-[155px]"
+              placeholder="Enter your query here.."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <span className="absolute left-2 top-1/2 -translate-y-1/2 transform">
+              {/* <BsKeyboard />{' '} */}
+            </span>
+          </div>
+          {!isLoading ? (
+            <button
+              type="submit"
+              disabled={!query || !connection}
+              className="w-30 text-1xl my-2 flex items-center justify-center rounded-sm bg-slate-600 px-8 py-2 font-bold tracking-widest text-slate-100 shadow-xl ring ring-2 ring-slate-50 hover:scale-105 hover:transform hover:bg-slate-700 hover:text-slate-100"
+            >
+              <span>Submit</span>
+              <span className=" ml-2">
+                <BsArrowRightCircleFill className="text-xl" />
+              </span>
+            </button>
+          ) : (
+            <LoadingBar loadingProgress={loadingProgress} />
+          )}
         </form>
-
-        {!isLoading ? <></> : <LoadingBar loadingProgress={loadingProgress} />}
       </div>
     </>
   );

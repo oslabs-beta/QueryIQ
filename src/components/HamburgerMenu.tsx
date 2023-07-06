@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { signOut, signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 
 const HamburgerMenu = () => {
+  const { data: sessionData } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -10,12 +12,12 @@ const HamburgerMenu = () => {
   };
 
   return (
-    <div className={`hamburger-menu relative ${isOpen ? 'open' : ''}`}>
+    <div className={`hamburger-menu relative z-50 ${isOpen ? 'open' : ''}`}>
       <div className="hamburger-icon" onClick={toggleMenu}>
-        <GiHamburgerMenu className="h-6 w-6 text-black" />
+        <GiHamburgerMenu className="mr-6 h-10 w-10 text-slate-100" />
       </div>
       {isOpen && (
-        <div className="menu-modal absolute right-0 top-full bg-white p-4 shadow">
+        <div className="menu-modal absolute right-12 top-full ml-8 rounded-md bg-slate-600 px-12 py-8 text-xl font-bold tracking-widest text-slate-100 shadow ring ring-2 ring-slate-50">
           <ul className="menu-items">
             <li className="py-2">
               <Link href="/homepage">Home</Link>
@@ -30,16 +32,29 @@ const HamburgerMenu = () => {
               <Link href="/contact">Contact</Link>
             </li>
             <li className="py-2">
-              <Link href="https://github.com/oslabs-beta/QueryIQ/blob/main/README.md">Docs</Link>
+              <a href="https://github.com/oslabs-beta/QueryIQ/blob/main/README.md" target="_blank" rel="noopener noreferrer">
+                Docs
+              </a>
             </li>
-            <li className="py-2">Logout</li>
+            <li
+              className="py-2"
+              onClick={
+                sessionData
+                  ? () => {
+                      void signOut({ callbackUrl: window.location.origin });
+                    }
+                  : () => {
+                      void signIn();
+                    }
+              }
+            >
+              {sessionData ? 'Logout' : 'Sign in'}
+            </li>
           </ul>
         </div>
       )}
     </div>
   );
 };
-/**<Link href="http://localhost:3000/homepage">
-              <h3 className="text-2xl font-bold">HOME PAGE →</h3>
-            </Link> */
+
 export default HamburgerMenu;

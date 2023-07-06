@@ -11,18 +11,17 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
   grafanaUser,
 }) => {
   return (
-    <form className="flex h-auto w-auto flex-col items-center justify-center space-y-2">
+    <form className="flex h-auto w-auto flex-col items-center justify-center space-y-2 text-slate-100 text-lg tracking-wide font-bold">
       <label>Grafana Username</label>
       <ModalFormInput
         placeholder="Username"
         type="text"
         value={formData.graf_name && grafanaUser.graf_name}
         onChange={(e) => {
-            const { value } = e.target;
-            setFormData({ ...formData, graf_name: value });
-            setGrafanaUser({...grafanaUser, graf_name: value});
-          }
-        }
+          const { value } = e.target;
+          setFormData({ ...formData, graf_name: value });
+          setGrafanaUser({ ...grafanaUser, graf_name: value });
+        }}
       />
       {/* <input className="rounded-lg border border-gray-900 p-2"></input> */}
       <label>Grafana Password</label>
@@ -31,11 +30,10 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
         type="password"
         value={formData.graf_pass && grafanaUser.graf_pass}
         onChange={(e) => {
-            const { value } = e.target;
-            setFormData({ ...formData, graf_pass: value });
-            setGrafanaUser({ ...grafanaUser, graf_pass: value });
-          }
-        }
+          const { value } = e.target;
+          setFormData({ ...formData, graf_pass: value });
+          setGrafanaUser({ ...grafanaUser, graf_pass: value });
+        }}
       />
       <label>Grafana Port</label>
       <ModalFormInput
@@ -43,15 +41,14 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
         type="text"
         value={formData.graf_port && grafanaUser.graf_port}
         onChange={(e) => {
-            const { value } = e.target;
-            setFormData({ ...formData, graf_port: value });
-            setGrafanaUser({ ...grafanaUser, graf_port: value});
-          }
-        }
+          const { value } = e.target;
+          setFormData({ ...formData, graf_port: value });
+          setGrafanaUser({ ...grafanaUser, graf_port: value });
+        }}
       />
       <div className="h-45 w-45 flex justify-center">
         <button
-          className="m-4 rounded-lg border border-gray-900 bg-indigo-500 p-2 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+          className="m-4 p-4 border bg-slate-500 shadow-xl text-xl hover:bg-slate-600 hover:text-slate-300 text-slate-100 rounded-sm hover:transform hover:scale-105"
           disabled={
             !formData.graf_name || !formData.graf_pass || !formData.graf_port
           }
@@ -60,7 +57,7 @@ const GrafanaCredentials: React.FC<GrafanaCredentialsProps> = ({
           Next
         </button>
         <button
-          className="m-4 rounded-lg border border-gray-900 bg-red-400 p-2 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+          className="m-4 p-4 border bg-slate-500 shadow-xl text-xl hover:bg-slate-600 hover:text-slate-300 text-slate-100 rounded-sm hover:transform hover:scale-105"
           onClick={handleCancel}
         >
           Cancel

@@ -30,7 +30,10 @@ nextApp
   .prepare()
   .then(() => {
     app.get('*', (req: Request, res: Response) => {
-      return handle(req, res);
+      handle(req, res).catch((error) => {
+        console.error(error);
+        res.status(500).send('Error occured during Next.js message handling');
+      });
     });
   })
   .catch((err: Error): void => {
@@ -62,6 +65,11 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+//catch all to non-existent routes
+app.use('*', (req: Request, res: Response) => {
+  res.status(404).send('Page not found')
+})
+
 // Global error handler
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr = {
@@ -74,4 +82,6 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(port, () => console.log(`> Ready on http://localhost:${port}`));
+app.listen(port, () =>
+  console.log(`> Express OK, served at http://localhost:${port}`)
+);

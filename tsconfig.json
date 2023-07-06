@@ -20,7 +20,7 @@
     "paths": {
       "~/*": ["./src/*"]
     },
-    "types": ["node", "next", "next/types/global"],
+    "types": ["node", "next", "next/types/global", "jest"],
     "outDir": "./dist"
   },
   "include": [

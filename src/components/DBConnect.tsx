@@ -1,27 +1,15 @@
 import React from 'react';
-import DBCard from './DBCard';
 import type { DBConnectProps } from '~/types/types';
-// import { useMutation } from 'react-query';
-
-
+import { BsDatabaseAdd } from 'react-icons/bs';
 
 const DBConnect: React.FC<DBConnectProps> = ({
   openModal,
   connection,
-  setConnection,
   formData,
   setFormData,
-  setTestConnected,
-  testConnected,
-  databaseGraphs,
-  setDatabaseGraphs,
+  disconnectDB,
 }) => {
-
-
-
-  // only for display purposes, conditionally renders an artifical "connected to DB" state and "disconnected from DB" state
-
-  const handleConnect =  () => {
+  const handleConnect = () => {
     setFormData({
       graf_name: '',
       graf_pass: '',
@@ -32,81 +20,48 @@ const DBConnect: React.FC<DBConnectProps> = ({
       db_server: '',
       db_password: '',
     });
-     openModal(true);
-
+    openModal(true);
   };
 
-
-  const handleClick = () => {
-    connection ? setConnection(false) : setConnection(true);
-  };
-
-  // setting database to hardcoded iframe data for now, will replace with iframes received from grafana
-  const handleClickTestDB = () => {
-    if (!testConnected) {
-      setDatabaseGraphs([
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776408132&to=1687798008132&panelId=3',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776441081&to=1687798041081&panelId=4',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776468593&to=1687798068593&panelId=1',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776520531&to=1687798120531&panelId=9',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776643111&to=1687798243111&panelId=8',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776561866&to=1687798161866&panelId=2',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776716637&to=1687798316637&panelId=7',
-        'http://localhost:3000/d-solo/a2dc4fc5-613f-4527-b267-a01f274f4612/dvdrental-dashboard?orgId=1&from=1687301145947&to=1687322745947&panelId=6',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687777521961&to=1687799121961&panelId=5',
-        'http://localhost:3000/d-solo/bce239a6-b14d-4359-a4f4-7bca1820ab2d/queryiq-for-database-performance-metrics-for-dvd-rental?orgId=1&from=1687776959519&to=1687798559519&panelId=12',
-      ]);
-    } else {
-      setDatabaseGraphs([]);
-    }
-    setTestConnected((prevState) => !prevState);
+  const handleClick = async () => {
+    await disconnectDB();
   };
 
   return (
     <div className="flex w-11/12 flex-col items-center justify-center">
-      {/**conditionally renders DB disconnected or DB connected**/}
       {!connection ? (
         <>
           <button
-            className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+            className="my-4 mt-12 flex items-center rounded-sm  bg-slate-500 p-1 text-slate-100 shadow-xl ring ring-2 ring-slate-50  hover:scale-105  hover:transform hover:bg-slate-700 hover:text-slate-300"
             onClick={handleConnect}
           >
-            Connect to Database
+            <span className="ml-2 mr-2 pb-1 text-5xl">
+              <BsDatabaseAdd />
+            </span>
+            <span className="mr-2 p-3 text-lg font-bold tracking-widest text-slate-100">
+              Connect to Database
+            </span>
           </button>
-          <span>OR</span>
-          {/* <span>Use Test Data</span> */}
-          <button
-            className="my-4 rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
-            onClick={handleClickTestDB}
-          >
-            {' '}
-            {testConnected ? 'Disconnect from test DB' : 'Connect to test DB'}
-          </button>
-          {testConnected && (
-            <div className="flex flex-col items-center justify-center">
-              <DBCard />
-            </div>
-          )}
         </>
       ) : (
         <>
-          <div className="my-8 flex w-full flex-col items-center justify-start overflow-y-auto rounded-lg border border-gray-900 shadow-xl">
-            <span className="w-full border-black bg-gray-900 p-1 text-center text-indigo-300">
+          <div className="my-8 flex w-full flex-col items-center justify-start overflow-y-auto rounded-md border border-gray-900 shadow-xl hover:bg-slate-700 ">
+            <span className="w-full border-black bg-gray-900 p-1 text-center font-bold tracking-wide text-slate-100">
               Active Connection
             </span>
-            <div className="items center flex w-full flex-col justify-center bg-gray-800 p-4 text-indigo-300 shadow-xl">
+            <div className="items center flex w-full flex-col justify-center bg-gray-800 p-4 font-bold tracking-wide text-slate-300 shadow-xl">
               <span>
-                DB NAME:{' '}
-                <span className="text-cyan-200">{formData.db_name}</span>
+                DB Name:{' '}
+                <span className="text-slate-100">{formData.db_name}</span>
               </span>
               <br></br>
               <span>
-                DB SERVER:{' '}
-                <span className="text-cyan-200">{formData.db_server}</span>
+                DB Server:{' '}
+                <span className="text-slate-100">{formData.db_server}</span>
               </span>
               <br></br>
               <button
-                className="rounded-lg border border-gray-900 bg-indigo-500 p-1 text-gray-900 shadow-xl hover:bg-gray-900 hover:text-indigo-500"
+                className="my-4 flex items-center justify-center rounded-sm bg-slate-500 p-1 font-bold tracking-wide text-slate-100 shadow-xl ring ring-1 ring-slate-50 hover:scale-105 hover:transform hover:bg-slate-700 hover:text-slate-300"
                 onClick={handleClick}
               >
                 Disconnect

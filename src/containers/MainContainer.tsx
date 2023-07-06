@@ -1,22 +1,28 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import { useMutation } from 'react-query';
 import QueryContainer from './QueryContainer';
 import SideBarContainer from './SideBarContainer';
-import { useState, useEffect } from 'react';
 import DBModal from '~/components/modal/DBModal';
-import type { QueryLogItemObject, FormData, GrafanaUserObject } from '~/types/types';
-import { useMutation } from 'react-query';
+import Popup from '~/components/Popup';
+import type {
+  QueryLogItemObject,
+  FormData,
+  GrafanaUserObject,
+} from '~/types/types';
 
 const MainContainer: React.FC = ({}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(''); // inputQuery state
   const [queryLog, setQueryLog] = useState<QueryLogItemObject[]>([]);
   const [connection, setConnection] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+
   const [grafanaUser, setGrafanaUser] = useState<GrafanaUserObject>({
     graf_name: '',
     graf_pass: '',
     graf_port: '',
   });
+  const [isFormValid, setIsFormValid] = useState(false);
   const [formData, setFormData] = useState({
     graf_name: '',
     graf_pass: '',
@@ -27,18 +33,16 @@ const MainContainer: React.FC = ({}) => {
     db_server: '',
     db_password: '',
   });
-  const [dashboardState, setDashboardState] = useState('database');
-  const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
-  const [dbUid, setdbUid] = useState('');
-  const [queryGraphs, setQueryGraphs] = useState<string[]>([]);
+  const [dbUid, setdbUid] = useState({ datasourceUid: '', dashboardUid: '' });
 
-  //for connecting to test DB
-  const [testConnected, setTestConnected] = useState(false);
+  const [dashboardState, setDashboardState] = useState('database'); // alt state is 'query'
+  const [databaseGraphs, setDatabaseGraphs] = useState<string[]>([]);
 
   const [activeQuery, setActiveQuery] = useState<QueryLogItemObject>({
     query: '',
     data: [],
     name: '',
+    dashboardUID: '',
   });
 
   //checking form validation on input changes for credentials
@@ -88,9 +92,6 @@ const MainContainer: React.FC = ({}) => {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Basic ${Buffer.from(
-          `${graf_name}:${graf_pass}`
-        ).toString('base64')}`,
       },
       body: JSON.stringify({
         graf_name,
@@ -113,67 +114,30 @@ const MainContainer: React.FC = ({}) => {
   // will only fire if isFormValid === true
   const handleConnect = async () => {
     try {
-      const {
-        graf_name,
-        graf_pass,
-        graf_port,
-        db_name,
-        db_url,
-        db_username,
-        db_server,
-        db_password,
-      } = formData;
       // mutation is an object returned by the useMutation hook and mutateAsync is a method provided by mutation object
       // await mutation.mutateAsync waits for the mutation operation to complete before moving to the next line
-      const response = await mutation.mutateAsync({
-        graf_name,
-        graf_pass,
-        graf_port,
-        db_name,
-        db_url,
-        db_username,
-        db_server,
-        db_password,
-      }) as void | {slug: string, uid: string, status: number, iFrames: string[]};
-
-    // If response is less than 200 or greater than 300
-    // Basically, if response is NOT 200-299
+      const response = (await mutation.mutateAsync(formData)) as void | {
+        slug: string;
+        uid: string;
+        status: number;
+        iFrames: string[];
+      };
+      // if response is NOT 200-299
       if (response.status <= 199 && response.status >= 300) {
-        throw new Error('Failed to connect'); // Handle error
+        throw new Error('Failed to connect');
       }
-      //used to say response.data
-      const { iFrames, datasourceuid } = response;
-      setdbUid(datasourceuid);
-      setDatabaseGraphs(iFrames); // pass in array of Iframes
+      const { iFrames, datasourceuid, dashboarduid } = response;
+      setdbUid({ datasourceUid: datasourceuid, dashboardUid: dashboarduid });
+      setDatabaseGraphs(iFrames);
       setDashboardState('database');
       setConnection(true);
       setIsModalOpen(false);
     } catch (error) {
-      // Handle error
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    // TODO: Does useEffect need to be here?
-    console.log('Updated databaseGraphs:', databaseGraphs);
-  }, [databaseGraphs]);
-  
-  useEffect(() => {
-    // TODO: Does useEffect need to be here?
-    console.log('Updated dbUid:', dbUid);
-  }, [dbUid]);
-
-  //if post request is still loading
-  if (mutation.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  //if post request fails to fetch
-  if (mutation.error) {
-    return <div>Error: {mutation.error.message}</div>;
-  }
-
+  // finds querylog object in array and updates the name property
   const editQueryLabel = (index: number, label: string): void => {
     setQueryLog((prevQueryLog) => {
       if (prevQueryLog.length > index) {
@@ -185,8 +149,104 @@ const MainContainer: React.FC = ({}) => {
     });
   };
 
+  const deleteQuery = async (index: number): Promise<void> => {
+    const queryToDelete = queryLog[index];
+    const isDeletingActiveQuery = queryToDelete === activeQuery;
+    try {
+      // make async call to backend to delete query specific dashboard
+      const url = 'http://localhost:3001/api/delete';
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          dashboardUID: queryToDelete.dashboardUID,
+          datasourceUID: dbUid,
+          GrafanaCredentials: {
+            graf_port: grafanaUser.graf_port,
+            graf_name: grafanaUser.graf_name,
+            graf_pass: grafanaUser.graf_pass,
+          },
+        }),
+      });
+      const data = await response.json();
+      if (data.status <= 199 && response.status >= 300) {
+        throw new Error('Failed to connect');
+      }
+      setQueryLog((prevQueryLog) => {
+        if (prevQueryLog.length > index) {
+          const updatedQueryLog = [...prevQueryLog];
+          updatedQueryLog.splice(index, 1);
+          return updatedQueryLog;
+        }
+      });
+      if (isDeletingActiveQuery) {
+        setActiveQuery({
+          query: '',
+          data: [],
+          name: '',
+          dashboardUID: '',
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const disconnectDB = async (): Promise<void> => {
+    try {
+      // make async call to backend to delete query specific dashboard
+      const url = 'http://localhost:3001/api/disconnect';
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          dashboardUID: dbUid.dashboardUid,
+          datasourceUID: dbUid.datasourceUid,
+          GrafanaCredentials: {
+            graf_port: grafanaUser.graf_port,
+            graf_name: grafanaUser.graf_name,
+            graf_pass: grafanaUser.graf_pass,
+          },
+        }),
+      });
+      const data = await response.json();
+      if (data.status <= 199 && response.status >= 300) {
+        throw new Error('Failed to connect');
+      }
+      setConnection(false);
+      setDatabaseGraphs([]);
+      setdbUid({ datasourceUid: '', dashboardUid: '' });
+      setGrafanaUser({
+        graf_name: '',
+        graf_pass: '',
+        graf_port: '',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // TO DO: want to move this conditional to the return statement and plug in our loading bar component
+  //if post request is still loading
+  if (mutation.isLoading) {
+    return <Popup text="Loading..." />;
+  }
+
+  // //if post request fails to fetch
+  if (mutation.error) {
+    return <Popup text={mutation.error.message} />;
+  }
+
   return (
-    <div className="flex h-full w-full flex-col bg-gradient-to-b from-purple-900 to-white md:flex-row">
+    <div className="flex h-full w-full flex-col md:flex-row h-100dvh overflow-y-hidden">
+      {/* {!mutation.isLoading ? <></> : <Popup text='Loading...'/>}
+      {!mutation.error ? <></> : <Popup text={mutation.error.message}/>} */}
       {!isModalOpen ? (
         <></>
       ) : (
@@ -205,32 +265,26 @@ const MainContainer: React.FC = ({}) => {
       <SideBarContainer
         openModal={setIsModalOpen}
         connection={connection}
-        setConnection={setConnection}
         setFormData={setFormData}
         formData={formData}
         queryLog={queryLog}
         setQueryLog={setQueryLog}
         editQueryLabel={editQueryLabel}
-        testConnected={testConnected}
-        setTestConnected={setTestConnected}
+        deleteQuery={deleteQuery}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}
-        databaseGraphs={databaseGraphs}
-        setDatabaseGraphs={setDatabaseGraphs}
+        disconnectDB={disconnectDB}
       />
       <QueryContainer
         setQueryLog={setQueryLog}
         setQuery={setQuery}
         query={query}
-        testConnected={testConnected}
         activeQuery={activeQuery}
         setActiveQuery={setActiveQuery}
         dashboardState={dashboardState}
         setDashboardState={setDashboardState}
         databaseGraphs={databaseGraphs}
-        queryGraphs={queryGraphs}
-        setQueryGraphs={setQueryGraphs}
         connection={connection}
         grafanaUser={grafanaUser}
         dbUid={dbUid}

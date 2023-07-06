@@ -6,7 +6,6 @@ export type GrafanaUserObject = {
   graf_port: string;
 }
 
-
 export type FormData = {
   graf_name: string;
   graf_pass: string;
@@ -18,43 +17,41 @@ export type FormData = {
   db_password: string;
 };
 
+export type dbUid = {
+  datasourceUid: string;
+  dashboardUid: string;
+}
+
 // parent container
 export type SideBarContainerProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
   queryLog: QueryLogItemObject[];
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   editQueryLabel: (index: number, label: string) => void;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
+  deleteQuery: (index: number) => Promise<void>;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
-  databaseGraphs: string[];
-  setDatabaseGraphs: React.Dispatch<React.SetStateAction<string[]>>;
+  disconnectDB: () => Promise<void>;
 };
 
 // child of SideBarContainer
 export type DBConnectProps = {
   openModal: React.Dispatch<React.SetStateAction<boolean>>;
   connection: boolean;
-  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
   formData: FormData;
   setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
-  setDashboardState: React.Dispatch<React.SetStateAction<string>>;
-  databaseGraphs: string[];
-  setDatabaseGraphs: React.Dispatch<React.SetStateAction<string[]>>;
+  disconnectDB: () => Promise<void>;
 };
 
 // child of SideBarContainer
 export type QueryLogProps = {
   queryLog: QueryLogItemObject[];
   editQueryLabel: (index: number, label: string) => void;
+  deleteQuery: (index: number) => Promise<void>;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
@@ -63,9 +60,8 @@ export type QueryLogProps = {
 // child of QueryLog
 export type QueryLogItemProps = {
   index: number;
-  // handleEditHover: (bool: boolean) => void;
-  // isHovered: boolean;
   editQueryLabel: (index: number, label: string) => void;
+  deleteQuery: (index: number) => Promise<void>;
   queryLogObject: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   activeQuery: QueryLogItemObject;
@@ -77,6 +73,7 @@ export type QueryLogItemObject = {
   query: string;
   data: string[];
   name: string;
+  dashboardUID: string;
 };
 
 // Parent container
@@ -84,18 +81,14 @@ export type QueryContainerProps = {
   setQueryLog: React.Dispatch<React.SetStateAction<Array<QueryLogItemObject>>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
   query: string;
-  // setTestConnected: React.Dispatch<React.SetStateAction<boolean>>;
-  testConnected: boolean;
   activeQuery: QueryLogItemObject;
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
-  queryGraphs: string[];
-  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
   connection: boolean;
   grafanaUser: GrafanaUserObject;
-  dbUid: string;
+  dbUid: dbUid;
 };
 
 // child of QueryContainer
@@ -106,9 +99,9 @@ export type InputQueryProps = {
   setActiveQuery: React.Dispatch<React.SetStateAction<QueryLogItemObject>>;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   activeQuery: QueryLogItemObject;
-  setQueryGraphs: React.Dispatch<React.SetStateAction<string[]>>;
   grafanaUser: GrafanaUserObject;
-  dbUid: string;
+  dbUid: dbUid;
+  connection: boolean;
 };
 
 // child of InputQuery
@@ -118,12 +111,10 @@ export type LoadingBarProps = {
 
 // parent container
 export type DashboardContainerProps = {
-  testConnected: boolean;
   activeQuery: QueryLogItemObject;
   dashboardState: string;
   setDashboardState: React.Dispatch<React.SetStateAction<string>>;
   databaseGraphs: string[];
-  queryGraphs: string[];
   connection: boolean;
 };
 
@@ -161,7 +152,6 @@ export type DBCredentialsProps = {
   handleConnect: React.MouseEventHandler<HTMLButtonElement>;
   isFormValid: boolean;
   handleCancel: () => void;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 // input for modals
