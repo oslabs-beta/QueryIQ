@@ -13,7 +13,7 @@
 </div>
 
 
-<div align="center" width="100%">   
+<div align="center" width="100%">
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
@@ -58,7 +58,7 @@
 <br />
 
 # About
-QueryIQ is a developer-friendly application designed to transform the process of analyzing and optimizing PostgreSQL databases. With its features, QueryIQ enables developers to gain valuable insights by creating data visualization dashboards based on database performance and query metrics. 
+QueryIQ is a developer-friendly application designed to transform the process of analyzing and optimizing PostgreSQL databases. With its features, QueryIQ enables developers to gain valuable insights by creating data visualization dashboards based on database performance and query metrics.
 
 
 ## Demo
@@ -73,9 +73,9 @@ QueryIQ is a developer-friendly application designed to transform the process of
 
 # Key Features:
 
-### ➮ PostgresQL Database Connection 
+### ➮ PostgresQL Database Connection
 
-Easily access to database connection through Grafana local server within one place 
+Easily access to database connection through Grafana local server within one place
 
 ### ➮ Overall metrics on database health including:
 - Queries with the Longest Running Queries
@@ -93,76 +93,64 @@ Easily access to database connection through Grafana local server within one pla
 - Query plan by aggregated with actual time, rows, and width
 - Sequence scan with actual time, rows, and width
 - Planning time
-- Execution time 
+- Execution time
 
-### ➮ Ability to disconnect to a database and delete dashboards 
+### ➮ Ability to disconnect to a database and delete dashboards
 
-### ➮ Ability to delete past query inputs 
+### ➮ Ability to delete past query inputs
 
-### ➮ Secured authorization through Google Oauth with required login 
+### ➮ Secured authorization through Google Oauth with required login
 
-Privacy and security within QueryIQ is maintained through running in individual local server along with Grafana's local instance with authorization required. 
+Privacy and security within QueryIQ is maintained through running in individual local server along with Grafana's local instance with authorization required.
 
 ### ➮ Privacy and Security
 
 QueryIQ does not store any user data, most importantly including database connection information, usernames, and passwords. Data is maintained within Grafana's local instance with authorization required and access restricted by the client as needed.
 
-
-<br />
-
-<!-- INSTALLATION -->
 # Installation
 
-### Prerequisites
+## Prerequisites
 
 ➮ Go to the following link to download the latest version (10.0.1) of Grafana: https://grafana.com/docs/grafana/latest/setup-grafana/installation/
 
 ➮ Go to your grafana.ini configurations file and ensure you have the following configurations. Refer to the the link if you're having trouble locating the grafana.ini: https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/
 
         allow_embedding = true
-        auth.anonymous 
+        auth.anonymous
         enabled = true
         org_name = <<org name>>
         org_role = Viewer
 
 ➮ Once you have Grafana installed, run the following command to start your Grafana local instance and ensure you've logged in successfully in the Grafana server
 
-    brew services restart grafana 
+- On OSX, `brew services restart grafana`, or by running the Grafana binary
 
 ➮ For the PostgreSQL database you connect to, ensure pg_stat_statements is enabled. Refer to the link for further details: https://virtual-dba.com/blog/postgresql-performance-enabling-pg-stat-statements/
 
+## Install Query IQ
 
-### Step 1 - .....
+1. Clone this repo
+2. `cd` into project directory
+3. Run `npm install`
+4. Run `npm run npm:fullInstall` to install packages nested within the project
+5. Run `npm run serve:dev` to spin up the Next.js and Express server layers
+6. Start Grafana (please see [Prerequisites](#Prerequisites))
 
-
-
-
-
-
-
-<br />
-
-<!-- CONTRIBUTING -->
 # How to Contribute
-- Please read [CONTRIBUTING.md](#) for details on how to contribute. 
 
-<br />
+- Please read [CONTRIBUTING.md](#) for details on how to contribute.
 
 <!-- Authors -->
-# Authors:
+# Authors
 
-|     Developed By      |                                                                                                                                                         |                                                                                                                                                             |
-| :-------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|    Connor Dillon    |   [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/connoro7)    |         [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/connor-dillon/)         |
-|       Khaile Tran       |      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khailetran)       |                             [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/khailetran/)                              |
-|  Johanna Cameron  |     [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jojecameron)      |         [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/johanna-cameron/)          |
-|     Dean Biscocho     |     [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deanbiscocho)     |         [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deanbiscocho/)         |
-|      Alan Beck       |      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KAlanBeck)      |          [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/k-alan-beck/)          |
-
+| Developed By | Github | LinkedIn |
+| :-: | :-: |:-: |
+|Connor Dillon |[![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/connoro7) |[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/connor-dillon/)|
+| Khaile Tran |[![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/khailetran) |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/khailetran/)|
+|Johanna Cameron|[![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jojecameron)|[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/johanna-cameron/) |
+|Dean Biscocho|[![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/deanbiscocho)|[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/deanbiscocho/)|
+|Alan Beck |[![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KAlanBeck)| [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/k-alan-beck/) |
 
 ## Show Your Support
 
 Please ⭐️ this project if you enjoy our tool, thank you so much!
-
-
-<hr>
