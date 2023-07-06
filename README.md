@@ -62,12 +62,17 @@ QueryIQ is a developer-friendly application designed to transform the process of
 
 
 ## Demo
-<!-- TODO: INSERT DEMO HERE -->
+
 <br />
+Connecting Query IQ to user database to receive health & performance metrics:
   <div align="center">
-    <!-- <img src="assets/FullDemo.gif" alt="Logo" width="fit" height="auto"> -->
+    <img src="public/assets/Demo_connectDB.gif" alt="Logo" width="fit" height="auto">
   </div>
 <br />
+User inputting an arbitrary query to receive query execution stats:
+  <div align="center">
+    <img src="public/assets/Demo_queryInput.gif" alt="Logo" width="fit" height="auto">
+  </div>
 
 <br />
 
