@@ -172,8 +172,7 @@ const FAQ = () => {
                 <div>
                   <div className="flex h-16 items-center">
                     <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50"> 
-                      What are some common performance issues with SQL queries,
-                      and how can I address them?
+                      What are some common SQL query performance issues and solutions?
                     </span>
                   </div>
                   <div className="h-0 overflow-hidden flex items-center py-2 transition-all duration-700 group-hover:h-auto opacity-0 group-hover:opacity-100">
