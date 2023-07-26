@@ -46,3 +46,6 @@ yarn-error.log*
 # binaries
 grafana-agent*
 *config.y*ml
+
+
+landingbuild/
