@@ -103,7 +103,7 @@ const FAQ = () => {
 
               <div className="lg:w-2/4 w-full px-2 xl:px-16">
 
-              <div className="group mt-4 flex">
+              <div className="group mt-16 sm:mt-4 flex">
                 <div>
                   <div className="flex h-16 items-center border-l-4 border-teal-400">
                     <span className="px-4 text-4xl text-teal-400 font-reem-kufi">Q.</span>
