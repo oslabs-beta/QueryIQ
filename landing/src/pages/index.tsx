@@ -1,6 +1,7 @@
 import { type NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
+import Hero from '../components/Hero';
 import Header from '../components/Header';
 import About from '../components/About';
 import FAQ from '../components/FAQ';
@@ -12,6 +13,7 @@ import '../../../src/styles/globals.css';
 const LandingHome: NextPage = () => {
   return (
     <>
+    <Hero/>
       <Head>
         <Header />
         <Image
@@ -27,7 +29,6 @@ const LandingHome: NextPage = () => {
           height={500}
         />
       </Head>
-      <h1>Query IQ</h1>
       <About />
       <FAQ />
       <Team />
