@@ -103,7 +103,7 @@ const FAQ = () => {
 
               <div className="lg:w-2/4 w-full px-2 xl:px-16">
 
-              <div className="group mt-4 flex">
+              <div className="group mt-16 sm:mt-4 flex">
                 <div>
                   <div className="flex h-16 items-center border-l-4 border-teal-400">
                     <span className="px-4 text-4xl text-teal-400 font-reem-kufi">Q.</span>
@@ -172,8 +172,7 @@ const FAQ = () => {
                 <div>
                   <div className="flex h-16 items-center">
                     <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50"> 
-                      What are some common performance issues with SQL queries,
-                      and how can I address them?
+                      What are some common SQL query performance issues and solutions?
                     </span>
                   </div>
                   <div className="h-0 overflow-hidden flex items-center py-2 transition-all duration-700 group-hover:h-auto opacity-0 group-hover:opacity-100">
