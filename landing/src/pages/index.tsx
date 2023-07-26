@@ -7,6 +7,7 @@ import FAQ from '../components/FAQ';
 import Team from '../components/Team';
 import Footer from '../components/Footer';
 import '../../../src/styles/globals.css';
+// https://cdn.discordapp.com/attachments/1115285712292565056/1126317089712517190/QuIQ_query.gif
 
 const LandingHome: NextPage = () => {
   return (
@@ -14,10 +15,16 @@ const LandingHome: NextPage = () => {
       <Head>
         <Header />
         <Image
-          src="https://user-images.githubusercontent.com/32769592/256317225-f3c7607f-e661-4d0a-96a1-83665e4918bc.png"
-          alt="Query IQ Logo"
-          width={300}
-          height={200}
+          src="https://cdn.discordapp.com/attachments/1115285712292565056/1126315338221506640/QuIQ_5-13.gif"
+          alt="connect to database and display overall health gif"
+          width={500}
+          height={500}
+        />
+        <Image
+          src="https://cdn.discordapp.com/attachments/1115285712292565056/1126317089712517190/QuIQ_query.gif"
+          alt="individual query gif"
+          width={500}
+          height={500}
         />
       </Head>
       <h1>Query IQ</h1>

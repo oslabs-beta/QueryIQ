@@ -21,6 +21,10 @@ const config = {
         protocol: 'https',
         hostname: '**.githubusercontent.com'
       },
+      {
+        protocol: 'https',
+        hostname: '**.discordapp.com'
+      },
     ],
    },
    distDir: 'landingbuild',
