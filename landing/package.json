@@ -16,5 +16,10 @@
     "next": "^13.4.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.27",
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwind": "^2.2.12"
   }
 }

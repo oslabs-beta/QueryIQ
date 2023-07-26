@@ -15,9 +15,12 @@ const config = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'github.com',
-
+        hostname: ['github.com', 'githubusercontent.com']
       },
+      // {
+      //   protocol: 'https',
+      //   hostname: 'user-images.githubusercontent.com',
+      // }
     ],
    },
    distDir: 'landingbuild',
