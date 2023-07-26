@@ -17,20 +17,20 @@ const About: React.FC = () => {
             By connecting their database, QueryIQ enables developers to gain valuable insights on their database from a holistic standpoint, 
             and to receive performance data through live query execution directly to their database.
           </p>
-          <div className="mt-8 flex flex-wrap gap-8 justify-center bg-transparent">
-            <div className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white shadow transition hover:shadow-md w-[250px] h-[380px]">
+          <div className="mt-8 flex flex-wrap gap-14 justify-center bg-transparent">
+            <div className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white shadow transition hover:shadow-md w-[350px] h-[500px]">
               <h2 className="text-xl font-semibold text-gray-800">Database Health</h2>
               <p className="mt-2 text-gray-600">
                 Content for Card 1 goes here.
               </p>
-              <Image
+              {/* <Image
                 src="https://cdn.discordapp.com/attachments/1115285712292565056/1126315338221506640/QuIQ_5-13.gif"
             alt="connect to database and display overall health gif"
             width={500}
             height={500}
-            />
+            /> */}
             </div>
-            <div className="w-64 h-64 p-4 bg-gray-100 rounded-md shadow-md ml-4">
+            <div className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white shadow transition hover:shadow-md w-[350px] h-[500px]">
               <h2 className="text-xl font-semibold text-gray-800">Query Performance</h2>
               <p className="mt-2 text-gray-600">
                 Content for Card 2 goes here.
