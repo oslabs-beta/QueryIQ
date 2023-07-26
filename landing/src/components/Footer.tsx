@@ -13,9 +13,10 @@ import Image from 'next/image';
   const Footer: React.FC = () => {
   
      return (
-      <div className="flex flex-row w-screen items-center justify-between md:flex-row md:justify-between bg-slate-600 text-slate-200 px-8 py-4">
-        <p>All rights reserved</p>
-        <p>Query IQ 2023 | MIT License</p>
+      <div className="mt-12">
+      <div className="flex flex-row w-screen items-center justify-between md:flex-row md:justify-between bg-gray-300 text-slate-700 px-8 py-4">
+        <p>All Rights Reserved</p>
+        <p>© Query IQ 2023 | MIT License</p>
 
         <div className="flex items-center ">
 
@@ -53,23 +54,42 @@ import Image from 'next/image';
             />
           </a>
         </div>
+
+
+        <div className="flex items-center ">
+          {/* Make the LinkedIn image clickable */}
+          <a
+            href="https://github.com/oslabs-beta/QueryIQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-2 image-container grayscale "
+          >
+            <Image
+              src="https://user-images.githubusercontent.com/115481927/256366544-f37a7882-2184-452a-8fe3-e0586ab3b4d4.png"
+              alt="GitHub"
+              width={100}
+              height={100}
+              className="h-10 w-10 "
+            />
+          </a>
+        </div>
       </div>
 
       {/* Adding the CSS styles here */}
       <style jsx>{`
         .grayscale {
           filter: grayscale(100%);
-          transition: filter 0.3s ease;
         }
 
         .image-container:hover {
-          filter: grayscale(0%); /* Remove the grayscale filter on hover */
+          filter: contrast(115%); /* Remove the grayscale filter on hover */
         }
 
         .image-container {
           text-decoration: none;
         }
       `}</style>
+    </div>
     </div>
   );
 };
