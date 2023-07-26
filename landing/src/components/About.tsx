@@ -1,13 +1,17 @@
 import React from 'react';
+import Image from 'next/image';
 
 const About: React.FC = () => {
   return (
     <>
-      <main id="about" className="max-h-full w-screen min-w-full max-w-full bg-transparent">
+      <section id="about" className="flex items-center justify-center min-h-screen bg-transparent">
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-4xl font-bold text-white">About Us</h1>
-          <p className="mt-4 text-lg text-gray-300">
-            We are proud to present QueryIQ, a powerful tool that empowers developers to take control of their PostgreSQL databases. 
+          <h1 className="text-4xl font-bold text-slate-50  text-center">About</h1>
+          <h2 className="mt-4 text-xl font-bold text-slate-50 text-center">QueryIQ is a powerful developer tool that provides holistic insights on your SQL database.</h2>
+          {/* <h2 className="mt-4 text-xl font-bold text-slate-50  text-center">It enables developers to gain holistic insights on their database.  </h2> */}
+            <h2 className="mt-4 text-xl font-bold text-slate-50  text-center">You receive live performance metrics on troublesome queries.  </h2>
+          {/* <p className="mt-4 text-lg text-gray-300">
+            
             Whether you are an experienced developer looking to optimize performance or a novice seeking guidance, 
             QueryIQ is here to simplify the process and enhance your development experience.
           </p>
@@ -15,25 +19,69 @@ const About: React.FC = () => {
             The main goal of Query IQ is to provide a one-stop-shop for developers who seek to fine-tune their application’s interactions with a SQL database. 
             By connecting their database, QueryIQ enables developers to gain valuable insights on their database from a holistic standpoint, 
             and to receive performance data through live query execution directly to their database.
-          </p>
-          <div className="flex mt-8">
-            <div className="flex-1 p-4 bg-gray-100 rounded-md shadow-md">
-              <h2 className="text-xl font-semibold text-gray-800">Card 1</h2>
-              <p className="mt-2 text-gray-600">
-                Content for Card 1 goes here.
+          </p> */}
+          <div className="mt-8 flex flex-wrap gap-14 justify-center bg-transparent">
+            <div className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-10 pb-4 text-white shadow transition hover:shadow-md w-[350px] h-[500px]">
+            <div className="flex flex-col items-center h-full justify-center transition-transform transform-gpu hover:scale-105">
+            <div className="transition-transform transform-gpu hover:scale-105">       
+              <Image
+                src="https://user-images.githubusercontent.com/108748353/256357255-34175d9e-c633-4b22-8f57-2569b9b4475d.png"
+            alt="database health "
+            width={250}
+            height={250}
+            />
+            </div>  
+            <h2 className="text-xl font-semibold text-slate-50">Database Health Metrics</h2>
+              <p className="mt-2 text-slate-50">
+                Monitor crucial metrics for your database such as query execution time, memory usage, cache-hit ratio, etc
               </p>
+              </div>    
             </div>
-            <div className="flex-1 p-4 bg-gray-100 rounded-md shadow-md ml-4">
-              <h2 className="text-xl font-semibold text-gray-800">Card 2</h2>
-              <p className="mt-2 text-gray-600">
-                Content for Card 2 goes here.
+            <div className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-10 pb-4 text-white shadow transition hover:shadow-md w-[350px] h-[500px]">
+            <div className="flex flex-col items-center h-full justify-center transition-transform transform-gpu hover:scale-105"> 
+            <div className="transition-transform transform-gpu hover:scale-105">
+              <Image
+          src="https://user-images.githubusercontent.com/108748353/256357302-ea8b14b7-08f0-4ba5-b6ec-9233a1c69860.png"
+          alt="query performance image"
+          width={250}
+          height={250}
+        />
+        </div>  
+        <h2 className="text-xl font-semibold text-slate-50">Query Performance</h2>
+              <p className="mt-2 text-slate-50">
+                Receive a granular level analysis of individual query performance by aggregating actual time, rows, and width
               </p>
+              </div> 
             </div>
           </div>
         </div>
-
-
-      </main>
+      </section>
+      <div className="container flex mx-4">
+        <h1 className="text-xl font-semibold text-slate-50">Features:</h1>
+        <ul className="feature-list w-1/2 pl-8 text-slate-50">
+          <li className="mb-8">
+            <span className="bullet">➮</span> PostgresQL Support <br />
+            Easily manage your PostgreSQL connection, health, and performance metrics
+          </li>
+          <li className="mb-8">
+            <span className="bullet">➮</span> Grafana Integration <br />
+            Query IQ simplifies managing your Grafana instance by creating data sources, customized dashboards, and embedded graphs within the application.
+            Users also have the option to remove their data sources and dashboards as needed.
+          </li>
+          <li className="mb-8">
+            <span className="bullet">➮</span> Secured authorization through Github OAuth <br />
+            Users can easily and securely create an account using their existing Github accounts
+          </li>
+        </ul>
+        <Image
+          className="feature-image w-1/2"
+          src="https://user-images.githubusercontent.com/108748353/256357302-ea8b14b7-08f0-4ba5-b6ec-9233a1c69860.png"
+          alt="Feature Image"
+          width={200}
+          height={200}
+          unoptimized
+        />
+      </div>
     </>
   );
 };
