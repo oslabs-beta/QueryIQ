@@ -10,7 +10,7 @@ const Header: React.FC = () => {
         <div className="flex justify-center md:mx-0 md:mr-4 md:items-center md:justify-start">
           {/* <Link href="/homepage"> */}
             <Image
-              src="/../public/assets/logo-full-no-bg.png"
+              src="https://user-images.githubusercontent.com/32769592/256317225-f3c7607f-e661-4d0a-96a1-83665e4918bc.png"
               alt="Logo"
               width={64}
               height={64}

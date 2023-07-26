@@ -14,7 +14,7 @@ const LandingHome: NextPage = () => {
       <Head>
         <Header />
         <Image
-          src="/../../../public/assets/logo-full-no-bg.png"
+          src="https://user-images.githubusercontent.com/32769592/256317225-f3c7607f-e661-4d0a-96a1-83665e4918bc.png"
           alt="Query IQ Logo"
           width={300}
           height={200}

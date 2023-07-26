@@ -55,6 +55,7 @@ const Team = () => {
                     alt="Profile"
                     width={55}
                     height={55}
+                    unoptimized
                   />
                   </a>
                 </figure>
