@@ -14,10 +14,7 @@ const LandingHome: NextPage = () => {
     <>
       <Head>
         <Header />
-        
-        
       </Head>
-      <h1>Query IQ</h1>
       <About />
       <FAQ />
       <Team />
