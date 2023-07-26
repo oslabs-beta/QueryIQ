@@ -12,23 +12,24 @@ const FAQ = () => {
             <p className="mt-2 text-center text-sm text-white">
               Here are some of the frequently asked questions
             </p>
-            <div className="mt-12 space-y-12 px-2 xl:px-16">
-              <div className="mt-4 flex">
+            <div className="flex">
+            <div className="w-2/4 mt-12 space-y-12 px-2 xl:px-16">
+              <div className="group mt-4 flex">
                 <div>
                   <div className="flex h-16 items-center border-l-4 border-blue-600">
                     <span className="px-4 text-4xl text-blue-600">Q.</span>
                   </div>
-                  <div className="flex h-16 items-center border-l-4 border-gray-400">
-                    <span className="px-4 text-4xl text-white">A.</span>
+                  <div className="hidden group-hover:block flex h-16 items-center border-l-4 border-gray-400 transition duration-700">
+                    <span className="hidden group-hover:block px-4 text-4xl text-white transition-transform duration-700">A.</span>
                   </div>
                 </div>
                 <div>
                   <div className="flex h-16 items-center">
-                    <span className="text-lg font-bold text-blue-600">
+                    <span className="text-lg font-bold text-blue-600 group-hover:text-white transition duration-700">
                       What are performance metrics for SQL database queries?
                     </span>
                   </div>
-                  <div className="flex items-center py-2">
+                  <div className="hidden group-hover:block flex items-center py-2 transition duration-700">
                     <span className="text-white">
                       Performance metrics for SQL database queries are
                       measurements used to assess the efficiency and
@@ -69,7 +70,7 @@ const FAQ = () => {
                   </div>
                 </div>
               </div>
-
+              
               <div className="mt-4 flex">
                 <div>
                   <div className="flex h-16 items-center border-l-4 border-blue-600">
@@ -97,7 +98,9 @@ const FAQ = () => {
                   </div>
                 </div>
               </div>
+              </div>
 
+              <div className="w-2/4 mt-12 space-y-12 px-2 xl:px-16">
               <div className="mt-4 flex">
                 <div>
                   <div className="flex h-16 items-center border-l-4 border-blue-600">
@@ -184,6 +187,7 @@ const FAQ = () => {
                 </div>
               </div>
             </div>
+           </div>
           </div>
         </div>
       </main>
