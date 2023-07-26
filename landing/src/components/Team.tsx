@@ -68,7 +68,7 @@ const Team = () => {
                     {' '}
 
                     <Image
-                      src="https://user-images.githubusercontent.com/32769592/256312282-3ceaa3d9-04ff-4205-91e8-cca7ba160752.png"
+                        src="https://user-images.githubusercontent.com/32769592/256312287-826dbce2-c518-44d6-95f9-e52898e608c6.png"
                       alt="LinkedIn"
                       width={10}
                       height={10}
@@ -86,7 +86,7 @@ const Team = () => {
                   <div className="flex items-center justify-center">
                     {' '}
                     <Image
-                      src="https://user-images.githubusercontent.com/32769592/256312287-826dbce2-c518-44d6-95f9-e52898e608c6.png"
+                        src="https://user-images.githubusercontent.com/32769592/256312282-3ceaa3d9-04ff-4205-91e8-cca7ba160752.png"
                       alt="GitHub"
                       width={10}
                       height={10}
