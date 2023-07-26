@@ -7,13 +7,11 @@ const tailwindConfig: Config = {
       fontFamily: {
         'reem-kufi': ['Reem Kufi', 'sans-serif'],
       },
-      // Add your custom CSS here
       visibility: ['group-hover'],
     },
   },
   variants: {
     extend: {
-      // Add the group-hover variants
       visibility: ['group-hover'],
     },
   },
