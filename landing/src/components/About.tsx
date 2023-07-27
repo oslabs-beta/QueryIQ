@@ -4,7 +4,7 @@ import Image from 'next/image';
 const About: React.FC = () => {
   return (
     <>
-      <section id="about" className="flex items-center justify-center min-h-screen bg-transparent">
+      <section id="about" className="flex items-center justify-center bg-transparent">
         <div className="container mx-auto">
           <h2 className="mt-4 text-3xl font-bold text-slate-50 text-center font-reem-kufi">Query IQ is a powerful developer tool that provides holistic insights on your SQL database.</h2>
           {/* <h2 className="mt-4 text-2xl font-bold text-slate-50  text-center"></h2> */}
