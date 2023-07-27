@@ -34,7 +34,7 @@ const headerStyle = {
   top: 0,
   bottom:0,
   zIndex: 999, // Optional: To ensure the header appears above other content
-  backgroundColor: '1F1F1F', // Replace 'blue' with your desired background color
+  backgroundColor: '#1F1F1F', // Replace 'blue' with your desired background color
   padding: '8px',
 };
 
