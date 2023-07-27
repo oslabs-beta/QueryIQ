@@ -1,33 +1,47 @@
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 const Header: React.FC = () => {
-  const [isSticky, setIsSticky] = useState(false);
+//   const [sticky, setSticky] = useState({ isSticky: false, offset: 0 });
+//   const headerRef = useRef(null);
 
-  const handleScroll = () => {
-    // Get the header height or any threshold value you prefer
-    const headerHeight = 100;
 
-    if (window.scrollY > headerHeight) {
-      setIsSticky(true);
-    } else {
-      setIsSticky(false);
-    }
-  };
+//  // handle scroll event
+//  const handleScroll = (elTopOffset, elHeight) => {
+//   if (window.scrollY > (elTopOffset + elHeight)) {
+//     setSticky({ isSticky: true, offset: elHeight });
+//   } else {
+//     setSticky({ isSticky: false, offset: 0 });
+//   }
+// };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+//   // add/remove scroll event listener
+//   useEffect(() => {
+//     var header = headerRef.current.getBoundingClientRect();
+//     const handleScrollEvent = () => {
+//       handleScroll(header.top, header.height)
+//     }
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+//     window.addEventListener('scroll', handleScrollEvent);
+
+//     return () => {
+//       window.removeEventListener('scroll', handleScrollEvent);
+//     };
+//   }, []);
+
+const headerStyle = {
+  position: 'sticky',
+  top: 0,
+  bottom:0,
+  zIndex: 999, // Optional: To ensure the header appears above other content
+  backgroundColor: '#1F1F1F', // Replace 'blue' with your desired background color
+  padding: '8px',
+};
 
   return (
+    <div style={headerStyle}>
     <div
-      className={`flex items-center justify-center md:flex-row md:justify-between px-8 py-4 ${
-        isSticky ? 'fixed top-0 left-0 right-0 z-50' : ''
-      }`}
+      className="flex items-center justify-center md:flex-row md:justify-between px-8 py-4"
     >
       <div className="flex items-center space-x-4" id='header'>
         <div className="flex justify-center md:mx-0 md:mr-4 md:items-center md:justify-start">
@@ -66,6 +80,8 @@ const Header: React.FC = () => {
         </ul>
       </div>
     </div>
+  </div>
+    
   );
 };
 
