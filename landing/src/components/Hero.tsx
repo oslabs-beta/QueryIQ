@@ -27,8 +27,15 @@ const Hero = () => {
 
         <div className='container mx-auto px-4 mt-8 text-slate-100 font-reem-kufi'>
           <div className='flex flex-col items-center justify-center font-reem-kufi'>
-              <h2 className='text-3xl sm:text-3xl md:text-4xl lg:text-5xl'>Your database will thank you!
+              <h2 className='text-3xl sm:text-3xl md:text-4xl lg:text-5xl'>
+                Your database will thank you!
               </h2>
+              <Image
+                src='https://user-images.githubusercontent.com/32769592/256666522-7781d527-9e34-449e-9a13-db06fc5390c9.png'
+                alt='Query IQ Application Screenshot'
+                width={width}
+                height={0}
+                className='mt-8 bg-gradient-to-bl from-purple-800 to-teal-400 p-1 rounded-2xl rounded-md'              />
           </div>
         </div>
         </div>
