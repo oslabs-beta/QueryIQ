@@ -44,7 +44,7 @@ const Team = () => {
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white transition hover:shadow-md w-[250px] h-[350px] duration-500 hover:scale-105 hover:from-purple-700 hover:to-teal-300"
+                className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white w-[250px] h-[350px] duration-500 transition hover:scale-105 hover:from-purple-700 hover:to-teal-300 shadow-[3px_2px_14px_3px] shadow-indigo-700/70"
               >
                 <figure className="aspect-square max-h-64 overflow-hidden ">
                   <Image
