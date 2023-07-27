@@ -8,7 +8,7 @@ const Hero = () => {
   const width = '1000'
   return (
     <>
-      <section id="hero" className="outline-red max-h-full w-screen min-w-full max-w-full bg-transparent">
+      <section id="hero" className="max-h-full w-screen min-w-full max-w-full bg-transparent">
         <div className='container mx-auto px-4 py-8 text-slate-50 font-reem-kufi'>
           <div className="flex items-center justify-center space-x-4">
             <div className="flex justify-center md:mx-0 md:mr-4 ">

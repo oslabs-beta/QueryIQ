@@ -4,8 +4,8 @@ import Image from 'next/image';
 const About: React.FC = () => {
   return (
     <>
-      <section id="about" className="outline-green flex items-center justify-center min-h-screen bg-transparent">
-        <div className="outline-blue container mx-auto">
+      <section id="about" className="flex items-center justify-center min-h-screen bg-transparent">
+        <div className="container mx-auto">
           <h2 className="mt-4 text-xl font-bold text-slate-50 text-center">QueryIQ is a powerful developer tool that provides holistic insights on your SQL database.</h2>
           {/* <h2 className="mt-4 text-xl font-bold text-slate-50  text-center">It enables developers to gain holistic insights on their database.  </h2> */}
             <h2 className="mt-4 text-xl font-bold text-slate-50  text-center">You receive live performance metrics on troublesome queries.  </h2>
