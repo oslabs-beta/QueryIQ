@@ -3,13 +3,13 @@ import React from 'react';
 const FAQ = () => {
   return (
     <>
-      <section id="faq" className="max-h-full w-screen min-w-full max-w-full bg-transparent flex">
+      <section id="faq" className="max-h-full w-screen min-w-full max-w-full bg-transparent flex space-y-10 my-20">
         <div className="px-16 flex-col">
           <div className="mt-12 rounded-lg bg-transparent p-4 py-8 flex-col">
-            <h4 className="text-center text-4xl font-bold uppercase tracking-widest text-slate-50 font-reem-kufi">
+            <h4 className="text-center text-5xl font-bold uppercase tracking-widest text-slate-50 font-reem-kufi">
               FAQ
             </h4>
-            <p className="mt-2 text-center text-sm text-slate-50 font-reem-kufi mb-12">
+            <p className="mt-2 text-center text-lg text-slate-50 font-reem-kufi mb-12">
               Below you&apos;ll find the answers to some frequently asked questions
             </p>
             <div className="flex justify-center items-center flex-col lg:flex-row">
