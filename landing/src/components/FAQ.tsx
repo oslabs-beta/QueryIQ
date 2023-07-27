@@ -3,9 +3,9 @@ import React from 'react';
 const FAQ = () => {
   return (
     <>
-      <section id="faq" className="max-h-full w-screen min-w-full max-w-full bg-transparent flex space-y-10 my-20">
+      <section id="faq" className="max-h-full w-screen min-w-full max-w-full bg-transparent flex ">
         <div className="px-16 flex-col">
-          <div className="mt-12 rounded-lg bg-transparent p-4 py-8 flex-col">
+          <div className="rounded-lg bg-transparent px-4 py-8 flex-col">
             <h4 className="text-center text-5xl font-bold uppercase tracking-widest text-slate-50 font-reem-kufi">
               FAQ
             </h4>
@@ -27,7 +27,7 @@ const FAQ = () => {
                 </div>
                 <div>
                   <div className="flex h-16 items-center">
-                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50"> 
+                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50">
                       What are performance metrics for SQL database queries?
                     </span>
                   </div>
@@ -71,7 +71,7 @@ const FAQ = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="group mt-16 flex sm:mt-4">
                 <div>
                   <div className="flex h-16 items-center border-l-4 border-teal-400">
@@ -83,7 +83,7 @@ const FAQ = () => {
                 </div>
                 <div>
                   <div className="flex h-16 items-center">
-                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50"> 
+                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50">
                       What is query execution time, and how can I optimize it?
                     </span>
                   </div>
@@ -114,7 +114,7 @@ const FAQ = () => {
                 </div>
                 <div>
                   <div className="flex h-16 items-center">
-                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50"> 
+                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50">
                       What is query throughput, and how can I improve it?
                     </span>
                   </div>
@@ -142,7 +142,7 @@ const FAQ = () => {
                 </div>
                 <div>
                   <div className="flex h-16 items-center">
-                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50"> 
+                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50">
                       What is query optimization, and how can I optimize my SQL
                       queries?
                     </span>
@@ -171,7 +171,7 @@ const FAQ = () => {
                 </div>
                 <div>
                   <div className="flex h-16 items-center">
-                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50"> 
+                    <span className="text-lg font-bold text-teal-400 group-hover:text-slate-50">
                       What are some common SQL query performance issues and solutions?
                     </span>
                   </div>
