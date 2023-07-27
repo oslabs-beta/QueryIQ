@@ -7,6 +7,7 @@ import About from '../components/About';
 import FAQ from '../components/FAQ';
 import Team from '../components/Team';
 import Footer from '../components/Footer';
+import Features from '../components/Features'
 import '../../../src/styles/globals.css';
 // https://cdn.discordapp.com/attachments/1115285712292565056/1126317089712517190/QuIQ_query.gif
 
@@ -30,10 +31,12 @@ const LandingHome: NextPage = () => {
         /> */}
       </Head>
       <About />
+      <Features />
       <FAQ />
       <Team />
       <Footer />
     </>
   );
 };
+
 export default LandingHome;

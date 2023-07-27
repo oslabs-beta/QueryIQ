@@ -46,6 +46,9 @@ const Header: React.FC = () => {
             <a href="#about">About</a>
           </li>
           <li className="py-2 hover:text-gray-700 transition-colors duration-300">
+            <a href="#features">Features</a>
+          </li>
+          <li className="py-2 hover:text-gray-700 transition-colors duration-300">
             <a href="#faq">FAQ</a>
           </li>
           <li className="py-2 hover:text-gray-700 transition-colors duration-300">

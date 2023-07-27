@@ -55,35 +55,6 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <section>
-      <div className="container flex mx-4">
-        <h1 className="text-xl font-semibold text-slate-50">Features:</h1>
-        <ul className="feature-list w-1/2 pl-8 text-slate-50">
-          <li className="mb-8">
-            <span className="bullet">➮</span> PostgresQL Support <br />
-            Easily manage your PostgreSQL connection, health, and performance metrics
-          </li>
-          <li className="mb-8">
-            <span className="bullet">➮</span> Grafana Integration <br />
-            Query IQ simplifies managing your Grafana instance by creating data sources, customized dashboards, and embedded graphs within the application.
-            Users also have the option to remove their data sources and dashboards as needed.
-          </li>
-          <li className="mb-8">
-            <span className="bullet">➮</span> Secured authorization through Github OAuth <br />
-            Users can easily and securely create an account using their existing Github accounts
-          </li>
-        </ul>
-        <Image
-          className="feature-image w-1/2"
-          src="https://user-images.githubusercontent.com/108748353/256357302-ea8b14b7-08f0-4ba5-b6ec-9233a1c69860.png"
-          alt="Feature Image"
-          width={200}
-          height={200}
-          unoptimized
-        />
-      </div>
-      </section>
     </>
   );
 };
