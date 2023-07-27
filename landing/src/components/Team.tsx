@@ -37,19 +37,18 @@ const Team = () => {
   ];
   return (
     <>
-      <main id="team" className="max-h-full w-screen min-w-full max-w-full flex flex-col items-center justify-center bg-transparent space-x-20 space-y-10">
-        <div className=" container mx-auto px-4 py-8 space-y-10 ">
-          <h1 className="text-5xl font-bold text-white">Meet Our Team</h1>
+      <section id="team" className="max-h-full w-screen min-w-full max-w-full flex flex-col items-center justify-center bg-transparent space-x-20 space-y-10 my-20">
+        <div className="container mx-auto px-4 py-8 space-y-10 ">
+          <h1 className="text-5xl mb-20 font-bold text-white text-center font-reem-kufi">Meet Our Team</h1>
           <div className="mt-8 flex flex-wrap gap-8 justify-center bg-transparent ">
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white shadow transition hover:shadow-md w-[250px] h-[380px]"
+                className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-1 pb-4 text-white transition hover:shadow-md w-[250px] h-[350px] duration-500 hover:scale-105 hover:from-purple-700 hover:to-teal-300"
               >
                 <figure className="aspect-square max-h-64 overflow-hidden ">
-                <a href={member.image} target="_blank" rel="noopener noreferrer">
                   <Image
-                    className="h-full w-full object-cover transition group-hover:scale-110 rounded-2xl"
+                    className="h-full w-full object-cover rounded-2xl"
                     src={member.image}
                     loader={({ src }) => src}
                     alt="Profile"
@@ -57,18 +56,17 @@ const Team = () => {
                     height={55}
                     unoptimized
                   />
-                  </a>
                 </figure>
 
-                <h2 className="mt-2 text-center text-lg font-semibold text-white">
+                <h2 className="mt-2 text-center text-xl font-semibold text-white font-reem-kufi">
                   {member.name}
                 </h2>
-                <div className="mt-4 text-center">
+                <div className="mt-4 flex justify-evenly">
                   <div className="flex items-center justify-center">
                     {' '}
 
                     <Image
-                        src="https://user-images.githubusercontent.com/32769592/256312287-826dbce2-c518-44d6-95f9-e52898e608c6.png"
+                      src="https://user-images.githubusercontent.com/32769592/256312287-826dbce2-c518-44d6-95f9-e52898e608c6.png"
                       alt="LinkedIn"
                       width={10}
                       height={10}
@@ -106,7 +104,7 @@ const Team = () => {
             ))}
           </div>
         </div>
-      </main>
+      </section>
     </>
   );
 };
