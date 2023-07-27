@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-  
+
 const Footer: React.FC = () => {
   return (
     <div id="footer" className="mt-12">
@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
             href="https://medium.com/@queryiqteam/query-iq-monitoring-postgresql-database-health-quantifying-query-efficiency-375de6e7ac2a"
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-2 image-container grayscale"
+            className="mx-2 image-container grayscale hover:transform hover:scale-105"
           >
             <Image
               src="https://user-images.githubusercontent.com/115481927/256350219-d2ed2aa2-0146-4612-951f-015c9e72c883.png"
@@ -26,13 +26,13 @@ const Footer: React.FC = () => {
               href="https://www.linkedin.com/company/queryiq"
               target="_blank"
               rel="noopener noreferrer"
-              className="mx-2 image-container grayscale "
+              className="mx-2 image-container grayscale hover:transform hover:scale-105"
             >
               <Image
                 src="https://user-images.githubusercontent.com/115481927/256355895-c7a7b5f3-baaf-46b6-bfdd-9bdea8763587.png"
                 alt="LinkedIn"
-                width={40}
-                height={40}
+                width={38}
+                height={38}
               />
             </a>
           </div>
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
               href="https://github.com/oslabs-beta/QueryIQ"
               target="_blank"
               rel="noopener noreferrer"
-              className="mx-2 image-container grayscale "
+              className="mx-2 image-container grayscale hover:transform hover:scale-105 "
             >
               <Image
                 src="https://user-images.githubusercontent.com/115481927/256366544-f37a7882-2184-452a-8fe3-e0586ab3b4d4.png"
