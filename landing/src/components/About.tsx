@@ -4,11 +4,11 @@ import Image from 'next/image';
 const About: React.FC = () => {
   return (
     <>
-      <section id="about" className="flex items-center justify-center min-h-screen bg-transparent">
+      <section id="about" className="flex items-center justify-center bg-transparent">
         <div className="container mx-auto">
-          <h2 className="mt-4 text-xl font-bold text-slate-50 text-center">QueryIQ is a powerful developer tool that provides holistic insights on your SQL database.</h2>
+          <h2 className="text-center my-12 text-5xl font-bold lg:tracking-wider text-slate-50 font-reem-kufi">QueryIQ provides holistic insights on your SQL database.</h2>
           {/* <h2 className="mt-4 text-xl font-bold text-slate-50  text-center">It enables developers to gain holistic insights on their database.  </h2> */}
-            <h2 className="mt-4 text-xl font-bold text-slate-50  text-center">You receive live performance metrics on troublesome queries.  </h2>
+            {/*<h2 className="mt-4 text-xl md:text-2xl lg:text-3xl font-bold text-slate-50  text-center">You receive live performance metrics on troublesome queries.  </h2>*/}
           {/* <p className="mt-4 text-lg text-gray-300">
 
             Whether you are an experienced developer looking to optimize performance or a novice seeking guidance,
@@ -19,7 +19,7 @@ const About: React.FC = () => {
             By connecting their database, QueryIQ enables developers to gain valuable insights on their database from a holistic standpoint,
             and to receive performance data through live query execution directly to their database.
           </p> */}
-          <div className="mt-8 flex flex-wrap gap-14 justify-center bg-transparent">
+          <div className="pt-12 mt-8 flex flex-wrap gap-14 justify-center bg-transparent">
             <div className="group inline-block overflow-hidden rounded-2xl bg-gradient-to-tr from-purple-800 to-teal-400 p-10 pb-4 text-white shadow transition hover:shadow-md w-[350px] h-[500px]">
             <div className="flex flex-col items-center h-full justify-center transition-transform transform-gpu hover:scale-105">
             <div className="transition-transform transform-gpu hover:scale-105">

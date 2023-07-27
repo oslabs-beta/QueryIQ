@@ -34,7 +34,7 @@ const headerStyle = {
   top: 0,
   bottom:0,
   zIndex: 999, // Optional: To ensure the header appears above other content
-  backgroundColor: '#1F1F1F', // Replace 'blue' with your desired background color
+  background: 'linear-gradient(to bottom, #1F1F1F, transparent)', // Replace 'blue' with your desired background color
   padding: '8px',
 };
 
@@ -50,25 +50,26 @@ const headerStyle = {
             alt="Logo"
             width={64}
             height={64}
+            className='min-w-[32px]'
           />
         </div>
-        <h1 className="font-reem-kufi text-6xl text-white">Query IQ</h1>
+        <h1 className="font-reem-kufi text-3xl sm:text-3xl md:text-4xl lg:text-6xl text-slate-100">Query IQ</h1>
       </div>
-      <div className="flex items-center text-white mr-10">
-        <ul className="menu-items flex space-x-8 text-3xl">
-          <li className="py-2 hover:text-gray-700 transition-colors duration-300">
+      <div className="flex items-center text-slate-200 mr-4">
+        <ul className="menu-items flex space-x-4 lg:space-x-8 text-xl md:text-2xl lg:text-4xl">
+          <li className="py-2 hover:text-gray-700 transition-colors duration-200">
             <a href="#about">About</a>
           </li>
-          <li className="py-2 hover:text-gray-700 transition-colors duration-300">
+          <li className="py-2 hover:text-gray-700 transition-colors duration-200">
             <a href="#features">Features</a>
           </li>
-          <li className="py-2 hover:text-gray-700 transition-colors duration-300">
+          <li className="py-2 hover:text-gray-700 transition-colors duration-200">
             <a href="#faq">FAQ</a>
           </li>
-          <li className="py-2 hover:text-gray-700 transition-colors duration-300">
+          <li className="py-2 hover:text-gray-700 transition-colors duration-200">
             <a href="#team">Team</a>
           </li>
-          <li className="py-2 hover:text-gray-700 transition-colors duration-300">
+          <li className="py-2 hover:text-gray-700 transition-colors duration-200">
             <a
               href="https://github.com/oslabs-beta/QueryIQ/blob/main/README.md"
               target="_blank"
@@ -81,7 +82,7 @@ const headerStyle = {
       </div>
     </div>
   </div>
-    
+
   );
 };
 
