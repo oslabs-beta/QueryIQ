@@ -16,16 +16,17 @@ const LandingHome: NextPage = () => {
 
   return (
     <>
-
+    <div className="background-container">
       <Head>
       </Head>
       <Header />
-      <Hero/>
-      <About />
-      <Features />
-      <FAQ />
-      <Team />
-      <Footer />
+        <Hero/>
+        <About />
+        <Features />
+        <FAQ />
+        <Team />
+        <Footer />
+    </div>
     </>
   );
 };
