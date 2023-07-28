@@ -12,6 +12,12 @@ body {
   /*background-image: linear-gradient(to bottom, #0f0f0f, #1f1f1f);*/
   background: #1f1f1f;
   height: 100dvh;
+  /* Replace 'your-image-url' with the actual URL of your PNG image on GitHub */
+  /* background-image: url('https://user-images.githubusercontent.com/108748353/256665415-02a9be39-db1b-4058-8d8e-47e9ea3fab57.png'); */
+  /* Add additional background properties if needed */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
 }
 
 @layer utilities {
@@ -33,4 +39,31 @@ body {
   .outline-purple {
     outline: 1px solid magenta;
   }
+}
+
+.background-container {
+  background-image: 
+    url('https://user-images.githubusercontent.com/108748353/256665415-02a9be39-db1b-4058-8d8e-47e9ea3fab57.png'); 
+  /* Add additional background properties if needed */
+  /* background-size: 5; */
+  background-position: top ;
+  /* background-repeat: no-repeat; */
+
+}
+
+.background-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Your scrolling background image */
+  background-image: url('https://user-images.githubusercontent.com/108748353/256679338-7ec11ad9-4ec4-4506-8695-defba5e40aab.png');
+  /* Add additional background properties if needed */
+  background-size: cover;
+  background-position: center;
+  /* background-repeat: no-repeat; */
+  opacity: 0.5; /* Adjust the opacity as desired */
+  z-index: -1; /* Ensure the pseudo-element is behind the content */
 }

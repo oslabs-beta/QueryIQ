@@ -7,7 +7,7 @@ import { GiPadlock } from 'react-icons/gi';
 const Features: React.FC = () => {
   return (
     <>
-      <section id="features" className='max-h-full w-screen min-w-full max-w-full bg-transparent flex-col space-y-10 my-20'>
+      <section id="features" className='max-h-full w-screen min-w-full max-w-full bg-transparent flex-col space-y-10 my-20' >
         <div className="px-16 flex-col">
           <h1 className="text-center my-12 text-5xl font-bold tracking-widest text-slate-50 font-reem-kufi">Features</h1>
           <div className="flex justify-stretch items-center flex-col">

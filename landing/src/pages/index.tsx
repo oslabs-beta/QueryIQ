@@ -16,39 +16,17 @@ const LandingHome: NextPage = () => {
 
   return (
     <>
+    <div className="background-container">
       <Head>
       </Head>
       <Header />
-      
-      <div
-        className="relative bg-cover bg-no-repeat bg-center w-screen h-screen"
-        style={{
-        backgroundImage: 'url("https://user-images.githubusercontent.com/108748353/256665415-02a9be39-db1b-4058-8d8e-47e9ea3fab57.png")',
-        }}
-      >
-        <div className="absolute top-0 left-0 w-full h-full z-10">
         <Hero/>
         <About />
         <Features />
         <FAQ />
         <Team />
         <Footer />
-        </div>
-      </div>
-      <div
-        className="relative bg-cover bg-no-repeat bg-center w-screen h-screen opacity-40"
-        style={{
-        backgroundImage: 'url("https://user-images.githubusercontent.com/108748353/256679338-7ec11ad9-4ec4-4506-8695-defba5e40aab.png")',
-        }}
-      >
-      </div>
-      <div
-        className="relative bg-cover bg-no-repeat bg-center w-screen h-screen mt-11 opacity-40"
-        style={{
-        backgroundImage: 'url("https://user-images.githubusercontent.com/108748353/256680290-21f4e5a9-f248-4a3a-a290-52865bc90063.png")',
-        }}
-      >
-      </div>
+    </div>
     </>
   );
 };
