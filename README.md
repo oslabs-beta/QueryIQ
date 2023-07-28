@@ -66,6 +66,7 @@
 # About
 QueryIQ is a developer-friendly application designed to transform the process of analyzing and optimizing PostgreSQL databases. With its features, QueryIQ enables developers to gain valuable insights by creating data visualization dashboards based on database performance and query metrics.
 
+Visit our website: <a href="https://www.query-iq.com/">query-iq.com</a>!
 
 ## Demo
 
