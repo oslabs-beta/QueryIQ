@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { NextFunction, RequestHandler, Request, Response } from 'express';
-import { type FormData } from '../../types/types';
+import { QueryLogItemObject, type FormData } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
 import { pgQueryHelper } from './pgQueryHelper';
+import GrafanaCredentials from '~/components/modal/GrafanaCredentials';
 
 interface GrafanaAPIHandler {
   (req: Request, res: Response, next: NextFunction): Promise<JSON | void>;
@@ -409,5 +410,49 @@ const grafanaController: GrafanaController = {
     }
    },
 };
+
+deleteAllQueryDashBoards: async (req, res, next) => {
+  try {
+    const (queryLog, GrafanaCredentials) = req.body as {
+      queryLog: QueryLogItemObject[];
+      GrafanaCredentials: {
+        graf_port: string;
+        graf_name: string;
+        graf_pass: string;
+      };
+    }
+    const { graf_name, graf_pass, graf_port } = GrafanaCredentials;
+
+    // create an array of all the dashboard UIDs for the queries in the query log
+    const dashboardUIDs = queryLog.filter((query) => query.dashboardUID);
+
+    const headers = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString(
+        'base64'
+      )}`,
+    };
+
+    const deletePromises = dashboardUIDs.map(async (dashboardUID) => {
+      const deleteUrl = `http://localhost:${graf_port}/api/dashboards/uid/${dashboardUID}`;
+      const response = await fetch(deleteUrl, {
+        method: 'DELETE',
+        headers: headers,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to delete dashboard with UID: ${dashboardUID}`);
+      }
+    });
+
+    await Promise.all(deletePromises);
+    
+    res.status(200).json({ message: 'All connections deleted successfully.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while deleting connections.' });
+  }
+}
 
 export default grafanaController;

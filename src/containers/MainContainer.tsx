@@ -195,6 +195,41 @@ const MainContainer: React.FC = ({}) => {
     }
   };
 
+  // sends query log to back end to delete all query connections from grafana
+  const deleteAll = async (): Promise<void> => {
+    try {
+      const url = 'http://localhost:3001/api/deleteAll';
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          queryLog: queryLog,
+          GrafanaCredentials: {
+            graf_port: grafanaUser.graf_port,
+            graf_name: grafanaUser.graf_name,
+            graf_pass: grafanaUser.graf_pass,
+          },
+        }),
+      });
+      const data = await response.json();
+      if (data.status <= 199 && response.status >= 300) {
+        throw new Error('Failed to connect');
+      }
+      setQueryLog([]);
+      setActiveQuery({
+        query: '',
+        data: [],
+        name: '',
+        dashboardUID: '',
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const disconnectDB = async (): Promise<void> => {
     try {
       // make async call to backend to delete query specific dashboard

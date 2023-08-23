@@ -32,4 +32,11 @@ router.delete(
   return res.status(200).send(res.locals.data);
 });
 
+router.delete(
+  '/deleteAll', 
+  grafanaController.deleteAllQueryDashBoards, 
+  (req, res) => {
+  return res.status(200).send(res.locals.data);
+});
+
 export default router;
