@@ -1,5 +1,6 @@
 import React from 'react';
 import DBConnect from '~/components/DBConnect';
+import DeleteAllButton from '~/components/queryLog/DeleteAllButton';
 import QueryLog from '~/components/queryLog/QueryLog';
 import type { SideBarContainerProps } from '~/types/types';
 
@@ -33,6 +34,13 @@ const SideBarContainer: React.FC<SideBarContainerProps> = ({
         setActiveQuery={setActiveQuery}
         setDashboardState={setDashboardState}
       />
+      {!queryLog.length ? (
+        <></>
+      ) : (
+        <>
+          <DeleteAllButton/>
+        </>
+      )}
     </div>
   );
 };
