@@ -12,6 +12,9 @@
     "express:watch": "nodemon",
     "prisma:generate": "prisma generate",
     "prisma:push": "npx prisma db push",
+    "lint": "next lint",
+    "start": "next start",
+    "prepare": "husky install && bash -c 'chmod ug+x .husky/*'",
     "prisma:studio": "npx prisma studio",
     "serve:dev": "concurrently \"npm run next:dev\" \"npm run express:watch\"",
     "cypress": "cypress open"
@@ -57,6 +60,7 @@
     "cypress": "^12.16.0",
     "eslint": "^8.40.0",
     "eslint-config-next": "^13.4.2",
+    "husky": "^8.0.3",
     "eslint-plugin-cypress": "^2.13.3",
     "jest": "^29.5.0",
     "nodemon": "^2.0.22",

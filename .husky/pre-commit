@@ -1,0 +1,47 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Exit if in production
+# More specifically, most Continuous Integration Servers set a CI environment variable.
+# The following detects if this script is running in a CI, early exit
+[ -n "$CI" ] && exit 0
+
+# Grab current name of branch
+LOCAL_BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
+
+# Branch name regex match
+VALID_BRANCH_REGEX='^((bug|docs|fix|feat|merge|test|wip)\/[a-zA-Z0-9\-]+)$'
+
+ERROR_MSG="\nERROR: There is something wrong with your branch name.\nBranch names must adhere to this contract:\n\n$VALID_BRANCH_REGEX\n\nDue to this conflict, your commit has been rejected. Please rename your branch to a valid name and try again."
+
+FIX_MSG="You can rename your current working branch with:\ngit branch --move \$OLD_NAME \$NEW_NAME\ngit push --set-upstream \$REMOTE \$NEW_NAME\ngit branch -a\n\nAnd then remove the old branch on remote:\ngit push \$REMOTE --delete \$OLD_NAME\n"
+
+# Rejects commit if current branch name does not match regex pattern
+echo 'Linting branch name...';
+if [[ ! $LOCAL_BRANCH_NAME =~ $VALID_BRANCH_REGEX ]]; then
+    # Print error
+    echo "$ERROR_MSG\n\n"
+    # Optional: Error fix suggestion
+    echo "$FIX_MSG"
+    # Abort commit
+    exit 1
+fi
+echo 'OK'
+
+echo 'Formatting staged files...';
+# Grab all files in staging
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
+
+# If staging is empty, abort commit
+[ -z "$FILES" ] && echo 'No staged files, aborting...' && exit 0
+
+# Format all staged files with Prettier
+echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --write
+
+echo 'Adding formatted files back to staging...';
+
+echo "$FILES" | xargs git add
+
+echo 'Pre-flight complete.\nCommitting...'
+
+exit 0
