@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Prevents force-pushing to main or dev
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+PUSH_COMMAND=$(ps -ocommand= -p $PPID)
+PROTECTED_BRANCHES="^(main|dev|release\/*|patch\/*)"
+FORCE_PUSH="force|delete|-f"
+if [[ "$BRANCH" =~ $PROTECTED_BRANCHES && "$PUSH_COMMAND" =~ $FORCE_PUSH ]]; then
+  echo "WARN: Prevented force-push to protected branch \"$BRANCH\" by pre-push hook"
+  exit 1
+fi
+
+# Tests must pass before pushing
+# npm test
+
+exit 0
+
