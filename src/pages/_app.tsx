@@ -1,8 +1,10 @@
-import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
-import { type AppType } from "next/app";
-import { api } from "~/utils/api";
-import "~/styles/globals.css";
+import { type Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import { type AppType } from 'next/app';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import '~/styles/globals.css';
+
+const queryClient = new QueryClient();
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -10,9 +12,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </SessionProvider>
   );
 };
 
-export default api.withTRPC(MyApp);
+export default MyApp;

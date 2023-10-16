@@ -9,8 +9,7 @@ const config = {
   reactStrictMode: true,
 
   /**
-   * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config
-   * out.
+   * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config out.
    *
    * @see https://github.com/vercel/next.js/issues/41980
    */
@@ -18,5 +17,15 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  tsconfigPath: "tsconfig.build.json",
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+
+      },
+    ],
+   },
 };
 export default config;
