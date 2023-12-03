@@ -3,6 +3,10 @@ import { NextFunction, RequestHandler, Request, Response } from 'express';
 import { type FormData } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
 import { pgQueryHelper } from './pgQueryHelper';
+import crypto from 'node:crypto';
+import path from 'node:path';
+
+const SESSION_UUID = crypto.randomUUID();
 
 interface GrafanaAPIHandler {
   (req: Request, res: Response, next: NextFunction): Promise<JSON | void>;
@@ -87,8 +91,31 @@ const grafanaController: GrafanaController = {
     };
 
     try {
-      const response = await fetch(url, payload);
-      const data = (await response.json()) as Promise<JSON>;
+      let response = await fetch(url, payload);
+      const data = (await response.json()) as { message: string };
+
+      if (data.message.includes('already exists')) {
+        const getPayload = {
+          method: 'GET',
+          headers: headers,
+        };
+
+        // TODO:
+        // fetch id by name from sqlite or file or accept id
+        const placeholder_id = 1; // this should come from the fetch call irl
+
+        let response = await fetch(
+          path.join(url, `/${placeholder_id}`),
+          getPayload
+        );
+        const data = await response.json();
+        console.log('[log] data obtained through GET: ', data);
+
+        const uuid = req.data?.datasources[db_name].uid;
+
+        // TODO: ensure that the uuid that comes back on data
+        // data = { datasource: { uid: uuid  } }
+      }
 
       //persist the response and port for next fetch in createDashBoard
       res.locals.data = data;
@@ -163,6 +190,8 @@ const grafanaController: GrafanaController = {
 
       //response is stored in res.locals.dashboard to send the to the frontend
       res.locals.dashboard = {
+        // TODO: ensure that the id/uuid/name from the creation event is sent back
+        // to be stored in localStorage
         slug: data.slug,
         dashboarduid: data.uid,
         status: data.status,
@@ -175,6 +204,7 @@ const grafanaController: GrafanaController = {
         iFrames: string[];
         datasourceuid: string;
       };
+
       return next();
     } catch (error) {
       const errorMessage =
@@ -318,11 +348,9 @@ const grafanaController: GrafanaController = {
         message: `${errorMessage}: error with the data source UID`,
       });
     }
-
-   },
+  },
 
   deleteDashBoard: async (req, res, next) => {
-    
     const { graf_name, graf_pass, graf_port } = res.locals.GrafanaCredentials;
     const { dashboardUID } = res.locals;
 
@@ -345,7 +373,10 @@ const grafanaController: GrafanaController = {
       const response = await fetch(url, payload);
       const data = (await response.json()) as Promise<JSON>;
 
-      res.locals.data = {datasource: res.locals.dataSourceResponse, dashboard: data}
+      res.locals.data = {
+        datasource: res.locals.dataSourceResponse,
+        dashboard: data,
+      };
 
       return next();
     } catch (error) {
@@ -407,7 +438,7 @@ const grafanaController: GrafanaController = {
         message: `${errorMessage}: error with the query dashboard UID`,
       });
     }
-   },
+  },
 };
 
 export default grafanaController;
