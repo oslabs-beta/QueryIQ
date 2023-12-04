@@ -1,0 +1,7 @@
+FROM grafana/grafana-enterprise:latest
+
+COPY ./grafana/grafana.ini /etc/grafana/grafana.ini
+
+EXPOSE 3000
+
+CMD ["grafana-server", "--config=/etc/grafana/grafana.ini", "--homepath=/usr/share/grafana", "--packaging=docker", "--pidfile=/var/run/grafana/grafana-server.pid", "cfg:default.paths.data=/var/lib/grafana", "cfg:default.paths.logs=/var/log/grafana", "cfg:default.paths.plugins=/var/lib/grafana/plugins"]
