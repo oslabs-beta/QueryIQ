@@ -7,9 +7,10 @@ The QueryIQ team really appreciates contributions from the community. If you're 
 
 ## Spin up the dev server
 1. Pull the repo down locally
-2. Ensure `./grafana.sh` is executable (`chmod +x ./grafana.sh` if it isn't)
-3. `docker-compose up & npm run serve:dev`
-4. Default credentials for your dockerized grafana and postgres server:
+2. Install packages: `npm install && npm run npm:fullInstall`
+3. Ensure `./grafana.sh` is executable (`chmod +x ./grafana.sh` if it isn't)
+4. `docker-compose up & npm run serve:dev`
+5. Default credentials for your dockerized grafana and postgres server:
     - Grafana:
 ```
     User: admin
