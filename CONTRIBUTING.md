@@ -5,6 +5,27 @@ The QueryIQ team really appreciates contributions from the community. If you're 
 ## How Can I Contribute?
 - If you have any suggestions to improve our project, please fork this repository, create a pull request and describe what your contribution or issue is.
 
+## Spin up the dev server
+1. Pull the repo down locally
+2. Ensure `./grafana.sh` is executable (`chmod +x ./grafana.sh` if it isn't)
+3. `docker-compose up & npm run serve:dev`
+4. Default credentials for your dockerized grafana and postgres server:
+    - Grafana:
+```
+    User: admin
+    Pass: admin
+    Port: 3000
+```
+    - Postgres:
+```
+    DB Name: pgdev
+    User: admin
+    Pass: postgres
+    URL: localhost:5432
+    Server: localhost:5432
+```
+
+
 
 ## Iteration Roadmap
 
