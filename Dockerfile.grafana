@@ -1,11 +1,38 @@
 FROM grafana/grafana-enterprise:latest
 
 COPY ./grafana/grafana.ini /etc/grafana/grafana.ini
+COPY ./grafana/setOrg.sh /setOrg.sh
+COPY ./grafana/createServiceAccount.sh /createServiceAccount.sh
 
 USER root
 RUN chmod +r /etc/grafana/grafana.ini
+RUN chmod +x /setOrg.sh
+RUN chmod +x /createServiceAccount.sh
 USER grafana
 
 EXPOSE 3000
 
-CMD ["grafana-server", "--config=/etc/grafana/grafana.ini", "--homepath=/usr/share/grafana", "--packaging=docker", "--pidfile=/var/run/grafana/grafana-server.pid", "cfg:default.paths.data=/var/lib/grafana", "cfg:default.paths.logs=/var/log/grafana", "cfg:default.paths.plugins=/var/lib/grafana/plugins"]
+# RUN curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X PUT -d '{"name":"AnonOrg"}' -u admin:admin http://localhost:3000/api/orgs/1
+
+
+ENV GF_SECURITY_ALLOW_EMBEDDING=true
+ENV GF_AUTH_ANONYMOUS_ENABLED=true
+ENV GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+ENV GF_AUTH_ANONYMOUS_ORG_NAME="AnonOrg"
+# ENV GF_AUTH_LDAP_CONFIG_FILE=/etc/grafana/ldap.toml
+# ENV GF_AUTH_LDAP_ENABLED=true
+# ENV GF_DATABASE_HOST=myhost:31006
+# ENV GF_DATABASE_NAME=docker
+# ENV GF_DATABASE_PASSWORD=docker
+# ENV GF_DATABASE_TYPE=postgres
+# ENV GF_DATABASE_USER=docker
+# ENV GF_SECURITY_ADMIN_PASSWORD="pass"
+# ENV GF_SECURITY_ADMIN_USER="admin"
+ENV GF_USERS_ALLOW_ORG_CREATE=false
+ENV GF_USERS_ALLOW_SIGN_UP=false
+
+
+# CMD ["grafana-server", "--config=/etc/grafana/grafana.inAnonOrg, "--homepath=/usr/share/grafana", "--packaging=docker", "--pidfile=/var/run/grafana/grafana-server.pid", "cfg:default.paths.data=/var/lib/grafana", "cfg:default.paths.logs=/var/log/grafana", "cfg:default.paths.plugins=/var/lib/grafana/plugins"]
+# CMD ["/setOrg.sh"]
+CMD ["sh", "/createServiceAccount.sh && grafana-server --config=/etc/grafana/grafana.ini --homepath=/usr/share/grafana --packaging=docker --pidfile=/var/run/grafana/grafana-server.pid cfg:default.paths.data=/var/lib/grafana cfg:default.paths.logs=/var/log/grafana cfg:default.paths.plugins=/var/lib/grafana/plugins"]
+
