@@ -17,6 +17,46 @@ export type FormData = {
   db_password: string;
 };
 
+export type DatasourceResponse =
+  | {
+      datasource: {
+        id: number;
+        uid: string;
+        orgId: number;
+        name: string;
+        type: string;
+        typeLogoUrl: string;
+        access: string;
+        url: string;
+        user: string;
+        database: string;
+        basicAuth: boolean;
+        basicAuthUser: string;
+        withCredentials: boolean;
+        isDefault: boolean;
+        jsonData: {
+          connMaxLifetime: number;
+          maxIdleConns: number;
+          maxIdleConnsAuto: boolean;
+          maxOpenConns: number;
+          postgresVersion: number;
+          sslmode: string;
+        };
+        secureJsonFields: {
+          password: boolean;
+        };
+        version: number;
+        readOnly: boolean;
+      };
+      id: number;
+      message: string;
+      name: string;
+    }
+  | {
+      message: string;
+      traceID: string;
+    };
+
 export type dbUid = {
   datasourceUid: string;
   dashboardUid: string;
