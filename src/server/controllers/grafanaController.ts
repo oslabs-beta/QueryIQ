@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { NextFunction, RequestHandler, Request, Response } from 'express';
-import { type FormData } from '../../types/types';
+import { type DatasourceResponse, type FormData } from '../../types/types';
 import { dashBoardHelper } from './dashBoardHelper';
 import { pgQueryHelper } from './pgQueryHelper';
+import path from 'node:path'
+import fs from 'node:fs'
+import {v4 as uuidv4} from 'uuid';
+
+const SESSION_UUID = uuidv4();
 
 interface GrafanaAPIHandler {
   (req: Request, res: Response, next: NextFunction): Promise<JSON | void>;
@@ -71,13 +76,22 @@ const grafanaController: GrafanaController = {
       },
     };
 
+
+    let bearerToken: string;
+    try {
+        bearerToken = fs.readFileSync(path.join(
+            __dirname, '../../../grafana/.service_account_token',
+            'utf8')).toString();
+    } catch (err) {
+        console.error(err);
+    }
+
     //headers for request to Graf API, grants basic auth to graf account
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString(
-        'base64'
-      )}`,
+      Authorization: `Bearer ${bearerToken}`,
+      // Authorization: `Basic ${Buffer.from(`${graf_name}:${graf_pass}`).toString( 'base64' )}`,
     };
 
     const payload = {
@@ -86,18 +100,54 @@ const grafanaController: GrafanaController = {
       body: JSON.stringify(body),
     };
 
-    try {
+    try { // create fresh datasource from grafana
       const response = await fetch(url, payload);
-      const data = (await response.json()) as Promise<JSON>;
+      let data: DatasourceResponse = (await response.json()) as DatasourceResponse;
 
+      if (data.message.includes('already exists')) { // if grafana says datasource exists,
+          try { // fetch the existing datasource
+              console.log('datasource exists, GET existing')
+              const GETPayload = {
+                  method: 'GET',
+                  headers: headers,
+              };
+          console.log('[LOG // EXISTS] data: ', data)
+
+          // TODO: fetch id by name from sqlite or file or accept id
+
+          // data = localStorage.getItem('DATASOURCE')
+          // localStorage.setItem('DATASOURCE', JSON.stringify(data))
+
+          const datasourceID = localStorage.getItem('DATASOURCE').datasource.id;
+
+
+
+
+
+
+          const response = await fetch(path.join(url, `/${datasourceID}`), GETPayload);
+          data = await response.json();
+          console.log('[LOG // GET] data: ', data)
+
+          const uuid: string = req.data?.datasources[db_name].uid;
+          console.log('[LOG // REQ] uuid: ', uuid)
+
+// TODO: ensure uuid that comes back on data is added to data object and returned in place of outer data object and entire data object is added to localStorage
+
+          data = { datasource: { uid: uuid } }
+
+          } catch (error) {
+                const errorMessage = error instanceof Error
+                    ? error.message
+                    : String(error);
+          }
+      }
+      console.log('New datasource created: ', data.datasource.uid)
+      console.log('[LOG // POST] data: ', data)
       //persist the response and port for next fetch in createDashBoard
       res.locals.data = data;
       res.locals.graf_port = graf_port;
       res.locals.headers = headers;
-
-      // setTimeout(() => {
-      //   return next();
-      // }, 5000);
 
       return next();
     } catch (error) {
@@ -322,7 +372,7 @@ const grafanaController: GrafanaController = {
    },
 
   deleteDashBoard: async (req, res, next) => {
-    
+
     const { graf_name, graf_pass, graf_port } = res.locals.GrafanaCredentials;
     const { dashboardUID } = res.locals;
 
