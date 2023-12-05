@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile.grafana
     ports:
       - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
   db:
     image: postgres:latest
     ports:
@@ -15,3 +17,6 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: pgdev
+    container_name: queryiq-pg
+volumes:
+  grafana-storage:
