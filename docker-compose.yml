@@ -1,8 +1,10 @@
 version: '3'
 
 services:
-  grafana:
-    image: grafana/grafana-enterprise:latest
+  custom-grafana:
+    build:
+      context: .
+      dockerfile: Dockerfile.grafana
     ports:
       - '3000:3000'
   db:
